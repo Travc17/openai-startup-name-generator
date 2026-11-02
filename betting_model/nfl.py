@@ -22,7 +22,7 @@ from itertools import combinations
 
 import numpy as np
 
-from nflmodel import backtest, data, ledger
+from nflmodel import absences, backtest, data, ledger
 from nflmodel.game import STAT_LABEL, GameModel, Player, american
 from nflmodel.pricing import ev_per_dollar, no_vig, parse_price, stake
 
@@ -101,16 +101,34 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     for pid in extra:
         team = current_team(model, pid)
         pids[pid] = team if team in (team_a, team_b) else sys.exit(f"{name_of(pid)} last played for {team}, not {team_a}/{team_b}.")
-    # Vacated share from players ruled out goes proportionally to everyone left
-    boost_t, boost_c = {team_a: 1.0, team_b: 1.0}, {team_a: 1.0, team_b: 1.0}
+    # Vacated share: teammates absorb only part of it. k fitted on real absences
+    # (nflmodel/absences.json): boost = 1 + k * (1 / (1 - vacated) - 1)
+    ab = absences.load()
+    vac_t, vac_c, first = {team_a: 0.0, team_b: 0.0}, {team_a: 0.0, team_b: 0.0}, {team_a: False, team_b: False}
     for pid in outs:
         team = current_team(model, pid)
-        if team not in boost_t:
+        if team not in vac_t:
             continue
         inp = model.player_inputs(Player(pid, team), team_b if team == team_a else team_a, key)
-        boost_t[team] /= max(1 - inp["t_share"], 0.4)
-        boost_c[team] /= max(1 - inp["c_share"], 0.4)
-        print(f"OUT: {name_of(pid)} ({team}), vacating {inp['t_share']:.0%} of targets, {inp['c_share']:.0%} of carries")
+        vac_t[team] += inp["t_share"]
+        vac_c[team] += inp["c_share"]
+        last_team_game = model.tg[(model.tg.posteam == team) & (model.tg.key < key)].key.max()
+        missed_already = model._pg_by[pid].key.max() < last_team_game
+        first[team] |= not missed_already
+        print(f"OUT: {name_of(pid)} ({team}), vacating {inp['t_share']:.0%} of targets, {inp['c_share']:.0%} of carries"
+              f" ({'continuing absence' if missed_already else 'first game missed'})")
+
+    def boost(vac, kind, team):
+        if vac <= 0:
+            return 1.0
+        stage = "first" if first[team] else "continuing"
+        k = ab.get(f"{kind}_{stage}_k", ab.get(f"{kind}_first_k", 0.3))
+        return 1 + k * (1 / (1 - min(vac, 0.6)) - 1)
+    boost_t = {t: boost(vac_t[t], "t", t) for t in vac_t}
+    boost_c = {t: boost(vac_c[t], "c", t) for t in vac_c}
+    for t in (team_a, team_b):
+        if vac_t[t] or vac_c[t]:
+            print(f"     {t} teammates: targets x{boost_t[t]:.3f}, carries x{boost_c[t]:.3f} (fitted on real absences)")
     return [Player(pid, t, share_mult=boost_t[t] * mults.get(pid, 1.0), carry_mult=boost_c[t] * mults.get(pid, 1.0))
             for pid, t in pids.items() if pid not in outs]
 

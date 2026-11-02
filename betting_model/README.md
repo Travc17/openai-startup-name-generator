@@ -88,12 +88,25 @@ So multi player parlays carry little hidden correlation edge. The large real
 correlation is **within one player** (receptions with yards), which the
 simulation captures and sportsbooks also price.
 
+## Injuries: how much share teammates really absorb
+
+`--out NAME` removes a player and boosts teammates by
+`1 + k * (1 / (1 - vacated share) - 1)`, with k fitted on every 2022 to 2025
+game where a regular sat (`nflmodel/absences.json`):
+
+| | k | n | actual/predicted: no bump | full proportional | fitted |
+|---|---|---|---|---|---|
+| targets, first game missed | 0.29 | 1,643 | 1.08 | 0.87 | 1.01 |
+| targets, continuing absence | 0.41 | 731 | 1.07 | 0.89 | 0.99 |
+| carries, first game missed | 0.27 | 183 | 1.19 | 0.71 | 1.01 |
+| carries, continuing absence | 0.36 | 87 | 1.23 | 0.71 | 0.97 |
+
+Full proportional redistribution overshoots by 11 to 29%: backups and game plan
+changes soak up most vacated looks. k fitted on 2022 and 2023 alone gave
+0.27/0.40/0.23 and held up on 2024 and 2025 (lowest error of the three methods).
+
 ## Honest limits
 
 * No historical prop lines: calibration is tested, profit is not. Closing line
   value on live bets (`log summary`) is the real test.
-* **`--out` redistribution is an untested assumption**: a missing player's share
-  goes to teammates in proportion to their current shares. It can move a
-  projection a lot (JSN over 99.5: 45% without it, 58% with it). Backtesting
-  how targets really shift when a starter sits is the next priority.
 * No QB passing props, touchdowns, game lines, weather, coverage, or route data yet. NFL only.
