@@ -1,73 +1,120 @@
-"""Walk forward backtest: project every qualifying player game using only prior data.
+"""Walk forward backtest of the joint game model (every projection uses only prior games).
 
-There are no free historical prop lines, so this tests CALIBRATION, not profit:
-  * Quantile coverage: actual yards should land below the model's 10th / 25th /
-    50th / 75th / 90th percentile about 10 / 25 / 50 / 75 / 90% of the time.
-    This is what makes alternate line probabilities trustworthy.
-  * Proxy line: a stand in for the book's line (the player's recency weighted
-    average, rounded to .5). We score P(over) with Brier score vs a coin flip.
-Beating the proxy is necessary, not sufficient. Real books set sharper lines.
+No free historical prop lines exist, so this measures CALIBRATION, the property
+alternate lines and parlays depend on:
+
+  1. Alternate line calibration, per stat. For each player game we set three
+     half point lines at the model's own 25th, 50th, and 75th percentiles and
+     compare the model's P(over) to how often the over actually hit.
+  2. Parlay correlation. For every pair of players in the same game, "both go
+     over their median line" is scored three ways:
+       * independent : multiplying single legs (how naive parlay math works)
+       * engine      : the simulation's shared volume structure only
+       * copula      : engine plus correlations fitted on OTHER seasons
+     and compared to how often it actually happened.
+
+`fit_copula` learns pair correlations from the normal scores of each player's
+actual result inside his own predicted distribution (randomized PIT). Fit on
+training seasons, then evaluate on held out seasons.
 """
 from __future__ import annotations
 
+import copy
+import json
+from itertools import combinations
+
 import numpy as np
 import pandas as pd
+from scipy.stats import norm
 
-from .model import ReceivingModel, _decay_weights
-
-QS = [0.10, 0.25, 0.50, 0.75, 0.90]
+from .game import COPULA_FILE, GameModel, Player, apply_copula, main_kind, main_stat, pair_kind
 
 
-def run(model: ReceivingModel, seasons: list[int], min_week: int = 4,
-        min_recent_targets: float = 5.0, n_sims: int = 4000, limit: int | None = None) -> pd.DataFrame:
-    pg = model.pg
-    cand = pg[pg.season.isin(seasons) & (pg.week >= min_week)]
-    rows = []
-    for r in cand.itertuples(index=False):
-        hist = model._pg_by_player[r.receiver_player_id]
-        hist = hist[hist.key < r.key].tail(3)
-        if len(hist) < 3 or hist.targets.mean() < min_recent_targets:
+def _half(x: float) -> float:
+    return float(np.floor(x)) + 0.5
+
+
+def _pit_z(sims: np.ndarray, actual: float, rng: np.random.Generator) -> float:
+    u = (sims < actual).mean() + rng.uniform() * (sims == actual).mean()
+    return float(norm.ppf(np.clip(u, 1e-4, 1 - 1e-4)))
+
+
+def run(model: GameModel, seasons: list[int], rho: dict[str, float] | None = None, min_week: int = 4,
+        n_sims: int = 4000, limit_games: int | None = None, seed: int = 11) -> tuple[pd.DataFrame, pd.DataFrame]:
+    rng = np.random.default_rng(seed)
+    games = model.tg[(model.tg.key // 100).isin(seasons) & (model.tg.key % 100 >= min_week)]
+    games = games.drop_duplicates("game_id")
+    marg, pairs = [], []
+    for gi, g in enumerate(games.itertuples(index=False)):
+        if limit_games and gi >= limit_games:
+            break
+        actual = model.pg[model.pg.game_id == g.game_id].set_index("pid")
+        roster = []
+        for team in (g.posteam, g.defteam):
+            for pid in model.usage_leaders(team, g.key, min_targets=5, min_carries=8):
+                if pid in actual.index:  # played (inactives are known pregame)
+                    roster.append(Player(pid, team))
+        if len(roster) < 2:
             continue
         try:
-            out = model.project(r.receiver_player_id, r.posteam, r.defteam, r.key, n_sims=n_sims, seed=None)
+            sim = model.simulate(g.posteam, g.defteam, g.key, roster, n_sims=n_sims, seed=int(rng.integers(1e9)), rho={})
         except (ValueError, KeyError):
             continue
-        sims = out["sims"]
-        h6 = model._pg_by_player[r.receiver_player_id]
-        h6 = h6[h6.key < r.key].tail(8)
-        proxy = round(np.average(h6.yards, weights=_decay_weights(h6.key.to_numpy(), model.cfg)) * 2) / 2
-        proxy = np.floor(proxy) + 0.5  # always a half line, no pushes
-        rows.append({
-            "season": r.season, "week": r.week, "player_id": r.receiver_player_id,
-            "team": r.posteam, "opp": r.defteam, "actual": r.yards,
-            "median": float(np.median(sims)), "mean": float(sims.mean()),
-            **{f"q{int(q*100)}": float(np.quantile(sims, q)) for q in QS},
-            "proxy_line": proxy, "p_over_proxy": float((sims > proxy).mean()),
-            "naive_mean": float(h6.yards.mean()),
-        })
-        if limit and len(rows) >= limit:
-            break
-    return pd.DataFrame(rows)
+        sim_c = apply_copula(copy.deepcopy(sim), rho, rng) if rho else None
+
+        legs = []
+        for p in roster:
+            s, info, a = sim["players"][p.pid], sim["info"][p.pid], actual.loc[p.pid]
+            kinds = (["rec", "rec_yds"] if info["t_share"] >= 0.12 else []) + \
+                    (["rush_att", "rush_yds"] if info["c_share"] >= 0.25 else [])
+            for stat in kinds:
+                for q in (0.25, 0.5, 0.75):
+                    line = _half(np.quantile(s[stat], q))
+                    marg.append({"stat": stat, "q": q, "p_over": float((s[stat] > line).mean()),
+                                 "hit": float(a[stat] > line)})
+            if not kinds:
+                continue
+            kind = main_kind(s)
+            stat = main_stat(kind)
+            line = _half(np.median(s[stat]))
+            legs.append({"p": p, "kind": kind, "line": line, "stat": stat,
+                         "over": s[stat] > line,
+                         "over_c": (sim_c["players"][p.pid][stat] > line) if sim_c else None,
+                         "hit": float(a[stat] > line), "z": _pit_z(s[stat], a[stat], rng)})
+        for l1, l2 in combinations(legs, 2):
+            row = {"kind": pair_kind(l1["p"].team, l1["kind"], l2["p"].team, l2["kind"]),
+                   "independent": float(l1["over"].mean() * l2["over"].mean()),
+                   "engine": float((l1["over"] & l2["over"]).mean()),
+                   "actual": l1["hit"] * l2["hit"], "z1": l1["z"], "z2": l2["z"]}
+            if sim_c:
+                row["copula"] = float((l1["over_c"] & l2["over_c"]).mean())
+            pairs.append(row)
+    return pd.DataFrame(marg), pd.DataFrame(pairs)
 
 
-def report(df: pd.DataFrame) -> str:
-    out = [f"Player games tested: {len(df)}"]
-    out.append("\nQuantile coverage (target vs actual share of games below model quantile):")
-    for q in QS:
-        cov = (df.actual < df[f"q{int(q*100)}"]).mean()
-        out.append(f"  {int(q*100):>3}th pct: target {q:.0%}  actual {cov:.1%}")
-    hit = (df.actual > df.proxy_line).astype(float)
-    brier_model = ((df.p_over_proxy - hit) ** 2).mean()
-    brier_coin = ((0.5 - hit) ** 2).mean()
-    out.append(f"\nProxy line over rate: {hit.mean():.1%}")
-    out.append(f"Brier score  model {brier_model:.4f}  vs coin flip {brier_coin:.4f}  "
-               f"(lower is better, skill {1 - brier_model / brier_coin:+.2%})")
-    out.append("\nCalibration of P(over proxy):")
-    bins = pd.cut(df.p_over_proxy, [0, .3, .4, .45, .5, .55, .6, .7, 1])
-    cal = df.assign(hit=hit).groupby(bins, observed=True).agg(n=("hit", "size"), predicted=("p_over_proxy", "mean"), actual=("hit", "mean"))
-    for b, r in cal.iterrows():
-        out.append(f"  {str(b):>12}  n={int(r.n):>5}  predicted {r.predicted:.1%}  actual {r.actual:.1%}")
-    mae_m = (df["median"] - df.actual).abs().mean()
-    mae_n = (df.naive_mean - df.actual).abs().mean()
-    out.append(f"\nMedian abs error  model median {mae_m:.1f} yds  vs naive recent mean {mae_n:.1f} yds")
+def fit_copula(pairs: pd.DataFrame, seasons: list[int], min_n: int = 100) -> dict[str, float]:
+    rho = {}
+    for kind, g in pairs.groupby("kind"):
+        if len(g) >= min_n:
+            r = np.corrcoef(g.z1, g.z2)[0, 1]
+            rho[kind] = round(float(r), 4)
+    COPULA_FILE.write_text(json.dumps({"fitted_on_seasons": seasons, "n_pairs": len(pairs),
+                                       "rho": rho}, indent=2) + "\n")
+    return rho
+
+
+def report(marg: pd.DataFrame, pairs: pd.DataFrame) -> str:
+    out = ["ALTERNATE LINE CALIBRATION (model P(over) vs actual over rate)",
+           f"{'stat':>9} {'line at':>8} {'n':>6} {'model':>7} {'actual':>7}"]
+    for (stat, q), g in marg.groupby(["stat", "q"]):
+        out.append(f"{stat:>9} {'q' + str(int(q * 100)):>8} {len(g):>6} {g.p_over.mean():>7.1%} {g.hit.mean():>7.1%}")
+    cols = ["independent", "engine"] + (["copula"] if "copula" in pairs else [])
+    out.append("\nPARLAY CORRELATION CHECK (both players over their median line)")
+    out.append(f"{'pair type':>16} {'n':>6} " + " ".join(f"{c:>11}" for c in cols) + f" {'actual':>8}")
+    for kind, g in pairs.groupby("kind"):
+        if len(g) < 100:
+            continue
+        out.append(f"{kind:>16} {len(g):>6} " + " ".join(f"{g[c].mean():>11.1%}" for c in cols) + f" {g.actual.mean():>8.1%}")
+    out.append("  Brier (lower is better): " + ", ".join(
+        f"{c} {((pairs[c] - pairs.actual) ** 2).mean():.5f}" for c in cols))
     return "\n".join(out)

@@ -1,79 +1,99 @@
-# NFL receiving yards prop model (v1)
+# NFL player prop model (v2)
 
-Data driven projections for NFL receiving yards props, built on free nflverse
-play by play data. Prices every main and alternate line, applies the bankroll
-rules, and logs bets with closing line value.
+Joint game simulation for **receptions, receiving yards, rushing attempts,
+rushing yards, and rush + rec yards**. Prices every main and alternate line,
+prices same game parlays from one shared simulation, ranks alt line parlays,
+applies the bankroll rules, and logs bets with closing line value.
+Built on free nflverse play by play (2022 to current).
 
 ## Setup
 
 ```
 cd betting_model
 pip install -r requirements.txt
-python nfl.py update          # downloads 2022 to 2026 play by play into data/
+python nfl.py update          # downloads play by play into data/
 ```
 
-## Use
+## Commands
 
 ```
-# Project a player and price lines (American odds or Robinhood cents)
+# Every key player in a game (injured players removed, their share redistributed)
+python nfl.py game SEA CHI --week 8 --out "Rashid Shaheed"
+
+# One player, priced lines (American odds or Robinhood cents like 53c)
 python nfl.py project "Jaxon Smith-Njigba" --opp CHI --week 8 \
-    --line 89.5:-153 --line 99.5:-113:-113 --line 119.5:+166
+    --line rec_yds:99.5:-113:-113 --line rec:7.5:+110:-130
 
-# Robinhood contract prices, with an optional per contract fee
-python nfl.py project "Puka Nacua" --opp SF --line 74.5:52c:50c --fee 0.01
+# Price a specific parlay
+python nfl.py parlay SEA CHI --week 8 \
+    --leg "Jaxon Smith-Njigba:rec_yds:over:89.5" \
+    --leg "D'Andre Swift:rush_yds:under:59.5" --price +200
 
-# News adjustment: teammate out, bump target share 8%
-python nfl.py project "Tory Horton" --opp CHI --share-mult 1.08 --line 30.5:-115
+# Alt line ladders above and below each main line + best parlays
+python nfl.py build SEA CHI --week 8 \
+    --main "Jaxon Smith-Njigba:rec_yds:99.5" --main "Jaxon Smith-Njigba:rec:7.5" \
+    --main "D'Andre Swift:rush_yds:59.5" --legs 2 [--cross-player-only]
 
-# Walk forward backtest
-python nfl.py backtest --seasons 2024 2025
+# Backtest (optionally refit parlay correlations on other seasons first)
+python nfl.py backtest --seasons 2024 2025 --fit 2022 2023
 
-# Bet log and closing line value
-python nfl.py log add "JSN o99.5 rec yds" --price -113 --stake 50 --prob 0.55
+# Bet log
+python nfl.py log add "JSN o99.5 rec yds" --price -113 --stake 50 --prob 0.577
 python nfl.py log settle 1 win --close -125
 python nfl.py log summary
 ```
 
-## How it works
+Stats: `targets`, `rec`, `rec_yds`, `rush_att`, `rush_yds`, `rec_rush_yds`.
+News: `--out NAME` (ruled out), `--mult "NAME=1.10"` (role change).
 
-Each game is simulated 20,000 times:
+## How one game is simulated (20,000 times)
 
-1. **Team targets**: the offense's recent target volume, adjusted by how many
-   targets the opponent usually faces.
-2. **Target share**: recency weighted (6 game half life, prior seasons
-   discounted), shrunk toward the position average.
-3. **Player targets**: binomial draw from team targets and share.
-4. **Yards per target**: resampled from the player's own recent targets
-   (incompletions count as zero), mixed with a league pool for his position,
-   scaled by the opponent's yards per target allowed (shrunk toward average).
+1. **Team volume**: both teams' targets and rushes drawn together. Correlations
+   come from 2022+ data: a team that throws more runs less (−0.35), and one
+   team's rushing moves opposite the other's (−0.48), which is game script.
+2. **Shares**: recency weighted target and carry shares, shrunk toward position averages.
+3. **Split**: teammates draw sequentially from what's left, so they compete for the same pie.
+4. **Outcomes**: every target is resampled as a (caught, yards) pair from the
+   player's own recent targets mixed with a league pool, so receptions and yards
+   stay consistent with each other. Same for carries. Opponent adjusted.
+5. **Cross player correlation**: a Gaussian copula fitted on real outcomes
+   (`nflmodel/copula.json`). Player marginals are untouched.
 
-The result is a full distribution, so every alternate line gets its own probability.
+## Backtest (walk forward, held out 2024 and 2025)
 
-## Bankroll rules (built in)
+Alt line calibration (model P(over) vs actual), lines set at the model's own percentiles:
 
-* Bet only when model probability beats the break even probability by 2%+.
-* $50 below a 4% edge. Above 4%, quarter Kelly, capped at $250.
+| stat | 25th pct line | median line | 75th pct line |
+|---|---|---|---|
+| receptions | 66% vs 69% | 42% vs 43% | 20% vs 20% |
+| receiving yards | 75% vs 77% | 50% vs 52% | 25% vs 26% |
+| rush attempts | 71% vs 71% | 46% vs 49% | 22% vs 27% |
+| rushing yards | 75% vs 73% | 50% vs 53% | 25% vs 28% |
 
-## Backtest (2024 and 2025, 2,100 player games, walk forward)
+Overs hit 1 to 4 points more often than predicted. Part of that is a test
+artifact (players who played but got zero touches are missing from play by play).
 
-| Model percentile | Target | Actual |
-|---|---|---|
-| 10th | 10% | 8.1% |
-| 25th | 25% | 22.6% |
-| 50th | 50% | 47.9% |
-| 75th | 75% | 74.0% |
-| 90th | 90% | 90.3% |
+**Parlay correlations (the important finding):** different players in the same
+game are nearly independent in real outcomes. Fitted on 2022 to 2025 (17,255 pairs):
 
-Brier skill vs a coin flip on a proxy line: **+5.2%**. Median absolute error 26.1
-yards vs 27.1 for a naive recent average.
+| pair | correlation |
+|---|---|
+| opposing RBs (rush yds) | −0.15 |
+| same team WR + RB | −0.03 |
+| same team WR + WR | +0.02 |
+| opposing WRs | +0.02 |
+
+On held out seasons the copula matched reality about as well as independence did.
+So multi player parlays carry little hidden correlation edge. The large real
+correlation is **within one player** (receptions with yards), which the
+simulation captures and sportsbooks also price.
 
 ## Honest limits
 
-* **No real historical prop lines.** The backtest proves calibration, not
-  profit. Real books set sharper lines than the proxy. The only true test is
-  closing line value on live bets (`log summary`).
-* **News is manual.** Injuries, inactives, and role changes need `--share-mult`.
-* **Receiving yards only.** No rushing, passing, receptions, TDs, game lines, or NBA yet.
-* **Games with zero targets are missing** from share history (play by play only
-  records targets), which slightly inflates share for part time players.
-* Weather, coverage scheme (man vs zone), and route data are not in v1.
+* No historical prop lines: calibration is tested, profit is not. Closing line
+  value on live bets (`log summary`) is the real test.
+* **`--out` redistribution is an untested assumption**: a missing player's share
+  goes to teammates in proportion to their current shares. It can move a
+  projection a lot (JSN over 99.5: 45% without it, 58% with it). Backtesting
+  how targets really shift when a starter sits is the next priority.
+* No QB passing props, touchdowns, game lines, weather, coverage, or route data yet. NFL only.

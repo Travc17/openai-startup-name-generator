@@ -15,6 +15,7 @@ PBP_COLS = [
     "season", "season_type", "week", "game_id", "game_date", "posteam", "defteam",
     "play_type", "pass_attempt", "sack", "two_point_attempt",
     "receiver_player_id", "receiver_player_name", "receiving_yards", "air_yards",
+    "complete_pass", "rush_attempt", "rusher_player_id", "rusher_player_name", "rushing_yards",
 ]
 
 
@@ -51,9 +52,30 @@ def load_targets(seasons: list[int]) -> pd.DataFrame:
         frames.append(d)
     t = pd.concat(frames, ignore_index=True)
     t["yards"] = t.receiving_yards.fillna(0.0)
+    t["complete"] = t.complete_pass.fillna(0).astype(int)
     t["key"] = t.season * 100 + t.week  # chronological game key
     return t[["season", "week", "key", "game_id", "game_date", "posteam", "defteam",
-              "receiver_player_id", "receiver_player_name", "yards", "air_yards"]]
+              "receiver_player_id", "receiver_player_name", "yards", "complete", "air_yards"]]
+
+
+def load_rushes(seasons: list[int]) -> pd.DataFrame:
+    """One row per regular season designed run or QB scramble (no kneels, no 2pt tries)."""
+    frames = []
+    for s in seasons:
+        d = pd.read_parquet(DATA_DIR / f"pbp_{s}.parquet", columns=PBP_COLS)
+        d = d[
+            (d.season_type == "REG")
+            & (d.play_type == "run")
+            & (d.rush_attempt == 1)
+            & (d.two_point_attempt != 1)
+            & d.rusher_player_id.notna()
+        ]
+        frames.append(d)
+    r = pd.concat(frames, ignore_index=True)
+    r["yards"] = r.rushing_yards.fillna(0.0)
+    r["key"] = r.season * 100 + r.week
+    return r[["season", "week", "key", "game_id", "posteam", "defteam",
+              "rusher_player_id", "rusher_player_name", "yards"]]
 
 
 def load_positions() -> dict[str, str]:
@@ -63,21 +85,3 @@ def load_positions() -> dict[str, str]:
 
 def load_players() -> pd.DataFrame:
     return pd.read_parquet(DATA_DIR / "players.parquet", columns=["gsis_id", "display_name", "position", "latest_team"])
-
-
-def player_games(t: pd.DataFrame) -> pd.DataFrame:
-    """Per player per game: targets, yards, and the team's total targets that game."""
-    team = t.groupby(["game_id", "posteam"]).size().rename("team_targets")
-    pg = (t.groupby(["season", "week", "key", "game_id", "posteam", "defteam", "receiver_player_id"])
-            .agg(targets=("yards", "size"), yards=("yards", "sum"))
-            .reset_index())
-    pg = pg.join(team, on=["game_id", "posteam"])
-    pg["share"] = pg.targets / pg.team_targets
-    return pg
-
-
-def team_games(t: pd.DataFrame) -> pd.DataFrame:
-    """Per team per game: targets thrown (offense) and yards on those targets."""
-    return (t.groupby(["season", "week", "key", "game_id", "posteam", "defteam"])
-              .agg(targets=("yards", "size"), yards=("yards", "sum"))
-              .reset_index())
