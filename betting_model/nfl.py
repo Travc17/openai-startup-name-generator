@@ -252,7 +252,8 @@ def cmd_build(a):
             sys.exit(f"--main '{spec}' must be NAME:STAT:LINE")
         mains.append((lookup(model, parts[0])[0], stat_name(parts[1]), float(parts[2])))
     roster = roster_for(model, a, key, [m[0] for m in mains])
-    sim = model.simulate(a.team_a.upper(), a.team_b.upper(), key, roster)
+    sim = model.simulate(a.team_a.upper(), a.team_b.upper(), key, roster, n_sims=a.sims)
+    print(f"Simulated the game {a.sims:,} times.")
 
     cands = []
     print("\nALT LADDERS (model probability, fair odds)")
@@ -266,31 +267,35 @@ def cmd_build(a):
             tag = "  <- main" if step == 0 else ""
             print(f"     {line:>6g}   over {po:>6.1%} ({american(po):>6})   under {1 - po:>6.1%} ({american(1 - po):>6}){tag}")
             for side in ("over", "under"):
+                if a.lower_only and not (side == "over" and step < 0):
+                    continue
                 h = hits(sim, pid, st, side, line)
                 if a.min_leg <= h.mean() <= a.max_leg:
                     cands.append(((pid, st, side, line), h))
 
-    combos = []
-    for combo in combinations(cands, a.legs):
-        keys = [(c[0][0], c[0][1]) for c in combo]
-        if len(set(keys)) < len(keys):  # one line per player stat
-            continue
-        if a.cross_player_only and len({k[0] for k in keys}) < len(keys):
-            continue
-        joint = np.logical_and.reduce([c[1] for c in combo]).mean()
-        ind = np.prod([c[1].mean() for c in combo])
-        if a.min_prob <= joint <= a.max_prob and ind > 0:
-            combos.append((joint / ind, joint, ind, [c[0] for c in combo]))
-    combos.sort(key=lambda x: -x[0])
-    print(f"\nTOP {a.legs} LEG PARLAYS by correlation lift (joint {a.min_prob:.0%} to {a.max_prob:.0%})")
-    print("Lift = true joint probability / independent product. A book that prices legs as")
-    print("independent underprices high lift combos. Compare FAIR odds to the real parlay price.\n")
-    for lift, joint, ind, legs in combos[:a.top]:
-        print(f"  x{lift:.2f}  joint {joint:.1%}  fair {american(joint):>6}   (indep {ind:.1%}, {american(ind)})")
-        for l in legs:
-            print(f"        {leg_label(*l)}")
-    if not combos:
-        print("  No combos in range. Widen --min-prob/--max-prob or add more --main lines.")
+    lo, _, hi = a.legs.partition("-")
+    sizes = range(int(lo), int(hi or lo) + 1)
+    for size in sizes:
+        combos = []
+        for combo in combinations(cands, size):
+            keys = [(c[0][0], c[0][1]) for c in combo]
+            if len(set(keys)) < len(keys):  # one line per player stat
+                continue
+            if a.cross_player_only and len({k[0] for k in keys}) < len(keys):
+                continue
+            joint = np.logical_and.reduce([c[1] for c in combo]).mean()
+            ind = np.prod([c[1].mean() for c in combo])
+            if a.min_prob <= joint <= a.max_prob and ind > 0:
+                combos.append((joint / ind if a.rank == "lift" else joint, joint, ind, [c[0] for c in combo]))
+        combos.sort(key=lambda x: -x[0])
+        print(f"\nTOP {size} LEG PARLAYS by {'correlation lift' if a.rank == 'lift' else 'hit probability'} "
+              f"(joint {a.min_prob:.0%} to {a.max_prob:.0%}, {len(combos):,} combos checked)")
+        for score, joint, ind, legs in combos[:a.top]:
+            print(f"  joint {joint:.1%}  fair {american(joint):>6}   (if independent {ind:.1%}, lift x{joint / ind:.2f})")
+            for l in legs:
+                print(f"        {leg_label(*l)}  [{hits(sim, *l).mean():.0%}]")
+        if not combos:
+            print("  No combos in range. Widen --min-prob/--max-prob or add more --main lines.")
     print("\nOnly bet a parlay if the offered price beats FAIR by your 2% edge rule: "
           "python nfl.py parlay ... --price <odds>")
 
@@ -357,7 +362,10 @@ def main():
     b = sub.add_parser("build", help="Alt line ladders and best correlated parlays")
     common(b)
     b.add_argument("--main", action="append", required=True, help="NAME:STAT:MAIN_LINE")
-    b.add_argument("--legs", type=int, default=2)
+    b.add_argument("--legs", default="2", help="Leg count or range, e.g. 3 or 3-5")
+    b.add_argument("--sims", type=int, default=20000)
+    b.add_argument("--lower-only", action="store_true", help="Only overs at alt lines BELOW the book line")
+    b.add_argument("--rank", choices=["lift", "prob"], default="lift")
     b.add_argument("--top", type=int, default=10)
     b.add_argument("--min-leg", type=float, default=0.30, help="Skip legs less likely than this")
     b.add_argument("--max-leg", type=float, default=0.90)
