@@ -1,0 +1,98 @@
+[
+ {
+  "player": "Lamar Jackson",
+  "team": "BAL QB",
+  "status": "Out",
+  "detail": "Right thumb; placed on injured reserve (out at least four games).",
+  "source": "Athlon Sports",
+  "url": "https://athlonsports.com/nfl/baltimore-ravens/baltimore-ravens-lamar-jackson-thumb-injury-tyler-huntley-joe-fagnano"
+ },
+ {
+  "player": "Tyler Huntley",
+  "team": "BAL QB",
+  "status": "Out",
+  "detail": "Suspected turf toe; coach Jesse Minter says he probably will not play Thursday.",
+  "source": "Yahoo Sports",
+  "url": "https://sports.yahoo.com/articles/ravens-qb-joe-fagnano-chance-021508035.html"
+ },
+ {
+  "player": "Joe Fagnano",
+  "team": "BAL QB",
+  "status": "Probable starter",
+  "detail": "Ankle; limited in Monday's walkthrough estimate. Minter says he has a chance and expects him to play. Undrafted rookie, third string: projected as the starter.",
+  "source": "ESPN",
+  "url": "https://www.espn.com/nfl/story/_/id/50362530/ravens-qb-joe-fagnano-ankle-chance-play-thursday"
+ },
+ {
+  "player": "Ravens pass catchers",
+  "team": "BAL",
+  "status": "Blind spot",
+  "detail": "Third-string undrafted QB: the model's QB prior is an average backup, so Ravens receiving props (incl. Henry and Hill receiving) are priced but kept out of bets. Henry and Hill RUSHING props stay bettable.",
+  "source": "Model playbook",
+  "url": "https://github.com/nflverse/nflverse-data"
+ },
+ {
+  "player": "Mark Andrews",
+  "team": "BAL TE",
+  "status": "Full",
+  "detail": "Full participant in Monday's walkthrough estimate.",
+  "source": "Russell Street Report",
+  "url": "https://russellstreetreport.com/2026/11/02/injury-report/injury-report-ravens-vs-jaguars-monday/"
+ },
+ {
+  "player": "Bhayshul Tuten",
+  "team": "JAX RB",
+  "status": "Playing (DNP Mon)",
+  "detail": "Ankle/foot; did not practice in Monday's estimate. Not ruled out, so projected as playing. His week 8 role shrank (50% of snaps, 48% of carries): Chris Rodriguez Jr. is the next man up if he sits.",
+  "source": "Yahoo Sports",
+  "url": "https://sports.yahoo.com/articles/10-jaguars-players-listed-first-015649383.html"
+ },
+ {
+  "player": "Jakobi Meyers",
+  "team": "JAX WR",
+  "status": "Limited",
+  "detail": "Hamstring/ankle; limited Monday after playing through it in week 8.",
+  "source": "Yahoo Sports",
+  "url": "https://sports.yahoo.com/articles/10-jaguars-players-listed-first-015649383.html"
+ },
+ {
+  "player": "Brian Thomas Jr.",
+  "team": "JAX WR",
+  "status": "Playing",
+  "detail": "No injury. Week 8: 52% of snaps, 12% target share (weeks 4-6: 9%, 8%, 5%). Now priced from his route role; no manual catch-rate override.",
+  "source": "nflverse snap counts",
+  "url": "https://github.com/nflverse/nflverse-data"
+ },
+ {
+  "player": "Travon Walker",
+  "team": "JAX DE",
+  "status": "DNP",
+  "detail": "Ribs; non-participant Monday after leaving week 8.",
+  "source": "Pro Football Talk",
+  "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/jaguars-estimate-de-travon-walker-as-a-non-participant-monday"
+ },
+ {
+  "player": "DaVon Hamilton, Eric Murray",
+  "team": "JAX DT, S",
+  "status": "Out (season)",
+  "detail": "Both out for the season per coach Liam Coen.",
+  "source": "Jaguars.com",
+  "url": "https://www.jaguars.com/news/day-after-week-8-win-over-colts-hamilton-murray-out-rest-of-season"
+ },
+ {
+  "player": "Antonio Johnson",
+  "team": "JAX S",
+  "status": "Limited",
+  "detail": "Ankle; limited Monday after missing week 8.",
+  "source": "Yahoo Sports",
+  "url": "https://sports.yahoo.com/articles/jaguars-injury-report-antonio-johnson-202035013.html"
+ },
+ {
+  "player": "Weather",
+  "team": "Baltimore",
+  "status": "Mild",
+  "detail": "Mid to upper 60s, chance of showers, no major wind in the latest local outlook. No wind adjustment applied; re-check Thursday.",
+  "source": "CBS Baltimore",
+  "url": "https://www.cbsnews.com/baltimore/news/beautiful-election-day-weather-across-maryland-tuesday/"
+ }
+]
