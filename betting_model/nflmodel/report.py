@@ -56,7 +56,8 @@ def _kelly_stake(p, cost, bankroll, min_bet=50, frac=0.25, cap=0.10):
 
 def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, bankroll, fee,
           fav=None, spread=None, total=None, model_line=None, blind=()):
-    sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7)
+    margin_home = (spread if fav == home else -spread) if (fav and spread is not None) else None
+    sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home)
     rep = {"home": home, "away": away, "date": date.today().isoformat(), "sims": n_sims, "news": news,
            "bankroll": bankroll, "fee": fee, "blind": sorted(blind)}
 

@@ -346,7 +346,7 @@ class GameModel:
     # ---------------- simulation ----------------
     def simulate(self, team_a: str, team_b: str, key: int, players: list[Player],
                  n_sims: int | None = None, seed: int | None = 7,
-                 rho: dict[str, float] | None = None) -> dict:
+                 rho: dict[str, float] | None = None, exp_margin_a: float | None = None) -> dict:
         """rho: pair correlations for the copula. None loads the fitted file, {} turns it off."""
         cfg = self.cfg
         n = n_sims or cfg.n_sims
@@ -356,6 +356,10 @@ class GameModel:
 
         mu = np.array([self._team_mu(team_a, team_b, key, "targets"), self._team_mu(team_a, team_b, key, "rushes"),
                        self._team_mu(team_b, team_a, key, "targets"), self._team_mu(team_b, team_a, key, "rushes")])
+        if exp_margin_a is not None:
+            # Game script from the market spread (2022-25 fit, 2,174 team-games): favorites run more.
+            # Per point of expected margin: +0.13 rushes, -0.02 targets.
+            mu = mu + np.array([-0.02, 0.13, 0.02, -0.13]) * exp_margin_a
         z = rng.multivariate_normal(np.zeros(4), self.vol_corr, size=n)
         vol = np.clip(np.rint(mu + z * self.vol_sd), 5, 80).astype(int)
         team_vol = {team_a: (vol[:, 0], vol[:, 1]), team_b: (vol[:, 2], vol[:, 3])}
