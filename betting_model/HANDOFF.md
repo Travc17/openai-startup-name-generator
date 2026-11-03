@@ -111,3 +111,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   (pred SEA 25-22, actual CHI 34-17). One game: watch whether coverage stays above 80% (ranges too wide). Published v5.
 * Proposed next (not built): X prediction card image per game, scorecard post after each game, season tracker,
   model-vs-book-line comparison (needs book captures for every game).
+* Sent-as-file fix: phone/email/chat previews open HTML without running scripts, so the page was a blank shell
+  (0 table rows). `build_page.py` now runs `simcast/snapshot.js` (Playwright) to bake the newest game's final into
+  the file; with scripts off it shows the final, box scores, predictions and play by play plus an "open in Chrome or
+  Safari" note; with scripts on it plays as before. Newest game opens first. Published v6.

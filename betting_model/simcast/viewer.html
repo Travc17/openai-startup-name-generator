@@ -113,6 +113,9 @@ input[type="range"] { width: 100%; accent-color: var(--first-down); }
 .gA { background: #1f6f43; color: #eafff2; } .gB { background: #24477a; color: #e8f0ff; } .gC { background: #3a4253; color: #c9d1e0; }
 .hit { color: #5fd38d; font-weight: 700; } .miss { color: #ff7a7a; font-weight: 700; }
 .scorecard { font-size: 15px; line-height: 1.45; margin: 0; }
+.nojs-note { display: none; }
+.nojs .nojs-note { display: grid; }
+.nojs .controls, .nojs .gamepick { display: none; }
 .tabs { display: inline-flex; gap: 4px; }
 .tabs button { background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 4px 10px; cursor: pointer; color: var(--muted); font-weight: 700; letter-spacing: 0.04em; }
 .tabs button[aria-selected="true"] { color: var(--chalk); border-color: var(--rule); background: var(--panel-2); }
@@ -150,7 +153,7 @@ td.bump { animation: bump 1100ms ease-out; }
 }
 </style>
 
-<div class="app" id="app">
+<!--APP--><div class="app nojs" id="app">
   <header class="top">
     <div class="brand"><b>Sizzle<span>Sims</span></b><small id="subtitle">Most typical of 25,000 sims</small></div>
     <label class="gamepick" for="game">Game <select id="game"></select></label>
@@ -169,6 +172,7 @@ td.bump { animation: bump 1100ms ease-out; }
         <div class="banner" id="banner" aria-live="polite"><span></span></div>
       </div>
 
+      <div class="lower nojs-note"><div class="meta">Preview</div><div class="txt">This is the <em>final</em> of the simulated game. Open the file in Chrome or Safari to watch it play out and switch games.</div></div>
       <div class="lower" aria-live="polite">
         <div class="meta" id="lt-meta">Pregame</div>
         <div class="txt" id="lt-txt">Press play to start the game.</div>
@@ -212,7 +216,7 @@ td.bump { animation: bump 1100ms ease-out; }
   </section>
 
   <section class="about" id="about"></section>
-</div>
+</div><!--/APP-->
 
 <script id="games-data" type="application/json">/*__GAMES__*/[]</script>
 <script>
@@ -592,7 +596,9 @@ td.bump { animation: bump 1100ms ease-out; }
   }
 
   // ---------------- wiring ----------------
+  $("app").classList.remove("nojs");   // the file ships with a pre-rendered final for apps that don't run scripts
   const sel = $("game");
+  sel.textContent = "";
   GAMES.forEach((g, k) => { const o = document.createElement("option"); o.value = k; o.textContent = `${g.season} wk ${g.week}: ${g.away} at ${g.home}`; sel.appendChild(o); });
   sel.addEventListener("change", () => loadGame(Number(sel.value)));
   $("play").addEventListener("click", () => (playing ? stop() : play()));
@@ -615,7 +621,7 @@ td.bump { animation: bump 1100ms ease-out; }
 
   function start(data) {
     if (!GAMES.length) { $("lt-txt").textContent = "No games exported yet."; return; }
-    const k = Math.min(data.game || 0, GAMES.length - 1);
+    const k = Math.min(data.game ?? GAMES.length - 1, GAMES.length - 1);   // newest game first
     sel.value = k;
     loadGame(k);
     // always opens at the 90-second clip (Travis, 2026-11-03); a saved speed is not restored
