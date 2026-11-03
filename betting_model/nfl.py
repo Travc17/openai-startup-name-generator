@@ -23,8 +23,8 @@ from itertools import combinations
 
 import numpy as np
 
-from nflmodel import absences, backtest, data, depth, ledger, report, returns, routes, scores
-from nflmodel.game import STAT_LABEL, GameModel, Player, american
+from nflmodel import absences, backtest, data, depth, ledger, picks, report, returns, routes, scores
+from nflmodel.game import POS_GROUP, STAT_LABEL, GameModel, Player, american
 from nflmodel.pricing import ev_per_dollar, no_vig, parse_price, stake
 
 CURRENT_SEASON = 2026
@@ -130,7 +130,10 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     # Vacated share: teammates absorb only part of it. k fitted on real absences
     # (nflmodel/absences.json): boost = 1 + k * (1 / (1 - vacated) - 1)
     ab = absences.load()
-    vac_t, vac_c, first = {team_a: 0.0, team_b: 0.0}, {team_a: 0.0, team_b: 0.0}, {team_a: False, team_b: False}
+    # Next man up: vacated share by position; same-position teammates absorb more (fitted on real absences)
+    vac_t = {team_a: {}, team_b: {}}
+    vac_c = {team_a: {}, team_b: {}}
+    first = {team_a: False, team_b: False}
     for pid in outs:
         team = current_team(model, pid)
         if team not in vac_t:
@@ -142,25 +145,25 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
             print(f"OUT: {name_of(pid)} ({team}) has missed {weeks_missed} straight games: no boost, "
                   "teammates' recent games already reflect it (absence data only supports weeks 1-2)")
             continue
-        vac_t[team] += inp["t_share"]
-        vac_c[team] += inp["c_share"]
-        last_team_game = model.tg[(model.tg.posteam == team) & (model.tg.key < key)].key.max()
-        missed_already = model._pg_by[pid].key.max() < last_team_game
-        first[team] |= not missed_already
-        print(f"OUT: {name_of(pid)} ({team}), vacating {inp['t_share']:.0%} of targets, {inp['c_share']:.0%} of carries"
-              f" ({'continuing absence' if missed_already else 'first game missed'})")
+        pos = inp["pos"]
+        vac_t[team][pos] = vac_t[team].get(pos, 0) + inp["t_share"]
+        vac_c[team][pos] = vac_c[team].get(pos, 0) + inp["c_share"]
+        first[team] |= weeks_missed == 0
+        print(f"OUT: {name_of(pid)} ({team} {pos}), vacating {inp['t_share']:.0%} of targets, {inp['c_share']:.0%} of carries"
+              f" ({'first game missed' if weeks_missed == 0 else 'continuing absence'})")
 
-    def boost(vac, kind, team):
-        if vac <= 0:
+    def boost_for(team, pos, kind):
+        vac = vac_t[team] if kind == "t" else vac_c[team]
+        if not vac:
             return 1.0
         stage = "first" if first[team] else "continuing"
-        k = ab.get(f"{kind}_{stage}_k", ab.get(f"{kind}_first_k", 0.3))
-        return 1 + k * (1 / (1 - min(vac, 0.6)) - 1)
-    boost_t = {t: boost(vac_t[t], "t", t) for t in vac_t}
-    boost_c = {t: boost(vac_c[t], "c", t) for t in vac_c}
-    for t in (team_a, team_b):
-        if vac_t[t] or vac_c[t]:
-            print(f"     {t} teammates: targets x{boost_t[t]:.3f}, carries x{boost_c[t]:.3f} (fitted on real absences)")
+        same = vac.get(pos, 0.0)
+        other = sum(v for p_, v in vac.items() if p_ != pos)
+        b = lambda v: 1 / (1 - min(v, 0.6)) - 1
+        ks = ab.get(f"{kind}_{stage}_k_same", ab.get(f"{kind}_{stage}_k", 0.3))
+        ko = ab.get(f"{kind}_{stage}_k_other", ab.get(f"{kind}_{stage}_k", 0.3))
+        return 1 + ks * b(same) + ko * b(other)
+
     dp = depth.load()
     players = []
     for pid, t in pids.items():
@@ -191,8 +194,12 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
                         print(f"ROUTES: {name_of(pid)} ({t}) route-based role x{rm:.2f} (recent routes/dropback vs target history)")
             except ValueError:
                 pass
-        players.append(Player(pid, t, share_mult=boost_t[t] * dm_t * rm * mults.get(pid, 1.0),
-                              carry_mult=boost_c[t] * dm_c * mults.get(pid, 1.0), catch_rate=catches.get(pid)))
+        ppos = POS_GROUP.get(model.pos.get(pid, "WR"), "WR")
+        bt, bc = boost_for(t, ppos, "t"), boost_for(t, ppos, "c")
+        if bt > 1.02 or bc > 1.02:
+            print(f"NEXT MAN UP: {name_of(pid)} ({t} {ppos}) targets x{bt:.2f}, carries x{bc:.2f}")
+        players.append(Player(pid, t, share_mult=bt * dm_t * rm * mults.get(pid, 1.0),
+                              carry_mult=bc * dm_c * mults.get(pid, 1.0), catch_rate=catches.get(pid)))
     return players
 
 
@@ -494,13 +501,19 @@ def cmd_report(a):
                 roster.append(Player(q, t))
     rep = report.build(model, name_of, lambda n: lookup(model, n)[0], roster, a.team_a, a.team_b, key, a.sims,
                        board, news, a.bankroll, a.fee, fav=(a.fav or "").upper() or None, spread=a.spread,
-                       total=a.total, model_line=a.model_line, blind=blind, qbs=qbs)
+                       total=a.total, model_line=a.model_line, blind=blind, qbs=qbs, wind=a.wind)
     title = a.title or f"{a.team_b} at {a.team_a} Report"
     with open(a.html, "w") as f:
         f.write(report.render(rep, title))
     if a.json:
         with open(a.json, "w") as f:
             json.dump(rep, f, indent=1, default=float)
+    played = ((model.tg.key == key) & model.tg.posteam.isin([a.away.upper(), a.home.upper()])).any()
+    if played and not a.no_log:
+        print("Paper-trading log: NOT logged, this game is already in the play by play (picks must be logged before kickoff)")
+    elif not a.no_log:
+        n = picks.log_report(rep, key)
+        print(f"Paper-trading log: {n} qualifying picks recorded (betting_model/picks_log.csv)")
     b = rep.get("best")
     print(f"Wrote {a.html}. Best bet: " + (f"{b['label']} ${b['stake']} (edge {b['edge']*100:+.1f})" if b else "none"))
 
@@ -612,6 +625,8 @@ def main():
     rp.add_argument("--blind", nargs="+", help="Players the model can't price tonight (excluded from bets)")
     rp.add_argument("--model-line", help="Independent model's number, shown for reference")
     rp.add_argument("--qb", action="append", help="'TEAM=QB Name' starter override (default: last game's starter)")
+    rp.add_argument("--wind", type=float, help="Forecast wind (mph) for outdoor games; leave out for domes")
+    rp.add_argument("--no-log", action="store_true", help="Don't add this report's picks to the paper-trading log")
     rp.add_argument("--sims", type=int, default=25000)
     rp.add_argument("--html", default="report.html")
     rp.add_argument("--json")
@@ -625,6 +640,9 @@ def main():
     bt.set_defaults(func=cmd_backtest)
 
     sub.add_parser("update").set_defaults(func=cmd_update)
+    pk = sub.add_parser("picks", help="Grade and summarize the paper-trading log")
+    pk.add_argument("action", choices=["grade", "summary"])
+    pk.set_defaults(func=lambda a: print(picks.grade(build_model()) if a.action == "grade" else picks.summary()))
 
     lg = sub.add_parser("log")
     lg.add_argument("action", choices=["add", "settle", "summary"])

@@ -58,6 +58,8 @@ class Config:
     share_carryover: float | None = 0.4
     share_half_life: float | None = 4.0
     adot_prior: bool = False   # league pool matched to the player's target depth (catch rate/yds prior)
+    vol_walkforward: bool = True   # team-volume correlation/SD fit only on games before the one projected
+    calibrate: bool = True     # per-stat calibration maps (calibration.json); backtests turn this off
     prior_mode: str = "tiered"        # share prior: "tiered" by recent usage, "all", or "regulars"
 
 
@@ -143,11 +145,21 @@ class GameModel:
         self._pos_league = t.groupby(["key", "pos"]).agg(n=("yards", "size"), yds=("yards", "sum")).reset_index()
         self._tz_by = {k: v for k, v in tz.groupby("receiver_player_id")}
         self.vol_corr, self.vol_sd = self._volume_covariance()
+        self._vol_cache = {}
 
     # ---------------- volume structure ----------------
-    def _volume_covariance(self) -> tuple[np.ndarray, np.ndarray]:
+    def _vol_params(self, key: int) -> tuple[np.ndarray, np.ndarray]:
+        """Walk-forward volume correlation/SD: fit only on games before `key` (no look-ahead)."""
+        if not self.cfg.vol_walkforward:
+            return self.vol_corr, self.vol_sd
+        if key not in self._vol_cache:
+            prior = self.tg[self.tg.key < key]
+            self._vol_cache[key] = self._volume_covariance(prior) if prior.game_id.nunique() >= 250 else (self.vol_corr, self.vol_sd)
+        return self._vol_cache[key]
+
+    def _volume_covariance(self, tg: pd.DataFrame | None = None) -> tuple[np.ndarray, np.ndarray]:
         """Correlation of [A targets, A rushes, B targets, B rushes] residuals within games."""
-        g = self.tg.copy()
+        g = (self.tg if tg is None else tg).copy()
         g["season"] = g.key // 100
         for c in ("targets", "rushes"):
             g[c + "_res"] = g[c] - g.groupby(["season", "posteam"])[c].transform("mean")
@@ -371,7 +383,7 @@ class GameModel:
     def simulate(self, team_a: str, team_b: str, key: int, players: list[Player],
                  n_sims: int | None = None, seed: int | None = 7,
                  rho: dict[str, float] | None = None, exp_margin_a: float | None = None,
-                 qbs: dict | None = None, qb_adjust: bool = True) -> dict:
+                 qbs: dict | None = None, qb_adjust: bool = True, wind: float | None = None) -> dict:
         """rho: pair correlations for the copula. None loads the fitted file, {} turns it off.
         qbs: {team: qb gsis id}; with a QB model attached, adds the QB line and the QB quality adjustment."""
         cfg = self.cfg
@@ -386,14 +398,25 @@ class GameModel:
             # Game script from the market spread (2022-25 fit, 2,174 team-games): favorites run more.
             # Per point of expected margin: +0.13 rushes, -0.02 targets.
             mu = mu + np.array([-0.02, 0.13, 0.02, -0.13]) * exp_margin_a
-        z = rng.multivariate_normal(np.zeros(4), self.vol_corr, size=n)
-        vol = np.clip(np.rint(mu + z * self.vol_sd), 5, 80).astype(int)
+        wfx = {"ypa_r": 0.0, "att_r": 0.0, "rush_r": 0.0}
+        if wind is not None and wind > 8:
+            import json as _json
+            from pathlib import Path as _P
+            wf = _P(__file__).with_name("weather.json")
+            if wf.exists():
+                per = _json.loads(wf.read_text())["per_mph_above_8"]
+                wfx = {k: v * (wind - 8) for k, v in per.items()}
+                mu = mu * np.array([1 + wfx["att_r"], 1 + wfx["rush_r"], 1 + wfx["att_r"], 1 + wfx["rush_r"]])
+        vcorr, vsd = self._vol_params(key)
+        z = rng.multivariate_normal(np.zeros(4), vcorr, size=n)
+        vol = np.clip(np.rint(mu + z * vsd), 5, 80).astype(int)
         team_vol = {team_a: (vol[:, 0], vol[:, 1]), team_b: (vol[:, 2], vol[:, 3])}
 
         out, info = {}, {}
         for team in teams:
             opp = opp_of[team]
             rec_mult, rush_mult = self._opp_mult(opp, key, "rec"), self._opp_mult(opp, key, "rush")
+            rec_mult *= 1 + wfx["ypa_r"]   # wind lowers yards per pass
             left_t, left_c = team_vol[team][0].copy(), team_vol[team][1].copy()
             share_left_t, share_left_c = np.ones(n), np.ones(n)
             qbm = getattr(self, "qbm", None)
@@ -483,6 +506,12 @@ class GameModel:
                 info[qb].update({"qb_yds_mult": qy_mult, "qb_cmp_mult": qc_mult, "td_per_yd": td_rate, "int_rate": int_rate})
         res = {"players": out, "info": info,
                "team_mu": {team_a: (mu[0], mu[1]), team_b: (mu[2], mu[3])}}
+        if self.cfg.calibrate:
+            from . import calibration as _cal
+            maps = _cal.load()
+            if maps:
+                for pid_ in out:
+                    _cal.apply(out[pid_], maps, rng)
         if qbs is not None:
             return res   # keep the natural joint structure: QB lines are sums of the same simulated targets
         return apply_copula(res, load_copula() if rho is None else rho, rng)

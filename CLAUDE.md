@@ -24,9 +24,18 @@ from the log (`python nfl.py log summary`).
    Put them in the board CSV as `book` rows. Add Robinhood prices from the user's screenshots as prop/spread/total/ml/tt rows.
 4. `python nfl.py report AWAY HOME --week N --out "Player" ... --fav TEAM --spread X --total Y --news news.json
    --board board.csv --blind "Player" ... --sims 25000 --html <scratchpad>/game.html`
+   Outdoor game with wind forecast above 8 mph: add `--wind MPH` (tested on QB pass yards only).
+   Run `python regression_check.py` after `update` or any code change; if it prints DRIFT, fix before publishing.
 5. Publish the HTML with the Artifact tool (same file path per game to keep the URL), then reply with: score
    prediction, edges (or "pass"), best bet with stake, top singles/parlays, and anything the model can't price.
-6. After the game: settle bets in the log with the closing price, and write a review in `betting_model/reviews/`.
+6. After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
+   review in `betting_model/reviews/`.
+
+Paper-trading log (`picks_log.csv`): `report` records every qualifying pick before kickoff and refuses games
+already in the data. Never add or edit rows by hand; this is the public every-pick record for subscribers.
+Automatic in every report (tested, see README "Model review"): next man up by position, no injury bump once a
+player has missed 2+ straight games, per-stat calibration maps, walk-forward team-volume fit. Parlay tickets
+are priced with NO combo discount (too few Robinhood tickets observed to fit one).
 
 PFF Pro API: key is stored as an environment network secret for api.pff.com (never in chat or the repo).
 `python nfl.py update` refreshes PFF weekly receiving data (routes run). PFF data is licensed: it stays in

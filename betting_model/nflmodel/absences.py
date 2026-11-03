@@ -53,6 +53,10 @@ def collect(model: GameModel, seasons: list[int], min_week: int = 4) -> pd.DataF
         for kind, (cnt, share_col, _) in ROLE.items():
             sk = "t_share" if kind == "t" else "c_share"
             vac = sum(inputs[p][sk] for p in missing if p in inputs)
+            vac_by_pos = {}
+            for mp in missing:
+                if mp in inputs:
+                    vac_by_pos[inputs[mp]["pos"]] = vac_by_pos.get(inputs[mp]["pos"], 0) + inputs[mp][sk]
             first = any(regulars.loc[p, "last"] == prev_keys[-1] for p in missing)
             all_keys = sorted(model.tg[(model.tg.posteam == team) & (model.tg.key < key)].key.unique())
             weeks_out = max([sum(1 for k in all_keys if k > model._pg_by[p][model._pg_by[p].key < key].key.max())
@@ -61,7 +65,7 @@ def collect(model: GameModel, seasons: list[int], min_week: int = 4) -> pd.DataF
             for p in present:
                 if p not in inputs or inputs[p][sk] < 0.05:
                     continue
-                rows.append({"key": key, "team": team, "kind": kind, "pid": p,
+                rows.append({"vac_same": vac_by_pos.get(inputs[p]["pos"], 0.0), "key": key, "team": team, "kind": kind, "pid": p,
                              "pos": inputs[p]["pos"], "pred": inputs[p][sk], "vacated": vac,
                              "first_miss": bool(first) if vac > 0 else None, "weeks_out": weeks_out,
                              "actual": actual.loc[p, cnt] / max(team_total, 1), "team_total": team_total})

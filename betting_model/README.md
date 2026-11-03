@@ -159,10 +159,57 @@ receptions -0.60% (t=-2.43), receiving yards -0.20% (n.s.). Route-based share al
 | Slot vs wide vs defense | +0.00% | **+0.70% WORSE (t=+3.98)** | +0.00% |
 | Man/zone per route (PFF, incl. 2026) | -0.04% (t=-0.67) | +0.05% | -0.05% (t=-0.88) |
 
+## Model review (2026-11-03): every test, passed and failed
+
+Full-season walk-forward run of the live model (routes + QB layer + game script), weeks 4+, real starting QBs,
+closing spread for game script. Median absolute error, model vs naive (player's last 8 games average):
+
+| season | targets | receptions | rec yds | rush att | rush yds |
+|---|---|---|---|---|---|
+| 2024 | 2.17 vs 2.20 | 1.65 vs 1.70 | 22.43 vs 22.90 | 3.97 vs 4.04 | 24.56 vs 25.53 |
+| 2025 | 2.05 vs 2.15 | 1.58 vs 1.67 | 21.77 vs 22.62 | 3.91 vs 4.11 | 24.79 vs 25.92 |
+| 2026 (wk 4-9) | 2.17 vs 2.17 (tie) | 1.68 vs 1.72 | 23.69 vs 24.52 | 4.25 vs 4.58 | 26.95 vs 29.21 |
+
+QB lines, 1,028 starts 2024-26, share of results under the model's P10 / P50 / P90 (calibrated = 10 / 50 / 90):
+pass yds 11.5 / 50.0 / 91.8, completions 13.1 / 50.9 / 89.4, attempts 15.6 / 54.2 / 88.6 (attempts run high:
+likely starters leaving games early, which the sim does not model), INT 12.0 / 51.8 / 91.0.
+TDs: 1+ TD model 73.7% vs actual 77.8%, 2+ 42.1% vs 45.8%, 3+ 20.0% vs 18.0%. **TD lines are biased (too few
+TDs at the low end): still no TD bets.** INT 1+ 49.7% vs 48.4%: close, but no INT bets until a held-out test.
+
+| Change | Test | Result | Status |
+|---|---|---|---|
+| Next man up by position (vacated share goes mostly to the same position) | held out, squared error vs single-k bump | targets -1.6% (n=623, better in 100% of bootstraps); carries -4.4% (n=75, 86%) | ON |
+| No bump once a player has missed 2+ straight games | his absence is already in teammates' recent shares | avoids double count (Monangai case) | ON |
+| Per-stat calibration maps (rank-preserving quantile remap, shrunk 50% to identity) | fit on 2024, scored on 2025-26 | Brier lower on every stat (total -0.14%); full shrink (no 50%) was worse (+0.03%) | ON |
+| Wind (outdoor, per mph above 8) | fit 2019-23, scored 2024-26 games with 10+ mph | QB pass yds -3.71% (t=-2.90), rec yds -0.26% (n.s.), rush yds -0.02% (n.s.) | ON (`--wind MPH`) |
+| Draft-capital prior for backup QBs | held out | 0.2071 to 0.2065, below the bar | OFF |
+| Team-volume correlation/SD fit only on prior games (leakage fix) | paired CRPS, 2024-26, same seeds | every stat within 0.2%, no abs t >= 2 | ON (removes look-ahead, no cost) |
+| Combo price discount (ticket vs product of legs) | 0.93 to 0.99 on the two Robinhood tickets seen | not enough evidence | parlays now priced with no discount (conservative) |
+
+Leakage audit of fitted constants: `absences.json`, `depth.json`, `returns.json`, `copula.json` and the
+game-script slope were fit on 2022-25, so 2024-25 backtests are partly in-sample for those few constants;
+2026 is fully out of sample and shows the same pattern. `weather.json` (2019-23) and the calibration test
+(fit 2024, score 2025-26) are clean. The production calibration map is refit on 2024-26.
+
+Pick-level paper test (Monday CHI@SEA, 15 qualifying picks, logged AFTER the game, so hindsight only and
+correlated, one game): 4 of 15 won (26.7%) vs 38.9% expected, flat ROI -28.4%. Moved to
+`reviews/2026_wk08_CHI_at_SEA_retro_picks.csv`. It proves nothing either way; the real record starts now.
+
+## Paper-trading record and regression check
+* `report` writes every qualifying pick (stake > 0) to `picks_log.csv` with a UTC timestamp, price, fee and
+  model probability. It refuses to log a game that is already in the play by play (no hindsight rows).
+* `python nfl.py picks grade` settles open picks from the data (a player with no snaps, or a QB with no
+  attempts, voids the pick); `python nfl.py picks summary` prints hit rate vs expected and flat-stake ROI.
+* `python regression_check.py` re-runs the live model on 2025 weeks 10-13 (fixed seeds, about 30 seconds)
+  and flags any stat whose CRPS worsens by more than 2% or whose P10/P50/P90 coverage moves more than
+  5 points from `regression_baseline.json`. Run it after every code change and every `update`.
+
 ## Honest limits
 
-* No historical prop lines: calibration is tested, profit is not. Closing line
-  value on live bets (`log summary`) is the real test.
-* Three way backfields where a player returns from IR are still weak: a back with
-  no games in the last 3 is not auto included unless he's a depth chart starter.
-* No QB passing props, touchdowns, game lines, weather, coverage, or route data yet. NFL only.
+* No historical prop lines: calibration is tested, profit is not. Closing line value on live bets
+  (`log summary`) and the timestamped paper log are the real tests. One real bet so far (CLV -1.7 pts of implied probability).
+* Three way backfields where a player returns from IR are still weak: a back with no games in the last
+  3 is not auto included unless he's a depth chart starter.
+* Third-string / undrafted QBs: the prior is an average backup, so they and their pass catchers stay blind spots.
+* No TD, INT, kicker or defense props. Starters leaving a game early (injury, blowout benching) is not simulated.
+* NFL only.

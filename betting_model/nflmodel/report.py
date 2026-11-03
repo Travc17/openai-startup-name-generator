@@ -24,7 +24,7 @@ import numpy as np
 from . import scores
 from .game import STAT_LABEL, american
 
-DISC = 0.928          # Robinhood combo price vs product of legs (observed on bet #1)
+DISC = 1.0           # combo price assumed = product of legs (observed 0.93-0.99 on 2 tickets: be conservative)
 STAT_SHORT = {"rec": "catches", "rec_yds": "rec yds", "rush_yds": "rush yds", "rush_att": "carries",
               "targets": "targets", "rec_rush_yds": "rush+rec yds", "pass_yds": "pass yds", "pass_att": "pass att",
               "pass_cmp": "completions", "pass_td": "pass TDs", "int": "INTs"}
@@ -56,9 +56,9 @@ def _kelly_stake(p, cost, bankroll, min_bet=50, frac=0.25, cap=0.10):
 
 
 def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, bankroll, fee,
-          fav=None, spread=None, total=None, model_line=None, blind=(), qbs=None):
+          fav=None, spread=None, total=None, model_line=None, blind=(), qbs=None, wind=None):
     margin_home = (spread if fav == home else -spread) if (fav and spread is not None) else None
-    sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home, qbs=qbs)
+    sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home, qbs=qbs, wind=wind)
     rep = {"home": home, "away": away, "date": date.today().isoformat(), "sims": n_sims, "news": news,
            "bankroll": bankroll, "fee": fee, "blind": sorted(blind)}
 
@@ -158,7 +158,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                 continue
             x = float(r["line"])
             hit = sim["players"][pid][r["stat"]] >= x
-            legs.append({"label": f"{nm} {x:g}+ {STAT_SHORT[r['stat']]}", "player": nm, "stat": r["stat"],
+            legs.append({"label": f"{nm} {x:g}+ {STAT_SHORT[r['stat']]}", "player": nm, "pid": pid, "x": x, "stat": r["stat"],
                          "p": float(hit.mean()), "price": price, "cost": cost, "edge": float(hit.mean() - cost),
                          "blind": nm in blind, "_hit": hit})
         elif gs is not None:
@@ -226,7 +226,8 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                 continue
             joint = float(np.logical_and.reduce([l["_hit"] for l in c]).mean())
             cost = ticket + fee
-            combos.append({"legs": [l["label"] for l in c], "p": joint, "ticket": ticket, "cost": cost,
+            combos.append({"legs": [l["label"] for l in c], "legs_data": [[l["pid"], l["stat"], l["x"]] for l in c],
+                           "p": joint, "ticket": ticket, "cost": cost,
                            "edge": joint - cost, "fair": american(joint)})
     combos.sort(key=lambda x: -x["edge"])
     top, used = [], []
@@ -490,5 +491,7 @@ def render(rep, title):
     out.append('</section>')
     if rep["blind"]:
         out.append(f'<p class="note">Excluded from bets as model blind spots tonight: {", ".join(_e(b) for b in rep["blind"])}.</p>')
+    out.append('<p class="note">Simulation projections, not guarantees. Picks are logged with a timestamp before kickoff and graded '
+               'afterward, wins and losses alike. 21+. If gambling stops being fun, call 1-800-GAMBLER.</p>')
     out.append('</div>')
     return "\n".join(out)

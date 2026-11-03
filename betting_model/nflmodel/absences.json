@@ -26,5 +26,14 @@
   "c_continuing_n": 87,
   "c_continuing_ratio_none": 1.232,
   "c_continuing_ratio_proportional": 0.708,
-  "c_continuing_ratio_fitted": 0.974
+  "c_continuing_ratio_fitted": 0.974,
+  "t_first_k_same": 0.477,
+  "t_first_k_other": 0.118,
+  "t_continuing_k_same": 0.656,
+  "t_continuing_k_other": 0.347,
+  "c_first_k_same": 0.476,
+  "c_first_k_other": 0.01,
+  "c_continuing_k_same": 0.454,
+  "c_continuing_k_other": 0.239,
+  "next_man_up_note": "by-position absorption fitted 2022-25; validated fit 22-23 / test 24-25: targets -1.6% (100% bootstrap), carries -4.4% (86%)"
 }
