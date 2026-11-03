@@ -622,7 +622,7 @@ def main():
     rp.add_argument("--board", help="CSV of Robinhood prices and/or big-book lines")
     rp.add_argument("--news", help="JSON list of injury/news items with sources")
     rp.add_argument("--players", nargs="+")
-    rp.add_argument("--blind", nargs="+", help="Players the model can't price tonight (excluded from bets)")
+    rp.add_argument("--blind", nargs="+", help="Players the model can't price tonight (excluded from bets); \"Name:rec,rec_yds\" excludes only those stats")
     rp.add_argument("--model-line", help="Independent model's number, shown for reference")
     rp.add_argument("--qb", action="append", help="'TEAM=QB Name' starter override (default: last game's starter)")
     rp.add_argument("--wind", type=float, help="Forecast wind (mph) for outdoor games; leave out for domes")

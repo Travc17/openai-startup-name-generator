@@ -59,8 +59,21 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
           fav=None, spread=None, total=None, model_line=None, blind=(), qbs=None, wind=None):
     margin_home = (spread if fav == home else -spread) if (fav and spread is not None) else None
     sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home, qbs=qbs, wind=wind)
+    # blind spots: "Name" excludes every prop for that player; "Name:rec,rec_yds" excludes only those stats
+    blind_stats = {}
+    for b in blind:
+        nm_, _, sts = b.partition(":")
+        blind_stats[nm_.strip()] = {x.strip() for x in sts.split(",") if x.strip()} or None
+
+    def is_blind(nm_, stat=None):
+        if nm_ not in blind_stats:
+            return False
+        st_ = blind_stats[nm_]
+        return st_ is None or (stat is not None and stat in st_)
+    blind_txt = sorted(nm_ if st_ is None else f"{nm_} ({', '.join(STAT_LABEL.get(x, x) for x in sorted(st_))})"
+                       for nm_, st_ in blind_stats.items())
     rep = {"home": home, "away": away, "date": date.today().isoformat(), "sims": n_sims, "news": news,
-           "bankroll": bankroll, "fee": fee, "blind": sorted(blind)}
+           "bankroll": bankroll, "fee": fee, "blind": blind_txt}
 
     # ---------- score ----------
     if fav and spread is not None and total is not None:
@@ -92,7 +105,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
     for pid, s in sim["players"].items():
         if "pass_yds" in s:
             info = sim["info"][pid]
-            rep["qbs"][info["team"]] = {"name": name_of(pid), "blind": name_of(pid) in blind,
+            rep["qbs"][info["team"]] = {"name": name_of(pid), "blind": is_blind(name_of(pid)),
                                         "yds_mult": info.get("qb_yds_mult", 1.0), "cmp_mult": info.get("qb_cmp_mult", 1.0),
                                         "stats": {st: [float(np.percentile(s[st], q)) for q in (10, 25, 50, 75, 90)]
                                                   for st in ("pass_att", "pass_cmp", "pass_yds", "pass_td", "int", "rush_yds")},
@@ -101,7 +114,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
         s, info = sim["players"][p.pid], sim["info"][p.pid]
         if s["targets"].mean() < 0.8 and s["rush_att"].mean() < 1.5:
             continue
-        row = {"name": name_of(p.pid), "pos": info["pos"], "blind": name_of(p.pid) in blind, "stats": {}}
+        row = {"name": name_of(p.pid), "pos": info["pos"], "blind": is_blind(name_of(p.pid)), "stats": {}}
         for st in ("targets", "rec", "rec_yds", "rush_att", "rush_yds"):
             v = s[st]
             if (st in ("targets", "rec", "rec_yds") and s["targets"].mean() >= 0.8) or \
@@ -134,7 +147,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
             x = float(r["line"])
             po = float((v > x).mean())
             row = {"player": nm, "stat": r["stat"], "line": x, "median": float(np.median(v)), "p_over": po,
-                   "src": r.get("book", ""), "blind": nm in blind}
+                   "src": r.get("book", ""), "blind": is_blind(nm, r["stat"])}
             for side, key_, pp in (("over", "price", po), ("under", "price2", 1 - po)):
                 a_ = r.get(key_, "")
                 if a_:
@@ -160,7 +173,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
             hit = sim["players"][pid][r["stat"]] >= x
             legs.append({"label": f"{nm} {x:g}+ {STAT_SHORT[r['stat']]}", "player": nm, "pid": pid, "x": x, "stat": r["stat"],
                          "p": float(hit.mean()), "price": price, "cost": cost, "edge": float(hit.mean() - cost),
-                         "blind": nm in blind, "_hit": hit})
+                         "blind": is_blind(nm, r["stat"]), "_hit": hit})
         elif gs is not None:
             if kind == "spread":
                 team, x = r["name"].upper(), float(r["line"])

@@ -27,6 +27,8 @@ from the log (`python nfl.py log summary`).
    Put them in the board CSV as `book` rows. Add Robinhood prices from the user's screenshots as prop/spread/total/ml/tt rows.
 4. `python nfl.py report AWAY HOME --week N --out "Player" ... --fav TEAM --spread X --total Y --news news.json
    --board board.csv --blind "Player" ... --sims 25000 --html <scratchpad>/game.html`
+   `--blind "Name"` excludes all of a player's props; `--blind "Name:rec,rec_yds,targets"` only those stats
+   (e.g. an RB's receiving props with a third-string QB while his rushing stays bettable).
    Outdoor game with wind forecast above 8 mph: add `--wind MPH` (tested on QB pass yards only).
    Run `python regression_check.py` after `update` or any code change; if it prints DRIFT, fix before publishing.
 5. Publish the HTML with the Artifact tool (same file path per game to keep the URL), then reply with: score
