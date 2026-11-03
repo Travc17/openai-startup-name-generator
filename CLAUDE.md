@@ -77,6 +77,11 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    then read-design and check EVERY number against the brief. Fix mismatches with edit-design (ask Travis before
    committing edits) or regenerate; never share a Canva design with a number that differs from the report.
    Reply with both links: the Canva graphic (shareable) and the HTML report (full box score, sources).
+5c. SimCast for every game (Travis, 2026-11-03): after the projections file is saved, in `betting_model/`:
+   `python simcast/export.py projections/<file>.json` (reruns the exact sims and stops on any mismatch), then
+   `python simcast/build_page.py`, then publish `betting_model/simcast/simcast.html` with the Artifact tool to
+   https://claude.ai/artifact/Bx8jZgufz7Amfk5FgysjRh (read it first; same URL every time; all games share one
+   page with a picker). Commit `simcast/games/*.json`.
 6. Before kickoff, record closing prices for logged picks (`python nfl.py picks close --game G --label L --price P`).
    After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
    review in `betting_model/reviews/`.

@@ -92,3 +92,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   transaction in an earlier session; if that expired, redo the fixes and ask before committing.
 * Offered, not yet approved: logging Travis's own hit-rate parlays (tagged), a break-even floor for
   hit-rate parlays, a defensive-injury matchup test, "coach-driven role cuts" as a playbook blind spot.
+
+## SimCast (2026-11-03)
+* Merged from `claude/brave-ptolemy-0vv9wd`. Fixed for the full roster: `typical.py` scores only players with
+  a real role (rank of the chosen game 491 -> 49); leftover volume labeled "Other <TEAM> receivers".
+* JAX@BAL (20:37 UTC projections) published to https://claude.ai/artifact/Bx8jZgufz7Amfk5FgysjRh (v2):
+  final JAX 25, BAL 16, 138 plays; headless check: plays to final, no script errors. Per-game step is CLAUDE.md 5c.

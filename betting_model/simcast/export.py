@@ -90,7 +90,7 @@ def other_receivers(run: dict, team: str, listed: set[str], n_tg: int, n_rec: in
         nm = run["names"].get(pid) if pid in run["names"] else None
         if nm is None:
             import nfl
-            nm = nfl.name_of(pid) if pid else f"{team} receiver"
+            nm = nfl.name_of(pid) if pid else f"Other {team} receivers"   # sim volume no modeled player took
         pos = run["model"].pos.get(pid, "WR") if pid else "WR"
         out.append({"pid": pid or f"{team}-other", "name": nm, "pos": pos, "targets": int(a), "rec": int(b),
                     "rec_yds": int(c), "rush_att": 0, "rush_yds": 0, "projected": False})

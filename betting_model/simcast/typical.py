@@ -14,6 +14,23 @@ import numpy as np
 
 PLAYER_STATS = ("targets", "rec", "rec_yds", "rush_att", "rush_yds")
 QB_STATS = ("pass_att", "pass_cmp", "pass_yds", "pass_td", "int")
+REC_ROLE, RUSH_ROLE = 0.8, 1.5   # avg targets / carries a player needs before those stats decide "typical"
+
+
+def scored_stats(pl: dict, s: dict) -> list[str]:
+    """Stats that decide how typical a game is: QB stats always; receiving stats only for players averaging
+    0.8+ targets and rushing stats only for 1.5+ carries (the projections file's old cutoffs). Since the sim
+    includes every player with recent snaps (2026-11-03), depth players and a receiver's rare carries would
+    otherwise add dozens of almost-always-zero stats that crowd out the starters. Their numbers still show."""
+    st_ = pl["stats"]
+    if "pass_yds" in st_:
+        return [k for k in QB_STATS if k in st_ and k in s]
+    out = []
+    if st_.get("targets", {}).get("mean", 0) >= REC_ROLE:
+        out += [k for k in ("targets", "rec", "rec_yds") if k in st_ and k in s]
+    if st_.get("rush_att", {}).get("mean", 0) >= RUSH_ROLE:
+        out += [k for k in ("rush_att", "rush_yds") if k in st_ and k in s]
+    return out
 
 
 def midrank_pct(v: np.ndarray) -> np.ndarray:
@@ -30,9 +47,7 @@ def typical_players(run: dict) -> tuple[int, list[str]]:
     used, dist = [], None
     for name, pl in saved.items():
         s = sim[pl["pid"]]
-        for st in pl["stats"]:
-            if st not in PLAYER_STATS + QB_STATS or st not in s:
-                continue
+        for st in scored_stats(pl, s):
             d = (midrank_pct(s[st]) - 0.5) ** 2
             dist = d if dist is None else dist + d
             used.append(f"{name}:{st}")
@@ -145,11 +160,10 @@ def typical_consistent(run: dict) -> dict:
     dist = None
     for name, pl in saved.items():
         s = sim[pl["pid"]]
-        for st in pl["stats"]:
-            if st in PLAYER_STATS + QB_STATS and st in s:
-                d = (midrank_pct(s[st]) - 0.5) ** 2
-                dist = d if dist is None else dist + d
-    n_stats = sum(1 for pl in saved.values() for st in pl["stats"] if st in PLAYER_STATS + QB_STATS and st in sim[pl["pid"]])
+        for st in scored_stats(pl, s):
+            d = (midrank_pct(s[st]) - 0.5) ** 2
+            dist = d if dist is None else dist + d
+    n_stats = sum(len(scored_stats(pl, sim[pl["pid"]])) for pl in saved.values())
     d_ok = np.where(ok, dist, np.inf)
     i = int(np.argmin(d_ok))
     return {"player_idx": i, "score_idx": j, "n_consistent": int(ok.sum()), "n": int(len(ok)), "rejected_by": why,
