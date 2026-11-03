@@ -34,7 +34,9 @@ from the log (`python nfl.py log summary`).
 5. Publish the HTML with the Artifact tool (same file path per game to keep the URL), then reply with: score
    prediction, edges (or "pass"), best bet with stake, top singles/parlays, and anything the model can't price.
 5b. Canva for every report (rule set by Travis 2026-11-03): `report` writes `<html name>.canva.txt`, a brief built
-   only from the report's numbers. Pass that text unchanged to Canva create-design (Instagram Post (Portrait)),
+   only from the report's numbers: a carousel with the summary, the FULL box score for each team, and book line vs
+   prediction (big-book lines plus each Robinhood ladder's main line, the rung priced closest to 50c). Both are required
+   on every report (Travis, 2026-11-03). Pass that text unchanged to Canva create-design (Instagram Post (Portrait)),
    then read-design and check EVERY number against the brief. Fix mismatches with edit-design (ask Travis before
    committing edits) or regenerate; never share a Canva design with a number that differs from the report.
    Reply with both links: the Canva graphic (shareable) and the HTML report (full box score, sources).

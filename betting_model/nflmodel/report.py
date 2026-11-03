@@ -200,6 +200,18 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
         l["stake"] = _kelly_stake(l["p"], l["cost"], bankroll)
     rep["lines"] = sorted(lines, key=lambda l: -l["edge"])
     rep["book"] = sorted(book, key=lambda b: -abs(b["p_over"] - 0.5))
+    # Robinhood "main line" per player+stat: the ladder rung priced closest to 50c (the market's own line)
+    ladders = {}
+    for l in legs:
+        ladders.setdefault((l["player"], l["stat"]), []).append(l)
+    market = []
+    for (nm, st), rungs in ladders.items():
+        r = min(rungs, key=lambda l: (abs(l["price"] - 0.5), l["x"]))
+        v = sim["players"][r["pid"]][st]
+        market.append({"player": nm, "stat": st, "line": r["x"], "price": r["price"], "p_model": r["p"],
+                       "median": float(np.median(v)), "blind": r["blind"],
+                       "team": sim["info"][r["pid"]]["team"]})
+    rep["market"] = sorted(market, key=lambda m: (m["team"], m["player"], m["stat"]))
     for t in box:
         for row in box[t]:
             row["book"] = {b["stat"]: b["line"] for b in book if b["player"] == row["name"]}
@@ -277,54 +289,70 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
 _LBL = {"pass_att": "pass attempts", "pass_cmp": "completions", "pass_yds": "pass yds", "rush_yds": "rush yds",
         "rec_yds": "rec yds", "rec": "receptions"}
 def canva_brief(rep: dict, title: str) -> str:
-    """Brief for Canva's design generator, written ONLY from the report's numbers (no retyping).
+    """Multi-page Canva brief written ONLY from the report's numbers (no retyping).
     After Canva builds it, read the design back and check every number against this brief."""
     A, H = rep["away"], rep["home"]
     med = lambda v: v[2]
-    out = ["A premium sports-analytics social graphic for an NFL game simulation. Dark navy background, teal accents, "
-           "bold condensed scoreboard typography, clean data layout. Do NOT use NFL or team logos or trademarked imagery; "
-           "team abbreviations as text only. Use every number EXACTLY as written below; do not round, add, or invent numbers.",
-           f'Title: "{title}"']
+    S = lambda st: _LBL.get(st, STAT_SHORT.get(st, st))
+    out = ["A premium sports-analytics Instagram carousel for an NFL game simulation, with exactly the pages listed below, "
+           "in order. Dark navy background, teal accents, bold condensed scoreboard typography, clean tables with aligned columns. "
+           "Do NOT use NFL or team logos or trademarked imagery; team abbreviations as text only. Use every number EXACTLY as "
+           "written; do not round, add, drop, or invent any number or row. Put this footer on every page: "
+           '"Simulation projections, not guarantees. Bet responsibly. 21+. 1-800-GAMBLER."']
+    # page 1: summary
+    out.append(f'PAGE 1 (summary). Title: "{title}"')
     sc = rep.get("score")
     if sc:
-        aw = sc["away_win"]
         out.append(f'Headline: "{rep["sims"]:,} SIMULATIONS: {A} {sc["away_pts"]:.0f}, {H} {sc["home_pts"]:.0f}"')
-        out.append(f'Sub line: "{A} win {aw:.0%} of sims. Big books: {sc["fav"]} -{sc["spread"]:g}, total {sc["total"]:g}."')
-    if rep.get("qbs"):
-        out.append('Section "Projected QB lines" (median of the sims):')
-        for t, q in rep["qbs"].items():
-            st = q["stats"]
-            flag = " (third-string QB: low confidence)" if q.get("blind") else ""
-            out.append(f'- {q["name"]} ({t}): {med(st["pass_cmp"]):.0f}/{med(st["pass_att"]):.0f}, '
-                       f'{med(st["pass_yds"]):.0f} pass yds, {med(st["pass_td"]):.0f} TD{flag}')
-    rush, rec = [], []
-    for t, rows in rep["box"].items():
-        for r in rows:
-            st = r["stats"]
-            if r["pos"] == "QB":
-                continue
-            if "rush_yds" in st and med(st.get("rush_att", [0] * 5)) >= 8:
-                rush.append((med(st["rush_yds"]), f'- {r["name"]} ({t}): {med(st["rush_att"]):.0f} carries, {med(st["rush_yds"]):.0f} rush yds'))
-            if "rec_yds" in st and med(st["rec_yds"]) >= 20:
-                rec.append((med(st["rec_yds"]), f'- {r["name"]} ({t}): {med(st["rec"]):.0f} rec, {med(st["rec_yds"]):.0f} yds'))
-    out.append('Section "Projected box score" (median of the sims):')
-    out += [x for _, x in sorted(rush, reverse=True)[:2]] + [x for _, x in sorted(rec, reverse=True)[:5]]
+        out.append(f'Sub line: "{A} win {sc["away_win"]:.0%} of sims. Big books: {sc["fav"]} -{sc["spread"]:g}, total {sc["total"]:g}."')
     pl = rep.get("plan") or {}
     if pl.get("bets"):
         out.append(f'Section "Bet plan" (total ${pl["total"]:.0f}):')
         out += [f'- {b["label"]}: hits {b["p"]:.0%} in sims, {b["cost"]*100:.0f}c with fee, edge {b["edge"]*100:+.1f} pts, stake ${b["stake"]:.0f}'
                 for b in pl["bets"]]
     else:
-        out.append('Bottom banner: "Model verdict: PASS. Nothing on the board clears our 2% edge rule."')
-    leans = [b for b in rep.get("book", []) if not b.get("blind") and abs(b["p_over"] - 0.5) >= 0.08]
-    if leans:
-        out.append('Section "Leans vs big-book lines (not bets until priced)":')
-        for b in leans[:3]:
-            side, p = ("over", b["p_over"]) if b["p_over"] > 0.5 else ("under", 1 - b["p_over"])
-            out.append(f'- {b["player"]} {side} {b["line"]:g} {_LBL.get(b["stat"], STAT_LABEL.get(b["stat"], b["stat"]))}: {p:.0%} in sims')
+        out.append('Banner: "Model verdict: PASS. Nothing on the board clears our 2% edge rule."')
     if rep.get("blind"):
-        out.append("Small note: \"Not bet (model blind spots): " + "; ".join(rep["blind"]) + '."')
-    out.append('Small footer text: "Simulation projections, not guarantees. Bet responsibly. 21+. 1-800-GAMBLER."')
+        out.append('Small note: "Not bet (model blind spots): ' + "; ".join(rep["blind"]) + '."')
+    # pages 2-3: full box score per team
+    page = 2
+    for t in (A, H):
+        rows = rep["box"].get(t, [])
+        out.append(f'PAGE {page} (full box score). Title: "{t} projected box score (median of {rep["sims"]:,} sims)". '
+                   'Table columns: Player | Targets | Rec | Rec yds | Carries | Rush yds. One row per player, exactly these rows:')
+        q = (rep.get("qbs") or {}).get(t)
+        if q:
+            st = q["stats"]
+            out.append(f'- QB {q["name"]}: {med(st["pass_cmp"]):.0f}/{med(st["pass_att"]):.0f}, {med(st["pass_yds"]):.0f} pass yds, '
+                       f'{med(st["pass_td"]):.0f} TD, {med(st["int"]):.0f} INT' + (" (third-string QB: low confidence)" if q.get("blind") else ""))
+        for r in rows:
+            if r["pos"] == "QB":
+                continue
+            st = r["stats"]
+            g = lambda k: f'{med(st[k]):.0f}' if k in st else "0"
+            out.append(f'- {r["name"]} ({r["pos"]}) | {g("targets")} | {g("rec")} | {g("rec_yds")} | {g("rush_att")} | {g("rush_yds")}')
+        page += 1
+    # page 4+: book / market line vs prediction
+    book = rep.get("book", [])
+    mk = rep.get("market", [])
+    if book or mk:
+        out.append(f'PAGE {page} (book line vs prediction). Title: "Lines vs our projection". '
+                   'Table columns: Player | Stat | Line | Market | Our probability | Our median. Exactly these rows:')
+        for b in book:
+            out.append(f'- {b["player"]} | {S(b["stat"])} | over {b["line"]:g} ({b["src"] or "big book"}) | big book | '
+                       f'{b["p_over"]:.0%} over | {b["median"]:.0f}' + (" | blind spot" if b.get("blind") else ""))
+        half = [m for m in mk if m["team"] == A], [m for m in mk if m["team"] == H]
+        for k, grp in enumerate(half):
+            if not grp:
+                continue
+            if k == 1 or len(book) + len(half[0]) > 18:
+                page += 1
+                out.append(f'PAGE {page} (book line vs prediction, continued). Same table columns. Exactly these rows:')
+            for m in grp:
+                out.append(f'- {m["player"]} ({m["team"]}) | {S(m["stat"])} | {m["line"]:g}+ | Robinhood {m["price"]*100:.0f}c | '
+                           f'{m["p_model"]:.0%} | {m["median"]:.0f}' + (" | blind spot" if m["blind"] else ""))
+        out.append('Small note on the lines pages: "Robinhood line = the rung priced closest to 50c. Our probability is '
+                   'before the 2c fee. Blind spots are shown, never bet."')
     return "\n".join(out)
 
 
@@ -462,6 +490,23 @@ def render(rep, title):
                    '<th class="num">P(over)</th><th>Lean</th><th>Book odds (edge pts)</th></tr>' + "".join(rows) + '</table>'
                    '<p class="note">Book lines come from big sportsbooks (DraftKings/FanDuel/consensus). Lean strength = how far my over probability sits from 50/50. '
                    'Edge pts use the book\'s own prices when given. A lean is not a bet until a price clears the 2% rule.</p></div></section>')
+
+    # Robinhood main lines vs model
+    if rep.get("market"):
+        rows = []
+        for m in rep["market"]:
+            d = m["p_model"] - m["price"]
+            cls = "good" if d >= 0.04 else ("bad" if d <= -0.04 else "muted")
+            flag = ' <span class="pill warn">blind spot</span>' if m["blind"] else ""
+            rows.append(f'<tr><td><b>{_e(m["player"])}</b> <span class="muted">{m["team"]}</span>{flag}</td><td>{STAT_SHORT[m["stat"]]}</td>'
+                        f'<td class="num">{m["line"]:g}+</td><td class="num">{m["price"]*100:.0f}c</td>'
+                        f'<td class="num">{_pct(m["p_model"])}</td><td class="num {cls}">{d*100:+.0f}</td>'
+                        f'<td class="num">{m["median"]:.0f}</td></tr>')
+        out.append('<section><h2>Robinhood main lines vs my projection</h2><div class="panel tbl"><table><tr><th>Player</th><th>Stat</th>'
+                   '<th class="num">Line</th><th class="num">Robinhood</th><th class="num">My P</th><th class="num">Diff pts</th>'
+                   '<th class="num">My median</th></tr>' + "".join(rows) + '</table>'
+                   '<p class="note">Main line = the rung on each Robinhood ladder priced closest to 50c, i.e. the market\'s own line for that stat. '
+                   'Diff = my probability minus the price, before the 2c fee. Blind spots are shown but never bet.</p></div></section>')
 
     # news
     if rep["news"]:
