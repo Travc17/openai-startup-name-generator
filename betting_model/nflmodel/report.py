@@ -55,6 +55,48 @@ def _kelly_stake(p, cost, bankroll, min_bet=50, frac=0.25, cap=0.10):
     return int(max(min_bet, min(round(bankroll * cap / 5) * 5, round(bankroll * k * frac / 5) * 5)))
 
 
+def hit_rate_parlays(usable, fee, min_legs=3, max_legs=6, lo=0.05, hi=0.40, beam=300, n=10):
+    """Alt-line parlays ranked by simulated hit rate (Travis: hit rate first, edge second).
+    Ticket = product of leg prices (no combo discount), kept between lo and hi.
+    Same player only as rushing + receiving (never catches + receiving yards). Beam search on joint hit rate."""
+    pool = [l for l in usable if l["p"] >= 0.5 and l.get("price")]
+    kind = lambda l: (l["player"], "rush" if l["stat"] in ("rush_yds", "rush_att") else "recv")
+    level = [((i,), pool[i]["_hit"], pool[i]["price"]) for i in range(len(pool))]
+    found = []
+    for size in range(2, max_legs + 1):
+        nxt, seen = [], set()
+        for idx, hit, price in level:
+            used = {kind(pool[i]) for i in idx}
+            for j in range(idx[-1] + 1, len(pool)):
+                if kind(pool[j]) in used:
+                    continue
+                key = idx + (j,)
+                if key in seen:
+                    continue
+                seen.add(key)
+                h = hit & pool[j]["_hit"]
+                nxt.append((key, h, price * pool[j]["price"], float(h.mean())))
+        nxt.sort(key=lambda t: -t[3])
+        level = [(k, h, pr) for k, h, pr, _ in nxt[:beam]]
+        if size >= min_legs:
+            found += [(k, p_, pr) for k, _, pr, p_ in nxt if lo <= pr <= hi]
+    found.sort(key=lambda t: -t[1])
+    out, used_sets, player_sets = [], [], []
+    for k, p_, pr in found:
+        legs = [pool[i] for i in k]
+        labels = [l["label"] for l in legs]
+        players = frozenset(l["player"] for l in legs)
+        if any(len(set(labels) & u) >= len(labels) - 1 for u in used_sets) or player_sets.count(players) >= 2:
+            continue  # keep the list varied: max 2 tickets per player combination
+        used_sets.append(set(labels))
+        player_sets.append(players)
+        out.append({"legs": labels, "legs_data": [[l["pid"], l["stat"], l["x"]] + (["no"] if l["side"] == "no" else []) for l in legs],
+                    "p": p_, "ticket": pr, "cost": pr + fee, "edge": p_ - pr - fee, "fair": american(p_)})
+        if len(out) == n:
+            break
+    return out
+
+
 def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, bankroll, fee,
           fav=None, spread=None, total=None, model_line=None, blind=(), qbs=None, wind=None):
     margin_home = (spread if fav == home else -spread) if (fav and spread is not None) else None
@@ -156,8 +198,8 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                     row[f"{side}_odds"], row[f"{side}_edge"] = a_, pp - be
             book.append(row)
             continue
-        price = float(r["price"]) / 100
-        cost = price + fee
+        price = float(r["price"]) / 100 if str(r.get("price", "")).strip() else None
+        cost = price + fee if price is not None else None
         if kind == "prop":
             nm = r["name"]
             if nm not in pid_cache:
@@ -171,9 +213,16 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                 continue
             x = float(r["line"])
             hit = sim["players"][pid][r["stat"]] >= x
-            legs.append({"label": f"{nm} {x:g}+ {STAT_SHORT[r['stat']]}", "player": nm, "pid": pid, "x": x, "stat": r["stat"],
-                         "p": float(hit.mean()), "price": price, "cost": cost, "edge": float(hit.mean() - cost),
-                         "blind": is_blind(nm, r["stat"]), "_hit": hit})
+            if price is not None:
+                legs.append({"label": f"{nm} {x:g}+ {STAT_SHORT[r['stat']]}", "player": nm, "pid": pid, "x": x, "stat": r["stat"],
+                             "side": "yes", "p": float(hit.mean()), "price": price, "cost": cost, "edge": float(hit.mean() - cost),
+                             "blind": is_blind(nm, r["stat"]), "_hit": hit})
+            if str(r.get("price2", "")).strip():   # Robinhood "No" price on the same rung: wins if he stays UNDER x
+                p2 = float(r["price2"]) / 100
+                miss = ~hit
+                legs.append({"label": f"{nm} NO {x:g}+ {STAT_SHORT[r['stat']]} (under {x - 0.5:g})", "player": nm, "pid": pid,
+                             "x": x, "stat": r["stat"], "side": "no", "p": float(miss.mean()), "price": p2, "cost": p2 + fee,
+                             "edge": float(miss.mean() - p2 - fee), "blind": is_blind(nm, r["stat"]), "_hit": miss})
         elif gs is not None:
             if kind == "spread":
                 team, x = r["name"].upper(), float(r["line"])
@@ -203,7 +252,8 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
     # Robinhood "main line" per player+stat: the ladder rung priced closest to 50c (the market's own line)
     ladders = {}
     for l in legs:
-        ladders.setdefault((l["player"], l["stat"]), []).append(l)
+        if l["side"] == "yes":
+            ladders.setdefault((l["player"], l["stat"]), []).append(l)
     market = []
     for (nm, st), rungs in ladders.items():
         r = min(rungs, key=lambda l: (abs(l["price"] - 0.5), l["x"]))
@@ -211,7 +261,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
         market.append({"player": nm, "stat": st, "line": r["x"], "price": r["price"], "p_model": r["p"],
                        "median": float(np.median(v)), "blind": r["blind"],
                        "team": sim["info"][r["pid"]]["team"]})
-    rep["market"] = sorted(market, key=lambda m: (m["team"], m["player"], m["stat"]))
+    rep["market"] = sorted(market, key=lambda m: -m["p_model"])   # highest hit rate first
     for t in box:
         for row in box[t]:
             row["book"] = {b["stat"]: b["line"] for b in book if b["player"] == row["name"]}
@@ -251,7 +301,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                 continue
             joint = float(np.logical_and.reduce([l["_hit"] for l in c]).mean())
             cost = ticket + fee
-            combos.append({"legs": [l["label"] for l in c], "legs_data": [[l["pid"], l["stat"], l["x"]] for l in c],
+            combos.append({"legs": [l["label"] for l in c], "legs_data": [[l["pid"], l["stat"], l["x"]] + (["no"] if l["side"] == "no" else []) for l in c],
                            "p": joint, "ticket": ticket, "cost": cost,
                            "edge": joint - cost, "fair": american(joint)})
     combos.sort(key=lambda x: -x["edge"])
@@ -266,6 +316,9 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
             break
     rep["parlays"] = top
 
+    # ---------- hit-rate parlays (alt lines, ranked by hit rate, edge shown but not required) ----------
+    rep["hit_parlays"] = hit_rate_parlays(usable, fee)
+
     # ---------- best bet ----------
     cands = [("single", s["label"], s) for s in singles if s["stake"]] + \
             [("parlay", " + ".join(p["legs"]), p) for p in top if p["stake"]] + \
@@ -276,7 +329,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
         if kind == "single":
             return [(d["pid"], d["stat"])]
         if kind == "parlay":
-            return [(pid, st) for pid, st, _ in d["legs_data"]]
+            return [(leg[0], leg[1]) for leg in d["legs_data"]]
         return []
     plan = plan_game([{"kind": kind, "label": label, "p": d["p"], "cost": d["cost"], "edge": d["edge"],
                        "stake": d["stake"], "legs": legs_of(kind, d)} for kind, label, d in cands], bankroll)
@@ -297,7 +350,9 @@ def canva_brief(rep: dict, title: str) -> str:
     out = ["A premium sports-analytics Instagram carousel for an NFL game simulation, with exactly the pages listed below, "
            "in order. Dark navy background, teal accents, bold condensed scoreboard typography, clean tables with aligned columns. "
            "Do NOT use NFL or team logos or trademarked imagery; team abbreviations as text only. Use every number EXACTLY as "
-           "written; do not round, add, drop, or invent any number or row. Put this footer on every page: "
+           "written; do not round, add, drop, or invent any number or row. Every word must be live, editable text: never bake "
+           "text or tables into background images, never duplicate any text, and leave clear space so nothing overlaps. "
+           "Keep each table small enough that every row fits on its page. Put this footer on every page, once: "
            '"Simulation projections, not guarantees. Bet responsibly. 21+. 1-800-GAMBLER."']
     # page 1: summary
     out.append(f'PAGE 1 (summary). Title: "{title}"')
@@ -332,27 +387,36 @@ def canva_brief(rep: dict, title: str) -> str:
             g = lambda k: f'{med(st[k]):.0f}' if k in st else "0"
             out.append(f'- {r["name"]} ({r["pos"]}) | {g("targets")} | {g("rec")} | {g("rec_yds")} | {g("rush_att")} | {g("rush_yds")}')
         page += 1
-    # page 4+: book / market line vs prediction
+    # hit-rate parlays page
+    hp = rep.get("hit_parlays") or []
+    if hp:
+        out.append(f'PAGE {page} (parlays). Title: "Highest hit-rate parlays". Subtitle: "Alt lines, ranked by how often every leg '
+                   'hits in the sims. Not model bets unless edge is +2 or more." Exactly these tickets, in this order:')
+        for k, t in enumerate(hp[:5], 1):
+            out.append(f'- #{k}: ' + " + ".join(t["legs"]) + f' | hits {t["p"]:.0%} | ticket {t["ticket"]*100:.0f}c | edge {t["edge"]*100:+.1f}')
+        page += 1
+    # book / market line vs prediction, highest hit rate first
     book = rep.get("book", [])
     mk = rep.get("market", [])
-    if book or mk:
-        out.append(f'PAGE {page} (book line vs prediction). Title: "Lines vs our projection". '
-                   'Table columns: Player | Stat | Line | Market | Our probability | Our median. Exactly these rows:')
-        for b in book:
-            out.append(f'- {b["player"]} | {S(b["stat"])} | over {b["line"]:g} ({b["src"] or "big book"}) | big book | '
-                       f'{b["p_over"]:.0%} over | {b["median"]:.0f}' + (" | blind spot" if b.get("blind") else ""))
-        half = [m for m in mk if m["team"] == A], [m for m in mk if m["team"] == H]
-        for k, grp in enumerate(half):
-            if not grp:
-                continue
-            if k == 1 or len(book) + len(half[0]) > 18:
-                page += 1
-                out.append(f'PAGE {page} (book line vs prediction, continued). Same table columns. Exactly these rows:')
-            for m in grp:
-                out.append(f'- {m["player"]} ({m["team"]}) | {S(m["stat"])} | {m["line"]:g}+ | Robinhood {m["price"]*100:.0f}c | '
-                           f'{m["p_model"]:.0%} | {m["median"]:.0f}' + (" | blind spot" if m["blind"] else ""))
-        out.append('Small note on the lines pages: "Robinhood line = the rung priced closest to 50c. Our probability is '
-                   'before the 2c fee. Blind spots are shown, never bet."')
+    if book:
+        out.append(f'PAGE {page} (book line vs prediction). Title: "Big-book lines vs our projection". '
+                   'Table columns: Player | Stat | Line | Source | Our probability | Our median. Exactly these rows:')
+        for b in sorted(book, key=lambda b: -max(b["p_over"], 1 - b["p_over"])):
+            side, pr = ("over", b["p_over"]) if b["p_over"] >= 0.5 else ("under", 1 - b["p_over"])
+            out.append(f'- {b["player"]} | {S(b["stat"])} | {side} {b["line"]:g} | {b["src"] or "big book"} | '
+                       f'{pr:.0%} {side} | {b["median"]:.0f}' + (" | blind spot" if b.get("blind") else ""))
+        page += 1
+    per = -(-len(mk) // max(1, -(-len(mk) // 16))) if mk else 1   # even pages, at most 16 rows each
+    for c in range(0, len(mk), per):
+        out.append(f'PAGE {page} (Robinhood lines vs prediction, highest hit rate first). Title: "Robinhood lines vs our projection"'
+                   + (' (continued)' if c else '') + '. Table columns: Player | Stat | Line | Robinhood | Our probability | Our median. '
+                   'Exactly these rows, in this order:')
+        for m in mk[c:c + per]:
+            out.append(f'- {m["player"]} ({m["team"]}) | {S(m["stat"])} | {m["line"]:g}+ | {m["price"]*100:.0f}c | '
+                       f'{m["p_model"]:.0%} | {m["median"]:.0f}' + (" | blind spot" if m["blind"] else ""))
+        out.append('Small note on this page: "Robinhood line = the rung priced closest to 50c. Our probability is before the 2c fee. '
+                   'Blind spots are shown, never bet."')
+        page += 1
     return "\n".join(out)
 
 
@@ -490,6 +554,17 @@ def render(rep, title):
                    '<th class="num">P(over)</th><th>Lean</th><th>Book odds (edge pts)</th></tr>' + "".join(rows) + '</table>'
                    '<p class="note">Book lines come from big sportsbooks (DraftKings/FanDuel/consensus). Lean strength = how far my over probability sits from 50/50. '
                    'Edge pts use the book\'s own prices when given. A lean is not a bet until a price clears the 2% rule.</p></div></section>')
+
+    # hit-rate parlays
+    if rep.get("hit_parlays"):
+        rows = "".join(f'<tr><td>{i}</td><td>{"<br>".join(_e(x) for x in hp["legs"])}</td><td class="num"><b>{_pct(hp["p"])}</b></td>'
+                       f'<td class="num">{hp["ticket"]*100:.1f}c</td><td class="num {"good" if hp["edge"] >= .02 else "muted"}">{hp["edge"]*100:+.1f}</td>'
+                       f'<td class="num">{hp["fair"]}</td></tr>' for i, hp in enumerate(rep["hit_parlays"], 1))
+        out.append('<section><h2>Highest hit-rate parlays (alt lines)</h2><div class="panel tbl"><table><tr><th>#</th><th>Legs</th>'
+                   '<th class="num">Hits</th><th class="num">Ticket</th><th class="num">Edge pts</th><th class="num">Fair</th></tr>' + rows + '</table>'
+                   '<p class="note">Ranked by how often every leg hits together in the sims, regardless of edge. Ticket = product of the Robinhood leg '
+                   'prices (no combo discount), 5c to 40c. Edge includes the 2c fee; only tickets with edge of +2 or more qualify as model bets. '
+                   'Blind spots excluded.</p></div></section>')
 
     # Robinhood main lines vs model
     if rep.get("market"):
