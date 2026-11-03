@@ -176,3 +176,19 @@ def load_passes(seasons: list[int]) -> pd.DataFrame:
     p["int"] = p.interception.fillna(0).astype(int)
     return p[["key", "game_id", "posteam", "defteam", "passer_player_id", "receiver_player_id", "targeted",
               "complete", "yards", "td", "int"]].sort_values("key").reset_index(drop=True)
+
+
+def load_coaches(seasons: list[int]) -> pd.DataFrame:
+    """Head coach for every team game (regular season): team, key, coach. A coach is public before kickoff."""
+    frames = []
+    for y in seasons:
+        try:
+            d = pd.read_parquet(DATA_DIR / f"pbp_{y}.parquet", columns=["game_id", "season", "week", "season_type",
+                                                                        "home_team", "away_team", "home_coach", "away_coach"])
+        except FileNotFoundError:
+            continue
+        d = d[d.season_type == "REG"].drop_duplicates("game_id")
+        k = d.season * 100 + d.week
+        frames.append(pd.DataFrame({"team": d.home_team, "key": k, "coach": d.home_coach}))
+        frames.append(pd.DataFrame({"team": d.away_team, "key": k, "coach": d.away_coach}))
+    return pd.concat(frames, ignore_index=True).dropna().sort_values("key").reset_index(drop=True)

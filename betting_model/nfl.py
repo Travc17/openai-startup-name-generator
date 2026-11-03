@@ -46,6 +46,7 @@ def build_model() -> GameModel:
         m.cfg.def_mode = DEFENSE
     from nflmodel.qb import QBModel
     m.qbm = QBModel(data.load_passes(list(range(2019, CURRENT_SEASON + 1))))
+    m.coach = data.load_coaches(HISTORY)
     try:
         pff, team = routes.load([s for s in HISTORY if s >= 2023])
         m.route_role = routes.RouteRole(pff, team, m.pg)

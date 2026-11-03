@@ -58,6 +58,10 @@ class Config:
     share_carryover: float | None = 0.4
     share_half_life: float | None = 4.0
     adot_prior: bool = False   # league pool matched to the player's target depth (catch rate/yds prior)
+    recent_targets: bool = False     # target share uses the same recency weights as carry share
+    recent_all: bool = False         # every input (shares, catch rate, yards pools) uses the carry-share recency weights
+    continuity_seasons: int = 2      # prior seasons that must match (team, primary QB, head coach) to keep the long role
+    t_carryover_break: float | None = None   # target-share weight on prior seasons when team, QB or head coach changed (None = off)
     vol_walkforward: bool = True   # team-volume correlation/SD fit only on games before the one projected
     calibrate: bool = True     # per-stat calibration maps (calibration.json); backtests turn this off
     prior_mode: str = "tiered"        # share prior: "tiered" by recent usage, "all", or "regulars"
@@ -146,6 +150,7 @@ class GameModel:
         self._tz_by = {k: v for k, v in tz.groupby("receiver_player_id")}
         self.vol_corr, self.vol_sd = self._volume_covariance()
         self._vol_cache = {}
+        self._cont_cache = {}
 
     # ---------------- volume structure ----------------
     def _vol_params(self, key: int) -> tuple[np.ndarray, np.ndarray]:
@@ -313,6 +318,44 @@ class GameModel:
         return float(tt[bt]), float(tc[bc])
 
     # ---------------- player inputs ----------------
+    def continuity(self, pid: str, team: str, key: int, hist: pd.DataFrame) -> bool:
+        """True when the player's past role should carry over: for each of the last `continuity_seasons` prior
+        seasons he played for this team, with the same primary QB and the same head coach as now. Fewer prior
+        seasons than required counts as a break (not a long stint). No prior-season games at all: True."""
+        season = key // 100
+        prev_seasons = sorted({int(x) for x in hist.key // 100 if x < season})
+        if not prev_seasons:
+            return True
+        need = self.cfg.continuity_seasons
+        if len(prev_seasons) < need:
+            return False
+        coach = getattr(self, "coach", None)
+        qbm = getattr(self, "qbm", None)
+        now_coach = now_qb = None
+        if coach is not None:
+            c = coach[(coach.team == team) & (coach.key // 100 == season) & (coach.key <= key)]
+            now_coach = c.coach.iloc[-1] if len(c) else None
+        if qbm is not None and (tp := qbm._by_team.get(team)) is not None:
+            n = tp[(tp.key // 100 == season) & (tp.key < key)]
+            now_qb = n.passer_player_id.mode().iloc[0] if len(n) else None
+        for s_ in prev_seasons[-need:]:
+            rows = hist[hist.key // 100 == s_]
+            if rows.posteam.mode().iloc[0] != team:
+                return False
+            if now_coach is not None:
+                c = coach[(coach.team == team) & (coach.key // 100 == s_)]
+                if len(c) and c.coach.mode().iloc[0] != now_coach:
+                    return False
+            if now_qb is not None:
+                ck = ("qb", team, s_)
+                if ck not in self._cont_cache:
+                    t = qbm._by_team[team]
+                    t = t[t.key // 100 == s_]
+                    self._cont_cache[ck] = t.passer_player_id.mode().iloc[0] if len(t) else None
+                if self._cont_cache[ck] is not None and self._cont_cache[ck] != now_qb:
+                    return False
+        return True
+
     def player_inputs(self, p: Player, opp: str, key: int) -> dict:
         cfg = self.cfg
         hist = self._pg_by.get(p.pid)
@@ -324,13 +367,19 @@ class GameModel:
             from dataclasses import replace
             ws = decay_weights(hist.key.to_numpy(), replace(cfg, season_carryover=cfg.share_carryover or cfg.season_carryover,
                                                             half_life_games=cfg.share_half_life or cfg.half_life_games))
+        if cfg.recent_all:
+            w = ws
         pos = POS_GROUP.get(self.pos.get(p.pid, "WR"), "WR")
         if cfg.prior_mode == "tiered":
             prior_t, prior_c = self._tiered_prior(pos, key, hist)
         else:
             prior_t, prior_c = self._share_prior(pos, key // 100)
         k = cfg.share_prior_games
-        t_share = (np.sum(w * hist.t_share) + k * prior_t) / (w.sum() + k) * p.share_mult
+        wt = ws if cfg.recent_targets else w
+        if cfg.t_carryover_break is not None and not self.continuity(p.pid, p.team, key, hist):
+            from dataclasses import replace
+            wt = decay_weights(hist.key.to_numpy(), replace(cfg, season_carryover=cfg.t_carryover_break))
+        t_share = (np.sum(wt * hist.t_share) + k * prior_t) / (wt.sum() + k) * p.share_mult
         c_share = (np.sum(ws * hist.c_share) + k * prior_c) / (ws.sum() + k) * p.carry_mult
         gw = dict(zip(hist.key, w))
 

@@ -195,6 +195,27 @@ Pick-level paper test (Monday CHI@SEA, 15 qualifying picks, logged AFTER the gam
 correlated, one game): 4 of 15 won (26.7%) vs 38.9% expected, flat ROI -28.4%. Moved to
 `reviews/2026_wk08_CHI_at_SEA_retro_picks.csv`. It proves nothing either way; the real record starts now.
 
+## Current-year weighting for receivers (tested 2026-11-03, all OFF)
+Question: should projections lean on this season instead of past seasons? Carries already do (prior seasons x0.4,
+4-game half-life: tested better). For receivers, paired CRPS on 2024-26 weeks 4+ (4,920 player-games, same seeds;
++ means worse):
+
+| Version | Targets | Receptions | Rec yds |
+|---|---|---|---|
+| Prior seasons x0.3 only when team, QB or head coach changed vs last season | +0.01% (t=+0.2) | -0.01% | -0.01% |
+| Same, but 2 straight seasons of continuity required ("long stint") | +0.05% (t=+0.8) | +0.04% | +0.05% |
+| Current year only (x0.0) when 1-season continuity breaks | +0.05% (t=+0.5) | -0.02% | +0.01% |
+| Current year only when 2-season continuity breaks | +0.19% (t=+1.7) | +0.11% | +0.11% |
+| All receivers: prior seasons x0.4 | +0.09% (t=+1.6) | +0.04% | -0.01% |
+| All receivers: weighted exactly like carries | +0.12% (t=+1.4) | +0.08% | +0.02% |
+| Everything (shares, catch rate, yards) weighted like carries | +0.10% | **+0.17% (t=+2.0)** | **+0.21% (t=+2.6)** |
+
+Where the continuity rule moved a projection by 1+ target (347-442 player-games) it was slightly better
+(targets -0.7%, t=-1.9), not enough to ship. With the current weights, this season already carries about two
+thirds of a receiver's target-share weight by week 9. Receiver roles that dip tend to bounce back (36-game
+segment test). Coach-driven role cuts are handled case by case (blind spot or a documented `--mult`), not by a
+global rule. Switches kept in `Config`: `t_carryover_break`, `continuity_seasons`, `recent_targets`, `recent_all`.
+
 ## Per-game exposure cap (approved 2026-11-03)
 Every bet on one game is correlated (same game script, same QB), so the 10% cap is on the game, not each bet.
 `report` builds a "Bet plan": up to 3 bets by expected profit, no player+stat repeated, stakes scaled down
