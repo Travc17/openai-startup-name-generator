@@ -115,6 +115,18 @@ changes soak up most vacated looks. k fitted on 2022 and 2023 alone gave
 | Return from long absence (IR, ACL) | 2022-25, 128 return games | Game 1 back: targets x0.73, carries x0.72; game 2: x0.90. Held on both 2022-23 and 2024-25 | ON (auto) |
 | Defense vs position lever | play by play | Paired test, 2,223 player games 2024-25: 5 versions (yds/target 12 game & full season, target volume, field zones, zones+volume) all within noise (abs t < 2). Full season yds/target was neutral | ON as a lever (`--defense` to switch) |
 
+## Game lines: spreads and totals (tested against REAL closing lines)
+
+Protocol: tune on 2023-2024 only, then run the locked 2025-2026 test ONCE. Target: 54.4%+ (2 pts over 52.4% break even).
+
+| Model | Locked test 2025-26 | Verdict |
+|---|---|---|
+| Spreads, best version (pass/rush split + points) | ATS 38.6% when it disagreed 2+ pts (n=166); margin error 10.58 vs market 9.67 | FAILS. Do not bet model spreads. |
+| **Totals, QB-specific ratings + pass/rush split** | **O/U 55.4% at 2+ pt disagreement (n=166), 56.5% at 3+ (n=115)**; validation 2024 was 59.0% (n=83) | Clears the 2% target, NOT yet statistically proven (about 1 standard error). Small stakes + track. |
+
+`gameline` prices any line by simulating around the big-book consensus (held out calibration within 1-2 pts on alt spreads).
+Defense vs position: six versions tested (yards, volume, zones, catch rate allowed), none beat noise. Kept as a light visible lever.
+
 ## Honest limits
 
 * No historical prop lines: calibration is tested, profit is not. Closing line

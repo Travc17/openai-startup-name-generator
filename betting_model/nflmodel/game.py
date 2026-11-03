@@ -126,7 +126,7 @@ class GameModel:
         self._tpool = {p: (g.key.to_numpy(), g.complete.to_numpy(), g.yards.to_numpy()) for p, g in t.groupby("pos")}
         self._rpool = {p: (g.key.to_numpy(), g.yards.to_numpy()) for p, g in r.groupby("pos")}
         self._tdp = {k: v for k, v in t.groupby(["key", "defteam", "pos"]).agg(
-            n=("yards", "size"), yds=("yards", "sum")).reset_index().groupby("defteam")}
+            n=("yards", "size"), yds=("yards", "sum"), comp=("complete", "sum")).reset_index().groupby("defteam")}
         tz = t[t.zone != "na"]
         self._tdz = {k: v for k, v in tz.groupby(["key", "defteam", "zone"]).agg(
             n=("yards", "size"), yds=("yards", "sum")).reset_index().groupby("defteam")}
@@ -179,13 +179,26 @@ class GameModel:
         if self.pos_defense and mode == "team":
             mode = "pos_ypt"
         ymult, smult = team_factor, 1.0
-        if mode in ("pos_ypt", "pos_ypt_long"):
-            ymult = self._opp_mult_pos(opp, key, pos, team_factor, long=(mode == "pos_ypt_long"))
+        if mode in ("pos_ypt", "pos_ypt_long", "pos_full"):
+            ymult = self._opp_mult_pos(opp, key, pos, team_factor, long=(mode != "pos_ypt"))
         if mode in ("zone", "zone_volume"):
             ymult = self._zone_mult(pid, opp, key, team_factor)
         if mode in ("pos_volume", "zone_volume"):
             smult = self._volume_mult(opp, key, pos)
         return ymult, smult
+
+    def _catch_mult(self, opp: str, key: int, pos: str, shrink: float = 300.0) -> float:
+        """Catch rate this defense allows to the position vs league, full season window, shrunk."""
+        keys = self._def_keys(opp, key, 17)
+        d = self._tdp[opp]
+        d = d[d.key.isin(keys) & (d.pos == pos)]
+        n = d.n.sum()
+        if n == 0:
+            return 1.0
+        lk, lc, _ = self._tpool.get(pos, self._tpool["WR"])
+        end = np.searchsorted(lk, key, side="left")
+        league = lc[max(0, end - self.cfg.league_pool_size):end].mean()
+        return float(1 + n / (n + shrink) * ((d.comp.sum() / n) / league - 1))
 
     def _volume_mult(self, opp: str, key: int, pos: str) -> float:
         """Share of targets this defense allows to the position vs league norm."""
@@ -362,6 +375,14 @@ class GameModel:
                 idx = rng.choice(len(inp["pool_ty"]), size=(n, mt), p=inp["pool_tp"])
                 m = np.arange(mt)[None, :] < tg[:, None]
                 rec = (inp["pool_c"][idx] * m).sum(1)
+                if self.cfg.def_mode == "pos_full":
+                    cm = self._catch_mult(opp, key, inp["pos"])
+                    if cm < 1:
+                        rec = rng.binomial(rec.astype(int), cm)
+                    else:
+                        cr = max(inp["catch"], 0.05)
+                        extra_p = min((cm - 1) * cr / max(1 - cr, 0.05), 1.0)
+                        rec = rec + rng.binomial((tg - rec).astype(int), extra_p)
                 rec_yds = (inp["pool_ty"][idx] * m).sum(1) * p_rec_mult
                 mc = max(int(ca.max()), 1)
                 idx = rng.choice(len(inp["pool_ry"]), size=(n, mc), p=inp["pool_rp"])
