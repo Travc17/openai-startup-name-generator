@@ -122,7 +122,18 @@ Protocol: tune on 2023-2024 only, then run the locked 2025-2026 test ONCE. Targe
 | Model | Locked test 2025-26 | Verdict |
 |---|---|---|
 | Spreads, best version (pass/rush split + points) | ATS 38.6% when it disagreed 2+ pts (n=166); margin error 10.58 vs market 9.67 | FAILS. Do not bet model spreads. |
-| **Totals, QB-specific ratings + pass/rush split** | **O/U 55.4% at 2+ pt disagreement (n=166), 56.5% at 3+ (n=115)**; validation 2024 was 59.0% (n=83) | Clears the 2% target, NOT yet statistically proven (about 1 standard error). Small stakes + track. |
+| Totals, QB-specific ratings + pass/rush split | Locked 2025-26: O/U 55.4% at 2+ (n=166) | Looked promising, then FAILED the wider test below |
+
+Wider walk-forward totals test (2019-21 warmup, coefficients fit only on prior seasons):
+
+| Season | O/U at 2+ pt disagreement | Note |
+|---|---|---|
+| 2022 | 42.8% (n=138) | clean out of sample |
+| 2023 | 47.5% (n=122) | mostly clean |
+| 2024 | 58.6% (n=111) | tuning season, not independent |
+| 2025 | 53.8% (n=130) | locked |
+| 2026 | 50.0% (n=42) | locked |
+| **All 5** | **50.3% on 543 bets, -21.8 units** | **No edge. Totals model shelved.** |
 
 `gameline` prices any line by simulating around the big-book consensus (held out calibration within 1-2 pts on alt spreads).
 Defense vs position: six versions tested (yards, volume, zones, catch rate allowed), none beat noise. Kept as a light visible lever.
