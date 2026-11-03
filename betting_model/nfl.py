@@ -128,6 +128,17 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     for pid in extra:
         team = current_team(model, pid)
         pids[pid] = team if team in (team_a, team_b) else sys.exit(f"{name_of(pid)} last played for {team}, not {team_a}/{team_b}.")
+    # Every skill player with offensive snaps in the team's last 2 games (Travis, 2026-11-03): depth
+    # players get their own share instead of being left out of the box score and the prop coverage.
+    # A/B on 2025 wks 6-13: leaders unchanged (all stats |change| < 0.1%, |t| < 1.1); depth players'
+    # upper tails too thin (<p90 coverage 82-84%), so they are auto blind spots (shown, never bet).
+    a.depth_added = set()
+    if not getattr(a, "leaders_only", False):
+        for t in (team_a, team_b):
+            for pid in model.active_players(t, key):
+                if pid not in outs and pid not in pids:
+                    pids[pid] = t
+                    a.depth_added.add(pid)
     # Vacated share: teammates absorb only part of it. k fitted on real absences
     # (nflmodel/absences.json): boost = 1 + k * (1 / (1 - vacated) - 1)
     ab = absences.load()
@@ -490,6 +501,9 @@ def cmd_report(a):
     board = report.load_board(a.board)
     news = report.load_news(a.news)
     blind = set(a.blind or [])
+    for pid in sorted(getattr(a, "depth_added", ())):
+        print(f"DEPTH ADD: {name_of(pid)} (recent snaps; auto blind spot until depth-player tails are calibrated)")
+        blind.add(name_of(pid))
     qbs = {t: model.qbm.starter(t, key) for t in (a.team_a, a.team_b)}
     for spec in a.qb or []:
         t, n = spec.split("=", 1)
@@ -613,6 +627,8 @@ def main():
         sp.add_argument("--season", type=int, default=CURRENT_SEASON)
         sp.add_argument("--week", type=int, help="Week being projected (default: next week in the data)")
         sp.add_argument("--out", action="append", help="Player ruled out (repeatable)")
+        sp.add_argument("--leaders-only", action="store_true",
+                        help="Old roster: usage leaders + depth starters only (default adds every skill player with recent snaps)")
         sp.add_argument("--mult", action="append", help="'NAME=1.10' share multiplier for role news")
         sp.add_argument("--catch", action="append", help="'NAME=0.48' catch-rate override (manual, flagged)")
         sp.add_argument("--fee", type=float, default=0.02, help="Fee per $1 contract (Robinhood charged 2c on bet #1)")

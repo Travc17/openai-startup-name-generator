@@ -1,0 +1,456 @@
+team,player,stat,stat_key,rung,model_pct,kalshi_yes,kalshi_no,book_best,book_best_name,book_best_pct,n_books,blind
+JAX,Bhayshul Tuten,Rec yds,rec_yds,10.0,43.8,97.0,96.0,-180.0,Fanatics,64.0,1,False
+JAX,Bhayshul Tuten,Rec yds,rec_yds,15.0,33.8,55.0,52.0,,,,0,False
+JAX,Bhayshul Tuten,Rec yds,rec_yds,20.0,25.8,47.0,91.0,150.0,Fanatics,40.0,1,False
+JAX,Bhayshul Tuten,Rec yds,rec_yds,25.0,20.3,43.0,96.0,220.0,Fanatics,31.0,1,False
+JAX,Bhayshul Tuten,Rec yds,rec_yds,30.0,14.9,34.0,97.0,300.0,Fanatics,25.0,1,False
+JAX,Bhayshul Tuten,Rec yds,rec_yds,40.0,7.8,19.0,97.0,575.0,Fanatics,15.0,1,False
+JAX,Bhayshul Tuten,Rec yds,rec_yds,50.0,4.2,7.0,97.0,950.0,Fanatics,10.0,1,False
+JAX,Bhayshul Tuten,Receptions,rec,2.0,41.4,,,-230.0,Fanatics,70.0,1,False
+JAX,Bhayshul Tuten,Receptions,rec,3.0,21.5,,,135.0,Fanatics,43.0,1,False
+JAX,Bhayshul Tuten,Receptions,rec,4.0,9.9,,,320.0,Fanatics,24.0,1,False
+JAX,Bhayshul Tuten,Receptions,rec,5.0,4.4,,,700.0,Fanatics,12.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,40.0,76.6,86.0,33.0,-750.0,Fanatics,88.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,50.0,63.5,79.0,43.0,-340.0,Fanatics,77.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,60.0,49.5,68.0,38.0,-180.0,Fanatics,64.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,70.0,38.7,52.0,50.0,-105.0,Fanatics,51.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,75.0,32.6,,,120.0,Fanatics,45.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,80.0,27.1,46.0,68.0,150.0,Fanatics,40.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,90.0,18.6,37.0,76.0,240.0,Fanatics,29.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,100.0,13.2,28.0,90.0,340.0,Fanatics,23.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,110.0,8.8,28.0,,475.0,Fanatics,17.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,120.0,5.7,25.0,,700.0,Fanatics,12.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,125.0,4.5,,,850.0,Fanatics,11.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,130.0,3.6,22.0,,950.0,Fanatics,10.0,1,False
+JAX,Bhayshul Tuten,Rush yds,rush_yds,140.0,2.0,22.0,,,,,0,False
+JAX,Brenton Strange,Rec yds,rec_yds,10.0,82.4,88.0,23.0,-1400.0,FanDuel,93.0,2,False
+JAX,Brenton Strange,Rec yds,rec_yds,15.0,75.1,84.0,29.0,-670.0,FanDuel,87.0,2,False
+JAX,Brenton Strange,Rec yds,rec_yds,20.0,67.1,77.0,36.0,-390.0,FanDuel,80.0,3,False
+JAX,Brenton Strange,Rec yds,rec_yds,25.0,58.7,69.0,38.0,-250.0,FanDuel,71.0,4,False
+JAX,Brenton Strange,Rec yds,rec_yds,30.0,51.7,62.0,43.0,-174.0,FanDuel,64.0,3,False
+JAX,Brenton Strange,Rec yds,rec_yds,37.0,41.9,,,-111.0,DraftKings,53.0,1,False
+JAX,Brenton Strange,Rec yds,rec_yds,40.0,38.1,44.0,60.0,114.0,FanDuel,47.0,3,False
+JAX,Brenton Strange,Rec yds,rec_yds,50.0,27.4,31.0,73.0,194.0,FanDuel,34.0,4,False
+JAX,Brenton Strange,Rec yds,rec_yds,60.0,18.6,21.0,82.0,323.0,DraftKings,24.0,3,False
+JAX,Brenton Strange,Rec yds,rec_yds,70.0,12.4,15.0,94.0,520.0,FanDuel,16.0,3,False
+JAX,Brenton Strange,Rec yds,rec_yds,75.0,10.0,,,525.0,Fanatics,16.0,2,False
+JAX,Brenton Strange,Rec yds,rec_yds,80.0,8.0,10.0,96.0,840.0,DraftKings,11.0,3,False
+JAX,Brenton Strange,Rec yds,rec_yds,90.0,5.1,7.0,97.0,1320.0,DraftKings,7.0,3,False
+JAX,Brenton Strange,Rec yds,rec_yds,100.0,3.4,,,2000.0,DraftKings,5.0,3,False
+JAX,Brenton Strange,Rec yds,rec_yds,110.0,2.2,,,3000.0,DraftKings,3.0,1,False
+JAX,Brenton Strange,Rec yds,rec_yds,125.0,1.0,,,1850.0,BetMGM,5.0,1,False
+JAX,Brenton Strange,Receptions,rec,2.0,78.5,91.0,26.0,-1080.0,DraftKings,92.0,3,False
+JAX,Brenton Strange,Receptions,rec,3.0,59.8,73.0,39.0,-302.0,DraftKings,75.0,3,False
+JAX,Brenton Strange,Receptions,rec,4.0,40.7,51.0,51.0,-121.0,DraftKings,55.0,3,False
+JAX,Brenton Strange,Receptions,rec,5.0,25.7,35.0,75.0,182.0,DraftKings,35.0,3,False
+JAX,Brenton Strange,Receptions,rec,6.0,14.9,20.0,90.0,379.0,DraftKings,21.0,3,False
+JAX,Brenton Strange,Receptions,rec,7.0,8.1,12.0,97.0,750.0,DraftKings,12.0,3,False
+JAX,Brenton Strange,Receptions,rec,8.0,4.1,7.0,,1380.0,DraftKings,7.0,2,False
+JAX,Brenton Strange,Receptions,rec,9.0,2.1,5.0,,2300.0,DraftKings,4.0,2,False
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,5.0,82.5,,,-225.0,FanDuel,69.0,1,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,10.0,74.1,54.0,49.0,-124.0,DraftKings,55.0,3,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,11.0,72.2,,,-114.0,DraftKings,53.0,1,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,15.0,64.8,43.0,70.0,128.0,FanDuel,44.0,2,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,20.0,57.7,35.0,79.0,188.0,FanDuel,35.0,3,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,25.0,49.7,27.0,84.0,260.0,DraftKings,28.0,4,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,30.0,42.8,21.0,89.0,360.0,FanDuel,22.0,3,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,40.0,31.6,13.0,95.0,610.0,DraftKings,14.0,3,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,50.0,21.8,9.0,96.0,1000.0,DraftKings,9.0,4,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,60.0,15.6,6.0,,1600.0,DraftKings,6.0,1,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,70.0,10.8,,,2500.0,DraftKings,4.0,1,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,75.0,8.8,,,1550.0,BetMGM,6.0,1,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,80.0,7.2,,,3800.0,DraftKings,3.0,1,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,100.0,3.1,,,2000.0,BetMGM,5.0,1,True
+JAX,Brian Thomas Jr.,Rec yds,rec_yds,125.0,1.0,,,2000.0,BetMGM,5.0,1,True
+JAX,Brian Thomas Jr.,Receptions,rec,1.0,85.8,,,-300.0,FanDuel,75.0,1,True
+JAX,Brian Thomas Jr.,Receptions,rec,2.0,62.7,38.0,64.0,156.0,DraftKings,39.0,2,True
+JAX,Brian Thomas Jr.,Receptions,rec,3.0,39.2,16.0,91.0,505.0,DraftKings,17.0,2,True
+JAX,Brian Thomas Jr.,Receptions,rec,4.0,22.1,8.0,97.0,1440.0,DraftKings,6.0,1,True
+JAX,Brian Thomas Jr.,Receptions,rec,5.0,11.0,,,2900.0,DraftKings,3.0,1,True
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,10.0,83.7,91.0,89.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,15.0,71.9,86.0,77.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,20.0,61.9,91.0,96.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,25.0,52.4,85.0,78.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,30.0,42.1,60.0,41.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,40.0,27.6,58.0,62.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,50.0,16.5,30.0,71.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,60.0,9.8,31.0,83.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,70.0,5.9,20.0,95.0,,,,0,False
+JAX,Chris Rodriguez Jr.,Rush yds,rush_yds,80.0,3.1,18.0,,,,,0,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,10.0,86.6,,,-1040.0,DraftKings,91.0,3,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,15.0,80.8,82.0,27.0,-620.0,DraftKings,86.0,2,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,20.0,76.0,78.0,36.0,-399.0,DraftKings,80.0,3,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,25.0,69.1,73.0,41.0,-275.0,DraftKings,73.0,4,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,30.0,62.3,65.0,44.0,-200.0,DraftKings,67.0,3,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,40.0,50.5,52.0,52.0,-115.0,Fanatics,53.0,3,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,41.0,49.4,,,-110.0,DraftKings,52.0,1,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,50.0,38.8,39.0,72.0,141.0,DraftKings,41.0,4,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,60.0,29.8,30.0,82.0,224.0,DraftKings,31.0,3,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,70.0,22.5,21.0,88.0,345.0,DraftKings,22.0,3,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,75.0,19.3,,,400.0,Fanatics,20.0,2,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,80.0,16.3,15.0,96.0,524.0,DraftKings,16.0,3,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,90.0,11.7,11.0,96.0,780.0,DraftKings,11.0,3,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,100.0,8.1,8.0,97.0,1140.0,DraftKings,8.0,4,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,110.0,5.7,6.0,,1660.0,DraftKings,6.0,2,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,120.0,3.8,,,2400.0,DraftKings,4.0,1,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,125.0,3.2,,,1600.0,BetMGM,6.0,1,False
+JAX,Jakobi Meyers,Rec yds,rec_yds,130.0,2.5,,,3200.0,DraftKings,3.0,1,False
+JAX,Jakobi Meyers,Receptions,rec,2.0,80.7,,,-670.0,DraftKings,87.0,3,False
+JAX,Jakobi Meyers,Receptions,rec,3.0,62.9,,,-207.0,DraftKings,67.0,3,False
+JAX,Jakobi Meyers,Receptions,rec,4.0,43.2,,,120.0,Fanatics,45.0,3,False
+JAX,Jakobi Meyers,Receptions,rec,5.0,27.4,,,261.0,DraftKings,28.0,3,False
+JAX,Jakobi Meyers,Receptions,rec,6.0,16.0,,,561.0,DraftKings,15.0,3,False
+JAX,Jakobi Meyers,Receptions,rec,7.0,8.5,,,1120.0,DraftKings,8.0,3,False
+JAX,Jakobi Meyers,Receptions,rec,8.0,4.3,,,2000.0,DraftKings,5.0,2,False
+JAX,Josh Cameron,Rec yds,rec_yds,5.0,54.5,,,-250.0,FanDuel,71.0,1,True
+JAX,Josh Cameron,Rec yds,rec_yds,10.0,44.2,53.0,54.0,-118.0,DraftKings,54.0,3,True
+JAX,Josh Cameron,Rec yds,rec_yds,15.0,35.5,39.0,65.0,140.0,DraftKings,42.0,2,True
+JAX,Josh Cameron,Rec yds,rec_yds,20.0,29.4,30.0,77.0,210.0,DraftKings,32.0,3,True
+JAX,Josh Cameron,Rec yds,rec_yds,25.0,23.1,25.0,82.0,299.0,DraftKings,25.0,4,True
+JAX,Josh Cameron,Rec yds,rec_yds,30.0,18.6,18.0,91.0,419.0,DraftKings,19.0,3,True
+JAX,Josh Cameron,Rec yds,rec_yds,40.0,11.7,11.0,94.0,790.0,DraftKings,11.0,3,True
+JAX,Josh Cameron,Rec yds,rec_yds,50.0,7.0,7.0,,1340.0,DraftKings,7.0,3,True
+JAX,Josh Cameron,Rec yds,rec_yds,60.0,4.3,4.0,,2200.0,DraftKings,4.0,1,True
+JAX,Josh Cameron,Rec yds,rec_yds,70.0,2.6,4.0,,3400.0,DraftKings,3.0,1,True
+JAX,Josh Cameron,Rec yds,rec_yds,75.0,2.0,,,1650.0,BetMGM,6.0,1,True
+JAX,Josh Cameron,Rec yds,rec_yds,100.0,0.6,,,2000.0,BetMGM,5.0,1,True
+JAX,Josh Cameron,Rec yds,rec_yds,125.0,0.1,,,2000.0,BetMGM,5.0,1,True
+JAX,Josh Cameron,Receptions,rec,1.0,60.2,,,-400.0,FanDuel,80.0,1,True
+JAX,Josh Cameron,Receptions,rec,2.0,29.1,41.0,60.0,133.0,DraftKings,43.0,3,True
+JAX,Josh Cameron,Receptions,rec,3.0,12.2,20.0,82.0,428.0,DraftKings,19.0,3,True
+JAX,Josh Cameron,Receptions,rec,4.0,4.4,9.0,97.0,1180.0,DraftKings,8.0,3,True
+JAX,Josh Cameron,Receptions,rec,5.0,1.5,5.0,,2600.0,DraftKings,4.0,1,True
+JAX,Josh Cameron,Receptions,rec,6.0,0.6,8.0,,,,,0,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,5.0,46.5,,,-166.0,FanDuel,62.0,1,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,8.0,39.6,,,-109.0,DraftKings,52.0,1,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,10.0,35.2,44.0,60.0,113.0,DraftKings,47.0,3,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,15.0,27.0,35.0,80.0,182.0,FanDuel,35.0,2,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,20.0,19.9,27.0,79.0,280.0,FanDuel,26.0,3,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,25.0,14.9,20.0,92.0,390.0,FanDuel,20.0,4,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,30.0,11.3,16.0,89.0,550.0,FanDuel,15.0,3,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,40.0,5.8,10.0,94.0,920.0,FanDuel,10.0,3,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,50.0,3.0,6.0,,1360.0,DraftKings,7.0,2,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,60.0,1.6,,,2100.0,DraftKings,5.0,1,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,70.0,0.9,,,3200.0,DraftKings,3.0,1,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,75.0,0.6,,,1900.0,BetMGM,5.0,1,True
+JAX,Nate Boerkircher,Rec yds,rec_yds,100.0,0.1,,,2000.0,BetMGM,5.0,1,True
+JAX,Nate Boerkircher,Receptions,rec,1.0,51.6,65.0,36.0,-235.0,FanDuel,70.0,1,True
+JAX,Nate Boerkircher,Receptions,rec,2.0,26.5,35.0,69.0,205.0,FanDuel,33.0,2,True
+JAX,Nate Boerkircher,Receptions,rec,3.0,12.0,15.0,94.0,630.0,FanDuel,14.0,2,True
+JAX,Nate Boerkircher,Receptions,rec,4.0,4.8,7.0,,1340.0,DraftKings,7.0,1,True
+JAX,Nate Boerkircher,Receptions,rec,5.0,1.8,,,2700.0,DraftKings,4.0,1,True
+JAX,Parker Washington,Rec yds,rec_yds,15.0,83.4,,,-2300.0,DraftKings,96.0,1,False
+JAX,Parker Washington,Rec yds,rec_yds,20.0,78.9,,,-1320.0,DraftKings,93.0,1,False
+JAX,Parker Washington,Rec yds,rec_yds,25.0,73.0,,,-860.0,DraftKings,90.0,4,False
+JAX,Parker Washington,Rec yds,rec_yds,30.0,67.0,84.0,26.0,-590.0,DraftKings,86.0,3,False
+JAX,Parker Washington,Rec yds,rec_yds,40.0,56.2,75.0,37.0,-320.0,DraftKings,76.0,3,False
+JAX,Parker Washington,Rec yds,rec_yds,50.0,45.9,66.0,39.0,-195.0,DraftKings,66.0,4,False
+JAX,Parker Washington,Rec yds,rec_yds,60.0,37.0,56.0,50.0,-125.0,DraftKings,56.0,3,False
+JAX,Parker Washington,Rec yds,rec_yds,63.0,34.4,,,-110.0,DraftKings,52.0,1,False
+JAX,Parker Washington,Rec yds,rec_yds,70.0,29.6,44.0,66.0,121.0,DraftKings,45.0,3,False
+JAX,Parker Washington,Rec yds,rec_yds,75.0,25.6,,,140.0,Fanatics,42.0,2,False
+JAX,Parker Washington,Rec yds,rec_yds,80.0,22.2,37.0,75.0,177.0,DraftKings,36.0,3,False
+JAX,Parker Washington,Rec yds,rec_yds,90.0,16.9,29.0,82.0,255.0,DraftKings,28.0,3,False
+JAX,Parker Washington,Rec yds,rec_yds,100.0,12.1,22.0,87.0,366.0,DraftKings,21.0,4,False
+JAX,Parker Washington,Rec yds,rec_yds,110.0,8.9,17.0,94.0,516.0,DraftKings,16.0,3,False
+JAX,Parker Washington,Rec yds,rec_yds,120.0,6.2,13.0,95.0,720.0,DraftKings,12.0,2,False
+JAX,Parker Washington,Rec yds,rec_yds,125.0,5.3,,,700.0,Fanatics,12.0,3,False
+JAX,Parker Washington,Rec yds,rec_yds,130.0,4.5,9.0,96.0,1000.0,DraftKings,9.0,2,False
+JAX,Parker Washington,Rec yds,rec_yds,140.0,3.2,8.0,97.0,1400.0,DraftKings,7.0,2,False
+JAX,Parker Washington,Rec yds,rec_yds,150.0,2.2,6.0,,1900.0,DraftKings,5.0,2,False
+JAX,Parker Washington,Rec yds,rec_yds,160.0,1.5,5.0,,2500.0,DraftKings,4.0,1,False
+JAX,Parker Washington,Rec yds,rec_yds,170.0,1.0,,,3400.0,DraftKings,3.0,1,False
+JAX,Parker Washington,Receptions,rec,2.0,82.0,96.0,18.0,-2900.0,DraftKings,97.0,1,False
+JAX,Parker Washington,Receptions,rec,3.0,64.1,85.0,26.0,-600.0,FanDuel,86.0,3,False
+JAX,Parker Washington,Receptions,rec,4.0,45.1,67.0,44.0,-230.0,Fanatics,70.0,3,False
+JAX,Parker Washington,Receptions,rec,5.0,29.3,49.0,55.0,100.0,Fanatics,50.0,3,False
+JAX,Parker Washington,Receptions,rec,6.0,17.0,33.0,80.0,197.0,DraftKings,34.0,3,False
+JAX,Parker Washington,Receptions,rec,7.0,9.0,19.0,91.0,388.0,DraftKings,20.0,3,False
+JAX,Parker Washington,Receptions,rec,8.0,4.6,13.0,96.0,760.0,DraftKings,12.0,3,False
+JAX,Parker Washington,Receptions,rec,9.0,2.2,7.0,,1380.0,DraftKings,7.0,2,False
+JAX,Parker Washington,Receptions,rec,10.0,1.1,5.0,,2300.0,DraftKings,4.0,1,False
+JAX,Travis Hunter,Rec yds,rec_yds,5.0,44.1,,,-205.0,FanDuel,67.0,1,True
+JAX,Travis Hunter,Rec yds,rec_yds,9.0,35.8,,,-109.0,DraftKings,52.0,1,True
+JAX,Travis Hunter,Rec yds,rec_yds,10.0,33.7,50.0,52.0,102.0,DraftKings,50.0,3,True
+JAX,Travis Hunter,Rec yds,rec_yds,15.0,26.5,41.0,75.0,162.0,DraftKings,38.0,2,True
+JAX,Travis Hunter,Rec yds,rec_yds,20.0,21.8,28.0,75.0,245.0,DraftKings,29.0,3,True
+JAX,Travis Hunter,Rec yds,rec_yds,25.0,16.2,25.0,89.0,342.0,DraftKings,23.0,3,True
+JAX,Travis Hunter,Rec yds,rec_yds,30.0,12.3,17.0,92.0,464.0,DraftKings,18.0,3,True
+JAX,Travis Hunter,Rec yds,rec_yds,40.0,7.7,12.0,95.0,840.0,DraftKings,11.0,3,True
+JAX,Travis Hunter,Rec yds,rec_yds,50.0,4.5,7.0,96.0,1440.0,DraftKings,6.0,3,True
+JAX,Travis Hunter,Rec yds,rec_yds,60.0,2.7,5.0,,2300.0,DraftKings,4.0,1,True
+JAX,Travis Hunter,Rec yds,rec_yds,70.0,1.5,,,3500.0,DraftKings,3.0,1,True
+JAX,Travis Hunter,Receptions,rec,1.0,48.6,,,-270.0,FanDuel,73.0,1,True
+JAX,Travis Hunter,Receptions,rec,2.0,20.9,34.0,68.0,189.0,DraftKings,35.0,2,True
+JAX,Travis Hunter,Receptions,rec,3.0,7.6,16.0,95.0,640.0,DraftKings,14.0,2,True
+JAX,Travis Hunter,Receptions,rec,4.0,2.8,7.0,94.0,1800.0,DraftKings,5.0,1,True
+JAX,Trevor Lawrence,Completions,pass_cmp,15.0,80.8,,81.0,,,,0,False
+JAX,Trevor Lawrence,Completions,pass_cmp,20.0,47.0,49.0,54.0,,,,0,False
+JAX,Trevor Lawrence,Completions,pass_cmp,25.0,16.4,29.0,89.0,,,,0,False
+JAX,Trevor Lawrence,Pass att,pass_att,27.0,64.5,96.0,67.0,,,,0,False
+JAX,Trevor Lawrence,Pass att,pass_att,32.0,38.5,43.0,60.0,,,,0,False
+JAX,Trevor Lawrence,Pass att,pass_att,37.0,16.8,41.0,92.0,,,,0,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,150.0,86.4,,,-1400.0,FanDuel,93.0,2,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,160.0,82.9,,,-980.0,DraftKings,91.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,170.0,79.3,,,-680.0,DraftKings,87.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,175.0,77.3,85.0,22.0,-580.0,FanDuel,85.0,2,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,180.0,75.1,,,-494.0,DraftKings,83.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,190.0,70.9,,,-366.0,DraftKings,79.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,200.0,66.5,72.0,31.0,-278.0,DraftKings,74.0,4,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,210.0,61.7,,,-208.0,DraftKings,68.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,220.0,56.6,,,-162.0,DraftKings,62.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,225.0,54.0,59.0,46.0,-145.0,Fanatics,59.0,2,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,230.0,51.8,,,-127.0,DraftKings,56.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,235.0,49.4,,,-112.0,DraftKings,53.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,240.0,46.8,,,101.0,DraftKings,50.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,250.0,42.1,44.0,57.0,127.0,DraftKings,44.0,4,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,260.0,37.3,,,157.0,DraftKings,39.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,270.0,32.7,,,200.0,DraftKings,33.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,275.0,30.6,32.0,74.0,230.0,Fanatics,30.0,2,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,280.0,28.5,,,253.0,DraftKings,28.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,290.0,24.2,,,315.0,DraftKings,24.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,300.0,20.9,21.0,85.0,410.0,Fanatics,20.0,4,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,310.0,17.8,,,494.0,DraftKings,17.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,320.0,14.7,,,610.0,DraftKings,14.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,325.0,13.4,13.0,92.0,700.0,Fanatics,12.0,2,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,330.0,12.2,,,750.0,DraftKings,12.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,340.0,10.1,,,920.0,DraftKings,10.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,350.0,8.2,9.0,94.0,1300.0,Fanatics,7.0,4,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,360.0,6.6,,,1380.0,DraftKings,7.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,370.0,5.1,,,1660.0,DraftKings,6.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,375.0,4.7,,,1400.0,FanDuel,7.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,380.0,4.0,,,1980.0,DraftKings,5.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,390.0,3.2,,,2300.0,DraftKings,4.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,400.0,2.5,,,2600.0,DraftKings,4.0,1,False
+JAX,Trevor Lawrence,Pass yds,pass_yds,410.0,2.0,,,2900.0,DraftKings,3.0,1,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,5.0,42.4,,,-420.0,FanDuel,81.0,1,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,10.0,31.8,59.0,53.0,-145.0,DraftKings,59.0,3,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,12.0,27.5,,,-112.0,DraftKings,53.0,1,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,15.0,21.0,44.0,59.0,127.0,DraftKings,44.0,2,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,20.0,15.6,33.0,82.0,215.0,DraftKings,32.0,3,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,25.0,11.5,23.0,85.0,340.0,DraftKings,23.0,4,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,30.0,7.7,16.0,97.0,523.0,DraftKings,16.0,3,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,40.0,3.7,8.0,95.0,1160.0,DraftKings,8.0,3,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,50.0,1.5,6.0,,2100.0,DraftKings,5.0,2,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,60.0,0.6,,,3300.0,DraftKings,3.0,1,False
+JAX,Trevor Lawrence,Rush yds,rush_yds,75.0,0.2,,,2000.0,BetMGM,5.0,1,False
+BAL,Derrick Henry,Rec yds,rec_yds,5.0,38.4,,,-172.0,FanDuel,63.0,1,True
+BAL,Derrick Henry,Rec yds,rec_yds,8.0,28.7,,,-115.0,DraftKings,53.0,1,True
+BAL,Derrick Henry,Rec yds,rec_yds,10.0,24.7,39.0,71.0,130.0,FanDuel,43.0,3,True
+BAL,Derrick Henry,Rec yds,rec_yds,15.0,15.4,30.0,84.0,225.0,FanDuel,31.0,2,True
+BAL,Derrick Henry,Rec yds,rec_yds,20.0,8.9,21.0,91.0,360.0,FanDuel,22.0,3,True
+BAL,Derrick Henry,Rec yds,rec_yds,25.0,5.7,16.0,94.0,520.0,FanDuel,16.0,3,True
+BAL,Derrick Henry,Rec yds,rec_yds,30.0,3.8,12.0,96.0,700.0,FanDuel,12.0,3,True
+BAL,Derrick Henry,Rec yds,rec_yds,40.0,1.5,6.0,,1300.0,DraftKings,7.0,2,True
+BAL,Derrick Henry,Rec yds,rec_yds,50.0,0.7,,,2400.0,DraftKings,4.0,1,True
+BAL,Derrick Henry,Rec yds,rec_yds,60.0,0.3,,,3600.0,DraftKings,3.0,1,True
+BAL,Derrick Henry,Receptions,rec,1.0,58.1,,,-420.0,FanDuel,81.0,1,True
+BAL,Derrick Henry,Receptions,rec,2.0,26.9,46.0,55.0,102.0,FanDuel,50.0,3,True
+BAL,Derrick Henry,Receptions,rec,3.0,11.1,25.0,84.0,303.0,DraftKings,25.0,3,True
+BAL,Derrick Henry,Receptions,rec,4.0,4.1,12.0,94.0,820.0,DraftKings,11.0,3,True
+BAL,Derrick Henry,Receptions,rec,5.0,1.5,7.0,,1880.0,DraftKings,5.0,1,True
+BAL,Derrick Henry,Rush yds,rush_yds,30.0,86.7,,,-2500.0,DraftKings,96.0,1,False
+BAL,Derrick Henry,Rush yds,rush_yds,40.0,75.7,85.0,28.0,-750.0,FanDuel,88.0,3,False
+BAL,Derrick Henry,Rush yds,rush_yds,50.0,63.0,77.0,37.0,-350.0,FanDuel,78.0,4,False
+BAL,Derrick Henry,Rush yds,rush_yds,60.0,51.2,63.0,40.0,-194.0,FanDuel,66.0,3,False
+BAL,Derrick Henry,Rush yds,rush_yds,70.0,39.1,51.0,52.0,-114.0,FanDuel,53.0,3,False
+BAL,Derrick Henry,Rush yds,rush_yds,73.0,36.2,,,-112.0,DraftKings,53.0,1,False
+BAL,Derrick Henry,Rush yds,rush_yds,75.0,33.2,47.0,54.0,105.0,Fanatics,49.0,2,False
+BAL,Derrick Henry,Rush yds,rush_yds,80.0,28.1,40.0,70.0,136.0,FanDuel,42.0,3,False
+BAL,Derrick Henry,Rush yds,rush_yds,90.0,19.3,34.0,80.0,210.0,Fanatics,32.0,3,False
+BAL,Derrick Henry,Rush yds,rush_yds,100.0,13.1,26.0,81.0,310.0,Fanatics,24.0,4,False
+BAL,Derrick Henry,Rush yds,rush_yds,110.0,8.8,18.0,87.0,450.0,Fanatics,18.0,3,False
+BAL,Derrick Henry,Rush yds,rush_yds,120.0,5.8,14.0,90.0,700.0,Fanatics,12.0,2,False
+BAL,Derrick Henry,Rush yds,rush_yds,125.0,4.4,,,800.0,Fanatics,11.0,3,False
+BAL,Derrick Henry,Rush yds,rush_yds,130.0,3.3,11.0,97.0,950.0,Fanatics,10.0,2,False
+BAL,Derrick Henry,Rush yds,rush_yds,140.0,1.8,8.0,,1140.0,DraftKings,8.0,1,False
+BAL,Derrick Henry,Rush yds,rush_yds,150.0,1.0,6.0,,1560.0,DraftKings,6.0,2,False
+BAL,Derrick Henry,Rush yds,rush_yds,160.0,0.6,5.0,97.0,2100.0,DraftKings,5.0,1,False
+BAL,Derrick Henry,Rush yds,rush_yds,170.0,0.3,,,2900.0,DraftKings,3.0,1,False
+BAL,Derrick Henry,Rush yds,rush_yds,180.0,0.2,,,3600.0,DraftKings,3.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,40.0,83.3,,,-1880.0,DraftKings,95.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,50.0,71.6,,,-780.0,DraftKings,89.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,60.0,58.8,,,-398.0,DraftKings,80.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,70.0,45.6,,,-228.0,DraftKings,70.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,80.0,33.6,53.0,54.0,-142.0,DraftKings,59.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,85.0,28.4,,,-114.0,DraftKings,53.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,90.0,23.7,,,109.0,DraftKings,48.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,100.0,16.2,,,161.0,DraftKings,38.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,105.0,13.3,44.0,96.0,,,,0,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,110.0,10.7,,,233.0,DraftKings,30.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,120.0,6.9,,,335.0,DraftKings,23.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,130.0,4.3,19.0,97.0,480.0,DraftKings,17.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,140.0,2.4,,,670.0,DraftKings,13.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,150.0,1.4,,,950.0,DraftKings,10.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,160.0,0.8,,,1300.0,DraftKings,7.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,170.0,0.4,,,1860.0,DraftKings,5.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,180.0,0.3,,,2400.0,DraftKings,4.0,1,False
+BAL,Derrick Henry,Rush+rec yds,rec_rush_yds,190.0,0.2,,,3100.0,DraftKings,3.0,1,False
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,5.0,76.3,,,-420.0,FanDuel,81.0,1,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,10.0,64.3,63.0,49.0,-199.0,DraftKings,67.0,3,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,15.0,53.6,52.0,60.0,-123.0,DraftKings,55.0,2,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,16.0,51.8,,,-113.0,DraftKings,53.0,1,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,20.0,43.3,43.0,71.0,124.0,DraftKings,45.0,3,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,25.0,33.8,36.0,79.0,175.0,DraftKings,36.0,4,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,30.0,27.2,28.0,84.0,241.0,DraftKings,29.0,3,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,40.0,16.7,18.0,91.0,430.0,DraftKings,19.0,3,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,50.0,9.5,13.0,95.0,740.0,DraftKings,12.0,4,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,60.0,5.5,9.0,,1200.0,DraftKings,8.0,3,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,70.0,2.9,6.0,,1860.0,DraftKings,5.0,2,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,75.0,2.1,,,1450.0,BetMGM,6.0,1,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,80.0,1.5,,,2800.0,DraftKings,3.0,2,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,90.0,0.7,,,3800.0,DraftKings,3.0,1,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,100.0,0.4,,,2000.0,BetMGM,5.0,1,True
+BAL,Ja'Kobi Lane,Rec yds,rec_yds,125.0,0.1,,,2000.0,BetMGM,5.0,1,True
+BAL,Ja'Kobi Lane,Receptions,rec,1.0,80.8,,,-580.0,FanDuel,85.0,1,True
+BAL,Ja'Kobi Lane,Receptions,rec,2.0,56.4,51.0,50.0,-125.0,FanDuel,56.0,3,True
+BAL,Ja'Kobi Lane,Receptions,rec,3.0,32.6,29.0,84.0,240.0,FanDuel,29.0,3,True
+BAL,Ja'Kobi Lane,Receptions,rec,4.0,16.7,13.0,95.0,630.0,FanDuel,14.0,3,True
+BAL,Ja'Kobi Lane,Receptions,rec,5.0,7.5,7.0,,1380.0,DraftKings,7.0,2,True
+BAL,Ja'Kobi Lane,Receptions,rec,6.0,3.0,4.0,,2600.0,DraftKings,4.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,125.0,75.1,,,-375.0,Fanatics,79.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,150.0,59.2,,,-180.0,Fanatics,64.0,3,True
+BAL,Joe Fagnano,Pass yds,pass_yds,160.0,52.4,,,-139.0,DraftKings,58.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,167.0,47.8,,,-114.0,DraftKings,53.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,170.0,45.6,,,-105.0,DraftKings,51.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,175.0,42.3,,,110.0,Fanatics,48.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,180.0,39.4,,,126.0,DraftKings,44.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,190.0,33.0,,,166.0,DraftKings,38.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,200.0,27.1,,,230.0,BetMGM,30.0,3,True
+BAL,Joe Fagnano,Pass yds,pass_yds,210.0,22.0,,,273.0,DraftKings,27.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,220.0,17.7,,,351.0,DraftKings,22.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,225.0,15.8,,,340.0,Fanatics,23.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,230.0,13.9,,,454.0,DraftKings,18.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,240.0,10.9,,,588.0,DraftKings,15.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,250.0,8.3,,,775.0,BetMGM,11.0,3,True
+BAL,Joe Fagnano,Pass yds,pass_yds,260.0,6.3,,,960.0,DraftKings,9.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,270.0,4.6,,,1260.0,DraftKings,7.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,275.0,3.9,,,1100.0,Fanatics,8.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,280.0,3.3,,,1540.0,DraftKings,6.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,290.0,2.5,,,1920.0,DraftKings,5.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,300.0,1.9,,,2300.0,DraftKings,4.0,2,True
+BAL,Joe Fagnano,Pass yds,pass_yds,310.0,1.4,,,2700.0,DraftKings,4.0,1,True
+BAL,Joe Fagnano,Pass yds,pass_yds,350.0,0.4,,,2000.0,BetMGM,5.0,1,True
+BAL,Josh Cuevas,Rec yds,rec_yds,10.0,17.7,48.0,57.0,-109.0,DraftKings,52.0,2,True
+BAL,Josh Cuevas,Rec yds,rec_yds,15.0,12.1,39.0,75.0,146.0,DraftKings,41.0,1,True
+BAL,Josh Cuevas,Rec yds,rec_yds,20.0,8.0,30.0,84.0,240.0,Fanatics,29.0,2,True
+BAL,Josh Cuevas,Rec yds,rec_yds,25.0,5.3,23.0,91.0,360.0,Fanatics,22.0,2,True
+BAL,Josh Cuevas,Rec yds,rec_yds,30.0,3.4,18.0,94.0,525.0,Fanatics,16.0,2,True
+BAL,Josh Cuevas,Rec yds,rec_yds,40.0,1.5,11.0,97.0,900.0,Fanatics,10.0,2,True
+BAL,Josh Cuevas,Rec yds,rec_yds,50.0,0.6,7.0,,1300.0,DraftKings,7.0,1,True
+BAL,Josh Cuevas,Rec yds,rec_yds,60.0,0.3,,,2100.0,DraftKings,5.0,1,True
+BAL,Josh Cuevas,Rec yds,rec_yds,70.0,0.1,,,3100.0,DraftKings,3.0,1,True
+BAL,Josh Cuevas,Receptions,rec,2.0,14.0,39.0,62.0,130.0,DraftKings,43.0,1,True
+BAL,Josh Cuevas,Receptions,rec,3.0,5.5,21.0,91.0,358.0,DraftKings,22.0,1,True
+BAL,Josh Cuevas,Receptions,rec,4.0,2.0,10.0,97.0,900.0,DraftKings,10.0,1,True
+BAL,Josh Cuevas,Receptions,rec,5.0,0.8,5.0,,1940.0,DraftKings,5.0,1,True
+BAL,Justice Hill,Rec yds,rec_yds,5.0,69.9,,,-420.0,FanDuel,81.0,1,True
+BAL,Justice Hill,Rec yds,rec_yds,10.0,53.0,64.0,46.0,-188.0,FanDuel,65.0,3,True
+BAL,Justice Hill,Rec yds,rec_yds,15.0,38.6,49.0,55.0,-102.0,FanDuel,50.0,2,True
+BAL,Justice Hill,Rec yds,rec_yds,20.0,26.5,36.0,74.0,158.0,FanDuel,39.0,3,True
+BAL,Justice Hill,Rec yds,rec_yds,25.0,18.5,30.0,77.0,230.0,FanDuel,30.0,3,True
+BAL,Justice Hill,Rec yds,rec_yds,30.0,12.7,23.0,83.0,320.0,FanDuel,24.0,3,True
+BAL,Justice Hill,Rec yds,rec_yds,40.0,5.5,13.0,92.0,580.0,FanDuel,15.0,3,True
+BAL,Justice Hill,Rec yds,rec_yds,50.0,2.6,9.0,96.0,1100.0,Fanatics,8.0,3,True
+BAL,Justice Hill,Rec yds,rec_yds,60.0,1.1,,,1560.0,DraftKings,6.0,1,True
+BAL,Justice Hill,Rec yds,rec_yds,70.0,0.6,,,2400.0,DraftKings,4.0,1,True
+BAL,Justice Hill,Rec yds,rec_yds,80.0,0.2,,,3500.0,DraftKings,3.0,1,True
+BAL,Justice Hill,Receptions,rec,1.0,85.7,,,-1450.0,FanDuel,94.0,1,True
+BAL,Justice Hill,Receptions,rec,2.0,63.0,,,-260.0,FanDuel,72.0,3,True
+BAL,Justice Hill,Receptions,rec,3.0,39.8,,,108.0,FanDuel,48.0,3,True
+BAL,Justice Hill,Receptions,rec,4.0,22.6,,,240.0,FanDuel,29.0,3,True
+BAL,Justice Hill,Receptions,rec,5.0,11.7,,,525.0,Fanatics,16.0,3,True
+BAL,Justice Hill,Receptions,rec,6.0,5.7,,,1100.0,Fanatics,8.0,3,True
+BAL,Justice Hill,Receptions,rec,7.0,2.8,,,1920.0,DraftKings,5.0,1,True
+BAL,Justice Hill,Rush yds,rush_yds,5.0,55.5,,,-500.0,FanDuel,83.0,1,False
+BAL,Justice Hill,Rush yds,rush_yds,10.0,38.7,67.0,49.0,-198.0,DraftKings,66.0,2,False
+BAL,Justice Hill,Rush yds,rush_yds,14.0,26.2,,,-113.0,DraftKings,53.0,1,False
+BAL,Justice Hill,Rush yds,rush_yds,15.0,24.3,46.0,63.0,100.0,DraftKings,50.0,2,False
+BAL,Justice Hill,Rush yds,rush_yds,20.0,17.3,38.0,66.0,181.0,DraftKings,36.0,2,False
+BAL,Justice Hill,Rush yds,rush_yds,25.0,11.9,26.0,86.0,296.0,DraftKings,25.0,2,False
+BAL,Justice Hill,Rush yds,rush_yds,30.0,8.9,21.0,84.0,472.0,DraftKings,17.0,2,False
+BAL,Justice Hill,Rush yds,rush_yds,40.0,5.5,11.0,97.0,970.0,DraftKings,9.0,2,False
+BAL,Justice Hill,Rush yds,rush_yds,50.0,2.9,7.0,,1660.0,DraftKings,6.0,2,False
+BAL,Justice Hill,Rush yds,rush_yds,60.0,1.6,5.0,,2500.0,DraftKings,4.0,2,False
+BAL,Justice Hill,Rush yds,rush_yds,70.0,1.0,,,3700.0,DraftKings,3.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,25.0,39.1,,,-202.0,DraftKings,67.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,33.0,26.0,,,-111.0,DraftKings,53.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,40.0,17.3,,,145.0,DraftKings,41.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,50.0,9.9,,,261.0,DraftKings,28.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,60.0,5.6,,,433.0,DraftKings,19.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,70.0,3.2,,,730.0,DraftKings,12.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,80.0,1.8,,,1180.0,DraftKings,8.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,90.0,0.9,,,1820.0,DraftKings,5.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,100.0,0.6,,,2700.0,DraftKings,4.0,1,False
+BAL,Justice Hill,Rush+rec yds,rec_rush_yds,110.0,0.3,,,3800.0,DraftKings,3.0,1,False
+BAL,Mark Andrews,Rec yds,rec_yds,5.0,87.9,,,-800.0,FanDuel,89.0,1,True
+BAL,Mark Andrews,Rec yds,rec_yds,10.0,76.4,72.0,40.0,-320.0,FanDuel,76.0,3,True
+BAL,Mark Andrews,Rec yds,rec_yds,15.0,65.0,63.0,52.0,-180.0,FanDuel,64.0,2,True
+BAL,Mark Andrews,Rec yds,rec_yds,20.0,52.4,51.0,51.0,-104.0,FanDuel,51.0,3,True
+BAL,Mark Andrews,Rec yds,rec_yds,21.0,50.4,,,-108.0,DraftKings,52.0,1,True
+BAL,Mark Andrews,Rec yds,rec_yds,25.0,42.0,39.0,68.0,154.0,FanDuel,39.0,4,True
+BAL,Mark Andrews,Rec yds,rec_yds,30.0,32.1,32.0,81.0,225.0,FanDuel,31.0,3,True
+BAL,Mark Andrews,Rec yds,rec_yds,40.0,17.9,18.0,88.0,450.0,FanDuel,18.0,3,True
+BAL,Mark Andrews,Rec yds,rec_yds,50.0,9.3,12.0,96.0,850.0,FanDuel,11.0,4,True
+BAL,Mark Andrews,Rec yds,rec_yds,60.0,4.5,8.0,,1280.0,FanDuel,7.0,3,True
+BAL,Mark Andrews,Rec yds,rec_yds,70.0,2.2,5.0,,1480.0,DraftKings,6.0,1,True
+BAL,Mark Andrews,Rec yds,rec_yds,75.0,1.5,,,1450.0,BetMGM,6.0,1,True
+BAL,Mark Andrews,Rec yds,rec_yds,80.0,1.1,,,2200.0,DraftKings,4.0,1,True
+BAL,Mark Andrews,Rec yds,rec_yds,90.0,0.5,,,3100.0,DraftKings,3.0,1,True
+BAL,Mark Andrews,Rec yds,rec_yds,100.0,0.1,,,2000.0,BetMGM,5.0,1,True
+BAL,Mark Andrews,Receptions,rec,2.0,79.0,75.0,34.0,-390.0,FanDuel,80.0,3,True
+BAL,Mark Andrews,Receptions,rec,3.0,60.1,54.0,47.0,-130.0,FanDuel,57.0,3,True
+BAL,Mark Andrews,Receptions,rec,4.0,39.7,34.0,79.0,188.0,FanDuel,35.0,3,True
+BAL,Mark Andrews,Receptions,rec,5.0,24.9,19.0,92.0,400.0,FanDuel,20.0,3,True
+BAL,Mark Andrews,Receptions,rec,6.0,14.2,11.0,97.0,760.0,DraftKings,12.0,3,True
+BAL,Mark Andrews,Receptions,rec,7.0,7.4,6.0,,1440.0,DraftKings,6.0,2,True
+BAL,Mark Andrews,Receptions,rec,8.0,3.7,4.0,,2400.0,DraftKings,4.0,1,True
+BAL,Rashod Bateman,Rec yds,rec_yds,5.0,76.2,,,-350.0,FanDuel,78.0,1,True
+BAL,Rashod Bateman,Rec yds,rec_yds,10.0,65.5,63.0,53.0,-175.0,DraftKings,64.0,3,True
+BAL,Rashod Bateman,Rec yds,rec_yds,15.0,55.5,52.0,52.0,-114.0,FanDuel,53.0,2,True
+BAL,Rashod Bateman,Rec yds,rec_yds,20.0,45.9,43.0,60.0,134.0,FanDuel,43.0,3,True
+BAL,Rashod Bateman,Rec yds,rec_yds,25.0,36.2,33.0,72.0,188.0,FanDuel,35.0,4,True
+BAL,Rashod Bateman,Rec yds,rec_yds,30.0,29.6,28.0,83.0,260.0,FanDuel,28.0,3,True
+BAL,Rashod Bateman,Rec yds,rec_yds,40.0,18.6,17.0,89.0,430.0,FanDuel,19.0,3,True
+BAL,Rashod Bateman,Rec yds,rec_yds,50.0,11.1,13.0,95.0,680.0,FanDuel,13.0,4,True
+BAL,Rashod Bateman,Rec yds,rec_yds,60.0,6.5,9.0,97.0,1100.0,Fanatics,8.0,3,True
+BAL,Rashod Bateman,Rec yds,rec_yds,70.0,3.7,6.0,,1640.0,DraftKings,6.0,2,True
+BAL,Rashod Bateman,Rec yds,rec_yds,75.0,2.9,,,1450.0,BetMGM,6.0,1,True
+BAL,Rashod Bateman,Rec yds,rec_yds,80.0,2.1,,,2500.0,DraftKings,4.0,1,True
+BAL,Rashod Bateman,Rec yds,rec_yds,90.0,1.2,,,3600.0,DraftKings,3.0,1,True
+BAL,Rashod Bateman,Rec yds,rec_yds,100.0,0.7,,,2000.0,BetMGM,5.0,1,True
+BAL,Rashod Bateman,Rec yds,rec_yds,125.0,0.1,,,2000.0,BetMGM,5.0,1,True
+BAL,Rashod Bateman,Receptions,rec,1.0,81.0,,,-490.0,FanDuel,83.0,1,True
+BAL,Rashod Bateman,Receptions,rec,2.0,54.7,51.0,51.0,-108.0,FanDuel,52.0,3,True
+BAL,Rashod Bateman,Receptions,rec,3.0,31.2,27.0,80.0,280.0,FanDuel,26.0,3,True
+BAL,Rashod Bateman,Receptions,rec,4.0,16.0,13.0,92.0,680.0,FanDuel,13.0,3,True
+BAL,Rashod Bateman,Receptions,rec,5.0,7.1,7.0,,1400.0,FanDuel,7.0,2,True
+BAL,Rashod Bateman,Receptions,rec,6.0,3.1,6.0,95.0,2400.0,DraftKings,4.0,1,True
+BAL,Zay Flowers,Rec yds,rec_yds,10.0,94.2,,,-1580.0,DraftKings,94.0,1,True
+BAL,Zay Flowers,Rec yds,rec_yds,15.0,90.8,89.0,21.0,-840.0,DraftKings,89.0,2,True
+BAL,Zay Flowers,Rec yds,rec_yds,20.0,86.5,83.0,30.0,-519.0,DraftKings,84.0,3,True
+BAL,Zay Flowers,Rec yds,rec_yds,25.0,81.2,77.0,37.0,-354.0,DraftKings,78.0,4,True
+BAL,Zay Flowers,Rec yds,rec_yds,30.0,76.2,72.0,44.0,-255.0,DraftKings,72.0,3,True
+BAL,Zay Flowers,Rec yds,rec_yds,40.0,65.5,57.0,48.0,-147.0,DraftKings,60.0,3,True
+BAL,Zay Flowers,Rec yds,rec_yds,45.0,59.2,,,-113.0,DraftKings,53.0,1,True
+BAL,Zay Flowers,Rec yds,rec_yds,50.0,54.1,47.0,60.0,112.0,DraftKings,47.0,4,True
+BAL,Zay Flowers,Rec yds,rec_yds,60.0,44.4,33.0,75.0,175.0,DraftKings,36.0,3,True
+BAL,Zay Flowers,Rec yds,rec_yds,70.0,34.4,27.0,75.0,268.0,DraftKings,27.0,3,True
+BAL,Zay Flowers,Rec yds,rec_yds,75.0,30.4,,,300.0,Fanatics,25.0,2,True
+BAL,Zay Flowers,Rec yds,rec_yds,80.0,26.8,19.0,91.0,401.0,DraftKings,20.0,3,True
+BAL,Zay Flowers,Rec yds,rec_yds,90.0,19.7,15.0,94.0,600.0,DraftKings,14.0,3,True
+BAL,Zay Flowers,Rec yds,rec_yds,100.0,14.6,10.0,93.0,890.0,DraftKings,10.0,4,True
+BAL,Zay Flowers,Rec yds,rec_yds,110.0,10.2,9.0,94.0,1320.0,DraftKings,7.0,3,True
+BAL,Zay Flowers,Rec yds,rec_yds,120.0,7.2,6.0,,1880.0,DraftKings,5.0,1,True
+BAL,Zay Flowers,Rec yds,rec_yds,125.0,6.1,,,1400.0,FanDuel,7.0,2,True
+BAL,Zay Flowers,Rec yds,rec_yds,130.0,5.0,,,2600.0,DraftKings,4.0,1,True
+BAL,Zay Flowers,Rec yds,rec_yds,140.0,3.3,,,3600.0,DraftKings,3.0,1,True
+BAL,Zay Flowers,Receptions,rec,2.0,92.8,91.0,18.0,-1400.0,Fanatics,93.0,3,True
+BAL,Zay Flowers,Receptions,rec,3.0,83.0,78.0,35.0,-360.0,FanDuel,78.0,3,True
+BAL,Zay Flowers,Receptions,rec,4.0,69.2,60.0,43.0,-154.0,FanDuel,61.0,3,True
+BAL,Zay Flowers,Receptions,rec,5.0,53.6,42.0,60.0,140.0,FanDuel,42.0,3,True
+BAL,Zay Flowers,Receptions,rec,6.0,38.3,27.0,82.0,270.0,FanDuel,27.0,3,True
+BAL,Zay Flowers,Receptions,rec,7.0,26.0,16.0,93.0,490.0,FanDuel,17.0,3,True
+BAL,Zay Flowers,Receptions,rec,8.0,16.4,10.0,96.0,880.0,FanDuel,10.0,3,True
+BAL,Zay Flowers,Receptions,rec,9.0,9.5,6.0,,1420.0,DraftKings,7.0,2,True
+BAL,Zay Flowers,Receptions,rec,10.0,5.3,4.0,,2300.0,DraftKings,4.0,1,True

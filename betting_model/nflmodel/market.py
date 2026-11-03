@@ -30,7 +30,7 @@ from collections import defaultdict
 from . import projections
 from .pricing import parse_price
 
-VENUE_FEE = {"robinhood": 0.02}
+VENUE_FEE = {"robinhood": 0.02, "kalshi": 0.02}   # kalshi: assumed until a real fill shows the fee (CLAUDE.md)
 NO_BET_STATS = {"pass_td", "int"}          # not calibration-checked yet (CLAUDE.md): never a bet
 
 

@@ -44,10 +44,11 @@ def export(sim: dict, name_of, home: str, away: str, key: int, meta: dict | None
         if "pass_yds" in s:
             stats = QB_STATS
         else:
+            # every player the sim used (Travis, 2026-11-03: full box score); was targets >= 0.8 / carries >= 1.5
             stats = [st for st in STATS
-                     if (st in ("targets", "rec", "rec_yds") and s["targets"].mean() >= 0.8)
-                     or (st in ("rush_att", "rush_yds") and s["rush_att"].mean() >= 1.5)
-                     or (st == "rec_rush_yds" and (s["targets"].mean() >= 0.8 or s["rush_att"].mean() >= 1.5))]
+                     if (st in ("targets", "rec", "rec_yds") and s["targets"].mean() > 0)
+                     or (st in ("rush_att", "rush_yds") and s["rush_att"].mean() > 0)
+                     or (st == "rec_rush_yds" and (s["targets"].mean() > 0 or s["rush_att"].mean() > 0))]
         if not stats:
             continue
         out["players"][name_of(pid)] = {"pid": pid, "team": info["team"], "pos": info.get("pos", "QB"),

@@ -1,0 +1,43 @@
+player,team,stat,stat_key,book_line,n_books,book_over,book_under,book_over_pct,kalshi_rung,kalshi_yes,kalshi_no,model_median,model_over_pct,blind,simulated,lean
+Bhayshul Tuten,JAX,Rush yds,rush_yds,65.5,1,-125,-105,52,70.0,52.0,50.0,59.9,43.0,False,True,-9.0
+Brenton Strange,JAX,Rec yds,rec_yds,36.5,2,-113,-114,50,40.0,44.0,60.0,31.3,42.0,False,True,-8.0
+Brenton Strange,JAX,Receptions,rec,3.5,3,-120,-108,51,4.0,51.0,51.0,3.0,41.0,False,True,-10.0
+Brian Thomas Jr,JAX,Rec yds,rec_yds,10.5,2,-113,-113,50,10.0,54.0,49.0,24.4,72.0,True,True,22.0
+Brian Thomas Jr,JAX,Receptions,rec,1.5,3,154,-200,37,2.0,38.0,64.0,2.0,63.0,True,True,26.0
+Jakobi Meyers,JAX,Rec yds,rec_yds,40.5,3,-114,-114,50,40.0,52.0,52.0,40.3,49.0,False,True,-1.0
+Jakobi Meyers,JAX,Receptions,rec,3.5,3,116,-153,43,,,,3.0,43.0,False,True,0.0
+Josh Cameron,JAX,Rec yds,rec_yds,11.5,1,-120,-111,51,10.0,53.0,54.0,7.4,41.0,True,True,-10.0
+Josh Cameron,JAX,Receptions,rec,1.5,3,120,-160,42,2.0,41.0,60.0,1.0,29.0,True,True,-13.0
+Nate Boerkircher,JAX,Rec yds,rec_yds,7.5,2,-110,-115,49,10.0,44.0,60.0,1.0,40.0,True,True,-9.0
+Nate Boerkircher,JAX,Receptions,rec,0.5,2,-225,169,65,1.0,65.0,36.0,1.0,52.0,True,True,-13.0
+Parker Washington,JAX,Rec yds,rec_yds,63.5,2,-114,-114,50,60.0,56.0,50.0,46.7,34.0,False,True,-16.0
+Parker Washington,JAX,Receptions,rec,4.5,3,-103,-124,48,5.0,49.0,55.0,3.0,29.0,False,True,-19.0
+Travis Hunter,JAX,Rec yds,rec_yds,9.5,2,-114,-114,50,10.0,50.0,52.0,0.0,34.0,True,True,-16.0
+Travis Hunter,JAX,Receptions,rec,1.5,2,171,-235,35,2.0,34.0,68.0,0.0,21.0,True,True,-14.0
+Trevor Lawrence,JAX,Completions,pass_cmp,19.5,1,-107,-119,49,20.0,49.0,54.0,19.0,47.0,False,True,-2.0
+Trevor Lawrence,JAX,Pass att,pass_att,30.5,1,-106,-121,48,32.0,43.0,60.0,29.0,44.0,False,True,-4.0
+Trevor Lawrence,JAX,Pass yds,pass_yds,235.5,1,-115,-115,50,225.0,59.0,46.0,233.9,49.0,False,True,-1.0
+Trevor Lawrence,JAX,Rush yds,rush_yds,11.5,2,-111,-115,50,10.0,59.0,53.0,1.9,28.0,False,True,-22.0
+Derrick Henry,BAL,Carries,rush_att,18.5,2,-104,-124,48,,,,16.0,34.0,False,True,-14.0
+Derrick Henry,BAL,Rec yds,rec_yds,7.5,2,-108,-118,49,10.0,39.0,71.0,2.4,29.0,True,True,-20.0
+Derrick Henry,BAL,Receptions,rec,1.5,2,103,-134,46,2.0,46.0,55.0,1.0,27.0,True,True,-19.0
+Derrick Henry,BAL,Rush yds,rush_yds,69.5,2,-114,-114,50,70.0,51.0,52.0,60.1,39.0,False,True,-11.0
+Derrick Henry,BAL,Rush+rec yds,rec_rush_yds,84.5,1,-111,-115,50,80.0,53.0,54.0,66.5,28.0,False,True,-22.0
+Ja'Kobi Lane,BAL,Rec yds,rec_yds,15.5,1,-112,-112,50,15.0,52.0,60.0,16.9,52.0,True,True,2.0
+Ja'Kobi Lane,BAL,Receptions,rec,1.5,2,-126,-3,52,2.0,51.0,50.0,2.0,56.0,True,True,4.0
+Joe Fagnano,BAL,Completions,pass_cmp,14.5,1,-125,-105,52,,,,18.0,72.0,True,True,20.0
+Joe Fagnano,BAL,Pass att,pass_att,29.5,1,-115,-115,50,,,,28.0,42.0,True,True,-8.0
+Joe Fagnano,BAL,Pass yds,pass_yds,165.5,1,-115,-115,50,,,,164.2,49.0,True,True,-1.0
+Josh Cuevas,BAL,Rec yds,rec_yds,9.5,1,-109,-115,49,10.0,48.0,57.0,0.0,18.0,True,True,-31.0
+Josh Cuevas,BAL,Receptions,rec,1.5,2,137,-181,40,2.0,39.0,62.0,0.0,14.0,True,True,-26.0
+Justice Hill,BAL,Rec yds,rec_yds,14.5,1,-113,-111,50,15.0,49.0,55.0,11.2,39.0,True,True,-11.0
+Justice Hill,BAL,Receptions,rec,2.5,3,105,-140,46,,,,2.0,40.0,True,True,-6.0
+Justice Hill,BAL,Rush yds,rush_yds,13.5,2,-113,-112,50,15.0,46.0,63.0,6.5,26.0,False,True,-24.0
+Justice Hill,BAL,Rush+rec yds,rec_rush_yds,32.5,1,-111,-115,50,,,,19.9,26.0,False,True,-24.0
+Mark Andrews,BAL,Rec yds,rec_yds,20.5,1,-108,-116,49,20.0,51.0,51.0,21.4,50.0,True,True,1.0
+Mark Andrews,BAL,Receptions,rec,2.5,2,-134,3,54,3.0,54.0,47.0,3.0,60.0,True,True,6.0
+Rashod Bateman,BAL,Rec yds,rec_yds,14.5,2,-115,-111,50,15.0,52.0,52.0,17.7,55.0,True,True,5.0
+Rashod Bateman,BAL,Receptions,rec,1.5,2,-109,-119,49,2.0,51.0,51.0,2.0,55.0,True,True,6.0
+Zay Flowers,BAL,Rec yds,rec_yds,44.5,1,-114,-110,50,40.0,57.0,48.0,53.8,59.0,True,True,9.0
+Zay Flowers,BAL,Receptions,rec,4.5,2,132,-173,41,5.0,42.0,60.0,5.0,54.0,True,True,13.0
+Trevor Lawrence,JAX,Carries,rush_att,3.5,1,-118,-108,51,,,,,,False,False,

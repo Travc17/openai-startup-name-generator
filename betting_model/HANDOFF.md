@@ -7,6 +7,14 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 
 ## State
 * Bankroll $2,257.22 (1 bet settled: +$257.22, closing-line value −1.7c). `python nfl.py log summary`.
+* VENUE IS KALSHI (Travis, 2026-11-03). Robinhood is dropped; fee assumed 2c/contract until a real fill.
+* MODEL CHANGE (Travis asked): the sim now includes every RB/WR/TE with offensive snaps in his team's last 2
+  games (`GameModel.active_players`, `roster_for`; `--leaders-only` restores the old roster) and the
+  projections file keeps every player the sim used. A/B 2025 wks 6-13 (116 games, 3,652 paired leader rows):
+  leaders unchanged (every stat |change| < 0.1%, |t| < 1.1). The 320 depth players' upper tails are too thin
+  (<p90 coverage 82-84%, should be 90%: in-game injuries to starters are not simulated), so every player added
+  by the rule is an automatic blind spot (shown, never bet). Next model task: calibrate depth-player tails.
+  Regression check after the change: No drift.
 * Container setup fixed and written into CLAUDE.md step 2 (2019-21 play by play, 2024-25 PFF). After it:
   `regression_check.py` = No drift (n=508, every stat within 0.6% CRPS of baseline).
 * Odds feed tested: main lines 94/94 two-sided from 4 books (Caesars not posting); `--alt` 1,052 quotes
@@ -31,17 +39,23 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Robinhood's stale Yes board is mostly at or below the market (median −2c vs Kalshi/books), except
   Justice Hill rushing rungs (+6 to +8c) and Josh Cameron (blind spot).
 
-### Recommended bet (conditional, not placed)
-* Robinhood **No on Justice Hill 20+ rush yds**, only if No costs **58c or less** (books/Kalshi say Yes
-  is 35.6-38%, so No ≥ 62%; minus 2c fee and 2% edge). Model No 82.7%.
-* Stake: rules give quarter Kelly on the model edge = $320, capped at $225.72 (10% per game).
-  Recommended $50 instead because the model's edge here is not trusted (see above). Travis decides.
-* If Kalshi's No (66c at 20:25 UTC) is what Robinhood shows now, there is no bet.
-* Check Robinhood's contract rule for a player who does not play (Hill: groin, limited Monday).
+### Bet (Kalshi): none
+* Projections re-run 20:37 UTC with the full roster (27 players); priced v3 (`_priced_open_v3.csv`):
+  0 BOTH AGREE, 0 market only, 0 model picks on an Over. Every Kalshi No the model likes costs more than the
+  books' floor (e.g. Hill 20+ No 66c + 2c fee vs books ≤ 62%). Pass unless prices move.
+* The earlier conditional Robinhood bet is void (venue change).
+
+### Graphics (`graphics/2026_wk09_JAX_at_BAL/`)
+* `JAX_at_BAL_box_score.pptx/.pdf` (3 slides, all 27 simulated players) and
+  `JAX_at_BAL_book_vs_kalshi_vs_model.pptx/.pdf` (18 slides: 42 main lines, 455 alternate rungs inside each
+  player's simulated range). Built only from `box.csv`, `main_lines.csv`, `ladders.csv` by `build_data.py` and
+  `build_pptx.py`. Kalshi asks of 95c+ shown as "-" (no real offer).
+* NOT yet in Canva: upload to www.canva.com was denied by the environment's network policy (403). Once
+  Travis allows www.canva.com: Canva create-upload-url, POST each .pptx, then read-design and check numbers.
 
 ## Open items, in order
-1. Travis: live Robinhood No prices for Hill 20+ rush yds (and the other Hill rungs).
-2. Game day: re-pull books and Kalshi, Robinhood close board within 1 hour of kickoff (EDGE_PROMPT.md).
+1. Upload the two decks to Canva once www.canva.com is allowed (see Graphics).
+2. Game day: re-pull books and Kalshi within 1 hour of kickoff (EDGE_PROMPT.md close capture), re-run price.
 3. Known issues below.
 
 ### Known issues (not fixed; ask Travis before changing code)
@@ -59,7 +73,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 3. Write the review in `reviews/`.
 
 ## Waiting on Travis
-* Robinhood No prices for Hill; whether to stake $50 or the rule's $225.72.
+* Allow www.canva.com in the environment's network settings so the two decks can be uploaded to Canva.
 * How this branch's commits reach master (into PR #1, stacked PR, or a second PR).
 * Approval of the proposed rule: real-money bets only on "BOTH AGREE" (model and books agree).
 * Canva carousel DAHZ4XCn3BY (https://canva.link/9irp6wkayeavxk3): fixes were staged in an edit

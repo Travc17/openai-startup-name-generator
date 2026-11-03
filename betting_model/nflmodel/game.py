@@ -587,6 +587,20 @@ class GameModel:
         agg = agg[(agg.n >= 2) & ((agg.t >= min_targets) | (agg.c >= min_carries))]
         return agg.sort_values("t", ascending=False).index.tolist()
 
+    def active_players(self, team: str, key: int, lookback: int = 2) -> list[str]:
+        """Every RB/WR/TE who played offensive snaps (snap counts or a touch) for this team in any of its
+        last `lookback` games before `key` and has not since played for another team. The sim gives each
+        one his own share, so depth players fill volume the leaders never had instead of being dropped."""
+        tk = sorted(self.tg[(self.tg.posteam == team) & (self.tg.key < key)].key.unique())[-lookback:]
+        g = self.pg[(self.pg.posteam == team) & self.pg.key.isin(tk) & self.pg.pos.isin(("RB", "WR", "TE"))]
+        g = g[(g.offense_pct.fillna(0) > 0) | (g.targets > 0) | (g.rush_att > 0)]
+        out = []
+        for pid in g.sort_values("t_share", ascending=False).pid.unique():
+            h = self._pg_by.get(pid)
+            if h is not None and h[h.key < key].iloc[-1].posteam == team:
+                out.append(pid)
+        return out
+
 
 def american(p: float) -> str:
     """Fair American odds for probability p."""

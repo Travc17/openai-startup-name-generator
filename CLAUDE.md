@@ -20,7 +20,9 @@ in `betting_model/bets.csv`; commit and push the log after every change. Current
 from the log (`python nfl.py log summary`).
 
 ## Rules (non negotiable)
-* Bet only when edge >= 2% after Robinhood's fee (2c per contract, seen on bet #1).
+* Execution venue is Kalshi (Travis, 2026-11-03: "forget Robinhood, I will use Kalshi"). Bet only when edge >= 2%
+  after the fee. Kalshi's fee is priced at 2c per contract (`--fee kalshi=0.02`, the default in market.py) until a
+  real fill shows the actual fee; replace it then. Robinhood (2c on bet #1) is no longer used.
 * Stake: $50 when edge is 2-4%; quarter Kelly above 4%. Max 3 bets per slate.
 * Cap: ALL bets on one game combined <= 10% of current bankroll (approved 2026-11-03). The report's
   "Bet plan" applies it: best expected profit first, no repeated player+stat, stakes scaled down together
