@@ -45,7 +45,7 @@ def log_report(rep: dict, key: int) -> int:
     new = []
     for s in rep.get("singles", []):
         if s.get("stake"):
-            new.append(dict(kind="single", label=s["label"], legs=json.dumps([[s["pid"], s["stat"], s["x"]]]),
+            new.append(dict(kind="single", label=s["label"], legs=json.dumps([[s["pid"], s["stat"], s["x"]] + (["no"] if s.get("side") == "no" else [])]),
                             price=s["price"], model_p=s["p"], edge=s["edge"], stake=s["stake"]))
     for p in rep.get("parlays", []):
         if p.get("stake"):
@@ -73,7 +73,9 @@ def grade(model) -> str:
         if model.tg.key.max() < r.key:
             continue  # game not in the data yet
         ok = True
-        for pid, stat, x in json.loads(r.legs):
+        for leg in json.loads(r.legs):
+            pid, stat, x = leg[:3]
+            no = len(leg) > 3 and leg[3] == "no"   # a Robinhood "No" contract wins when he stays under x
             if stat.startswith("pass_") or stat == "int":
                 val = qb[stat].get((pid, r.key)) if (pid, r.key) in qb.index else None
             else:
@@ -83,7 +85,7 @@ def grade(model) -> str:
             if val is None:
                 ok = None  # no snaps / no attempts: player did not play, the pick is void
                 break
-            if not val >= x:
+            if (val >= x) == no:
                 ok = False
         if ok is None:
             df.at[i, "result"], df.at[i, "profit_per_1"] = "void", 0.0
