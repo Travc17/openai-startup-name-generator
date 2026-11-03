@@ -32,6 +32,11 @@ PFF Pro API: key is stored as an environment network secret for api.pff.com (nev
 `python nfl.py update` refreshes PFF weekly receiving data (routes run). PFF data is licensed: it stays in
 `betting_model/data/` (gitignored) and is never committed. Route-based role (50/50 blend) is ON: tested
 2024-25, targets -0.93% (t=-3.35), receptions -0.60% (t=-2.43). Coverage/man-zone matchups tested neutral (off).
+QB layer is ON: QB lines (att/cmp/yds/TD/INT) are summed from the same simulated targets; QB quality scales
+his receivers (tested 2024-25: QB completions -0.97% error, t=-2.6; receiver yards in QB-change games -1.1%).
+Its prior is an AVERAGE backup, so third-string/undrafted QBs are still too generous: keep them and their pass
+catchers as blind spots. TD/INT props are not calibration-checked yet: no TD/INT bets until they are.
+Default starter = last game's starter; override with --qb "TEAM=Name".
 Before recommending any player, check his last 4 weeks of routes, snaps, and target share.
 
 Board CSV columns: `kind,name,stat,line,price,price2,book` (see `betting_model/nflmodel/report.py` docstring).

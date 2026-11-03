@@ -138,6 +138,15 @@ Wider walk-forward totals test (2019-21 warmup, coefficients fit only on prior s
 `gameline` prices any line by simulating around the big-book consensus (held out calibration within 1-2 pts on alt spreads).
 Defense vs position: six versions tested (yards, volume, zones, catch rate allowed), none beat noise. Kept as a light visible lever.
 
+## QB layer
+QB passing lines are the sum of every simulated target (listed receivers + the rest of the team), so a QB's
+yards, completions, and his receivers always agree. QB quality (yards per target and completion rate vs league,
+blended toward league for veterans and toward a measured backup level otherwise) scales his receivers.
+Backtest 2024-25 (886 QB starts): pass yds error 59.2 vs 59.6 for the QB's own recent average; P10/P50/P90
+coverage 11%/51%/92%. QB adjustment: completions -0.97% (t=-2.6), pass yds -0.96% (t=-1.7), receiver yards in
+QB-change games -1.10% (t=-1.67), unchanged otherwise. Limits: prior is an average backup (too generous for
+third-string QBs); TD/INT lines not calibration-checked yet.
+
 ## PFF routes (paid data)
 Route participation (routes / team dropbacks, last 3 games) x targets per route run, blended 50/50 with
 the target-share history. Backtest 2024-25 weeks 4+, 3,515 player games: targets -0.93% (t=-3.35),

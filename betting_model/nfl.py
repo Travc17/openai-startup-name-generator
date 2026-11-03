@@ -44,6 +44,8 @@ def build_model() -> GameModel:
                   snaps=data.load_snaps(HISTORY))
     if DEFENSE:
         m.cfg.def_mode = DEFENSE
+    from nflmodel.qb import QBModel
+    m.qbm = QBModel(data.load_passes(list(range(2019, CURRENT_SEASON + 1))))
     try:
         pff, team = routes.load([s for s in HISTORY if s >= 2023])
         m.route_role = routes.RouteRole(pff, team, m.pg)
@@ -480,9 +482,19 @@ def cmd_report(a):
     board = report.load_board(a.board)
     news = report.load_news(a.news)
     blind = set(a.blind or [])
+    qbs = {t: model.qbm.starter(t, key) for t in (a.team_a, a.team_b)}
+    for spec in a.qb or []:
+        t, n = spec.split("=", 1)
+        qbs[t.upper()] = lookup(model, n)[0]
+    for t, q in qbs.items():
+        if q:
+            qy, qc, nq = model.qbm.adjustment(q, t, key)
+            print(f"QB: {name_of(q)} ({t}) receivers x{qy:.2f} yards, x{qc:.2f} completions ({nq} recent targeted attempts)")
+            if q in model._pg_by and q not in [p.pid for p in roster]:
+                roster.append(Player(q, t))
     rep = report.build(model, name_of, lambda n: lookup(model, n)[0], roster, a.team_a, a.team_b, key, a.sims,
                        board, news, a.bankroll, a.fee, fav=(a.fav or "").upper() or None, spread=a.spread,
-                       total=a.total, model_line=a.model_line, blind=blind)
+                       total=a.total, model_line=a.model_line, blind=blind, qbs=qbs)
     title = a.title or f"{a.team_b} at {a.team_a} Report"
     with open(a.html, "w") as f:
         f.write(report.render(rep, title))
@@ -599,6 +611,7 @@ def main():
     rp.add_argument("--players", nargs="+")
     rp.add_argument("--blind", nargs="+", help="Players the model can't price tonight (excluded from bets)")
     rp.add_argument("--model-line", help="Independent model's number, shown for reference")
+    rp.add_argument("--qb", action="append", help="'TEAM=QB Name' starter override (default: last game's starter)")
     rp.add_argument("--sims", type=int, default=25000)
     rp.add_argument("--html", default="report.html")
     rp.add_argument("--json")

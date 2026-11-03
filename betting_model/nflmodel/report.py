@@ -26,7 +26,8 @@ from .game import STAT_LABEL, american
 
 DISC = 0.928          # Robinhood combo price vs product of legs (observed on bet #1)
 STAT_SHORT = {"rec": "catches", "rec_yds": "rec yds", "rush_yds": "rush yds", "rush_att": "carries",
-              "targets": "targets", "rec_rush_yds": "rush+rec yds"}
+              "targets": "targets", "rec_rush_yds": "rush+rec yds", "pass_yds": "pass yds", "pass_att": "pass att",
+              "pass_cmp": "completions", "pass_td": "pass TDs", "int": "INTs"}
 
 
 def load_board(path):
@@ -55,9 +56,9 @@ def _kelly_stake(p, cost, bankroll, min_bet=50, frac=0.25, cap=0.10):
 
 
 def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, bankroll, fee,
-          fav=None, spread=None, total=None, model_line=None, blind=()):
+          fav=None, spread=None, total=None, model_line=None, blind=(), qbs=None):
     margin_home = (spread if fav == home else -spread) if (fav and spread is not None) else None
-    sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home)
+    sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home, qbs=qbs)
     rep = {"home": home, "away": away, "date": date.today().isoformat(), "sims": n_sims, "news": news,
            "bankroll": bankroll, "fee": fee, "blind": sorted(blind)}
 
@@ -87,6 +88,15 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
 
     # ---------- box score ----------
     box = {home: [], away: []}
+    rep["qbs"] = {}
+    for pid, s in sim["players"].items():
+        if "pass_yds" in s:
+            info = sim["info"][pid]
+            rep["qbs"][info["team"]] = {"name": name_of(pid), "blind": name_of(pid) in blind,
+                                        "yds_mult": info.get("qb_yds_mult", 1.0), "cmp_mult": info.get("qb_cmp_mult", 1.0),
+                                        "stats": {st: [float(np.percentile(s[st], q)) for q in (10, 25, 50, 75, 90)]
+                                                  for st in ("pass_att", "pass_cmp", "pass_yds", "pass_td", "int", "rush_yds")},
+                                        "p": {"2+ TD": float((s["pass_td"] >= 2).mean()), "1+ INT": float((s["int"] >= 1).mean())}}
     for p in roster:
         s, info = sim["players"][p.pid], sim["info"][p.pid]
         if s["targets"].mean() < 0.8 and s["rush_att"].mean() < 1.5:
@@ -402,6 +412,25 @@ def render(rep, title):
                            for l in rep["lines"])
             out.append(f'<div class="panel tbl"><table><tr><th>Robinhood line</th><th class="num">Price</th><th class="num">Sims</th><th class="num">Edge</th><th class="num">Stake</th></tr>{rows}</table></div>')
         out.append('</section>')
+
+    # quarterbacks
+    if rep.get("qbs"):
+        rows = []
+        for t in (A, H):
+            q = rep["qbs"].get(t)
+            if not q:
+                continue
+            st = q["stats"]
+            f = lambda k: f'<b>{st[k][2]:.0f}</b> <span class="muted" style="font-size:.75rem">{st[k][1]:.0f} to {st[k][3]:.0f}</span>'
+            adj = f'receivers x{q["yds_mult"]:.2f} yds, x{q["cmp_mult"]:.2f} catches'
+            flag = ' <span class="pill warn">blind spot</span>' if q["blind"] else ""
+            rows.append(f'<tr><td><b>{_e(q["name"])}</b> <span class="muted">{t}</span>{flag}<div class="muted" style="font-size:.75rem">{adj}</div></td>'
+                        f'<td>{f("pass_cmp")} / {f("pass_att")}</td><td>{f("pass_yds")}</td><td class="num">{st["pass_td"][2]:.0f} <span class="muted" style="font-size:.75rem">2+ {q["p"]["2+ TD"]*100:.0f}%</span></td>'
+                        f'<td class="num">{st["int"][2]:.0f} <span class="muted" style="font-size:.75rem">1+ {q["p"]["1+ INT"]*100:.0f}%</span></td><td>{f("rush_yds")}</td></tr>')
+        out.append('<section><h2>Quarterbacks</h2><div class="panel tbl"><table><tr><th>QB</th><th>Cmp / Att</th><th>Pass yds</th>'
+                   '<th class="num">TD</th><th class="num">INT</th><th>Rush yds</th></tr>' + "".join(rows) + '</table>'
+                   '<p class="note">Passing lines are the sum of every simulated target, so they move with the receivers. '
+                   'QB quality scales his receivers (backtested: completions -0.97% error). TD and INT odds are less tested than yards.</p></div></section>')
 
     # box score
     out.append(f'<section><h2>Projected box score</h2><p class="note">Median (solid mark) with the middle half of {rep["sims"]:,} sims shaded; '

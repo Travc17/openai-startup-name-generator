@@ -151,3 +151,28 @@ def load_depth(seasons: list[int]) -> pd.DataFrame:
     new_format = df.game_id.str[:4].astype(int) >= 2025
     df["starter"] = [r <= STARTERS.get(p, 1) if nf else r == 1 for r, p, nf in zip(df["rank"], df.pos, new_format)]
     return df
+
+
+def load_passes(seasons: list[int]) -> pd.DataFrame:
+    """Every regular season pass attempt (targeted or not; no sacks, spikes, or 2pt tries), with passer."""
+    cols = ["season", "season_type", "week", "game_id", "posteam", "defteam", "play_type", "pass_attempt", "sack",
+            "two_point_attempt", "passer_player_id", "receiver_player_id", "complete_pass", "passing_yards",
+            "pass_touchdown", "interception"]
+    frames = []
+    for s in seasons:
+        try:
+            d = pd.read_parquet(DATA_DIR / f"pbp_{s}.parquet", columns=cols)
+        except FileNotFoundError:
+            continue
+        d = d[(d.season_type == "REG") & (d.play_type == "pass") & (d.pass_attempt == 1) & (d.sack != 1)
+              & (d.two_point_attempt != 1) & d.passer_player_id.notna()]
+        frames.append(d)
+    p = pd.concat(frames, ignore_index=True)
+    p["key"] = p.season * 100 + p.week
+    p["targeted"] = p.receiver_player_id.notna().astype(int)
+    p["yards"] = p.passing_yards.fillna(0.0)
+    p["complete"] = p.complete_pass.fillna(0).astype(int)
+    p["td"] = p.pass_touchdown.fillna(0).astype(int)
+    p["int"] = p.interception.fillna(0).astype(int)
+    return p[["key", "game_id", "posteam", "defteam", "passer_player_id", "receiver_player_id", "targeted",
+              "complete", "yards", "td", "int"]].sort_values("key").reset_index(drop=True)

@@ -370,8 +370,10 @@ class GameModel:
     # ---------------- simulation ----------------
     def simulate(self, team_a: str, team_b: str, key: int, players: list[Player],
                  n_sims: int | None = None, seed: int | None = 7,
-                 rho: dict[str, float] | None = None, exp_margin_a: float | None = None) -> dict:
-        """rho: pair correlations for the copula. None loads the fitted file, {} turns it off."""
+                 rho: dict[str, float] | None = None, exp_margin_a: float | None = None,
+                 qbs: dict | None = None, qb_adjust: bool = True) -> dict:
+        """rho: pair correlations for the copula. None loads the fitted file, {} turns it off.
+        qbs: {team: qb gsis id}; with a QB model attached, adds the QB line and the QB quality adjustment."""
         cfg = self.cfg
         n = n_sims or cfg.n_sims
         rng = np.random.default_rng(seed)
@@ -394,6 +396,14 @@ class GameModel:
             rec_mult, rush_mult = self._opp_mult(opp, key, "rec"), self._opp_mult(opp, key, "rush")
             left_t, left_c = team_vol[team][0].copy(), team_vol[team][1].copy()
             share_left_t, share_left_c = np.ones(n), np.ones(n)
+            qbm = getattr(self, "qbm", None)
+            qb = (qbs or {}).get(team) if qbm is not None else None
+            if qb is None and qbm is not None and qbs is not None:
+                qb = qbm.starter(team, key)
+            qy_mult, qc_mult = 1.0, 1.0
+            if qb is not None and qb_adjust:
+                qy_mult, qc_mult, _ = qbm.adjustment(qb, team, key)
+            team_rec, team_yds, listed = np.zeros(n), np.zeros(n), []
             for p in [p for p in players if p.team == team]:
                 inp = self.player_inputs(p, opp, key)
                 p_rec_mult, vol_mult = self.defense_adjust(p.pid, opp, key, inp["pos"], rec_mult)
@@ -422,6 +432,8 @@ class GameModel:
                         extra_p = min((cm - 1) * cr / max(1 - cr, 0.05), 1.0)
                         rec = rec + rng.binomial((tg - rec).astype(int), extra_p)
                 rec_yds = (inp["pool_ty"][idx] * m).sum(1) * p_rec_mult
+                if qc_mult != 1.0 or qy_mult != 1.0:
+                    rec, rec_yds = self._apply_qb(rng, rec, rec_yds, tg, inp["catch"], qc_mult, qy_mult)
                 if p.catch_rate is not None and inp["catch"] > 0:
                     keep = min(p.catch_rate / inp["catch"], 1.0)
                     rec_new = rng.binomial(rec.astype(int), keep)
@@ -434,11 +446,58 @@ class GameModel:
 
                 out[p.pid] = {"targets": tg, "rec": rec, "rec_yds": rec_yds,
                               "rush_att": ca, "rush_yds": rush_yds, "rec_rush_yds": rec_yds + rush_yds}
+                team_rec = team_rec + rec; team_yds = team_yds + rec_yds; listed.append(p.pid)
                 info[p.pid] = {**{k: v for k, v in inp.items() if not k.startswith("pool")},
                                "team": team, "opp": opp, "rec_mult": p_rec_mult, "rush_mult": rush_mult}
+            if qb is not None:
+                # Targets to receivers not simulated individually, from the team's recent targets to them
+                rc_, ry_ = qbm.rest_pool(team, key, set(listed))
+                lk, lc_, ly_ = self._tpool["WR"]
+                end = np.searchsorted(lk, key, side="left")
+                pool_c = np.concatenate([rc_, lc_[max(0, end - 3000):end]])
+                pool_y = np.concatenate([ry_, ly_[max(0, end - 3000):end]])
+                w = np.concatenate([np.ones(len(rc_)), np.full(min(end, 3000), 40.0 / max(min(end, 3000), 1))])
+                w = w / w.sum()
+                rest = np.maximum(left_t, 0)
+                mr = max(int(rest.max()), 1)
+                idx = rng.choice(len(pool_y), size=(n, mr), p=w)
+                m = np.arange(mr)[None, :] < rest[:, None]
+                r_rec = (pool_c[idx] * m).sum(1)
+                r_yds = (pool_y[idx] * m).sum(1) * rec_mult
+                if qc_mult != 1.0 or qy_mult != 1.0:
+                    r_rec, r_yds = self._apply_qb(rng, r_rec, r_yds, rest, float(pool_c @ w), qc_mult, qy_mult)
+                td_rate, int_rate, untargeted = qbm.rates(qb, team, key)
+                att = team_vol[team][0] + rng.poisson(untargeted, n)
+                cmp_ = team_rec + r_rec
+                pyds = team_yds + r_yds
+                qline = {"pass_att": att, "pass_cmp": cmp_, "pass_yds": pyds,
+                         "pass_td": rng.poisson(td_rate * np.maximum(pyds, 0)),
+                         "int": rng.poisson(int_rate * att)}
+                if qb in out:
+                    out[qb].update(qline)
+                else:
+                    z0 = np.zeros(n)
+                    out[qb] = {"targets": z0, "rec": z0, "rec_yds": z0, "rush_att": z0, "rush_yds": z0, "rec_rush_yds": z0, **qline}
+                    info[qb] = {"pos": "QB", "team": team, "opp": opp, "t_share": 0.0, "c_share": 0.0,
+                                "rec_mult": 1.0, "rush_mult": rush_mult}
+                info[qb].update({"qb_yds_mult": qy_mult, "qb_cmp_mult": qc_mult, "td_per_yd": td_rate, "int_rate": int_rate})
         res = {"players": out, "info": info,
                "team_mu": {team_a: (mu[0], mu[1]), team_b: (mu[2], mu[3])}}
+        if qbs is not None:
+            return res   # keep the natural joint structure: QB lines are sums of the same simulated targets
         return apply_copula(res, load_copula() if rho is None else rho, rng)
+
+    @staticmethod
+    def _apply_qb(rng, rec, rec_yds, targets, catch, qc_mult, qy_mult):
+        """Scale completions (thin or add from incompletions) and yards per target for the QB throwing."""
+        rec = rec.astype(int)
+        if qc_mult < 1:
+            new = rng.binomial(rec, qc_mult)
+        else:
+            cr = min(max(catch, 0.05), 0.95)
+            extra = min((qc_mult - 1) * cr / (1 - cr), 1.0)
+            new = rec + rng.binomial(np.maximum(targets.astype(int) - rec, 0), extra)
+        return new, rec_yds * qy_mult
 
     # ---------------- helpers ----------------
     def usage_leaders(self, team: str, key: int, min_targets: float = 4.0, min_carries: float = 6.0,
