@@ -143,6 +143,13 @@ Route participation (routes / team dropbacks, last 3 games) x targets per route 
 the target-share history. Backtest 2024-25 weeks 4+, 3,515 player games: targets -0.93% (t=-3.35),
 receptions -0.60% (t=-2.43), receiving yards -0.20% (n.s.). Route-based share alone was not better.
 
+## PFF features tested and left OFF (2024-25 weeks 4+, 3,534 player games, vs model with routes)
+| Feature | Receptions | Receiving yards | Targets |
+|---|---|---|---|
+| Yards per route run (efficiency) | +0.00% | +0.05% (t=+0.29) | +0.00% |
+| Slot vs wide vs defense | +0.00% | **+0.70% WORSE (t=+3.98)** | +0.00% |
+| Man/zone per route (PFF, incl. 2026) | -0.04% (t=-0.67) | +0.05% | -0.05% (t=-0.88) |
+
 ## Honest limits
 
 * No historical prop lines: calibration is tested, profit is not. Closing line
