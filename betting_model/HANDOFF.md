@@ -98,3 +98,6 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   a real role (rank of the chosen game 491 -> 49); leftover volume labeled "Other <TEAM> receivers".
 * JAX@BAL (20:37 UTC projections) published to https://claude.ai/artifact/Bx8jZgufz7Amfk5FgysjRh (v2):
   final JAX 25, BAL 16, 138 plays; headless check: plays to final, no script errors. Per-game step is CLAUDE.md 5c.
+* Renamed SizzleSims (Travis). Now the MEDIAN game (`export.py --mode median`, default): players at exact medians,
+  QB = sum of receivers (JAX 14/24 157 vs Lawrence's own median 19/29 234; BAL 15/25 123 vs 18/28 164), no
+  placeholder rows. Page opens at 90 seconds, Clean feed removed, both box scores side by side. Published v3.

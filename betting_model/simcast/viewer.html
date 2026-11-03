@@ -1,11 +1,11 @@
-<title>SimCast NFL</title>
+<title>SizzleSims NFL</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Barlow+Semi+Condensed:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: a night-game broadcast. Stage (score bug, field, lower third, controls) on the left,
-   live box score and play by play on the right; one column on phones so it records cleanly in portrait. */
+/* Layout: a night-game broadcast. Stage (score bug, field, lower third, controls) on the left, play by play
+   on the right; both teams' box scores side by side underneath; one column on phones. */
 :root {
   --night: #0a0f17;        /* page */
   --panel: #111925;        /* cards */
@@ -99,13 +99,16 @@ button, select, input { font: inherit; color: inherit; }
 .spacer { flex: 1; }
 input[type="range"] { width: 100%; accent-color: var(--first-down); }
 .progress-label { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.clean .controls, .clean .about, .clean .gamepick { display: none; }
 
 /* ---------- side: box score + play by play ---------- */
 .side { display: grid; gap: 14px; min-width: 0; }
 .card { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; min-width: 0; }
 .card h2 { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0; }
 .card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 12px 0; flex-wrap: wrap; }
+.boxes { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .boxes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.teambox { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.teambox h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: 0.06em; padding-left: 10px; border-left: 5px solid var(--rule); }
 .tabs { display: inline-flex; gap: 4px; }
 .tabs button { background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 4px 10px; cursor: pointer; color: var(--muted); font-weight: 700; letter-spacing: 0.04em; }
 .tabs button[aria-selected="true"] { color: var(--chalk); border-color: var(--rule); background: var(--panel-2); }
@@ -145,7 +148,7 @@ td.bump { animation: bump 1100ms ease-out; }
 
 <div class="app" id="app">
   <header class="top">
-    <div class="brand"><b>Sim<span>Cast</span></b><small id="subtitle">Most typical of 25,000 sims</small></div>
+    <div class="brand"><b>Sizzle<span>Sims</span></b><small id="subtitle">Most typical of 25,000 sims</small></div>
     <label class="gamepick" for="game">Game <select id="game"></select></label>
   </header>
 
@@ -176,11 +179,10 @@ td.bump { animation: bump 1100ms ease-out; }
           <button class="btn" id="final" type="button">Jump to final</button>
           <span class="spacer"></span>
           <div class="seg" role="group" aria-label="Game length">
-            <button type="button" data-speed="broadcast" aria-pressed="true">8 min</button>
+            <button type="button" data-speed="broadcast" aria-pressed="false">8 min</button>
             <button type="button" data-speed="fast" aria-pressed="false">3 min</button>
-            <button type="button" data-speed="clip" aria-pressed="false">X clip 90s</button>
+            <button type="button" data-speed="clip" aria-pressed="true">90 sec</button>
           </div>
-          <button class="btn" id="clean" type="button" aria-pressed="false">Clean feed</button>
         </div>
         <input type="range" id="scrub" min="0" max="1" value="0" aria-label="Game progress">
         <div class="row"><span class="progress-label" id="plabel">Play 0 of 0</span><span class="spacer"></span><span class="progress-label">Space plays and pauses. Arrow keys step.</span></div>
@@ -188,19 +190,17 @@ td.bump { animation: bump 1100ms ease-out; }
     </section>
 
     <aside class="side">
-      <section class="card" aria-label="Box score">
-        <div class="card-head">
-          <h2>Box score</h2>
-          <div class="tabs" role="tablist" id="tabs"></div>
-        </div>
-        <div class="box-body" id="box"></div>
-      </section>
       <section class="card" aria-label="Play by play">
         <div class="card-head"><h2>Play by play</h2><span class="progress-label">Newest first</span></div>
         <div class="pbp" id="pbp"></div>
       </section>
     </aside>
   </main>
+
+  <section class="card" aria-label="Box score">
+    <div class="card-head"><h2>Box score</h2></div>
+    <div class="box-body" id="box"></div>
+  </section>
 
   <section class="about" id="about"></section>
 </div>
@@ -217,7 +217,7 @@ td.bump { animation: bump 1100ms ease-out; }
   const QN = ["", "1ST", "2ND", "3RD", "4TH"];
   const ORD = ["", "1st", "2nd", "3rd", "4th"];
 
-  let G, EV, N, players, durs, idx = 0, playing = false, speed = "broadcast", timer = null, raf = null, tab = null, prevStats = {};
+  let G, EV, N, players, durs, idx = 0, playing = false, speed = "clip", timer = null, raf = null, prevStats = {};
 
   // ---------------- data helpers ----------------
   function buildPlayers() {
@@ -431,39 +431,17 @@ td.bump { animation: bump 1100ms ease-out; }
   const short = (n) => { const p = n.split(" "); return p.length < 2 ? n : `${p[0][0]}. ${p.slice(1).join(" ")}`; };
   const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
 
-  function renderTabs() {
-    const tabs = $("tabs");
-    tabs.textContent = "";
-    for (const t of [G.away, G.home, "TEAM"]) {
-      const b = document.createElement("button");
-      b.type = "button"; b.role = "tab"; b.textContent = t === "TEAM" ? "Team" : t;
-      b.setAttribute("aria-selected", String(t === tab));
-      b.addEventListener("click", () => { tab = t; renderTabs(); render(idx); });
-      tabs.appendChild(b);
-    }
-  }
   function cell(v, key, cls) {
     const changed = prevStats[key] !== undefined && prevStats[key] !== v;
     prevStats[key] = v;
     return `<td class="${cls || ""}${changed ? " bump" : ""}">${v}</td>`;
   }
-  function renderBox(st, animate) {
-    const box = $("box");
-    if (!animate) prevStats = {};
-    if (tab === "TEAM") {
-      const A = st.team[G.away], H = st.team[G.home];
-      const rows = [["Total yards", A.yds, H.yds], ["Passing", A.pass, H.pass], ["Rushing", A.rush, H.rush], ["Plays", A.plays, H.plays],
-        ["Yards per play", A.plays ? (A.yds / A.plays).toFixed(1) : "0.0", H.plays ? (H.yds / H.plays).toFixed(1) : "0.0"],
-        ["First downs", A.fd, H.fd], ["3rd down", `${A.t3c}/${A.t3a}`, `${H.t3c}/${H.t3a}`], ["Possession", mmss(A.top), mmss(H.top)]];
-      box.innerHTML = `<div class="tw"><table class="teamstats"><thead><tr><th>Team</th><th>${G.away}</th><th>${G.home}</th></tr></thead><tbody>${
-        rows.map(([k, a, h]) => `<tr><td>${k}</td>${cell(a, "T" + k + "a")}${cell(h, "T" + k + "h")}</tr>`).join("")}</tbody></table></div>`;
-      return;
-    }
-    const t = tab, b = G.box[t];
+  function teamBox(t, st) {
+    const b = G.box[t];
     const S = (pid) => st.stats[pid] || {};
     const name = (pid) => { const p = players[pid]; return `${esc(p.name)}<span class="pos">${p.pos}</span>${p.projected ? "" : '<span class="dag" title="Not individually projected">&dagger;</span>'}`; };
     const qb = S(b.qb.pid);
-    let html = `<div class="tw"><table><caption>Passing</caption><thead><tr><th>Player</th><th>C/Att</th><th>Yds</th><th>TD</th><th>Int</th></tr></thead><tbody>
+    let html = `<h3 style="border-left-color:${G.colors[t][0]}">${t}</h3><div class="tw"><table><caption>Passing</caption><thead><tr><th>Player</th><th>C/Att</th><th>Yds</th><th>TD</th><th>Int</th></tr></thead><tbody>
       <tr><td>${name(b.qb.pid)}</td>${cell(`${qb.cmp || 0}/${qb.att || 0}`, t + "ca")}${cell(qb.pass_yds || 0, t + "py")}${cell(qb.pass_td || 0, t + "ptd")}${cell(qb.int || 0, t + "int")}</tr></tbody></table></div>`;
     const all = [b.qb.pid, ...b.players.map((p) => p.pid), ...b.others.map((p) => p.pid)];
     const rushers = all.filter((pid) => (S(pid).rush_att || 0) > 0).sort((x, y) => (S(y).rush_yds || 0) - (S(x).rush_yds || 0));
@@ -474,7 +452,19 @@ td.bump { animation: bump 1100ms ease-out; }
     html += `<div class="tw"><table><caption>Receiving</caption><thead><tr><th>Player</th><th>Rec</th><th>Tgt</th><th>Yds</th><th>Lng</th><th>TD</th></tr></thead><tbody>${
       catchers.length ? catchers.map((pid) => { const s = S(pid); return `<tr><td>${name(pid)}</td>${cell(s.rec || 0, pid + "rc")}${cell(s.targets, pid + "tg")}${cell(s.rec_yds || 0, pid + "cy")}${cell(s.rec ? s.rec_lng : 0, pid + "cl")}${cell(s.rec_td || 0, pid + "ct")}</tr>`; }).join("")
       : '<tr><td colspan="6">No targets yet</td></tr>'}</tbody></table></div>`;
-    box.innerHTML = html;
+    const m = b.qb.median;
+    if (m) html += `<p class="progress-label" style="margin:0">${esc(b.qb.name)}'s own median: ${m.cmp}/${m.att}, ${m.yds} yds, ${m.td} TD, ${m.int} INT. The line above adds up his receivers' medians, so every completion goes to a named player.</p>`;
+    return `<div class="teambox">${html}</div>`;
+  }
+  function renderBox(st, animate) {
+    if (!animate) prevStats = {};
+    const A = st.team[G.away], H = st.team[G.home];
+    const rows = [["Total yards", A.yds, H.yds], ["Passing", A.pass, H.pass], ["Rushing", A.rush, H.rush], ["Plays", A.plays, H.plays],
+      ["Yards per play", A.plays ? (A.yds / A.plays).toFixed(1) : "0.0", H.plays ? (H.yds / H.plays).toFixed(1) : "0.0"],
+      ["First downs", A.fd, H.fd], ["3rd down", `${A.t3c}/${A.t3a}`, `${H.t3c}/${H.t3a}`], ["Possession", mmss(A.top), mmss(H.top)]];
+    const team = `<div class="tw"><table class="teamstats"><caption>Team</caption><thead><tr><th>Team</th><th>${G.away}</th><th>${G.home}</th></tr></thead><tbody>${
+      rows.map(([k, a, h]) => `<tr><td>${k}</td>${cell(a, "T" + k + "a")}${cell(h, "T" + k + "h")}</tr>`).join("")}</tbody></table></div>`;
+    $("box").innerHTML = `<div class="boxes">${teamBox(G.away, st)}${teamBox(G.home, st)}</div>${team}`;
   }
   function renderPbp(n) {
     const pbp = $("pbp");
@@ -537,9 +527,8 @@ td.bump { animation: bump 1100ms ease-out; }
   function loadGame(k) {
     stop();
     G = GAMES[k]; EV = G.events; N = EV.length;
-    tab = G.away;
-    buildPlayers(); computeDurs(); drawField(); renderTabs();
-    $("subtitle").textContent = `Most typical of ${G.typical.sims.toLocaleString()} sims`;
+    buildPlayers(); computeDurs(); drawField();
+    $("subtitle").textContent = G.typical.mode === "median" ? `Median of ${G.typical.sims.toLocaleString()} sims` : `Most typical of ${G.typical.sims.toLocaleString()} sims`;
     renderAbout();
     render(0);
   }
@@ -547,6 +536,15 @@ td.bump { animation: bump 1100ms ease-out; }
     const T = G.typical, L = G.line;
     const fav = L.fav ? `${L.fav} −${L.spread}, total ${L.total}` : "no market line";
     const made = (G.made_utc || "").replace("T", " ").slice(0, 16) + " UTC";
+    if (T.mode === "median") {
+      $("about").innerHTML = `<h2>How this game was made</h2><ul>
+      <li><b>Every running back and receiver</b> shows his median from the model's ${T.sims.toLocaleString()} simulated games (the same run as the saved projections, ${esc(made)}): half the sims were above each number, half below.</li>
+      <li><b>Each QB's line</b> is the sum of his receivers' medians, so every completion goes to a named player. Medians of separate players do not add up to the QB's own median, which is shown under his team's box score.</li>
+      <li><b>The final score</b> is the median score from the model's score simulation, anchored to the market line (${esc(fav)}). ${G.away} ${G.final[G.away]}, ${G.home} ${G.final[G.home]} came up in ${T.score_count} of ${T.sims.toLocaleString()} sims.</li>
+      <li><b>Filled in around the model's numbers</b>, because the model does not simulate them: the order of plays, drives, downs, field position, the clock, kicks, and how each player's yards split across his touches. No sacks, penalties or fumbles. Every play is checked so the final box score matches exactly.</li>
+    </ul>`;
+      return;
+    }
     $("about").innerHTML = `<h2>How this game was made</h2><ul>
       <li><b>Player and QB stats</b> are one simulated game from the model's ${T.sims.toLocaleString()} (the same run as the saved projections, ${esc(made)}): sim #${T.player_sim.toLocaleString()}, the closest to the median across ${T.stats_scored} player stats among the ${T.consistent.toLocaleString()} sims whose numbers add up (catches never exceed targets, the QB line matches his receivers, passing TDs fit the score). It ranks #${T.rank} of all ${T.sims.toLocaleString()}.</li>
       <li><b>The final score</b> comes from the model's score simulation, which is anchored to the market line (${esc(fav)}). ${G.away} ${G.final[G.away]}, ${G.home} ${G.final[G.home]} is the median score and came up in ${T.score_count} of ${T.sims.toLocaleString()} sims.</li>
@@ -570,19 +568,11 @@ td.bump { animation: bump 1100ms ease-out; }
     document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
     computeDurs();
   }));
-  $("clean").addEventListener("click", () => {
-    const on = !$("app").classList.contains("clean");
-    $("app").classList.toggle("clean", on);
-    $("clean").setAttribute("aria-pressed", String(on));
-    if (on) document.addEventListener("dblclick", exitClean, { once: true });
-  });
-  function exitClean() { $("app").classList.remove("clean"); $("clean").setAttribute("aria-pressed", "false"); }
   document.addEventListener("keydown", (ev) => {
     if (ev.target.closest("select, input")) return;
     if (ev.key === " ") { ev.preventDefault(); playing ? stop() : play(); }
     else if (ev.key === "ArrowRight") { stop(); if (idx < N) render(idx + 1); }
     else if (ev.key === "ArrowLeft") { stop(); if (idx > 0) render(idx - 1); }
-    else if (ev.key === "Escape") exitClean();
   });
 
   function start(data) {
@@ -590,7 +580,7 @@ td.bump { animation: bump 1100ms ease-out; }
     const k = Math.min(data.game || 0, GAMES.length - 1);
     sel.value = k;
     loadGame(k);
-    if (data.speed && SPEEDS[data.speed]) document.querySelector(`.seg button[data-speed="${data.speed}"]`).click();
+    // always opens at the 90-second clip (Travis, 2026-11-03); a saved speed is not restored
     if (data.idx) render(Math.min(data.idx, N));
   }
   window.claude?.hot?.snapshot?.(() => ({ game: Number(sel.value), idx, speed }));

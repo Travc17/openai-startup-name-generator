@@ -1,4 +1,8 @@
-# SimCast: watch the most typical simulated game
+# SizzleSims (formerly SimCast): watch the model's median game
+
+Default (`--mode median`, Travis 2026-11-03): every RB/WR/TE at his exact median, each QB line = the sum of his
+receivers so every completion goes to a named player (his own median is shown under his box), score = median score.
+`--mode typical` keeps the old single most typical sim.
 
 Turns a saved projections file into a broadcast-style page: score bug, field with the line of
 scrimmage and first down line, live box score, and play by play. Each game is the single most

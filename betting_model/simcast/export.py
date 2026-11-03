@@ -21,7 +21,7 @@ sys.path.insert(0, str(HERE))
 
 from rerun import check, rerun  # noqa: E402
 from sequence import CATCH, DUR, INC, INT, RUN, THROW, build_touches, int_split, solve  # noqa: E402
-from typical import best_decomposition, typical_consistent  # noqa: E402
+from typical import best_decomposition, typical_consistent, typical_score  # noqa: E402
 
 COLORS = {  # primary, secondary (team colors, no logos)
     "ARI": ("#97233F", "#FFB612"), "ATL": ("#A71930", "#000000"), "BAL": ("#241773", "#9E7C0C"),
@@ -126,6 +126,41 @@ def team_box(run: dict, i: int, team: str, rng: np.random.Generator) -> dict:
         o_yds = 0
     others = other_receivers(run, team, set(pids), o_tg, o_cmp, o_yds, rng)
     return {"abbr": team, "qb": qb, "players": players, "others": others}
+
+
+def med(v) -> int:
+    """Median of the sims, rounded half up (the same 50th percentile the projections file stores)."""
+    return int(np.floor(np.percentile(np.asarray(v, float), 50) + 0.5))
+
+
+def median_box(run: dict, team: str) -> dict:
+    """The median game (Travis, 2026-11-03): every RB/WR/TE shows his exact median from the sims. Medians of
+    separate players do not add up to the QB's median, so the QB line is the SUM of his receivers (every
+    completion goes to a named player, never to a placeholder); his own median is kept in qb['median']."""
+    sim, info, names = run["sim"]["players"], run["sim"]["info"], run["names"]
+    pids = [p for p in sim if info[p]["team"] == team]
+    qb_pid = next(p for p in pids if "pass_yds" in sim[p])
+    players = []
+    for p in pids:
+        if p == qb_pid:
+            continue
+        s = sim[p]
+        tg, rec, ry, ra, rr = (med(s[k]) for k in ("targets", "rec", "rec_yds", "rush_att", "rush_yds"))
+        rec = min(rec, tg)
+        ry = 0 if rec == 0 else int(np.clip(ry, -3 * rec, 75 * rec))
+        rr = 0 if ra == 0 else int(np.clip(rr, -6 * ra, 70 * ra))
+        players.append({"pid": p, "name": names[p], "pos": info[p].get("pos", "WR"), "targets": tg, "rec": rec,
+                        "rec_yds": ry, "rush_att": ra, "rush_yds": rr, "projected": True})
+    q = sim[qb_pid]
+    own = {k: med(q[k]) for k in ("pass_att", "pass_cmp", "pass_yds", "pass_td", "int")}
+    cmp_, yds = sum(p["rec"] for p in players), sum(p["rec_yds"] for p in players)
+    att = sum(p["targets"] for p in players)
+    ra, rr = med(q["rush_att"]), med(q["rush_yds"])
+    qb = {"pid": qb_pid, "name": names[qb_pid], "att": att, "cmp": cmp_, "yds": yds,
+          "td": min(own["pass_td"], cmp_), "int": min(own["int"], att - cmp_),
+          "rush_att": ra, "rush_yds": 0 if ra == 0 else int(np.clip(rr, -6 * ra, 70 * ra)),
+          "median": {"att": own["pass_att"], "cmp": own["pass_cmp"], "yds": own["pass_yds"], "td": own["pass_td"], "int": own["int"]}}
+    return {"abbr": team, "qb": qb, "players": players, "others": []}
 
 
 def build_events(lay, slots, teams, boxes, tries, names, receive_first):
@@ -299,19 +334,22 @@ def verify(ev, boxes, final) -> list[str]:
     return bad
 
 
-def export(proj_path: str, seed: int | None = None) -> dict:
+def export(proj_path: str, seed: int | None = None, mode: str = "median") -> dict:
     run = rerun(proj_path)
     bad = check(run)
     if bad:
         sys.exit("Rerun does not match the saved projections:\n" + "\n".join(bad))
-    pick = typical_consistent(run)
-    i, j = pick["player_idx"], pick["score_idx"]
+    if mode == "median":
+        pick, i, j = None, None, typical_score(run)
+    else:
+        pick = typical_consistent(run)
+        i, j = pick["player_idx"], pick["score_idx"]
     away, home = run["away"], run["home"]
     teams = [away, home]
     final = {away: int(run["score"]["away"][j]), home: int(run["score"]["home"][j])}
     seed = seed if seed is not None else run["key"] * 7 + sum(map(ord, away + home))
     rng = np.random.default_rng(seed)
-    boxes = {t: team_box(run, i, t, rng) for t in teams}
+    boxes = {t: (median_box(run, t) if mode == "median" else team_box(run, i, t, rng)) for t in teams}
 
     outcomes, tries, ptd = {}, {}, {}
     plan = {}
@@ -364,8 +402,9 @@ def export(proj_path: str, seed: int | None = None) -> dict:
         "final": final, "plan": plan, "tries": tries,
         "line": {"fav": fav, "spread": spread, "total": total},
         "qbs": meta.get("qbs"), "made_utc": run["proj"]["made_utc"],
-        "typical": {"sims": pick["n"], "player_sim": i + 1, "score_sim": j + 1, "consistent": pick["n_consistent"],
-                    "score_count": same, "stats_scored": pick["stats_scored"], "rank": pick["rank"]},
+        "typical": ({"mode": "median", "sims": len(gs["home"]), "score_sim": j + 1, "score_count": same} if mode == "median" else
+                    {"mode": "typical", "sims": pick["n"], "player_sim": i + 1, "score_sim": j + 1, "consistent": pick["n_consistent"],
+                     "score_count": same, "stats_scored": pick["stats_scored"], "rank": pick["rank"]}),
         "box": boxes, "events": ev, "seed": seed, "cost": round(cost, 2), "n_poss": n_poss,
         "drives": [{"team": s["team"], "half": s["half"], "outcome": s["outcome"], "start": s["S"], "end": s["E"],
                     "plays": len(s["plays"])} for s in slots],
@@ -378,8 +417,10 @@ if __name__ == "__main__":
     ap.add_argument("proj")
     ap.add_argument("--out")
     ap.add_argument("--seed", type=int)
+    ap.add_argument("--mode", choices=("median", "typical"), default="median",
+                    help="median (default): every player at his median, QB = sum of receivers; typical: one sim game")
     a = ap.parse_args()
-    g = export(a.proj, a.seed)
+    g = export(a.proj, a.seed, a.mode)
     out = a.out or str(HERE / "games" / (Path(a.proj).stem + ".json"))
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     Path(out).write_text(json.dumps(g, separators=(",", ":"), default=int))
