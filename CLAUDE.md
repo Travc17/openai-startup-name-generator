@@ -25,6 +25,8 @@ from the log (`python nfl.py log summary`).
    depth/role changes, QB status. Write them to a news JSON with source URLs.
 3. Lines: WebSearch big-book (DraftKings/FanDuel/BetMGM/consensus) spread, total, moneyline, and player prop lines.
    Put them in the board CSV as `book` rows. Add Robinhood prices from the user's screenshots as prop/spread/total/ml/tt rows.
+   Save a copy of every board to `betting_model/markets/` (open and close captures; see EDGE_PROMPT.md). Price history
+   is the only way to test profit, so never leave a board only in the scratchpad.
 4. `python nfl.py report AWAY HOME --week N --out "Player" ... --fav TEAM --spread X --total Y --news news.json
    --board board.csv --blind "Player" ... --sims 25000 --html <scratchpad>/game.html`
    `--blind "Name"` excludes all of a player's props; `--blind "Name:rec,rec_yds,targets"` only those stats
