@@ -23,7 +23,7 @@ from itertools import combinations
 
 import numpy as np
 
-from nflmodel import absences, backtest, data, depth, ledger, picks, report, returns, routes, scores
+from nflmodel import absences, backtest, data, depth, ledger, market, picks, projections, report, returns, routes, scores
 from nflmodel.game import POS_GROUP, STAT_LABEL, GameModel, Player, american
 from nflmodel.pricing import ev_per_dollar, no_vig, parse_price, stake
 
@@ -504,6 +504,13 @@ def cmd_report(a):
                        board, news, a.bankroll, a.fee, fav=(a.fav or "").upper() or None, spread=a.spread,
                        total=a.total, model_line=a.model_line, blind=blind, qbs=qbs, wind=a.wind)
     title = a.title or f"{a.team_b} at {a.team_a} Report"
+    proj = rep.pop("projections")
+    # every manual input, so later reviews can grade whether human adjustments helped or hurt
+    proj["meta"]["adjustments"] = {"out": a.out or [], "mult": a.mult or [], "catch": a.catch or [],
+                                   "blind": sorted(blind), "qb_override": a.qb or [], "sims": a.sims}
+    proj_path = a.proj or a.html.rsplit(".", 1)[0] + ".proj.json"
+    projections.save(proj, proj_path)
+    print(f"Projections (no prices, for `nfl.py price`): {proj_path}")
     with open(a.html, "w") as f:
         f.write(report.render(rep, title))
     brief_path = a.html.rsplit(".", 1)[0] + ".canva.txt"
@@ -521,6 +528,31 @@ def cmd_report(a):
         print(f"Paper-trading log: {n} qualifying picks recorded (betting_model/picks_log.csv)")
     b = rep.get("best")
     print(f"Wrote {a.html}. Best bet: " + (f"{b['label']} ${b['stake']} (edge {b['edge']*100:+.1f})" if b else "none"))
+
+
+def cmd_price(a):
+    """Layer 3: compare one game's projections with every quote from every venue."""
+    import csv
+    proj = projections.load(a.proj)
+    fees = {k.lower(): float(v) for k, v in (f.split("=", 1) for f in (a.fee or []))}
+    quotes = market.load_quotes(a.quotes, fees) if a.quotes else []
+    if a.board:
+        quotes += market.from_board(report.load_board(a.board), fees)
+    rows = market.find(proj, quotes, a.min_edge)
+    for r in rows:                                   # blind spots stay out of bets (CLAUDE.md)
+        bl = proj["players"].get(r["player"], {}).get("blind")
+        if bl and (bl == "all" or r["stat"] in bl) and r["verdict"] not in ("pass", "no projection"):
+            r["verdict"] = "blind spot"
+    rows = market.sort_rows(rows)
+    print(f"{proj['game']} projections made {proj['made_utc']} ({proj['sims']} sims); {len(quotes)} quotes, "
+          f"{sum(1 for k in market.market_probs(quotes))} lines with a two-sided big-book price")
+    print(market.table(rows, a.top))
+    if a.csv:
+        with open(a.csv, "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+            w.writeheader()
+            w.writerows(rows)
+        print(f"Wrote {a.csv}")
 
 
 def cmd_backtest(a):
@@ -636,7 +668,18 @@ def main():
     rp.add_argument("--html", default="report.html")
     rp.add_argument("--json")
     rp.add_argument("--title")
+    rp.add_argument("--proj", help="Where to save the projections file (default: next to the HTML as .proj.json)")
     rp.set_defaults(func=cmd_report)
+
+    pc = sub.add_parser("price", help="Bet finder: projections vs any venue's prices, and vs big-book no-vig")
+    pc.add_argument("--proj", required=True, help="Projections file written by `report`")
+    pc.add_argument("--quotes", help="Quotes CSV: venue,player,stat,line,side,price,captured_at")
+    pc.add_argument("--board", help="Or the report's board CSV (Robinhood rungs + book rows)")
+    pc.add_argument("--fee", action="append", help="'venue=0.02' fee per contract (Robinhood default 0.02)")
+    pc.add_argument("--min-edge", type=float, default=0.02)
+    pc.add_argument("--top", type=int, default=40)
+    pc.add_argument("--csv", help="Write every priced quote to this CSV")
+    pc.set_defaults(func=cmd_price)
 
     bt = sub.add_parser("backtest")
     bt.add_argument("--seasons", type=int, nargs="+", default=[2024, 2025])

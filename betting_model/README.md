@@ -243,3 +243,18 @@ bet is dropped and the other two scale to $75 + $70.
 * Third-string / undrafted QBs: the prior is an average backup, so they and their pass catchers stay blind spots.
 * No TD, INT, kicker or defense props. Starters leaving a game early (injury, blowout benching) is not simulated.
 * NFL only.
+
+## Two-stage pipeline (2026-11-03)
+* **Stage 1, projections** (`nflmodel/projections.py`, `report --proj`): every player's distribution
+  saved as P(stat >= k) on a half-unit grid, plus mean and 10/25/50/75/90th percentiles, game meta,
+  blind-spot flags, and every manual adjustment. No prices. Checked against the report on JAX@BAL wk9:
+  230 rungs, largest difference 0.00004 (rounding).
+* **Stage 2, bet finder** (`nflmodel/market.py`, `nfl.py price`): quotes from any venue (American odds
+  or cents + per-venue fee). Big-book no-vig probability averaged over books quoting both sides of the
+  same line. Each quote gets a model edge, a market edge, and a verdict (BOTH AGREE, market only,
+  model only, model vs market, blind spot, pass). Robinhood "x+" rungs map to over/under x - 0.5.
+* **Whole-number fix for book lines**: results are whole numbers, so over 45.5 = 46 or more. Book rows
+  in the report used P(sim > 45.5), while rungs used P(sim >= 46) (the convention the calibration maps
+  were fit on). Continuous yard sims made those differ by about 1 point (Tuten rush yds 59.5: 49.8% vs
+  48.6%). Book rows now use P(sim >= 46). Count stats were unaffected. Regression check: no drift.
+

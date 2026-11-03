@@ -19,6 +19,13 @@ from the log (`python nfl.py log summary`).
 * Treat any player who is not ruled out as PLAYING (missed practice or not) until the news says otherwise.
 * Big-book prop lines are often not posted until 1-2 days before kickoff; re-check before game day.
 
+## Two stages (Travis, 2026-11-03): projections, then bets
+Stage 1 `betting_model/PROJECTION_PROMPT.md`: sims + news only, no prop prices, saves
+`betting_model/projections/<season>_wk<NN>_<AWAY>_at_<HOME>.json` (report `--proj`). Stage 2
+`betting_model/BETFINDER_PROMPT.md`: big-book lines + any venue's prices vs those projections
+(`python nfl.py price --proj ... --quotes ... [--board ...]`). Robinhood is one venue, not the base.
+The steps below still apply; the report's `--proj` file is the stage 1 record.
+
 ## When asked for a game ("run TNF", "CHI at SEA tonight", etc.)
 1. `cd betting_model && python nfl.py update`
 2. News: WebSearch trusted sources (official injury reports, ESPN, team beat writers) for injuries, inactives,

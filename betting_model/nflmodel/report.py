@@ -21,7 +21,7 @@ from datetime import date
 
 import numpy as np
 
-from . import scores
+from . import projections, scores
 from .game import STAT_LABEL, american
 
 DISC = 1.0           # combo price assumed = product of legs (observed 0.93-0.99 on 2 tickets: be conservative)
@@ -116,6 +116,15 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                        for nm_, st_ in blind_stats.items())
     rep = {"home": home, "away": away, "date": date.today().isoformat(), "sims": n_sims, "news": news,
            "bankroll": bankroll, "fee": fee, "blind": blind_txt}
+    # Layer 1 output: projections only (no prices), for the venue-agnostic bet finder (market.py)
+    proj = projections.export(sim, name_of, home, away, key,
+                              meta={"fav": fav, "spread": spread, "total": total, "wind": wind,
+                                    "qbs": {t: name_of(q) for t, q in (qbs or {}).items() if q},
+                                    "news": [{k: n.get(k) for k in ("player", "team", "status", "url")} for n in news]})
+    for nm_, pl in proj["players"].items():
+        if nm_ in blind_stats:
+            pl["blind"] = sorted(blind_stats[nm_]) if blind_stats[nm_] else "all"
+    rep["projections"] = proj
 
     # ---------- score ----------
     if fav and spread is not None and total is not None:
@@ -187,7 +196,13 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                 continue
             v = sim["players"][pid][r["stat"]]
             x = float(r["line"])
-            po = float((v > x).mean())
+            # results are whole numbers: over 45.5 means 46+, the same P(stat >= 46) as a "46+" rung
+            # (the calibration maps were fit on that convention); a whole-number line pushes at exactly x
+            if float(x).is_integer():
+                push_ = float((v >= x).mean() - (v >= x + 1).mean())
+                po = float((v >= x + 1).mean()) / max(1 - push_, 1e-9)
+            else:
+                po = float((v >= np.ceil(x)).mean())
             row = {"player": nm, "stat": r["stat"], "line": x, "median": float(np.median(v)), "p_over": po,
                    "src": r.get("book", ""), "blind": is_blind(nm, r["stat"])}
             for side, key_, pp in (("over", "price", po), ("under", "price2", 1 - po)):
