@@ -50,6 +50,7 @@ class Config:
     team_window: int = 12
     league_pool_size: int = 6000
     n_sims: int = 20000
+    prior_mode: str = "tiered"        # share prior: "tiered" by recent usage, "all", or "regulars"
 
 
 def decay_weights(keys: np.ndarray, cfg: Config) -> np.ndarray:
@@ -69,8 +70,14 @@ class Player:
 
 class GameModel:
     def __init__(self, targets: pd.DataFrame, rushes: pd.DataFrame, positions: dict[str, str],
-                 cfg: Config | None = None):
+                 cfg: Config | None = None, snaps: pd.DataFrame | None = None, pos_defense: bool = False,
+                 depth: pd.DataFrame | None = None):
+        """snaps: add games played with zero touches (from snap counts).
+        pos_defense: opponent adjustment by receiver position (WR/TE/RB) instead of one team number.
+        depth: normalized depth charts (data.load_depth) for role change adjustments."""
         self.cfg = cfg or Config()
+        self.pos_defense = pos_defense
+        self.depth = depth
         self.pos = positions
         grp = lambda pid: POS_GROUP.get(self.pos.get(pid, "WR"), "WR")
         t = targets.sort_values("key").reset_index(drop=True)
@@ -92,6 +99,15 @@ class GameModel:
             rush_att=("yards", "size"), rush_yds=("yards", "sum"))
         pr.index = pr.index.set_names("pid", level=3)
         pg = pt.join(pr, how="outer").fillna(0).reset_index()
+        if snaps is not None:
+            z = snaps.rename(columns={"team": "posteam", "gsis_id": "pid"})[["game_id", "posteam", "pid", "offense_pct"]]
+            pg = pg.merge(z, on=["game_id", "posteam", "pid"], how="outer")
+            keymap = self.tg.drop_duplicates("game_id").set_index("game_id").key
+            pg["key"] = pg.game_id.map(keymap)
+            pg = pg.dropna(subset=["key"])
+            pg["key"] = pg.key.astype(int)
+            for c in ("targets", "rec", "rec_yds", "rush_att", "rush_yds"):
+                pg[c] = pg[c].fillna(0)
         pg = pg.merge(self.tg[["game_id", "posteam", "defteam", "targets", "rushes"]].rename(
             columns={"targets": "team_targets", "rushes": "team_rushes"}), on=["game_id", "posteam"])
         pg["t_share"] = pg.targets / pg.team_targets.clip(lower=1)
@@ -106,6 +122,8 @@ class GameModel:
         self._tg_def = {k: v for k, v in self.tg.groupby("defteam")}
         self._tpool = {p: (g.key.to_numpy(), g.complete.to_numpy(), g.yards.to_numpy()) for p, g in t.groupby("pos")}
         self._rpool = {p: (g.key.to_numpy(), g.yards.to_numpy()) for p, g in r.groupby("pos")}
+        self._tdp = {k: v for k, v in t.groupby(["key", "defteam", "pos"]).agg(
+            n=("yards", "size"), yds=("yards", "sum")).reset_index().groupby("defteam")}
         self.vol_corr, self.vol_sd = self._volume_covariance()
 
     # ---------------- volume structure ----------------
@@ -142,14 +160,59 @@ class GameModel:
             return 1.0
         return float(1 + n / (n + shrink) * ((y / n) / ly - 1))
 
+    def _opp_mult_pos(self, opp: str, key: int, pos: str, team_factor: float) -> float:
+        """Yards per target allowed to this position group, shrunk toward the team factor."""
+        if not self.pos_defense:
+            return team_factor
+        keys = self._tg_def[opp]
+        keys = keys[keys.key < key].tail(self.cfg.team_window).key
+        d = self._tdp[opp]
+        d = d[d.key.isin(keys) & (d.pos == pos)]
+        n = d.n.sum()
+        if n == 0:
+            return team_factor
+        lk, _, ly = self._tpool.get(pos, self._tpool["WR"])
+        end = np.searchsorted(lk, key, side="left")
+        league = ly[max(0, end - self.cfg.league_pool_size):end].mean()
+        raw = (d.yds.sum() / n) / league
+        return float(team_factor + n / (n + 150.0) * (raw - team_factor))
+
     @lru_cache(maxsize=4096)
     def _share_prior(self, pos: str, season: int) -> tuple[float, float]:
         g = self.pg[(self.pg.pos == pos) & (self.pg.key // 100 >= season - 2) & (self.pg.key // 100 < season)]
         if g.empty:
             g = self.pg[self.pg.pos == pos]
-        reg_t = g[g.targets >= 3].t_share.mean()
-        reg_c = g[g.rush_att >= 5].c_share.mean() if pos in ("RB", "QB") else g.c_share.mean()
+        if self.cfg.prior_mode == "all":  # every game the position was on the field
+            reg_t, reg_c = g.t_share.mean(), g.c_share.mean()
+        else:  # starters only (original)
+            reg_t = g[g.targets >= 3].t_share.mean()
+            reg_c = g[g.rush_att >= 5].c_share.mean() if pos in ("RB", "QB") else g.c_share.mean()
         return float(np.nan_to_num(reg_t, nan=0.1)), float(np.nan_to_num(reg_c, nan=0.02))
+
+    T_BINS = np.array([0, .02, .05, .08, .11, .14, .18, .22, .27, .33, 1.01])
+    C_BINS = np.array([0, .02, .05, .10, .20, .30, .40, .50, .60, .70, 1.01])
+
+    @lru_cache(maxsize=256)
+    def _tier_table(self, pos: str, season: int) -> tuple[np.ndarray, np.ndarray]:
+        """What players at this position with a given recent share (last 4 games)
+        actually got next game, learned only from seasons BEFORE `season`."""
+        g = self.pg[self.pg.pos == pos].sort_values(["pid", "key"])
+        out = []
+        for col, bins in (("t_share", self.T_BINS), ("c_share", self.C_BINS)):
+            trail = g.groupby("pid")[col].transform(lambda x: x.shift(1).rolling(4, min_periods=2).mean())
+            ok = trail.notna() & (g.key // 100 < season) & (g.key // 100 >= season - 3)
+            b = np.clip(np.digitize(trail[ok], bins) - 1, 0, len(bins) - 2)
+            means = pd.Series(g.loc[ok, col].to_numpy()).groupby(b).mean()
+            mids = (bins[:-1] + bins[1:]) / 2
+            out.append(np.array([means.get(i, mids[i]) for i in range(len(bins) - 1)]))
+        return out[0], out[1]
+
+    def _tiered_prior(self, pos: str, key: int, hist: pd.DataFrame) -> tuple[float, float]:
+        tt, tc = self._tier_table(pos, key // 100)
+        rec = hist.tail(4)
+        bt = int(np.clip(np.digitize(rec.t_share.mean(), self.T_BINS) - 1, 0, len(tt) - 1))
+        bc = int(np.clip(np.digitize(rec.c_share.mean(), self.C_BINS) - 1, 0, len(tc) - 1))
+        return float(tt[bt]), float(tc[bc])
 
     # ---------------- player inputs ----------------
     def player_inputs(self, p: Player, opp: str, key: int) -> dict:
@@ -159,7 +222,10 @@ class GameModel:
             raise ValueError(f"No history before this week for {p.pid}")
         w = decay_weights(hist.key.to_numpy(), cfg)
         pos = POS_GROUP.get(self.pos.get(p.pid, "WR"), "WR")
-        prior_t, prior_c = self._share_prior(pos, key // 100)
+        if cfg.prior_mode == "tiered":
+            prior_t, prior_c = self._tiered_prior(pos, key, hist)
+        else:
+            prior_t, prior_c = self._share_prior(pos, key // 100)
         k = cfg.share_prior_games
         t_share = (np.sum(w * hist.t_share) + k * prior_t) / (w.sum() + k) * p.share_mult
         c_share = (np.sum(w * hist.c_share) + k * prior_c) / (w.sum() + k) * p.carry_mult
@@ -230,7 +296,8 @@ class GameModel:
                 idx = rng.choice(len(inp["pool_ty"]), size=(n, mt), p=inp["pool_tp"])
                 m = np.arange(mt)[None, :] < tg[:, None]
                 rec = (inp["pool_c"][idx] * m).sum(1)
-                rec_yds = (inp["pool_ty"][idx] * m).sum(1) * rec_mult
+                p_rec_mult = self._opp_mult_pos(opp, key, inp["pos"], rec_mult)
+                rec_yds = (inp["pool_ty"][idx] * m).sum(1) * p_rec_mult
                 mc = max(int(ca.max()), 1)
                 idx = rng.choice(len(inp["pool_ry"]), size=(n, mc), p=inp["pool_rp"])
                 m = np.arange(mc)[None, :] < ca[:, None]
@@ -239,7 +306,7 @@ class GameModel:
                 out[p.pid] = {"targets": tg, "rec": rec, "rec_yds": rec_yds,
                               "rush_att": ca, "rush_yds": rush_yds, "rec_rush_yds": rec_yds + rush_yds}
                 info[p.pid] = {**{k: v for k, v in inp.items() if not k.startswith("pool")},
-                               "team": team, "opp": opp, "rec_mult": rec_mult, "rush_mult": rush_mult}
+                               "team": team, "opp": opp, "rec_mult": p_rec_mult, "rush_mult": rush_mult}
         res = {"players": out, "info": info,
                "team_mu": {team_a: (mu[0], mu[1]), team_b: (mu[2], mu[3])}}
         return apply_copula(res, load_copula() if rho is None else rho, rng)

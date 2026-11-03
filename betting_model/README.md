@@ -105,8 +105,19 @@ Full proportional redistribution overshoots by 11 to 29%: backups and game plan
 changes soak up most vacated looks. k fitted on 2022 and 2023 alone gave
 0.27/0.40/0.23 and held up on 2024 and 2025 (lowest error of the three methods).
 
+## Context data (v3)
+
+| Feature | Data | Backtest result | Status |
+|---|---|---|---|
+| Zero touch games | nflverse snap counts | Backups and QB rushing error down 2 to 7% | ON |
+| Usage tiered share prior | learned from prior seasons only | Backups now calibrated (median line hit 47 to 53%, was 34 to 43%); starters unchanged | ON |
+| Depth chart role changes | nflverse daily depth charts (game day snapshot) | Promoted: targets x1.12, carries x1.15. Demoted: x0.82. Fitted 2022 to 2024, held on 2025 (x1.22 / x0.77) | ON |
+| Defense by position (WR/TE/RB) | play by play | Slightly WORSE (rec yds CRPS 18.19 vs 18.15) | OFF (`pos_defense=True` to test) |
+
 ## Honest limits
 
 * No historical prop lines: calibration is tested, profit is not. Closing line
   value on live bets (`log summary`) is the real test.
+* Three way backfields where a player returns from IR are still weak: a back with
+  no games in the last 3 is not auto included unless he's a depth chart starter.
 * No QB passing props, touchdowns, game lines, weather, coverage, or route data yet. NFL only.

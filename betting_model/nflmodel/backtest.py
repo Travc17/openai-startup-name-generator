@@ -39,21 +39,35 @@ def _pit_z(sims: np.ndarray, actual: float, rng: np.random.Generator) -> float:
     return float(norm.ppf(np.clip(u, 1e-4, 1 - 1e-4)))
 
 
+def crps(sims: np.ndarray, y: float) -> float:
+    """Continuous ranked probability score: error of the whole predicted distribution
+    (lower is better). Equals absolute error when the prediction is a single number."""
+    x = np.sort(sims[:2000])
+    n = len(x)
+    return float(np.abs(x - y).mean() - (2 * np.arange(1, n + 1) - n - 1) @ x / n ** 2)
+
+
 def run(model: GameModel, seasons: list[int], rho: dict[str, float] | None = None, min_week: int = 4,
-        n_sims: int = 4000, limit_games: int | None = None, seed: int = 11) -> tuple[pd.DataFrame, pd.DataFrame]:
+        n_sims: int = 4000, limit_games: int | None = None, seed: int = 11,
+        truth: GameModel | None = None, adjust=None) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """truth: model whose game table defines who played and their actual stats (use the
+    snap count version so every configuration is graded on the same games).
+    adjust: optional fn(model, Player, game_id, key) -> Player, e.g. depth chart multipliers."""
     rng = np.random.default_rng(seed)
+    truth = truth or model
     games = model.tg[(model.tg.key // 100).isin(seasons) & (model.tg.key % 100 >= min_week)]
     games = games.drop_duplicates("game_id")
     marg, pairs = [], []
     for gi, g in enumerate(games.itertuples(index=False)):
         if limit_games and gi >= limit_games:
             break
-        actual = model.pg[model.pg.game_id == g.game_id].set_index("pid")
+        actual = truth.pg[truth.pg.game_id == g.game_id].set_index("pid")
         roster = []
         for team in (g.posteam, g.defteam):
-            for pid in model.usage_leaders(team, g.key, min_targets=5, min_carries=8):
-                if pid in actual.index:  # played (inactives are known pregame)
-                    roster.append(Player(pid, team))
+            for pid in truth.usage_leaders(team, g.key, min_targets=5, min_carries=8):
+                if pid in actual.index and pid in model._pg_by:  # played (inactives are known pregame)
+                    pl = Player(pid, team)
+                    roster.append(adjust(model, pl, g.game_id, g.key) if adjust else pl)
         if len(roster) < 2:
             continue
         try:
@@ -71,7 +85,8 @@ def run(model: GameModel, seasons: list[int], rho: dict[str, float] | None = Non
                 for q in (0.25, 0.5, 0.75):
                     line = _half(np.quantile(s[stat], q))
                     marg.append({"stat": stat, "q": q, "p_over": float((s[stat] > line).mean()),
-                                 "hit": float(a[stat] > line)})
+                                 "hit": float(a[stat] > line),
+                                 "crps": crps(s[stat], a[stat]) if q == 0.5 else np.nan})
             if not kinds:
                 continue
             kind = main_kind(s)
@@ -108,6 +123,8 @@ def report(marg: pd.DataFrame, pairs: pd.DataFrame) -> str:
            f"{'stat':>9} {'line at':>8} {'n':>6} {'model':>7} {'actual':>7}"]
     for (stat, q), g in marg.groupby(["stat", "q"]):
         out.append(f"{stat:>9} {'q' + str(int(q * 100)):>8} {len(g):>6} {g.p_over.mean():>7.1%} {g.hit.mean():>7.1%}")
+    sc = marg.dropna(subset=["crps"]).groupby("stat").crps.mean()
+    out.append("\nCRPS, whole distribution error (lower is better): " + ", ".join(f"{k} {v:.3f}" for k, v in sc.items()))
     cols = ["independent", "engine"] + (["copula"] if "copula" in pairs else [])
     out.append("\nPARLAY CORRELATION CHECK (both players over their median line)")
     out.append(f"{'pair type':>16} {'n':>6} " + " ".join(f"{c:>11}" for c in cols) + f" {'actual':>8}")

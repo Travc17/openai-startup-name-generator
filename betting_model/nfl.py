@@ -22,7 +22,7 @@ from itertools import combinations
 
 import numpy as np
 
-from nflmodel import absences, backtest, data, ledger
+from nflmodel import absences, backtest, data, depth, ledger
 from nflmodel.game import STAT_LABEL, GameModel, Player, american
 from nflmodel.pricing import ev_per_dollar, no_vig, parse_price, stake
 
@@ -39,7 +39,8 @@ ALT_STEPS = {"rec_yds": [-30, -20, -10, 0, 10, 20, 30], "rush_yds": [-20, -10, 0
 # ---------------- setup ----------------
 def build_model() -> GameModel:
     data.ensure_data(HISTORY)
-    return GameModel(data.load_targets(HISTORY), data.load_rushes(HISTORY), data.load_positions())
+    return GameModel(data.load_targets(HISTORY), data.load_rushes(HISTORY), data.load_positions(),
+                     snaps=data.load_snaps(HISTORY))
 
 
 _PLAYERS = None
@@ -98,6 +99,11 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     for t in (team_a, team_b):
         for pid in model.usage_leaders(t, key):
             pids[pid] = t
+    # Depth chart: add today's starters the usage history misses (e.g. a back returning from IR)
+    dep = depth_status(model, a, key, (team_a, team_b))
+    for pid, (now, prev, rank, pos, team) in dep.items():
+        if now and pos in ("WR", "TE", "RB") and pid in model._pg_by and pid not in outs:
+            pids.setdefault(pid, team)
     for pid in extra:
         team = current_team(model, pid)
         pids[pid] = team if team in (team_a, team_b) else sys.exit(f"{name_of(pid)} last played for {team}, not {team_a}/{team_b}.")
@@ -129,8 +135,43 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     for t in (team_a, team_b):
         if vac_t[t] or vac_c[t]:
             print(f"     {t} teammates: targets x{boost_t[t]:.3f}, carries x{boost_c[t]:.3f} (fitted on real absences)")
-    return [Player(pid, t, share_mult=boost_t[t] * mults.get(pid, 1.0), carry_mult=boost_c[t] * mults.get(pid, 1.0))
-            for pid, t in pids.items() if pid not in outs]
+    dp = depth.load()
+    players = []
+    for pid, t in pids.items():
+        if pid in outs:
+            continue
+        dm_t, dm_c = 1.0, 1.0
+        if pid in dep:
+            now, prev, rank, pos, _ = dep[pid]
+            change = "promoted" if now and not prev else ("demoted" if prev and not now else "same")
+            dm_t, dm_c = depth.multipliers(dp, change)
+            if change != "same":
+                print(f"DEPTH: {name_of(pid)} ({t}) {change} ({pos}{rank}): targets x{dm_t:.2f}, carries x{dm_c:.2f}")
+        players.append(Player(pid, t, share_mult=boost_t[t] * dm_t * mults.get(pid, 1.0),
+                              carry_mult=boost_c[t] * dm_c * mults.get(pid, 1.0)))
+    return players
+
+
+def depth_status(model: GameModel, a, key: int, teams) -> dict:
+    """Starter status from the depth chart on game day vs at each team's previous game."""
+    import pandas as pd
+    season = key // 100
+    try:
+        raw = pd.read_parquet(data.DATA_DIR / f"depth_charts_{season}.parquet")
+    except FileNotFoundError:
+        return {}
+    if "dt" not in raw.columns:
+        return {}
+    gd = data.game_dates([season])
+    today = getattr(a, "date", None) or raw.dt.str[:10].max()
+    out = {}
+    for team in teams:
+        prev = gd[((gd.home_team == team) | (gd.away_team == team)) & (gd.game_date < today)].game_date.max()
+        if not isinstance(prev, str):
+            continue
+        for pid, (now, was, rank, pos) in depth.current_status(raw, team, today, prev).items():
+            out[pid] = (now, was, rank, pos, team)
+    return out
 
 
 def parse_leg(model, spec: str) -> tuple[str, str, str, float]:

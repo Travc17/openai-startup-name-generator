@@ -10,6 +10,9 @@ import pandas as pd
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 PBP_URL = "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.parquet"
 PLAYERS_URL = "https://github.com/nflverse/nflverse-data/releases/download/players/players.parquet"
+SNAPS_URL = "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_{season}.parquet"
+DEPTH_URL = "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_{season}.parquet"
+SKILL = ["WR", "TE", "RB", "FB", "QB"]
 
 PBP_COLS = [
     "season", "season_type", "week", "game_id", "game_date", "posteam", "defteam",
@@ -32,7 +35,10 @@ def _download(url: str, dest: Path, refresh: bool = False) -> Path:
 def ensure_data(seasons: list[int], refresh_seasons: list[int] | None = None) -> None:
     refresh_seasons = set(refresh_seasons or [])
     for s in seasons:
-        _download(PBP_URL.format(season=s), DATA_DIR / f"pbp_{s}.parquet", refresh=s in refresh_seasons)
+        r = s in refresh_seasons
+        _download(PBP_URL.format(season=s), DATA_DIR / f"pbp_{s}.parquet", refresh=r)
+        _download(SNAPS_URL.format(season=s), DATA_DIR / f"snap_counts_{s}.parquet", refresh=r)
+        _download(DEPTH_URL.format(season=s), DATA_DIR / f"depth_charts_{s}.parquet", refresh=r)
     _download(PLAYERS_URL, DATA_DIR / "players.parquet", refresh=bool(refresh_seasons))
 
 
@@ -85,3 +91,60 @@ def load_positions() -> dict[str, str]:
 
 def load_players() -> pd.DataFrame:
     return pd.read_parquet(DATA_DIR / "players.parquet", columns=["gsis_id", "display_name", "position", "latest_team"])
+
+
+def load_snaps(seasons: list[int]) -> pd.DataFrame:
+    """Offensive snaps for skill players, keyed by gsis_id. Lets us add games where a
+    player was on the field but never got a target or carry (play by play omits them)."""
+    s = pd.concat([pd.read_parquet(DATA_DIR / f"snap_counts_{y}.parquet") for y in seasons], ignore_index=True)
+    s = s[(s.game_type == "REG") & s.position.isin(SKILL) & (s.offense_snaps > 0)]
+    ids = pd.read_parquet(DATA_DIR / "players.parquet", columns=["gsis_id", "pfr_id"]).dropna()
+    s = s.merge(ids, left_on="pfr_player_id", right_on="pfr_id")
+    return s[["game_id", "team", "gsis_id", "offense_snaps", "offense_pct"]]
+
+
+def game_dates(seasons: list[int]) -> pd.DataFrame:
+    frames = [pd.read_parquet(DATA_DIR / f"pbp_{y}.parquet", columns=["game_id", "season", "week", "game_date", "home_team", "away_team"])
+              .drop_duplicates("game_id") for y in seasons]
+    return pd.concat(frames, ignore_index=True)
+
+
+STARTERS = {"WR": 3, "TE": 1, "RB": 1, "FB": 0, "QB": 1}
+
+
+def load_depth(seasons: list[int]) -> pd.DataFrame:
+    """Depth chart rank for skill players at each team game, using only the chart
+    published on or before game day. Two nflverse formats are normalized:
+      * through 2024: weekly charts with depth_team (1 = starter)
+      * 2025 on: daily ESPN snapshots with pos_rank within position
+    Output: game_id, team, gsis_id, pos, rank, starter."""
+    games = game_dates(seasons)
+    out = []
+    for y in seasons:
+        d = pd.read_parquet(DATA_DIR / f"depth_charts_{y}.parquet")
+        g = games[games.season == y]
+        if "dt" in d.columns:  # daily snapshots
+            d = d[d.pos_abb.isin(SKILL) & d.gsis_id.notna()].copy()
+            d["date"] = d.dt.str[:10]
+            snaps = sorted(d.date.unique())
+            for r in g.itertuples(index=False):
+                prior = [x for x in snaps if x <= r.game_date]
+                if not prior:
+                    continue
+                snap = d[d.date == prior[-1]]
+                for team in (r.home_team, r.away_team):
+                    t = snap[snap.team == team].drop_duplicates(["gsis_id", "pos_abb"])
+                    for row in t.itertuples(index=False):
+                        out.append((r.game_id, team, row.gsis_id, row.pos_abb, int(row.pos_rank)))
+        else:  # weekly
+            d = d[(d.game_type == "REG") & (d.formation == "Offense") & d.position.isin(SKILL) & d.gsis_id.notna()]
+            d = d.assign(rank=pd.to_numeric(d.depth_team, errors="coerce")).dropna(subset=["rank"])
+            d = d.sort_values("rank").drop_duplicates(["club_code", "week", "gsis_id"])
+            m = d.merge(pd.concat([g.assign(team=g.home_team), g.assign(team=g.away_team)]),
+                        left_on=["club_code", "week"], right_on=["team", "week"])
+            # weekly format lists every WR slot as rank 1 for starters, so rank = depth_team
+            out += list(zip(m.game_id, m.team, m.gsis_id, m.position, m["rank"].astype(int)))
+    df = pd.DataFrame(out, columns=["game_id", "team", "gsis_id", "pos", "rank"]).drop_duplicates(["game_id", "team", "gsis_id"])
+    new_format = df.game_id.str[:4].astype(int) >= 2025
+    df["starter"] = [r <= STARTERS.get(p, 1) if nf else r == 1 for r, p, nf in zip(df["rank"], df.pos, new_format)]
+    return df
