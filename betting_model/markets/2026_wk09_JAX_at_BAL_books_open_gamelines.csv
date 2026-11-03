@@ -1,0 +1,17 @@
+venue,player,stat,line,side,price,captured_at
+DraftKings,Baltimore Ravens,spreads,10.0,team,-110,2026-11-03T20:04:31+00:00
+DraftKings,Jacksonville Jaguars,spreads,-10.0,team,-110,2026-11-03T20:04:31+00:00
+DraftKings,Over,totals,40.5,over,-112,2026-11-03T20:04:31+00:00
+DraftKings,Under,totals,40.5,under,-108,2026-11-03T20:04:31+00:00
+FanDuel,Baltimore Ravens,spreads,9.5,team,-102,2026-11-03T20:04:31+00:00
+FanDuel,Jacksonville Jaguars,spreads,-9.5,team,-120,2026-11-03T20:04:31+00:00
+FanDuel,Over,totals,40.5,over,-120,2026-11-03T20:04:31+00:00
+FanDuel,Under,totals,40.5,under,-102,2026-11-03T20:04:31+00:00
+Fanatics,Baltimore Ravens,spreads,9.5,team,-105,2026-11-03T20:04:31+00:00
+Fanatics,Jacksonville Jaguars,spreads,-9.5,team,-115,2026-11-03T20:04:31+00:00
+Fanatics,Over,totals,41.0,over,-110,2026-11-03T20:04:31+00:00
+Fanatics,Under,totals,41.0,under,-110,2026-11-03T20:04:31+00:00
+BetMGM,Baltimore Ravens,spreads,10.0,team,-110,2026-11-03T20:04:31+00:00
+BetMGM,Jacksonville Jaguars,spreads,-10.0,team,-108,2026-11-03T20:04:31+00:00
+BetMGM,Over,totals,40.5,over,-110,2026-11-03T20:04:31+00:00
+BetMGM,Under,totals,40.5,under,-108,2026-11-03T20:04:31+00:00

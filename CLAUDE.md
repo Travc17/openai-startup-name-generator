@@ -1,5 +1,16 @@
 # NFL betting model playbook (betting_model/)
 
+## Session start (every session, before anything else; Travis, 2026-11-03)
+1. `git fetch origin`, then get onto the working branch named at the top of `betting_model/HANDOFF.md`:
+   `git pull origin <working branch>`. If this session's branch has no `betting_model/` folder, fast-forward
+   it first: `git merge --ff-only origin/<working branch>`. Never start work on a branch without it.
+2. `pip install -r betting_model/requirements.txt` (fresh containers are missing scipy).
+3. Read `betting_model/HANDOFF.md`, then every file it lists. HANDOFF.md is the state; this file is the rules.
+4. Do the first open item in HANDOFF.md and report its result before starting anything new.
+5. Before the session ends: rewrite HANDOFF.md (state, open items in order, waiting on Travis, credits left),
+   commit and push. Every quotes, board and priced file goes in `betting_model/markets/` and is committed;
+   nothing stays only in the scratchpad.
+
 Travis runs a $2,000 model bankroll (started 2026-11-02). Track ONLY bets he calls "yours/the model's"
 in `betting_model/bets.csv`; commit and push the log after every change. Current bankroll is computed
 from the log (`python nfl.py log summary`).
