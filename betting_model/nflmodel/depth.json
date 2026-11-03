@@ -1,0 +1,20 @@
+{
+  "fitted_on_seasons": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "t_demoted": 0.831,
+  "t_demoted_n": 229,
+  "c_demoted": 0.833,
+  "c_demoted_n": 47,
+  "t_promoted": 1.128,
+  "t_promoted_n": 428,
+  "c_promoted": 1.193,
+  "c_promoted_n": 88,
+  "t_same": 1.009,
+  "t_same_n": 4431,
+  "c_same": 1.033,
+  "c_same_n": 1158
+}

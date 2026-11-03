@@ -1,0 +1,17 @@
+{
+  "fitted_on_seasons": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "n_pairs": 17255,
+  "rho": {
+    "opp:rec-rec": 0.0219,
+    "opp:rec-rush": -0.0023,
+    "opp:rush-rush": -0.1514,
+    "same:rec-rec": 0.0207,
+    "same:rec-rush": -0.0328,
+    "same:rush-rush": 0.0246
+  }
+}
