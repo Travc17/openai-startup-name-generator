@@ -195,6 +195,13 @@ Pick-level paper test (Monday CHI@SEA, 15 qualifying picks, logged AFTER the gam
 correlated, one game): 4 of 15 won (26.7%) vs 38.9% expected, flat ROI -28.4%. Moved to
 `reviews/2026_wk08_CHI_at_SEA_retro_picks.csv`. It proves nothing either way; the real record starts now.
 
+## Per-game exposure cap (approved 2026-11-03)
+Every bet on one game is correlated (same game script, same QB), so the 10% cap is on the game, not each bet.
+`report` builds a "Bet plan": up to 3 bets by expected profit, no player+stat repeated, stakes scaled down
+together to fit 10% of current bankroll (never below $50; the weakest bet is dropped if the minimums alone
+break the cap). Example at $2,257 (cap $225): $85 + $75 + $50 = $210 fits; at $1,500 (cap $150) the third
+bet is dropped and the other two scale to $75 + $70.
+
 ## Paper-trading record and regression check
 * `report` writes every qualifying pick (stake > 0) to `picks_log.csv` with a UTC timestamp, price, fee and
   model probability. It refuses to log a game that is already in the play by play (no hindsight rows).

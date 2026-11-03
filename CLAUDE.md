@@ -6,7 +6,10 @@ from the log (`python nfl.py log summary`).
 
 ## Rules (non negotiable)
 * Bet only when edge >= 2% after Robinhood's fee (2c per contract, seen on bet #1).
-* Stake: $50 when edge is 2-4%; quarter Kelly above 4%; cap 10% of current bankroll. Max 3 bets per slate.
+* Stake: $50 when edge is 2-4%; quarter Kelly above 4%. Max 3 bets per slate.
+* Cap: ALL bets on one game combined <= 10% of current bankroll (approved 2026-11-03). The report's
+  "Bet plan" applies it: best expected profit first, no repeated player+stat, stakes scaled down together
+  (never below $50); if the minimums alone break the cap, the weakest bet is dropped.
 * Stop and report if bankroll <= $1,000. After 50 bets, report closing-line value; no CLV edge = recommend stopping.
 * Never bet model spreads or totals (both failed walk-forward tests vs real closing lines). Game lines are priced
   only around the big-book consensus line (`gameline` / report).

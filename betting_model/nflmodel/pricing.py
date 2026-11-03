@@ -55,3 +55,41 @@ def stake(p_win: float, price: Price, bankroll: float = 2000, min_bet: float = 5
     k = (p_win * price.net_odds - (1 - p_win)) / price.net_odds
     amt = max(min_bet, min(max_bet, round(bankroll * k * kelly_frac / 5) * 5))
     return float(amt), f"BET quarter Kelly (edge {edge:+.1%}, full Kelly {k:.1%})"
+
+
+GAME_CAP_FRAC = 0.10  # ALL bets on one game combined: 10% of current bankroll (approved 2026-11-03)
+
+
+def plan_game(cands: list[dict], bankroll: float, max_bets: int = 3, min_bet: float = 50,
+              cap_frac: float = GAME_CAP_FRAC) -> dict:
+    """Pick the bets for one game and fit them under the per-game cap.
+
+    cands: dicts with label, kind, p (model prob), cost (price + fee), stake (single-bet Kelly stake),
+    and legs: [(pid, stat), ...] (empty for game lines). Bets are taken best expected profit first,
+    skipping any bet that repeats a player+stat already in the plan (that is the same bet twice).
+    If the stakes add up to more than the cap they are scaled down together (to $5 steps, never
+    below the minimum); if the minimums alone break the cap, the weakest bet is dropped."""
+    cap = round(bankroll * cap_frac / 5) * 5
+    ev = lambda c: c["stake"] * (c["p"] / c["cost"] - 1)
+    chosen, used = [], set()
+    for c in sorted((c for c in cands if c["stake"]), key=ev, reverse=True):
+        legs = {tuple(l) for l in c.get("legs", [])}
+        if legs & used:
+            continue
+        chosen.append(dict(c))
+        used |= legs
+        if len(chosen) == max_bets:
+            break
+    while chosen:
+        total = sum(c["stake"] for c in chosen)
+        if total <= cap:
+            break
+        scaled = [max(min_bet, (c["stake"] * cap / total) // 5 * 5) for c in chosen]
+        if sum(scaled) <= cap:
+            for c, st in zip(chosen, scaled):
+                c["stake"] = float(st)
+            break
+        chosen.pop()  # minimums alone exceed the cap: drop the weakest bet and retry
+    for c in chosen:
+        c["ev"] = ev(c)
+    return {"cap": cap, "bets": chosen, "total": sum(c["stake"] for c in chosen)}

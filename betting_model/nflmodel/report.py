@@ -245,15 +245,18 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
     cands = [("single", s["label"], s) for s in singles if s["stake"]] + \
             [("parlay", " + ".join(p["legs"]), p) for p in top if p["stake"]] + \
             [("game line", l["label"], l) for l in rep["lines"] if l["stake"]]
-    if cands:
-        def ev(c):
-            d = c[2]
-            return d["stake"] * (d["p"] / d["cost"] - 1)
-        kind, label, d = max(cands, key=ev)
-        rep["best"] = {"kind": kind, "label": label, "p": d["p"], "cost": d["cost"], "edge": d["edge"],
-                       "stake": d["stake"], "ev": ev((kind, label, d))}
-    else:
-        rep["best"] = None
+    from .pricing import plan_game
+
+    def legs_of(kind, d):
+        if kind == "single":
+            return [(d["pid"], d["stat"])]
+        if kind == "parlay":
+            return [(pid, st) for pid, st, _ in d["legs_data"]]
+        return []
+    plan = plan_game([{"kind": kind, "label": label, "p": d["p"], "cost": d["cost"], "edge": d["edge"],
+                       "stake": d["stake"], "legs": legs_of(kind, d)} for kind, label, d in cands], bankroll)
+    rep["plan"] = plan
+    rep["best"] = plan["bets"][0] if plan["bets"] else None
     return rep
 
 
@@ -345,7 +348,7 @@ def render(rep, title):
                    f'Centered on the big-book line ({sc["fav"]} −{sc["spread"]:g}, total {sc["total"]:g}).</p>')
     else:
         out.append(f'<h1 style="font-size:2.4rem">{A} at {H}</h1>')
-    out.append(f'<p class="sub">Bankroll ${rep["bankroll"]:,.2f} · stakes are quarter Kelly, $50 minimum, capped at 10% of bankroll · '
+    out.append(f'<p class="sub">Bankroll ${rep["bankroll"]:,.2f} · stakes are quarter Kelly, $50 minimum, all bets on this game capped at 10% of bankroll combined · '
                f'every edge includes the {rep["fee"]*100:.0f}c per-contract fee.</p></header>')
 
     # best bet
@@ -359,6 +362,16 @@ def render(rep, title):
         msg = "Send Robinhood's board to rank bets." if not rep["singles"] and not rep["lines"] else "Nothing on the board clears the 2% edge rule. Pass."
         out.append(f'<div class="panel">{msg}</div>')
     out.append('</section>')
+    pl = rep.get("plan")
+    if pl and pl["bets"]:
+        rows = "".join(f'<tr><td>{i}</td><td>{_e(c["label"])}<div class="muted">{_e(c["kind"])}</div></td>'
+                       f'<td class="num">{_pct(c["p"])}</td><td class="num">{c["cost"]*100:.1f}c</td>'
+                       f'<td class="num">{c["edge"]*100:+.1f}</td><td class="num">${c["stake"]:.0f}</td></tr>'
+                       for i, c in enumerate(pl["bets"], 1))
+        out.append('<section><h2>Bet plan for this game</h2><div class="panel"><table><thead><tr><th>#</th><th>Bet</th>'
+                   '<th class="num">Hits</th><th class="num">Cost</th><th class="num">Edge</th><th class="num">Stake</th></tr></thead>'
+                   f'<tbody>{rows}</tbody></table><p class="note">Total ${pl["total"]:.0f} of a ${pl["cap"]} per-game cap '
+                   '(10% of bankroll across every bet on this game; max 3 bets; no player+stat repeated).</p></div></section>')
 
     # book lines vs model
     if rep.get("book"):
