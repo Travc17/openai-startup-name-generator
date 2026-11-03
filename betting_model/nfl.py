@@ -17,12 +17,13 @@ Prices: American odds (-113, +240) or Robinhood contract cents (53c).
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from itertools import combinations
 
 import numpy as np
 
-from nflmodel import absences, backtest, data, depth, ledger, returns, scores
+from nflmodel import absences, backtest, data, depth, ledger, report, returns, scores
 from nflmodel.game import STAT_LABEL, GameModel, Player, american
 from nflmodel.pricing import ev_per_dollar, no_vig, parse_price, stake
 
@@ -448,6 +449,28 @@ def cmd_gameline(a):
           "Edges appear when Robinhood prices disagree with the big books.")
 
 
+def cmd_report(a):
+    """Full game report (news, score, lines, box score, top singles/parlays, best bet) as HTML + JSON."""
+    model = build_model()
+    a.team_a, a.team_b = a.home.upper(), a.away.upper()
+    key = game_key(model, a)
+    roster = roster_for(model, a, key, [lookup(model, n)[0] for n in (a.players or [])])
+    board = report.load_board(a.board)
+    news = report.load_news(a.news)
+    blind = set(a.blind or [])
+    rep = report.build(model, name_of, lambda n: lookup(model, n)[0], roster, a.team_a, a.team_b, key, a.sims,
+                       board, news, a.bankroll, a.fee, fav=(a.fav or "").upper() or None, spread=a.spread,
+                       total=a.total, model_line=a.model_line, blind=blind)
+    title = a.title or f"{a.team_b} at {a.team_a} Report"
+    with open(a.html, "w") as f:
+        f.write(report.render(rep, title))
+    if a.json:
+        with open(a.json, "w") as f:
+            json.dump(rep, f, indent=1, default=float)
+    b = rep.get("best")
+    print(f"Wrote {a.html}. Best bet: " + (f"{b['label']} ${b['stake']} (edge {b['edge']*100:+.1f})" if b else "none"))
+
+
 def cmd_backtest(a):
     model = build_model()
     rho = None
@@ -535,6 +558,24 @@ def main():
     gl.add_argument("--fee", type=float, default=0.02)
     gl.add_argument("--bankroll", type=float, default=None)
     gl.set_defaults(func=cmd_gameline)
+
+    rp = sub.add_parser("report", help="Full game report as an HTML page")
+    common(rp, teams=False)
+    rp.add_argument("away")
+    rp.add_argument("home")
+    rp.add_argument("--fav")
+    rp.add_argument("--spread", type=float)
+    rp.add_argument("--total", type=float)
+    rp.add_argument("--board", help="CSV of Robinhood prices and/or big-book lines")
+    rp.add_argument("--news", help="JSON list of injury/news items with sources")
+    rp.add_argument("--players", nargs="+")
+    rp.add_argument("--blind", nargs="+", help="Players the model can't price tonight (excluded from bets)")
+    rp.add_argument("--model-line", help="Independent model's number, shown for reference")
+    rp.add_argument("--sims", type=int, default=25000)
+    rp.add_argument("--html", default="report.html")
+    rp.add_argument("--json")
+    rp.add_argument("--title")
+    rp.set_defaults(func=cmd_report)
 
     bt = sub.add_parser("backtest")
     bt.add_argument("--seasons", type=int, nargs="+", default=[2024, 2025])
