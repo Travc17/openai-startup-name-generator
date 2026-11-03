@@ -75,6 +75,7 @@ class Player:
     share_mult: float = 1.0   # manual target share adjustment for news
     carry_mult: float = 1.0   # manual carry share adjustment for news
     catch_rate: float | None = None  # manual catch-rate override (e.g. a deep threat's real rate)
+    yds_mult: float = 1.0            # receiving-yards multiplier (e.g. coverage matchup)
 
 
 class GameModel:
@@ -396,6 +397,7 @@ class GameModel:
             for p in [p for p in players if p.team == team]:
                 inp = self.player_inputs(p, opp, key)
                 p_rec_mult, vol_mult = self.defense_adjust(p.pid, opp, key, inp["pos"], rec_mult)
+                p_rec_mult *= p.yds_mult
                 inp["t_share"] = float(np.clip(inp["t_share"] * vol_mult, 0.0, 0.6))
                 st = rng.beta(max(inp["t_share"], 1e-3) * cfg.target_concentration,
                               max(1 - inp["t_share"], 1e-3) * cfg.target_concentration, n) if inp["t_share"] > 0.002 else np.zeros(n)
