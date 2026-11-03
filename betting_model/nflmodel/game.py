@@ -53,6 +53,10 @@ class Config:
     # Defense vs position lever (adjusts, never replaces, the team defense factor). Paired backtest
     # 2024-25: no version beat noise; pos_ypt_long was neutral (-0.00%), so it is the default.
     def_mode: str = "pos_ypt_long"    # team | pos_ypt | pos_ypt_long | pos_volume | zone | zone_volume
+    # Carry share uses heavier current-season weighting (backtest 2024-25 wks 6+: rush attempts error -0.86%, t=-2.42).
+    # Target share keeps the longer history: more recency did NOT help receivers (rec/rec yds flat or worse).
+    share_carryover: float | None = 0.4
+    share_half_life: float | None = 4.0
     prior_mode: str = "tiered"        # share prior: "tiered" by recent usage, "all", or "regulars"
 
 
@@ -297,7 +301,12 @@ class GameModel:
         hist = self._pg_by.get(p.pid)
         if hist is None or (hist := hist[hist.key < key].tail(cfg.max_games)).empty:
             raise ValueError(f"No history before this week for {p.pid}")
-        w = decay_weights(hist.key.to_numpy(), cfg)
+        w = decay_weights(hist.key.to_numpy(), cfg)   # efficiency weights (per-target outcome pools)
+        ws = w
+        if cfg.share_carryover is not None or cfg.share_half_life is not None:
+            from dataclasses import replace
+            ws = decay_weights(hist.key.to_numpy(), replace(cfg, season_carryover=cfg.share_carryover or cfg.season_carryover,
+                                                            half_life_games=cfg.share_half_life or cfg.half_life_games))
         pos = POS_GROUP.get(self.pos.get(p.pid, "WR"), "WR")
         if cfg.prior_mode == "tiered":
             prior_t, prior_c = self._tiered_prior(pos, key, hist)
@@ -305,7 +314,7 @@ class GameModel:
             prior_t, prior_c = self._share_prior(pos, key // 100)
         k = cfg.share_prior_games
         t_share = (np.sum(w * hist.t_share) + k * prior_t) / (w.sum() + k) * p.share_mult
-        c_share = (np.sum(w * hist.c_share) + k * prior_c) / (w.sum() + k) * p.carry_mult
+        c_share = (np.sum(ws * hist.c_share) + k * prior_c) / (ws.sum() + k) * p.carry_mult
         gw = dict(zip(hist.key, w))
 
         def pool(own: pd.DataFrame | None, league_keys, cols, prior_n):
