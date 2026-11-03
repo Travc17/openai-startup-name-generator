@@ -23,7 +23,7 @@ from itertools import combinations
 
 import numpy as np
 
-from nflmodel import absences, backtest, data, depth, ledger, report, returns, scores
+from nflmodel import absences, backtest, data, depth, ledger, report, returns, routes, scores
 from nflmodel.game import STAT_LABEL, GameModel, Player, american
 from nflmodel.pricing import ev_per_dollar, no_vig, parse_price, stake
 
@@ -44,6 +44,11 @@ def build_model() -> GameModel:
                   snaps=data.load_snaps(HISTORY))
     if DEFENSE:
         m.cfg.def_mode = DEFENSE
+    try:
+        pff, team = routes.load([s for s in HISTORY if s >= 2023])
+        m.route_role = routes.RouteRole(pff, team, m.pg)
+    except FileNotFoundError:
+        m.route_role = None
     return m
 
 
@@ -172,7 +177,19 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
             dm_t, dm_c = depth.multipliers(dp, change)
             if change != "same":
                 print(f"DEPTH: {name_of(pid)} ({t}) {change} ({pos}{rank}): targets x{dm_t:.2f}, carries x{dm_c:.2f}")
-        players.append(Player(pid, t, share_mult=boost_t[t] * dm_t * mults.get(pid, 1.0),
+        rm = 1.0
+        rr = getattr(model, "route_role", None)
+        if rr is not None:
+            try:
+                inp0 = model.player_inputs(Player(pid, t), team_b if t == team_a else team_a, key)
+                es = rr.expected_share(pid, t, key, inp0["pos"])
+                if es is not None and inp0["t_share"] > 0.01:
+                    rm = float(np.clip((0.5 * es + 0.5 * inp0["t_share"]) / inp0["t_share"], 0.4, 2.5))
+                    if abs(rm - 1) >= 0.15:
+                        print(f"ROUTES: {name_of(pid)} ({t}) route-based role x{rm:.2f} (recent routes/dropback vs target history)")
+            except ValueError:
+                pass
+        players.append(Player(pid, t, share_mult=boost_t[t] * dm_t * rm * mults.get(pid, 1.0),
                               carry_mult=boost_c[t] * dm_c * mults.get(pid, 1.0), catch_rate=catches.get(pid)))
     return players
 
@@ -489,6 +506,11 @@ def cmd_backtest(a):
 
 def cmd_update(a):
     data.ensure_data(HISTORY, refresh_seasons=[CURRENT_SEASON])
+    try:
+        n = routes.refresh_pff(CURRENT_SEASON)
+        print(f"PFF weekly receiving data refreshed ({n} weeks).")
+    except Exception as e:
+        print(f"PFF refresh skipped: {e}")
     print(f"Refreshed {CURRENT_SEASON} play by play and player list.")
 
 

@@ -28,4 +28,10 @@ from the log (`python nfl.py log summary`).
    prediction, edges (or "pass"), best bet with stake, top singles/parlays, and anything the model can't price.
 6. After the game: settle bets in the log with the closing price, and write a review in `betting_model/reviews/`.
 
+PFF Pro API: key is stored as an environment network secret for api.pff.com (never in chat or the repo).
+`python nfl.py update` refreshes PFF weekly receiving data (routes run). PFF data is licensed: it stays in
+`betting_model/data/` (gitignored) and is never committed. Route-based role (50/50 blend) is ON: tested
+2024-25, targets -0.93% (t=-3.35), receptions -0.60% (t=-2.43). Coverage/man-zone matchups tested neutral (off).
+Before recommending any player, check his last 4 weeks of routes, snaps, and target share.
+
 Board CSV columns: `kind,name,stat,line,price,price2,book` (see `betting_model/nflmodel/report.py` docstring).

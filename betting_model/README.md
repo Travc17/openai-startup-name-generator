@@ -138,6 +138,11 @@ Wider walk-forward totals test (2019-21 warmup, coefficients fit only on prior s
 `gameline` prices any line by simulating around the big-book consensus (held out calibration within 1-2 pts on alt spreads).
 Defense vs position: six versions tested (yards, volume, zones, catch rate allowed), none beat noise. Kept as a light visible lever.
 
+## PFF routes (paid data)
+Route participation (routes / team dropbacks, last 3 games) x targets per route run, blended 50/50 with
+the target-share history. Backtest 2024-25 weeks 4+, 3,515 player games: targets -0.93% (t=-3.35),
+receptions -0.60% (t=-2.43), receiving yards -0.20% (n.s.). Route-based share alone was not better.
+
 ## Honest limits
 
 * No historical prop lines: calibration is tested, profit is not. Closing line
