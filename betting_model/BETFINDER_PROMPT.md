@@ -18,8 +18,12 @@ latest injury news. Read `meta.adjustments` and the blind-spot flags.
 ## 2. Pull lines from the popular books
 DraftKings, FanDuel, BetMGM, Caesars, Fanatics (plus any book Travis names). For every player in the
 projections file: main line AND both prices (over and under), plus alternate lines where posted.
-* Best source: an odds feed (The Odds API lists US-book NFL player props; needs an API key stored
-  as an environment network secret and the host allowed by the environment's network policy).
+* Best source: The Odds API (key `ODDS_API_KEY`, host api.the-odds-api.com allowed):
+  `python nfl.py odds AWAY HOME --out markets/<season>_wk<NN>_<AWAY>_at_<HOME>_books_open.csv [--alt]`
+  pulls DraftKings, FanDuel, BetMGM, Caesars, Fanatics player props (yards, attempts, completions,
+  carries, catches, rush+rec yards; TD/INT skipped) plus spread/total into a second file. It prints
+  credits left and how many lines have both sides priced. About 10 credits per game per pull (free
+  plan: 500 a month); `--alt` roughly doubles it.
 * Fallback: WebSearch. It is thin (JAX@BAL wk9 found 3 book lines, none with both prices), and a
   one-sided line cannot produce a market edge.
 * Never invent a line or price. A line you could not find is "not found", not estimated.

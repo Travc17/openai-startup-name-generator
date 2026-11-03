@@ -257,4 +257,8 @@ bet is dropped and the other two scale to $75 + $70.
   in the report used P(sim > 45.5), while rungs used P(sim >= 46) (the convention the calibration maps
   were fit on). Continuous yard sims made those differ by about 1 point (Tuten rush yds 59.5: 49.8% vs
   48.6%). Book rows now use P(sim >= 46). Count stats were unaffected. Regression check: no drift.
+* **Odds feed** (`nflmodel/odds_api.py`, `nfl.py odds AWAY HOME --out quotes.csv`): The Odds API v4,
+  five US books, props in the bet finder's quotes format, game lines in a separate file. Player names
+  match across venues by a normalized key ("Brian Thomas Jr." = "Brian Thomas Jr"). TD/INT quotes are
+  labeled "not calibrated" and never bet.
 

@@ -24,12 +24,21 @@ sportsbooks carry their cut inside the odds.
 from __future__ import annotations
 
 import csv
+import re
 from collections import defaultdict
 
 from . import projections
 from .pricing import parse_price
 
 VENUE_FEE = {"robinhood": 0.02}
+NO_BET_STATS = {"pass_td", "int"}          # not calibration-checked yet (CLAUDE.md): never a bet
+
+
+def name_key(n: str) -> str:
+    """Same player across venues: 'Brian Thomas Jr.' = 'Brian Thomas Jr' = 'brian thomas'."""
+    n = re.sub(r"[.'’,]", "", n.lower())
+    n = re.sub(r"\b(jr|sr|ii|iii|iv|v)\b", "", n)
+    return " ".join(n.split())
 CENT_VENUES = {"robinhood", "kalshi", "polymarket"}
 
 
@@ -82,7 +91,7 @@ def market_probs(quotes: list[dict]) -> dict:
     for q in quotes:
         if q["venue"].lower() in CENT_VENUES:
             continue                                  # the market reference is sportsbooks only
-        by[(q["player"], q["stat"], q["line"], q["venue"])][q["side"]] = q["cost"]
+        by[(name_key(q["player"]), q["stat"], q["line"], q["venue"])][q["side"]] = q["cost"]
     agg = defaultdict(list)
     for (pl, st, ln, _), s in by.items():
         if "over" in s and "under" in s:
@@ -92,9 +101,10 @@ def market_probs(quotes: list[dict]) -> dict:
 
 def find(proj: dict, quotes: list[dict], min_edge: float = 0.02) -> list[dict]:
     mk = market_probs(quotes)
+    players = {name_key(n): (n, v) for n, v in proj["players"].items()}
     out = []
     for q in quotes:
-        pl = proj["players"].get(q["player"])
+        pname, pl = players.get(name_key(q["player"]), (None, None))
         st = pl["stats"].get(q["stat"]) if pl else None
         if st is None:
             win, push = None, 0.0
@@ -104,25 +114,32 @@ def find(proj: dict, quotes: list[dict], min_edge: float = 0.02) -> list[dict]:
             win, push = projections.p_over(st, q["line"])
         # a push refunds the stake, so compare the no-push probability with the breakeven
         p_model = None if win is None else (win if q["side"] == "over" else 1 - win - push) / max(1 - push, 1e-9)
-        m = mk.get((q["player"], q["stat"], q["line"]))
+        m = mk.get((name_key(q["player"]), q["stat"], q["line"]))
         p_mkt = None if m is None else (m[0] if q["side"] == "over" else 1 - m[0])
         row = {**q, "p_model": p_model, "p_market": p_mkt, "books": m[1] if m else 0,
                "edge_model": None if p_model is None else p_model - q["cost"],
                "edge_market": None if p_mkt is None else p_mkt - q["cost"]}
         row["verdict"] = verdict(row, min_edge)
+        bl = pl.get("blind") if pl else None             # blind spots stay out of bets (CLAUDE.md)
+        if row["verdict"] not in ("pass", "no projection"):
+            if bl and (bl == "all" or q["stat"] in bl):
+                row["verdict"] = "blind spot"
+            elif q["stat"] in NO_BET_STATS:
+                row["verdict"] = "not calibrated"
+        row["proj_name"] = pname
         out.append(row)
     best = {}
     for r in out:                                     # best price for each exact bet across venues
-        k = (r["player"], r["stat"], r["line"], r["side"])
+        k = (name_key(r["player"]), r["stat"], r["line"], r["side"])
         if k not in best or r["cost"] < best[k]["cost"]:
             best[k] = r
     for r in out:
-        r["best_price"] = best[(r["player"], r["stat"], r["line"], r["side"])] is r
+        r["best_price"] = best[(name_key(r["player"]), r["stat"], r["line"], r["side"])] is r
     return sort_rows(out)
 
 
-RANK = {"BOTH AGREE": 0, "market only": 1, "model only": 2, "model vs market": 3, "blind spot": 4, "pass": 5,
-        "no projection": 6}
+RANK = {"BOTH AGREE": 0, "market only": 1, "model only": 2, "model vs market": 3, "blind spot": 4,
+        "not calibrated": 5, "pass": 6, "no projection": 7}
 
 
 def sort_rows(rows: list[dict]) -> list[dict]:

@@ -538,12 +538,7 @@ def cmd_price(a):
     quotes = market.load_quotes(a.quotes, fees) if a.quotes else []
     if a.board:
         quotes += market.from_board(report.load_board(a.board), fees)
-    rows = market.find(proj, quotes, a.min_edge)
-    for r in rows:                                   # blind spots stay out of bets (CLAUDE.md)
-        bl = proj["players"].get(r["player"], {}).get("blind")
-        if bl and (bl == "all" or r["stat"] in bl) and r["verdict"] not in ("pass", "no projection"):
-            r["verdict"] = "blind spot"
-    rows = market.sort_rows(rows)
+    rows = market.find(proj, quotes, a.min_edge)    # blind spots and TD/INT are kept out of bets inside find()
     print(f"{proj['game']} projections made {proj['made_utc']} ({proj['sims']} sims); {len(quotes)} quotes, "
           f"{sum(1 for k in market.market_probs(quotes))} lines with a two-sided big-book price")
     print(market.table(rows, a.top))
@@ -553,6 +548,28 @@ def cmd_price(a):
             w.writeheader()
             w.writerows(rows)
         print(f"Wrote {a.csv}")
+
+
+def cmd_odds(a):
+    """Pull big-book player prop lines (The Odds API) into a quotes CSV for `price`."""
+    from nflmodel import odds_api
+    rows, hdr, kick = odds_api.fetch(a.away, a.home, alt=a.alt)
+    props = [r for r in rows if r["stat"] not in ("spreads", "totals")]
+    game = [r for r in rows if r["stat"] in ("spreads", "totals")]
+    odds_api.save(props, a.out)
+    print(f"{a.away.upper()} at {a.home.upper()} (kickoff {kick}): {len(props)} prop quotes from "
+          f"{len({r['venue'] for r in props})} books -> {a.out}; {odds_api.credits(hdr)}")
+    two = {}
+    for r in props:
+        two.setdefault((r["venue"], r["player"], r["stat"], r["line"]), set()).add(r["side"])
+    print(f"Lines with both sides priced: {sum(1 for s in two.values() if len(s) == 2)} of {len(two)}")
+    if game:
+        gl = a.out.rsplit(".", 1)[0] + "_gamelines.csv"
+        odds_api.save(game, gl)
+        tot = sorted(r["line"] for r in game if r["stat"] == "totals" and r["side"] == "over")
+        sp = sorted(r["line"] for r in game if r["stat"] == "spreads" and r["player"] == odds_api.TEAMS[a.home.upper()])
+        if tot and sp:
+            print(f"Big-book consensus (median): {a.home.upper()} spread {sp[len(sp) // 2]:+g}, total {tot[len(tot) // 2]:g} -> {gl}")
 
 
 def cmd_backtest(a):
@@ -680,6 +697,13 @@ def main():
     pc.add_argument("--top", type=int, default=40)
     pc.add_argument("--csv", help="Write every priced quote to this CSV")
     pc.set_defaults(func=cmd_price)
+
+    od = sub.add_parser("odds", help="Pull big-book player prop lines (The Odds API) into a quotes CSV")
+    od.add_argument("away")
+    od.add_argument("home")
+    od.add_argument("--out", required=True, help="Quotes CSV to write (save under markets/)")
+    od.add_argument("--alt", action="store_true", help="Also pull alternate lines (roughly doubles the credits)")
+    od.set_defaults(func=cmd_odds)
 
     bt = sub.add_parser("backtest")
     bt.add_argument("--seasons", type=int, nargs="+", default=[2024, 2025])
