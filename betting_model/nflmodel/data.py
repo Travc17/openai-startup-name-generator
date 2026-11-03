@@ -5,6 +5,7 @@ import os
 import urllib.request
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -18,7 +19,7 @@ PBP_COLS = [
     "season", "season_type", "week", "game_id", "game_date", "posteam", "defteam",
     "play_type", "pass_attempt", "sack", "two_point_attempt",
     "receiver_player_id", "receiver_player_name", "receiving_yards", "air_yards",
-    "complete_pass", "rush_attempt", "rusher_player_id", "rusher_player_name", "rushing_yards",
+    "complete_pass", "pass_location", "rush_attempt", "rusher_player_id", "rusher_player_name", "rushing_yards",
 ]
 
 
@@ -59,9 +60,11 @@ def load_targets(seasons: list[int]) -> pd.DataFrame:
     t = pd.concat(frames, ignore_index=True)
     t["yards"] = t.receiving_yards.fillna(0.0)
     t["complete"] = t.complete_pass.fillna(0).astype(int)
+    depth = np.where(t.air_yards.isna(), "na", np.where(t.air_yards >= 10, "deep", "short"))
+    t["zone"] = np.where(t.pass_location.isna(), "na", t.pass_location.astype(str) + "_" + depth)
     t["key"] = t.season * 100 + t.week  # chronological game key
     return t[["season", "week", "key", "game_id", "game_date", "posteam", "defteam",
-              "receiver_player_id", "receiver_player_name", "yards", "complete", "air_yards"]]
+              "receiver_player_id", "receiver_player_name", "yards", "complete", "air_yards", "zone"]]
 
 
 def load_rushes(seasons: list[int]) -> pd.DataFrame:

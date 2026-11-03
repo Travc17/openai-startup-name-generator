@@ -50,6 +50,9 @@ class Config:
     team_window: int = 12
     league_pool_size: int = 6000
     n_sims: int = 20000
+    # Defense vs position lever (adjusts, never replaces, the team defense factor). Paired backtest
+    # 2024-25: no version beat noise; pos_ypt_long was neutral (-0.00%), so it is the default.
+    def_mode: str = "pos_ypt_long"    # team | pos_ypt | pos_ypt_long | pos_volume | zone | zone_volume
     prior_mode: str = "tiered"        # share prior: "tiered" by recent usage, "all", or "regulars"
 
 
@@ -124,6 +127,12 @@ class GameModel:
         self._rpool = {p: (g.key.to_numpy(), g.yards.to_numpy()) for p, g in r.groupby("pos")}
         self._tdp = {k: v for k, v in t.groupby(["key", "defteam", "pos"]).agg(
             n=("yards", "size"), yds=("yards", "sum")).reset_index().groupby("defteam")}
+        tz = t[t.zone != "na"]
+        self._tdz = {k: v for k, v in tz.groupby(["key", "defteam", "zone"]).agg(
+            n=("yards", "size"), yds=("yards", "sum")).reset_index().groupby("defteam")}
+        self._zone_league = tz.groupby(["key", "zone"]).agg(n=("yards", "size"), yds=("yards", "sum")).reset_index()
+        self._pos_league = t.groupby(["key", "pos"]).agg(n=("yards", "size"), yds=("yards", "sum")).reset_index()
+        self._tz_by = {k: v for k, v in tz.groupby("receiver_player_id")}
         self.vol_corr, self.vol_sd = self._volume_covariance()
 
     # ---------------- volume structure ----------------
@@ -160,12 +169,67 @@ class GameModel:
             return 1.0
         return float(1 + n / (n + shrink) * ((y / n) / ly - 1))
 
-    def _opp_mult_pos(self, opp: str, key: int, pos: str, team_factor: float) -> float:
-        """Yards per target allowed to this position group, shrunk toward the team factor."""
-        if not self.pos_defense:
+    def _def_keys(self, opp: str, key: int, window: int) -> pd.Series:
+        k = self._tg_def[opp]
+        return k[k.key < key].tail(window).key
+
+    def defense_adjust(self, pid: str, opp: str, key: int, pos: str, team_factor: float) -> tuple[float, float]:
+        """(yards multiplier, target share multiplier) for this receiver vs this defense, per cfg.def_mode."""
+        mode = self.cfg.def_mode
+        if self.pos_defense and mode == "team":
+            mode = "pos_ypt"
+        ymult, smult = team_factor, 1.0
+        if mode in ("pos_ypt", "pos_ypt_long"):
+            ymult = self._opp_mult_pos(opp, key, pos, team_factor, long=(mode == "pos_ypt_long"))
+        if mode in ("zone", "zone_volume"):
+            ymult = self._zone_mult(pid, opp, key, team_factor)
+        if mode in ("pos_volume", "zone_volume"):
+            smult = self._volume_mult(opp, key, pos)
+        return ymult, smult
+
+    def _volume_mult(self, opp: str, key: int, pos: str) -> float:
+        """Share of targets this defense allows to the position vs league norm."""
+        keys = self._def_keys(opp, key, 17)
+        d = self._tdp[opp]
+        d = d[d.key.isin(keys)]
+        n_all = d.n.sum()
+        if n_all == 0:
+            return 1.0
+        def_share = d[d.pos == pos].n.sum() / n_all
+        L = self._pos_league[(self._pos_league.key < key) & (self._pos_league.key >= key - 100)]
+        lg_share = L[L.pos == pos].n.sum() / max(L.n.sum(), 1)
+        if lg_share == 0:
+            return 1.0
+        w = n_all / (n_all + 600.0)
+        return float(1 + w * (def_share / lg_share - 1))
+
+    def _zone_mult(self, pid: str, opp: str, key: int, team_factor: float) -> float:
+        """Player's target mix by field zone (left/middle/right x short/deep) times the
+        defense's yards per target allowed in each zone vs league."""
+        own = self._tz_by.get(pid)
+        if own is None:
             return team_factor
-        keys = self._tg_def[opp]
-        keys = keys[keys.key < key].tail(self.cfg.team_window).key
+        own = own[own.key < key].tail(150)
+        if len(own) < 10:
+            return team_factor
+        mix = own.zone.value_counts(normalize=True)
+        keys = self._def_keys(opp, key, self.cfg.team_window)
+        d = self._tdz.get(opp)
+        d = d[d.key.isin(keys)].groupby("zone").sum(numeric_only=True)
+        L = self._zone_league[(self._zone_league.key < key) & (self._zone_league.key >= key - 100)].groupby("zone").sum(numeric_only=True)
+        total = 0.0
+        for z, share in mix.items():
+            if z in d.index and z in L.index and L.loc[z, "n"] > 0:
+                n = d.loc[z, "n"]
+                raw = (d.loc[z, "yds"] / n) / (L.loc[z, "yds"] / L.loc[z, "n"])
+                total += share * (1 + n / (n + 100.0) * (raw - 1))
+            else:
+                total += share
+        return float(total)
+
+    def _opp_mult_pos(self, opp: str, key: int, pos: str, team_factor: float, long: bool = False) -> float:
+        """Yards per target allowed to this position group, shrunk toward the team factor."""
+        keys = self._def_keys(opp, key, 17 if long else self.cfg.team_window)
         d = self._tdp[opp]
         d = d[d.key.isin(keys) & (d.pos == pos)]
         n = d.n.sum()
@@ -175,7 +239,7 @@ class GameModel:
         end = np.searchsorted(lk, key, side="left")
         league = ly[max(0, end - self.cfg.league_pool_size):end].mean()
         raw = (d.yds.sum() / n) / league
-        return float(team_factor + n / (n + 150.0) * (raw - team_factor))
+        return float(team_factor + n / (n + (400.0 if long else 150.0)) * (raw - team_factor))
 
     @lru_cache(maxsize=4096)
     def _share_prior(self, pos: str, season: int) -> tuple[float, float]:
@@ -282,6 +346,8 @@ class GameModel:
             share_left_t, share_left_c = np.ones(n), np.ones(n)
             for p in [p for p in players if p.team == team]:
                 inp = self.player_inputs(p, opp, key)
+                p_rec_mult, vol_mult = self.defense_adjust(p.pid, opp, key, inp["pos"], rec_mult)
+                inp["t_share"] = float(np.clip(inp["t_share"] * vol_mult, 0.0, 0.6))
                 st = rng.beta(max(inp["t_share"], 1e-3) * cfg.target_concentration,
                               max(1 - inp["t_share"], 1e-3) * cfg.target_concentration, n) if inp["t_share"] > 0.002 else np.zeros(n)
                 sc = rng.beta(max(inp["c_share"], 1e-3) * cfg.carry_concentration,
@@ -296,7 +362,6 @@ class GameModel:
                 idx = rng.choice(len(inp["pool_ty"]), size=(n, mt), p=inp["pool_tp"])
                 m = np.arange(mt)[None, :] < tg[:, None]
                 rec = (inp["pool_c"][idx] * m).sum(1)
-                p_rec_mult = self._opp_mult_pos(opp, key, inp["pos"], rec_mult)
                 rec_yds = (inp["pool_ty"][idx] * m).sum(1) * p_rec_mult
                 mc = max(int(ca.max()), 1)
                 idx = rng.choice(len(inp["pool_ry"]), size=(n, mc), p=inp["pool_rp"])

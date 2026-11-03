@@ -39,8 +39,14 @@ ALT_STEPS = {"rec_yds": [-30, -20, -10, 0, 10, 20, 30], "rush_yds": [-20, -10, 0
 # ---------------- setup ----------------
 def build_model() -> GameModel:
     data.ensure_data(HISTORY)
-    return GameModel(data.load_targets(HISTORY), data.load_rushes(HISTORY), data.load_positions(),
-                     snaps=data.load_snaps(HISTORY))
+    m = GameModel(data.load_targets(HISTORY), data.load_rushes(HISTORY), data.load_positions(),
+                  snaps=data.load_snaps(HISTORY))
+    if DEFENSE:
+        m.cfg.def_mode = DEFENSE
+    return m
+
+
+DEFENSE = None
 
 
 _PLAYERS = None
@@ -233,7 +239,10 @@ def cmd_project(a):
     print("Recent games (targets/rec/rec yds | carries/rush yds): " + ", ".join(
         f"{int(r.targets)}/{int(r.rec)}/{int(r.rec_yds)}|{int(r.rush_att)}/{int(r.rush_yds)}" for r in rec.itertuples()))
     print(f"Inputs: target share {info['t_share']:.1%}, carry share {info['c_share']:.1%}, catch rate {info['catch']:.0%}, "
-          f"yds/target {info['ypt']:.1f}, yds/carry {info['ypc']:.1f}, opp factor rec x{info['rec_mult']:.2f} rush x{info['rush_mult']:.2f}")
+          f"yds/target {info['ypt']:.1f}, yds/carry {info['ypc']:.1f}")
+    team_f = model._opp_mult(a.opp.upper(), key, "rec")
+    print(f"Defense: {a.opp.upper()} overall pass factor x{team_f:.2f} -> vs {info['pos']}s x{info['rec_mult']:.2f} "
+          f"(lever: {model.cfg.def_mode}), run factor x{info['rush_mult']:.2f}")
     for st in ("targets", "rec", "rec_yds", "rush_att", "rush_yds"):
         if s[st].mean() >= 0.5:
             q = np.quantile(s[st], [.1, .25, .5, .75, .9])
@@ -437,7 +446,11 @@ def main():
     lg.add_argument("--bankroll", type=float, default=2000)
     lg.set_defaults(func=cmd_log)
 
+    p.add_argument("--defense", choices=["team", "pos_ypt", "pos_ypt_long", "pos_volume", "zone", "zone_volume"],
+                   help="Defense vs position lever (default pos_ypt_long)")
     a = p.parse_args()
+    global DEFENSE
+    DEFENSE = a.defense
     a.func(a)
 
 
