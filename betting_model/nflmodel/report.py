@@ -273,6 +273,61 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
     return rep
 
 
+# ======================= CANVA =======================
+_LBL = {"pass_att": "pass attempts", "pass_cmp": "completions", "pass_yds": "pass yds", "rush_yds": "rush yds",
+        "rec_yds": "rec yds", "rec": "receptions"}
+def canva_brief(rep: dict, title: str) -> str:
+    """Brief for Canva's design generator, written ONLY from the report's numbers (no retyping).
+    After Canva builds it, read the design back and check every number against this brief."""
+    A, H = rep["away"], rep["home"]
+    med = lambda v: v[2]
+    out = ["A premium sports-analytics social graphic for an NFL game simulation. Dark navy background, teal accents, "
+           "bold condensed scoreboard typography, clean data layout. Do NOT use NFL or team logos or trademarked imagery; "
+           "team abbreviations as text only. Use every number EXACTLY as written below; do not round, add, or invent numbers.",
+           f'Title: "{title}"']
+    sc = rep.get("score")
+    if sc:
+        aw = sc["away_win"]
+        out.append(f'Headline: "{rep["sims"]:,} SIMULATIONS: {A} {sc["away_pts"]:.0f}, {H} {sc["home_pts"]:.0f}"')
+        out.append(f'Sub line: "{A} win {aw:.0%} of sims. Big books: {sc["fav"]} -{sc["spread"]:g}, total {sc["total"]:g}."')
+    if rep.get("qbs"):
+        out.append('Section "Projected QB lines" (median of the sims):')
+        for t, q in rep["qbs"].items():
+            st = q["stats"]
+            flag = " (third-string QB: low confidence)" if q.get("blind") else ""
+            out.append(f'- {q["name"]} ({t}): {med(st["pass_cmp"]):.0f}/{med(st["pass_att"]):.0f}, '
+                       f'{med(st["pass_yds"]):.0f} pass yds, {med(st["pass_td"]):.0f} TD{flag}')
+    rush, rec = [], []
+    for t, rows in rep["box"].items():
+        for r in rows:
+            st = r["stats"]
+            if r["pos"] == "QB":
+                continue
+            if "rush_yds" in st and med(st.get("rush_att", [0] * 5)) >= 8:
+                rush.append((med(st["rush_yds"]), f'- {r["name"]} ({t}): {med(st["rush_att"]):.0f} carries, {med(st["rush_yds"]):.0f} rush yds'))
+            if "rec_yds" in st and med(st["rec_yds"]) >= 20:
+                rec.append((med(st["rec_yds"]), f'- {r["name"]} ({t}): {med(st["rec"]):.0f} rec, {med(st["rec_yds"]):.0f} yds'))
+    out.append('Section "Projected box score" (median of the sims):')
+    out += [x for _, x in sorted(rush, reverse=True)[:2]] + [x for _, x in sorted(rec, reverse=True)[:5]]
+    pl = rep.get("plan") or {}
+    if pl.get("bets"):
+        out.append(f'Section "Bet plan" (total ${pl["total"]:.0f}):')
+        out += [f'- {b["label"]}: hits {b["p"]:.0%} in sims, {b["cost"]*100:.0f}c with fee, edge {b["edge"]*100:+.1f} pts, stake ${b["stake"]:.0f}'
+                for b in pl["bets"]]
+    else:
+        out.append('Bottom banner: "Model verdict: PASS. Nothing on the board clears our 2% edge rule."')
+    leans = [b for b in rep.get("book", []) if not b.get("blind") and abs(b["p_over"] - 0.5) >= 0.08]
+    if leans:
+        out.append('Section "Leans vs big-book lines (not bets until priced)":')
+        for b in leans[:3]:
+            side, p = ("over", b["p_over"]) if b["p_over"] > 0.5 else ("under", 1 - b["p_over"])
+            out.append(f'- {b["player"]} {side} {b["line"]:g} {_LBL.get(b["stat"], STAT_LABEL.get(b["stat"], b["stat"]))}: {p:.0%} in sims')
+    if rep.get("blind"):
+        out.append("Small note: \"Not bet (model blind spots): " + "; ".join(rep["blind"]) + '."')
+    out.append('Small footer text: "Simulation projections, not guarantees. Bet responsibly. 21+. 1-800-GAMBLER."')
+    return "\n".join(out)
+
+
 # ======================= HTML =======================
 CSS = """
 /* Layout: a single reading column; the predicted score is the masthead, then bet decisions, then evidence. */

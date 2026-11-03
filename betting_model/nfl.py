@@ -505,6 +505,10 @@ def cmd_report(a):
     title = a.title or f"{a.team_b} at {a.team_a} Report"
     with open(a.html, "w") as f:
         f.write(report.render(rep, title))
+    brief_path = a.html.rsplit(".", 1)[0] + ".canva.txt"
+    with open(brief_path, "w") as f:
+        f.write(report.canva_brief(rep, title))
+    print(f"Canva brief (numbers straight from this report): {brief_path}")
     if a.json:
         with open(a.json, "w") as f:
             json.dump(rep, f, indent=1, default=float)

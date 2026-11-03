@@ -33,6 +33,11 @@ from the log (`python nfl.py log summary`).
    Run `python regression_check.py` after `update` or any code change; if it prints DRIFT, fix before publishing.
 5. Publish the HTML with the Artifact tool (same file path per game to keep the URL), then reply with: score
    prediction, edges (or "pass"), best bet with stake, top singles/parlays, and anything the model can't price.
+5b. Canva for every report (rule set by Travis 2026-11-03): `report` writes `<html name>.canva.txt`, a brief built
+   only from the report's numbers. Pass that text unchanged to Canva create-design (Instagram Post (Portrait)),
+   then read-design and check EVERY number against the brief. Fix mismatches with edit-design (ask Travis before
+   committing edits) or regenerate; never share a Canva design with a number that differs from the report.
+   Reply with both links: the Canva graphic (shareable) and the HTML report (full box score, sources).
 6. Before kickoff, record closing prices for logged picks (`python nfl.py picks close --game G --label L --price P`).
    After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
    review in `betting_model/reviews/`.
