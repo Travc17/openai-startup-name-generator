@@ -22,7 +22,7 @@ from itertools import combinations
 
 import numpy as np
 
-from nflmodel import absences, backtest, data, depth, ledger, returns
+from nflmodel import absences, backtest, data, depth, ledger, returns, scores
 from nflmodel.game import STAT_LABEL, GameModel, Player, american
 from nflmodel.pricing import ev_per_dollar, no_vig, parse_price, stake
 
@@ -382,6 +382,72 @@ def cmd_build(a):
           "python nfl.py parlay ... --price <odds>")
 
 
+def cmd_gameline(a):
+    """Market anchored score simulation: spread, total, team totals, moneyline, alt lines."""
+    home, away = a.home.upper(), a.away.upper()
+    fav = a.fav.upper()
+    spread_line = a.spread if fav == home else -a.spread   # expected HOME margin
+    g, tg = scores.load_games(HISTORY)
+    resid = scores.market_residuals(g, a.season + 1)
+    sim = scores.market_simulate(spread_line, a.total, resid, n=a.sims)
+    H, A, M, T = sim["home"], sim["away"], sim["margin"], sim["total"]
+    print(f"\n{away} at {home}: anchor {fav} -{a.spread:g}, total {a.total:g} ({a.sims:,} sims; anchor = big-book consensus line)")
+    print(f"Typical score: {home} {np.median(H):.0f}, {away} {np.median(A):.0f}   "
+          f"(most common margins: " + ", ".join(f"{home} {int(v):+d} ({c/len(M):.1%})" for v, c in
+          zip(*np.unique(M, return_counts=True)) if c / len(M) >= 0.05) + ")")
+    print(f"Win probability: {home} {(M > 0).mean():.1%}, {away} {(M < 0).mean():.1%}, tie {(M == 0).mean():.1%}")
+    print(f"Fair moneyline: {home} {american((M > 0).mean() / max((M != 0).mean(), 1e-9))}, {away} {american((M < 0).mean() / max((M != 0).mean(), 1e-9))}")
+    fm = M if fav == home else -M
+    print(f"\nALT SPREADS ({fav})                       ALT TOTALS")
+    spreads = [-10.5, -7.5, -6.5, -3.5, -a.spread, -2.5, -1.5, 1.5, 2.5, 3.5, 6.5, 7.5]
+    totals = [a.total + k for k in (-10, -7, -3, 0, 3, 7, 10)]
+    for i, line in enumerate(sorted(set(spreads))):
+        win, push = (fm + line > 0).mean(), (fm + line == 0).mean()
+        txt = f"  {fav} {line:+g}: {win:6.1%}" + (f" (+{push:.1%} push)" if push else "            ")
+        if i < len(totals):
+            tl = totals[i]
+            ov, tp = (T > tl).mean(), (T == tl).mean()
+            txt += f"     over {tl:g}: {ov:6.1%}" + (f" (+{tp:.1%} push)" if tp else "")
+        print(txt)
+    print("\nTEAM TOTALS")
+    for team, pts in ((home, H), (away, A)):
+        med = np.median(pts)
+        print(f"  {team}: median {med:.0f}   " + "   ".join(f"{x}+ {(pts >= x).mean():.0%}" for x in
+              [int(med) - 7, int(med) - 3, int(med), int(med) + 3, int(med) + 7] if x > 0))
+    for spec in a.line or []:
+        # TEAM:SPREAD:PRICE (e.g. BAL:-6.5:40c), OVER:41.5:52c, UNDER:41.5:50c, TEAM:ML:60c, TEAM:TT:20.5:50c
+        parts = spec.split(":")
+        kind = parts[0].upper()
+        if kind in ("OVER", "UNDER"):
+            x, pr = float(parts[1]), parse_price(parts[2], a.fee)
+            p = (T > x).mean() if kind == "OVER" else (T < x).mean()
+            lab = f"{kind.lower()} {x:g}"
+        elif parts[1].upper() == "ML":
+            pts_for = M if kind == home else -M
+            p, pr, lab = (pts_for > 0).mean(), parse_price(parts[2], a.fee), f"{kind} to win"
+        elif parts[1].upper() == "TT":
+            pts = H if kind == home else A
+            x, pr = float(parts[2]), parse_price(parts[3], a.fee)
+            p, lab = (pts > x).mean(), f"{kind} team total over {x:g}"
+        else:
+            x, pr = float(parts[1]), parse_price(parts[2], a.fee)
+            pts_for = M if kind == home else -M
+            p, lab = (pts_for + x > 0).mean(), f"{kind} {x:+g}"
+        if kind not in ("OVER", "UNDER") and parts[1].upper() not in ("ML", "TT"):
+            push = (pts_for + x == 0).mean()
+        elif kind in ("OVER", "UNDER"):
+            push = (T == x).mean()
+        else:
+            push = 0.0
+        p = p / (1 - push) if push < 1 else p   # pushes refund: grade on decided outcomes
+        amt, why = stake(p, pr, bankroll=a.bankroll)
+        lab += f" (push {push:.0%})" if push else ""
+        print(f"  {lab:<28} model {p:.1%}  price {pr.raw} (b/e {pr.breakeven:.1%})  edge {p - pr.breakeven:+.1%}  "
+              f"-> {('$%d ' % amt) if amt else ''}{why}")
+    print("\nNote: centered on the big-book consensus line (my independent score model lost to closing lines in backtests).\n"
+          "Edges appear when Robinhood prices disagree with the big books.")
+
+
 def cmd_backtest(a):
     model = build_model()
     rho = None
@@ -456,6 +522,19 @@ def main():
     b.add_argument("--cross-player-only", action="store_true",
                    help="Skip same player combos (books already price receptions+yards correlation)")
     b.set_defaults(func=cmd_build)
+
+    gl = sub.add_parser("gameline", help="Spread/total/team total/moneyline sim anchored to the market line")
+    gl.add_argument("away")
+    gl.add_argument("home")
+    gl.add_argument("--fav", required=True, help="Team favored on the main spread")
+    gl.add_argument("--spread", type=float, required=True, help="Main spread size, e.g. 2.5")
+    gl.add_argument("--total", type=float, required=True)
+    gl.add_argument("--line", action="append", help="BAL:-6.5:40c | OVER:41.5:52c | BAL:ML:60c | BAL:TT:20.5:50c")
+    gl.add_argument("--sims", type=int, default=25000)
+    gl.add_argument("--season", type=int, default=CURRENT_SEASON)
+    gl.add_argument("--fee", type=float, default=0.02)
+    gl.add_argument("--bankroll", type=float, default=None)
+    gl.set_defaults(func=cmd_gameline)
 
     bt = sub.add_parser("backtest")
     bt.add_argument("--seasons", type=int, nargs="+", default=[2024, 2025])
