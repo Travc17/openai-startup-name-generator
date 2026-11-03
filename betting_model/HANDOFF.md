@@ -118,3 +118,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * X: SizzleSims link is shared "anyone with the link" (Travis set it). Clip tool `simcast/clip.py` (+ `record_clip.js`):
   gameplay recorded at 1080x1920, end cards spliced as stills (recorder drops frames on static screens). JAX@BAL clip
   1:51.6 sent to Travis (not in git).
+* Look (Travis): Kentucky blue page background (#0033a0), green field, team colors on the bug and end zones, black
+  panels with white text, white buttons. Play-by-play list removed (one-line caption stays); the box score sits in
+  its place and follows the team with the ball (both teams at the final). QB line removed from the score bug.
+  Published v8; X clip re-recorded (1:50) and sent.

@@ -23,7 +23,7 @@ const { chromium } = require('playwright');
   await p.waitForTimeout(3000);
   console.log('hold done at', at());
   await p.addStyleTag({ content: `
-    .endcard .grid, .endcard #box > .tw { display: none !important; }
+    .endcard .stage, .endcard #box > .tw { display: none !important; }
     .endcard .teambox.hide { display: none !important; }
     .endcard section[aria-label="Box score"] h2 { font-size: 22px; }
     .endcard .teambox h3 { font-size: 30px; }` });

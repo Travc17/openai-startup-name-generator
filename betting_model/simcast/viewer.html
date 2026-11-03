@@ -7,14 +7,17 @@
 /* Layout: a night-game broadcast. Stage (score bug, field, lower third, controls) on the left, play by play
    on the right; both teams' box scores side by side underneath; one column on phones. */
 :root {
-  --night: #0a0f17;        /* page */
-  --panel: #111925;        /* cards */
-  --panel-2: #172234;      /* raised rows, inputs */
-  --rule: #24314a;         /* hairlines */
-  --chalk: #eef2f8;        /* primary text */
-  --muted: #8f9bb4;        /* secondary text */
-  --first-down: #ffd23f;   /* the yellow line, also highlights */
-  --scrimmage: #3d8bff;    /* the blue line */
+  --night: #0033a0;        /* page background: Kentucky blue (Travis, 2026-11-03) */
+  --panel: #000000;        /* cards: black */
+  --panel-2: #161616;      /* raised rows, inputs */
+  --rule: #2c2c2c;         /* hairlines */
+  --chalk: #ffffff;        /* text: white */
+  --muted: #b4b4bd;        /* secondary text on black */
+  --on-blue: rgba(255, 255, 255, 0.82);   /* secondary text on the blue page */
+  --uk: #0033a0;           /* Kentucky blue */
+  --uk-bright: #ffffff;    /* accents are white now (the blue is the background) */
+  --first-down: #ffd23f;   /* the yellow line */
+  --scrimmage: #3d8bff;    /* line of scrimmage: broadcast blue on green */
   --turf-a: #2e6a36;
   --turf-b: #295f31;
   --paint: rgba(255, 255, 255, 0.82);
@@ -26,7 +29,7 @@
 html, body { background: var(--night); color: var(--chalk); }
 body { font-family: var(--body); font-size: 15px; line-height: 1.4; }
 button, select, input { font: inherit; color: inherit; }
-:focus-visible { outline: 2px solid var(--first-down); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--uk-bright); outline-offset: 2px; }
 
 .app {
   max-width: 1320px; margin: 0 auto;
@@ -38,9 +41,9 @@ button, select, input { font: inherit; color: inherit; }
 .top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 16px; }
 .brand { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
 .brand b { font-family: var(--display); font-weight: 900; font-size: 26px; letter-spacing: 0.02em; text-transform: uppercase; }
-.brand b span { color: var(--first-down); }
-.brand small { color: var(--muted); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
-.gamepick { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 13px; }
+.brand b span { color: #fff; background: #000; padding: 0 6px; margin-left: 2px; border-radius: 4px; }
+.brand small { color: var(--on-blue); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.gamepick { display: flex; gap: 8px; align-items: center; color: var(--on-blue); font-size: 13px; }
 .gamepick select { background: var(--panel-2); border: 1px solid var(--rule); border-radius: 6px; padding: 6px 8px; }
 
 .grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
@@ -49,31 +52,29 @@ button, select, input { font: inherit; color: inherit; }
 
 /* ---------- score bug ---------- */
 .bug { display: grid; grid-template-columns: 1fr 1fr auto; border-radius: 8px; overflow: hidden;
-  background: var(--panel); border: 1px solid var(--rule); min-height: 64px; }
-.side-team { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; padding: 6px 14px; position: relative; min-width: 0; }
+  background: var(--panel); border: 2px solid #000; min-height: 64px; }
+.side-team { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; padding: 6px 14px; position: relative; min-width: 0; }
 .side-team .abbr { font-family: var(--display); font-weight: 800; font-size: 24px; letter-spacing: 0.04em; }
-.side-team .rec { font-size: 12px; color: rgba(255,255,255,0.72); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .side-team .pts { font-family: var(--display); font-weight: 900; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; min-width: 1.4ch; text-align: right; }
 .side-team .poss { position: absolute; top: 50%; left: 2px; transform: translateY(-50%); width: 0; height: 0;
-  border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 8px solid var(--first-down); opacity: 0; }
+  border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 8px solid #fff; opacity: 0; }
 .side-team.has-ball .poss { opacity: 1; }
-.clockbox { display: grid; align-content: center; justify-items: center; padding: 6px 16px; background: var(--panel-2); min-width: 120px; gap: 2px; }
+.clockbox { display: grid; align-content: center; justify-items: center; padding: 6px 16px; background: #000; min-width: 120px; gap: 2px; }
 .clockbox .qc { font-family: var(--display); font-weight: 800; font-size: 22px; font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }
-.clockbox .dd { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--first-down); min-height: 1.2em; }
+.clockbox .dd { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; min-height: 1.2em; }
 @keyframes jitter {
   0% { transform: scale(1); } 15% { transform: scale(1.45) rotate(-4deg); } 30% { transform: scale(1.3) rotate(4deg); }
   45% { transform: scale(1.35) rotate(-3deg); } 60% { transform: scale(1.2) rotate(2deg); } 100% { transform: scale(1) rotate(0); }
 }
-.pts.pop { animation: jitter 900ms ease-out; color: var(--first-down); }
+.pts.pop { animation: jitter 900ms ease-out; color: #fff; text-shadow: 0 0 14px rgba(255, 255, 255, 0.8); }
 @media (max-width: 520px) {
   .bug { grid-template-columns: 1fr 1fr; }
   .clockbox { grid-column: 1 / -1; grid-auto-flow: column; justify-content: space-between; min-width: 0; padding: 4px 14px; }
-  .side-team .rec { display: none; }
   .side-team .pts { font-size: 34px; }
 }
 
 /* ---------- field ---------- */
-.field-wrap { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); background: var(--turf-a); }
+.field-wrap { position: relative; border-radius: 10px; overflow: hidden; border: 2px solid #000; background: var(--turf-a); }
 .field-wrap svg { display: block; width: 100%; height: auto; }
 .banner { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
 .banner span { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em;
@@ -82,22 +83,22 @@ button, select, input { font: inherit; color: inherit; }
 .banner.show span { transform: skewX(-8deg) scale(1); opacity: 1; }
 
 /* ---------- lower third ---------- */
-.lower { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; display: grid; gap: 4px; min-height: 76px; }
-.lower .meta { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+.lower { background: #000; border: 1px solid #000; border-radius: 8px; padding: 10px 14px; display: grid; gap: 4px; min-height: 76px; }
+.lower .meta { font-size: 12px; color: rgba(255,255,255,0.78); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
 .lower .txt { font-size: 19px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
-.lower .txt em { font-style: normal; color: var(--first-down); }
+.lower .txt em { font-style: normal; color: #000; background: #fff; padding: 0 5px; border-radius: 3px; }
 
 /* ---------- controls ---------- */
 .controls { display: grid; gap: 10px; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; }
 .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .btn { background: var(--panel-2); border: 1px solid var(--rule); border-radius: 6px; padding: 7px 12px; cursor: pointer; font-weight: 600; }
 .btn:hover { border-color: var(--muted); }
-.btn.primary { background: var(--first-down); color: #1a1405; border-color: var(--first-down); min-width: 92px; }
+.btn.primary { background: #fff; color: #000; border-color: #fff; min-width: 92px; }
 .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
 .seg button { background: transparent; border: 0; padding: 7px 10px; cursor: pointer; font-weight: 600; color: var(--muted); }
-.seg button[aria-pressed="true"] { background: var(--panel-2); color: var(--chalk); box-shadow: inset 0 -2px 0 var(--first-down); }
+.seg button[aria-pressed="true"] { background: var(--panel-2); color: var(--chalk); box-shadow: inset 0 -2px 0 var(--uk-bright); }
 .spacer { flex: 1; }
-input[type="range"] { width: 100%; accent-color: var(--first-down); }
+input[type="range"] { width: 100%; accent-color: var(--uk-bright); }
 .progress-label { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
 /* ---------- side: box score + play by play ---------- */
@@ -106,12 +107,13 @@ input[type="range"] { width: 100%; accent-color: var(--first-down); }
 .card h2 { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0; }
 .card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 12px 0; flex-wrap: wrap; }
 .boxes { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+.boxes.one { grid-template-columns: minmax(0, 1fr) !important; }
 @media (min-width: 900px) { .boxes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .teambox { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .teambox h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: 0.06em; padding-left: 10px; border-left: 5px solid var(--rule); }
 .g { display: inline-block; min-width: 1.7em; text-align: center; border-radius: 4px; font-weight: 700; font-size: 12px; padding: 1px 4px; }
-.gA { background: #1f6f43; color: #eafff2; } .gB { background: #24477a; color: #e8f0ff; } .gC { background: #3a4253; color: #c9d1e0; }
-.hit { color: #5fd38d; font-weight: 700; } .miss { color: #ff7a7a; font-weight: 700; }
+.gA { background: var(--uk); color: #fff; } .gB { background: #fff; color: #000; } .gC { background: #3a3a42; color: #d4d4dc; }
+.hit { color: #fff; font-weight: 700; } .miss { color: #ff5c5c; font-weight: 700; }
 .scorecard { font-size: 15px; line-height: 1.45; margin: 0; }
 .nojs-note { display: none; }
 .nojs .nojs-note { display: grid; }
@@ -127,20 +129,11 @@ th:first-child, td:first-child { text-align: left; }
 td { text-align: right; padding: 4px 6px; border-bottom: 1px solid rgba(36, 49, 74, 0.55); white-space: nowrap; }
 td:first-child { white-space: normal; }
 td .pos { color: var(--muted); font-size: 11px; margin-left: 4px; }
-td .dag { color: var(--first-down); margin-left: 2px; }
+td .dag { color: var(--uk-bright); margin-left: 2px; }
 caption { caption-side: top; text-align: left; font-family: var(--display); font-weight: 800; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 2px 0 4px; }
-@keyframes bump { from { background: rgba(255, 210, 63, 0.38); } to { background: transparent; } }
+@keyframes bump { from { background: rgba(255, 255, 255, 0.28); } to { background: transparent; } }
 td.bump { animation: bump 1100ms ease-out; }
 .teamstats td:nth-child(2), .teamstats td:nth-child(3), .teamstats th:nth-child(2), .teamstats th:nth-child(3) { width: 25%; }
-.pbp { max-height: 460px; overflow-y: auto; padding: 4px 0 8px; }
-.pbp ol { list-style: none; margin: 0; padding: 0; }
-.pbp li { display: grid; grid-template-columns: 74px 1fr; gap: 2px 10px; padding: 7px 12px; border-bottom: 1px solid rgba(36, 49, 74, 0.55); border-left: 3px solid transparent; }
-.pbp li .when { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.pbp li .sit { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
-.pbp li .what { font-size: 14px; min-width: 0; }
-.pbp li.score .what { font-weight: 700; }
-.pbp li.newest { background: rgba(255, 210, 63, 0.07); }
-.pbp .empty { padding: 14px 12px; color: var(--muted); }
 
 .about { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; display: grid; gap: 8px; }
 .about h2 { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0; }
@@ -162,8 +155,8 @@ td.bump { animation: bump 1100ms ease-out; }
   <main class="grid">
     <section class="stage" aria-label="Broadcast">
       <div class="bug" id="bug">
-        <div class="side-team" id="bug-away"><i class="poss"></i><span class="abbr"></span><span class="rec"></span><span class="pts">0</span></div>
-        <div class="side-team" id="bug-home"><i class="poss"></i><span class="abbr"></span><span class="rec"></span><span class="pts">0</span></div>
+        <div class="side-team" id="bug-away"><i class="poss"></i><span class="abbr"></span><span class="pts">0</span></div>
+        <div class="side-team" id="bug-home"><i class="poss"></i><span class="abbr"></span><span class="pts">0</span></div>
         <div class="clockbox"><span class="qc" id="qc">1ST 15:00</span><span class="dd" id="dd">Kickoff</span></div>
       </div>
 
@@ -198,17 +191,12 @@ td.bump { animation: bump 1100ms ease-out; }
     </section>
 
     <aside class="side">
-      <section class="card" aria-label="Play by play">
-        <div class="card-head"><h2>Play by play</h2><span class="progress-label">Newest first</span></div>
-        <div class="pbp" id="pbp"></div>
+      <section class="card" aria-label="Box score">
+        <div class="card-head"><h2 id="box-title">Box score</h2><span class="progress-label" id="box-sub">Follows the team with the ball</span></div>
+        <div class="box-body" id="box"></div>
       </section>
     </aside>
   </main>
-
-  <section class="card" aria-label="Box score">
-    <div class="card-head"><h2>Box score</h2></div>
-    <div class="box-body" id="box"></div>
-  </section>
 
   <section class="card" aria-label="Predictions">
     <div class="card-head"><h2>Predictions</h2><span class="progress-label" id="pred-sub"></span></div>
@@ -400,9 +388,6 @@ td.bump { animation: bump 1100ms ease-out; }
       box.style.background = `linear-gradient(90deg, ${c1}, ${c1} 70%, ${shade(c1)})`;
       box.style.borderBottom = `4px solid ${c2}`;
       box.querySelector(".abbr").textContent = t;
-      const qb = G.box[t].qb;
-      const s = st.stats[qb.pid] || {};
-      box.querySelector(".rec").textContent = `${short(qb.name)} ${s.cmp || 0}/${s.att || 0}, ${s.pass_yds || 0} yds`;
       const pts = box.querySelector(".pts");
       const old = Number(pts.textContent);
       const now = st.score[t] || 0;
@@ -432,8 +417,7 @@ td.bump { animation: bump 1100ms ease-out; }
     // progress
     $("scrub").max = N; $("scrub").value = n;
     $("plabel").textContent = `Play ${n} of ${N}`;
-    renderBox(st, opts.animate);
-    renderPbp(n);
+    renderBox(st, opts.animate, n);
   }
   function shade(hex) {
     const v = parseInt(hex.slice(1), 16);
@@ -469,31 +453,22 @@ td.bump { animation: bump 1100ms ease-out; }
     if (b.pct) html += `<p class="progress-label" style="margin:0">${esc(b.qb.name)}'s line is his median. Each receiver sits at the same point of his own range (about the ${b.pct.rec_yds}th percentile for yards, ${b.pct.rec}th for catches) so the receivers add up to it exactly; every completion goes to a named player.${b.throwaways ? ` ${b.throwaways} incompletion${b.throwaways > 1 ? "s" : ""} thrown away.` : ""}</p>`;
     return `<div class="teambox">${html}</div>`;
   }
-  function renderBox(st, animate) {
+  function renderBox(st, animate, n) {
     if (!animate) prevStats = {};
+    // the team with the ball (the offense on the latest play); both teams at the final
+    const final = n >= N;
+    const ball = n > 0 ? EV[n - 1].off : (EV[0] && EV[0].off) || G.away;
+    $("box-title").textContent = final ? "Final box score" : `Box score · ${ball} ball`;
+    $("box-sub").textContent = final ? "Both teams" : "Follows the team with the ball";
     const A = st.team[G.away], H = st.team[G.home];
     const rows = [["Total yards", A.yds, H.yds], ["Passing", A.pass, H.pass], ["Rushing", A.rush, H.rush], ["Plays", A.plays, H.plays],
       ["Yards per play", A.plays ? (A.yds / A.plays).toFixed(1) : "0.0", H.plays ? (H.yds / H.plays).toFixed(1) : "0.0"],
       ["First downs", A.fd, H.fd], ["3rd down", `${A.t3c}/${A.t3a}`, `${H.t3c}/${H.t3a}`], ["Possession", mmss(A.top), mmss(H.top)]];
     const team = `<div class="tw"><table class="teamstats"><caption>Team</caption><thead><tr><th>Team</th><th>${G.away}</th><th>${G.home}</th></tr></thead><tbody>${
       rows.map(([k, a, h]) => `<tr><td>${k}</td>${cell(a, "T" + k + "a")}${cell(h, "T" + k + "h")}</tr>`).join("")}</tbody></table></div>`;
-    $("box").innerHTML = `<div class="boxes">${teamBox(G.away, st)}${teamBox(G.home, st)}</div>${team}`;
+    const shown = final ? teamBox(G.away, st) + teamBox(G.home, st) : teamBox(ball, st);
+    $("box").innerHTML = `<div class="boxes one">${shown}</div>${team}`;
   }
-  function renderPbp(n) {
-    const pbp = $("pbp");
-    if (!n) { pbp.innerHTML = '<p class="empty">Plays show up here as the game runs, newest on top.</p>'; return; }
-    const items = [];
-    for (let i = n - 1; i >= 0 && items.length < 400; i--) {
-      const e = EV[i];
-      const scoring = e.td || e.type === "fg" || e.type === "safety" || (e.type === "xp" && /GOOD\./.test(e.text) && !/NO GOOD/.test(e.text)) || e.type === "two";
-      const sit = e.down ? `${ORD[e.down]} & ${e.goal ? "goal" : e.togo} · ${e.spotText}` : e.off;
-      const stripe = scoring ? `border-left-color:${G.colors[e.type === "safety" ? opp(e.off) : e.off][1]}` : "";
-      items.push(`<li class="${scoring ? "score" : ""}${i === n - 1 ? " newest" : ""}" style="${stripe}"><span class="when">${QN[e.q]} ${e.clock}</span><span class="what">${esc(e.text)}</span><span></span><span class="sit">${esc(sit)} · ${e.score[G.away]}-${e.score[G.home]}</span></li>`);
-    }
-    pbp.innerHTML = `<ol>${items.join("")}</ol>`;
-    pbp.scrollTop = 0;
-  }
-
   // ---------------- playback ----------------
   function animateEvent(i, ms, done) {
     const e = EV[i];
@@ -591,7 +566,7 @@ td.bump { animation: bump 1100ms ease-out; }
       <li><b>Player and QB stats</b> are one simulated game from the model's ${T.sims.toLocaleString()} (the same run as the saved projections, ${esc(made)}): sim #${T.player_sim.toLocaleString()}, the closest to the median across ${T.stats_scored} player stats among the ${T.consistent.toLocaleString()} sims whose numbers add up (catches never exceed targets, the QB line matches his receivers, passing TDs fit the score). It ranks #${T.rank} of all ${T.sims.toLocaleString()}.</li>
       <li><b>The final score</b> comes from the model's score simulation, which is anchored to the market line (${esc(fav)}). ${G.away} ${G.final[G.away]}, ${G.home} ${G.final[G.home]} is the median score and came up in ${T.score_count} of ${T.sims.toLocaleString()} sims.</li>
       <li><b>Filled in around the model's numbers</b>, because the model does not simulate them: the order of plays, drives, downs, field position, the clock, kicks, and how each player's yards split across his touches. No sacks, penalties or fumbles. Every play is checked so the final box score matches the simulated game exactly.</li>
-      <li><span style="color:var(--first-down)">&dagger;</span> Receivers the model does not project one by one. Their catches come from the team's "everyone else" share, assigned to the team's other recent targets.</li>
+      <li><span style="color:var(--uk-bright)">&dagger;</span> Receivers the model does not project one by one. Their catches come from the team's "everyone else" share, assigned to the team's other recent targets.</li>
     </ul>`;
   }
 
