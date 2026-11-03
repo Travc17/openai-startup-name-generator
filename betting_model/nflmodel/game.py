@@ -57,6 +57,7 @@ class Config:
     # Target share keeps the longer history: more recency did NOT help receivers (rec/rec yds flat or worse).
     share_carryover: float | None = 0.4
     share_half_life: float | None = 4.0
+    adot_prior: bool = False   # league pool matched to the player's target depth (catch rate/yds prior)
     prior_mode: str = "tiered"        # share prior: "tiered" by recent usage, "all", or "regulars"
 
 
@@ -73,6 +74,7 @@ class Player:
     team: str
     share_mult: float = 1.0   # manual target share adjustment for news
     carry_mult: float = 1.0   # manual carry share adjustment for news
+    catch_rate: float | None = None  # manual catch-rate override (e.g. a deep threat's real rate)
 
 
 class GameModel:
@@ -128,6 +130,8 @@ class GameModel:
         self._tg_off = {k: v for k, v in self.tg.groupby("posteam")}
         self._tg_def = {k: v for k, v in self.tg.groupby("defteam")}
         self._tpool = {p: (g.key.to_numpy(), g.complete.to_numpy(), g.yards.to_numpy()) for p, g in t.groupby("pos")}
+        self.ADOT_BINS = np.array([-100, 0, 5, 10, 15, 20, 1000])
+        self._tpool_ab = {p: np.clip(np.digitize(g.air_yards.fillna(5).to_numpy(), self.ADOT_BINS) - 1, 0, 5) for p, g in t.groupby("pos")}
         self._rpool = {p: (g.key.to_numpy(), g.yards.to_numpy()) for p, g in r.groupby("pos")}
         self._tdp = {k: v for k, v in t.groupby(["key", "defteam", "pos"]).agg(
             n=("yards", "size"), yds=("yards", "sum"), comp=("complete", "sum")).reset_index().groupby("defteam")}
@@ -331,6 +335,25 @@ class GameModel:
 
         tk, tc, ty = self._tpool.get(pos, self._tpool["WR"])
         (pool_c, pool_ty), pool_tp = pool(self._t_by.get(p.pid), tk, (tc, ty), cfg.ypt_prior_targets)
+        own_t = self._t_by.get(p.pid)
+        if cfg.adot_prior and own_t is not None:
+            own_t = own_t[own_t.key.isin(hist.key)]
+            if len(own_t) >= 5:
+                # Reweight the league part of the pool so its target-depth mix matches this player's
+                ab_all = self._tpool_ab.get(pos, self._tpool_ab["WR"])
+                end = np.searchsorted(tk, key, side="left")
+                lab = ab_all[max(0, end - cfg.league_pool_size):end]
+                own_b = np.clip(np.digitize(own_t.air_yards.fillna(5).to_numpy(), self.ADOT_BINS) - 1, 0, 5)
+                own_w = own_t.key.map(gw).to_numpy()
+                mix = np.bincount(own_b, weights=own_w, minlength=6) + 0.5
+                mix = mix / mix.sum()
+                cnt = np.bincount(lab, minlength=6).astype(float)
+                n_own = len(own_t)
+                lw = (mix / np.maximum(cnt, 1))[lab]
+                lw = lw / lw.sum() * cfg.ypt_prior_targets
+                ow = pool_tp[:n_own] * 0 + own_w
+                probs = np.concatenate([ow, lw])
+                pool_tp = probs / probs.sum()
         rk, ry = self._rpool.get(pos, self._rpool["RB"])
         (pool_ry,), pool_rp = pool(self._r_by.get(p.pid), rk, (ry,), cfg.ypc_prior_carries)
         return {
@@ -397,6 +420,11 @@ class GameModel:
                         extra_p = min((cm - 1) * cr / max(1 - cr, 0.05), 1.0)
                         rec = rec + rng.binomial((tg - rec).astype(int), extra_p)
                 rec_yds = (inp["pool_ty"][idx] * m).sum(1) * p_rec_mult
+                if p.catch_rate is not None and inp["catch"] > 0:
+                    keep = min(p.catch_rate / inp["catch"], 1.0)
+                    rec_new = rng.binomial(rec.astype(int), keep)
+                    rec_yds = np.where(rec > 0, rec_yds * rec_new / np.maximum(rec, 1), rec_yds)
+                    rec = rec_new
                 mc = max(int(ca.max()), 1)
                 idx = rng.choice(len(inp["pool_ry"]), size=(n, mc), p=inp["pool_rp"])
                 m = np.arange(mc)[None, :] < ca[:, None]

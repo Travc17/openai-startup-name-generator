@@ -98,6 +98,11 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     """Usage leaders for both teams plus any named players, minus --out, with news multipliers."""
     team_a, team_b = a.team_a.upper(), a.team_b.upper()
     outs = {lookup(model, n)[0] for n in (a.out or [])}
+    catches = {}
+    for spec in getattr(a, "catch", None) or []:
+        n, v = spec.rsplit("=", 1)
+        catches[lookup(model, n)[0]] = float(v)
+        print(f"CATCH RATE OVERRIDE: {n} = {float(v):.0%}")
     mults = {}
     for spec in a.mult or []:
         n, v = spec.rsplit("=", 1)
@@ -168,7 +173,7 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
             if change != "same":
                 print(f"DEPTH: {name_of(pid)} ({t}) {change} ({pos}{rank}): targets x{dm_t:.2f}, carries x{dm_c:.2f}")
         players.append(Player(pid, t, share_mult=boost_t[t] * dm_t * mults.get(pid, 1.0),
-                              carry_mult=boost_c[t] * dm_c * mults.get(pid, 1.0)))
+                              carry_mult=boost_c[t] * dm_c * mults.get(pid, 1.0), catch_rate=catches.get(pid)))
     return players
 
 
@@ -508,6 +513,7 @@ def main():
         sp.add_argument("--week", type=int, help="Week being projected (default: next week in the data)")
         sp.add_argument("--out", action="append", help="Player ruled out (repeatable)")
         sp.add_argument("--mult", action="append", help="'NAME=1.10' share multiplier for role news")
+        sp.add_argument("--catch", action="append", help="'NAME=0.48' catch-rate override (manual, flagged)")
         sp.add_argument("--fee", type=float, default=0.02, help="Fee per $1 contract (Robinhood charged 2c on bet #1)")
         sp.add_argument("--bankroll", type=float, default=None, help="Default: current bankroll from the bet log")
 
