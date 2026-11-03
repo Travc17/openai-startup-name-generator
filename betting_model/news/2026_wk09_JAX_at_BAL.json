@@ -94,5 +94,29 @@
   "detail": "Mid to upper 60s, chance of showers, no major wind in the latest local outlook. No wind adjustment applied; re-check Thursday.",
   "source": "CBS Baltimore",
   "url": "https://www.cbsnews.com/baltimore/news/beautiful-election-day-weather-across-maryland-tuesday/"
+ },
+ {
+  "player": "Bhayshul Tuten",
+  "team": "JAX RB",
+  "status": "Playing (not seen at Tue practice)",
+  "detail": "Not spotted during the media-open portion of Tuesday's practice (ESPN's Michael DiRocco via RotoWire). Not ruled out, so still projected as playing. If he sits: Chris Rodriguez Jr., LeQuint Allen Jr., Ameer Abdullah. Bet-stage risk flag, no projection change.",
+  "source": "RotoWire (citing ESPN)",
+  "url": "https://www.rotowire.com/football/headlines/bhayshul-tuten-injury-not-spotted-at-practice-645770"
+ },
+ {
+  "player": "Justice Hill",
+  "team": "BAL RB",
+  "status": "Playing (limited Mon, groin)",
+  "detail": "Limited in Monday's practice estimate with a groin injury, first appearance on the report this season. Played 25 snaps (49%) in week 8 per nflverse snap counts (a search summary claiming he was inactive was wrong). Not ruled out, so projected as playing. Bet-stage risk flag, no projection change.",
+  "source": "NBC Sports / RotoWire",
+  "url": "https://www.nbcsports.com/fantasy/football/player-news/2026-11-02/justice-hill-bothered-by-groin-injury-monday"
+ },
+ {
+  "player": "Tyler Loop",
+  "team": "BAL K",
+  "status": "IR candidate",
+  "detail": "Groin; Jake Moody kicks Thursday per Jesse Minter. Not used by the prop model.",
+  "source": "Baltimore Beatdown",
+  "url": "https://www.baltimorebeatdown.com/baltimore-ravens-news/87372/ravens-could-place-tyler-loop-on-ir-jake-moody-to-kick-vs-jaguars"
  }
 ]

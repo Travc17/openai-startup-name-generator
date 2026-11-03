@@ -4,7 +4,11 @@
 1. `git fetch origin`, then get onto the working branch named at the top of `betting_model/HANDOFF.md`:
    `git pull origin <working branch>`. If this session's branch has no `betting_model/` folder, fast-forward
    it first: `git merge --ff-only origin/<working branch>`. Never start work on a branch without it.
-2. `pip install -r betting_model/requirements.txt` (fresh containers are missing scipy).
+2. `pip install -r betting_model/requirements.txt` (fresh containers are missing scipy). Then, because
+   `data/` is gitignored and `update` only fetches 2022+, a fresh container also needs (in `betting_model/`):
+   `python -c "from nflmodel import data, routes; data.ensure_data([2019,2020,2021]); routes.refresh_pff(2024); routes.refresh_pff(2025)"`
+   Without 2019-21 play by play the QB layer returns NaN and `report` crashes; without 2024-25 PFF data
+   `regression_check.py` shows targets/rec DRIFT. A "No drift." with no stat rows above it is NOT a pass.
 3. Read `betting_model/HANDOFF.md`, then every file it lists. HANDOFF.md is the state; this file is the rules.
 4. Do the first open item in HANDOFF.md and report its result before starting anything new.
 5. Before the session ends: rewrite HANDOFF.md (state, open items in order, waiting on Travis, credits left),

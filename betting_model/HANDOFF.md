@@ -1,74 +1,68 @@
-# Handoff (2026-11-03, session 2): open items for the next session
+# Handoff (2026-11-03, session 2, 20:35 UTC): open items for the next session
 
-Working branch: `claude/robinhood-trading-mcp-qo26do` (see CLAUDE.md "Session start").
+Working branch: `claude/robinhood-trading-mcp-qo26do` (see CLAUDE.md "Session start"). This session's
+commits are on `claude/tender-faraday-offel8` (fast-forward of the working branch); Travis has not yet
+chosen how they reach master (PR #1 is open from the working branch).
 Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE_PROMPT.md` first.
 
 ## State
 * Bankroll $2,257.22 (1 bet settled: +$257.22, closing-line value −1.7c). `python nfl.py log summary`.
-* Two-stage pipeline built: projections (`report --proj`) then bet finder (`nfl.py price`).
-* Odds feed TESTED 2026-11-03 20:05 UTC (`nfl.py odds`): works.
-  * Main lines: 188 quotes, 4 books (DraftKings, FanDuel, BetMGM, Fanatics; Caesars not posting this
-    game), 94 of 94 lines with both sides priced, 10 credits.
-  * `--alt`: 1,052 quotes, 8 books, 15 credits. Alt lines are Over only, so `price` cannot use them
-    for the market check (needs both sides). See "Known issues".
-  * Credits: 51 used, 19,949 left (account quota is 20,000, not the 500 free plan BETFINDER_PROMPT.md assumes).
+* Container setup fixed and written into CLAUDE.md step 2 (2019-21 play by play, 2024-25 PFF). After it:
+  `regression_check.py` = No drift (n=508, every stat within 0.6% CRPS of baseline).
+* Odds feed tested: main lines 94/94 two-sided from 4 books (Caesars not posting); `--alt` 1,052 quotes
+  from 8 books. Kalshi ladders pulled by hand into quotes format (494 quotes). Credits left: 19,942
+  (quota 20,000, not the 500 free plan BETFINDER_PROMPT.md assumes).
 
-## Next game: JAX at BAL, week 9, Thursday 2026-11-05 8:15 PM ET
-* Projections: `projections/2026_wk09_JAX_at_BAL.json` (made 2026-11-03 19:28 UTC).
-* Robinhood board (Yes prices only): `markets/2026_wk09_JAX_at_BAL_open.csv`. News with sources:
-  `news/2026_wk09_JAX_at_BAL.json` (Lamar Jackson and Tyler Huntley out, Joe Fagnano starts).
-* Book captures (open): `markets/2026_wk09_JAX_at_BAL_books_open.csv`, `..._books_open_alt.csv`,
-  `..._gamelines.csv`. Priced: `markets/2026_wk09_JAX_at_BAL_priced_open.csv`, `..._priced_open_alt.csv`.
-* Published report: https://claude.ai/artifact/GURncLCo67PbWAK5rQD5Nv (read it with the Artifact
-  tool before republishing).
+## JAX at BAL, week 9, Thursday 2026-11-05 8:15 PM ET
+* Projections RE-RUN 2026-11-03 20:22 UTC at the current consensus (JAX −10, total 40.5; the first run
+  used −8.5 / 43.5). Same adjustments as before; news file +3 items (Tuten not seen at Tuesday practice,
+  Hill limited Monday with a groin injury, Loop/Moody); blind spot name fixed to Nate Boerkircher.
+  Sim score JAX 25, BAL 16; JAX wins 79%.
+* Captures in `markets/`: `_open.csv` (Robinhood, Yes only, 11/3 screenshots), `_books_open*.csv`
+  (20:05 UTC), `_kalshi_open.csv` (20:25 UTC), priced `_priced_open_v2.csv` (all venues).
+* Report HTML not republished and no Canva made this session. Re-running `report --board` would log
+  paper picks again (JAX@BAL rows already logged): use `--no-log` or check `picks_log.csv` first.
 
-### Bet finder result (main lines, 2026-11-03)
-* BOTH AGREE: 0. Market only: 0. Model vs market: 33 (paper only). Blind spot: 61. Pass: 306.
-* All 33 model vs market rows are UNDERS on main lines, model 4 to 21 points above the books' no-vig
-  (biggest: Justice Hill rush yds under 13.5, model 73.7% vs books 49.9%). Same direction on every
-  line = likely model bias on this game, not 33 edges. Log it for H4; one game is weak evidence.
-* Robinhood Yes rungs with a two-sided book price at the same number: 18 of 242. None beats the
-  books (best market edge −0.6% after the 2c fee).
+### Bet finder result (v2: books main + alt, Kalshi, Robinhood)
+* BOTH AGREE 0, market only 0. Model only 30 (all Kalshi Nos), model vs market 30 (all unders).
+* Every model pick is an UNDER, and every one fails a conservative book check (1 − books' alt Over
+  probability, which includes their cut): best is Tuten under 69.5 rush yds at −3.2 points. The model
+  leans under on this whole game; treat it as model bias until H4 says otherwise. Paper only.
+* Robinhood's stale Yes board is mostly at or below the market (median −2c vs Kalshi/books), except
+  Justice Hill rushing rungs (+6 to +8c) and Josh Cameron (blind spot).
 
-### Bets under consideration (Robinhood No; need Travis's No-side prices)
-Hand check against book alt ladders (Over only, so the books' numbers include their cut and the
-real Over chance is a little lower):
-| Rung | RH Yes | Books / Kalshi Over | Model Over | No price where model AND books agree (2%+ after 2c fee) | Model-only limit (handoff v1) |
-|---|---|---|---|---|---|
-| Justice Hill 20+ rush yds | 46c | DK 35.6%, FD 37.3%, Kalshi 38.0% | 17.5% | ≤ 58c | ≤ 71c |
-| Bhayshul Tuten 3+ catches | 52c | Fanatics 42.6% (one book) | 21.5% | ≤ 53c | ≤ 74c |
-* Between the two columns the books say no: model vs market, paper only (BETFINDER_PROMPT.md).
-* Robinhood board was captured from screenshots on 11/3 (time unknown); books at 20:05 UTC. Re-check
-  the Robinhood Yes and No prices before acting.
-* Blind spots for this game: Brian Thomas Jr. (coach-driven role cut), all BAL pass catchers (third-string
-  QB), Josh Cameron, Ja'Kobi Lane, Boerkircher, Joe Fagnano; Henry and Hill receiving only.
-* Paper log has 3 Thomas Jr. rows logged before the blind-spot override; leave them (never hand-edit).
-
-### Known issues found in the test (not fixed; ask Travis before changing code)
-1. `price` treats any `book` row on the Robinhood board as a bettable venue: "Sports Gambling Podcast
-   (11/3)" produced the only "model only" row (Lawrence pass att under 31.5, −107). Not a sportsbook.
-2. Alt lines are one-sided, so `price` gives no market check on Robinhood ladder rungs. Fix idea:
-   remove an estimated alt-line cut, or use Kalshi (two-sided ladders, region `us_ex`) as the market.
-3. Name mismatch: books list "Nate Boerkircher", the Robinhood board and this file said "Nick".
-   Projections have no Boerkircher and no Josh Cuevas, and no Lawrence rush attempts (30 rows "no projection").
-4. BETFINDER_PROMPT.md lists Caesars and a 500-credit free plan; neither matches this account.
+### Recommended bet (conditional, not placed)
+* Robinhood **No on Justice Hill 20+ rush yds**, only if No costs **58c or less** (books/Kalshi say Yes
+  is 35.6-38%, so No ≥ 62%; minus 2c fee and 2% edge). Model No 82.7%.
+* Stake: rules give quarter Kelly on the model edge = $320, capped at $225.72 (10% per game).
+  Recommended $50 instead because the model's edge here is not trusted (see above). Travis decides.
+* If Kalshi's No (66c at 20:25 UTC) is what Robinhood shows now, there is no bet.
+* Check Robinhood's contract rule for a player who does not play (Hill: groin, limited Monday).
 
 ## Open items, in order
-1. Get No-side prices for the two rungs above from Travis; apply the table.
-2. Game day: re-pull books (`nfl.py odds JAX BAL --out markets/2026_wk09_JAX_at_BAL_books_close.csv`)
-   and a Robinhood close board within 1 hour of kickoff (EDGE_PROMPT.md data capture).
-3. Decide with Travis on known issues 1 and 2.
+1. Travis: live Robinhood No prices for Hill 20+ rush yds (and the other Hill rungs).
+2. Game day: re-pull books and Kalshi, Robinhood close board within 1 hour of kickoff (EDGE_PROMPT.md).
+3. Known issues below.
+
+### Known issues (not fixed; ask Travis before changing code)
+1. `price` treats any `book` row on the Robinhood board as a bettable venue ("Sports Gambling Podcast").
+2. Alt lines are Over only, so `price` gives no market number on ladder rungs. This session used
+   1 − alt Over as a conservative floor by hand; worth building in, plus Kalshi as an execution venue
+   (Kalshi prices must be in cents in the quotes CSV; Odds API gives American odds).
+3. `update` does not fetch what the model needs on a fresh container (CLAUDE.md step 2 workaround).
+4. BETFINDER_PROMPT.md lists Caesars and a 500-credit free plan; neither matches this account.
 
 ## After the game
 1. Settle any model bets in `bets.csv` with closing prices; `python nfl.py picks grade`.
-2. Grade EVERY rung on the saved board and every book quote (EDGE_PROMPT.md data capture step 4):
-   first real test of H1/H2 (No vs Yes, longshot bias). One game: weak evidence, report it as such.
+2. Grade EVERY rung and book/Kalshi quote (EDGE_PROMPT.md data capture step 4): first real test of
+   H1/H2/H3 and the all-unders lean. One game: weak evidence, report it as such.
 3. Write the review in `reviews/`.
 
 ## Waiting on Travis
-* No-side prices for Hill 20+ rush yds and Tuten 3+ catches.
+* Robinhood No prices for Hill; whether to stake $50 or the rule's $225.72.
+* How this branch's commits reach master (into PR #1, stacked PR, or a second PR).
 * Approval of the proposed rule: real-money bets only on "BOTH AGREE" (model and books agree).
 * Canva carousel DAHZ4XCn3BY (https://canva.link/9irp6wkayeavxk3): fixes were staged in an edit
-  transaction in the previous session; if that expired, redo the fixes and ask before committing.
+  transaction in an earlier session; if that expired, redo the fixes and ask before committing.
 * Offered, not yet approved: logging Travis's own hit-rate parlays (tagged), a break-even floor for
   hit-rate parlays, a defensive-injury matchup test, "coach-driven role cuts" as a playbook blind spot.
