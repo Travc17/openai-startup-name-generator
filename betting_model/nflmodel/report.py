@@ -111,7 +111,11 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
         if kind == "book":
             nm = r["name"]
             if nm not in pid_cache:
-                pid_cache[nm] = lookup(nm)
+                try:
+                    pid_cache[nm] = lookup(nm)
+                except SystemExit:
+                    pid_cache[nm] = None   # no history in the data: can't price
+                    rep.setdefault("unpriced", []).append(nm)
             pid = pid_cache[nm]
             if pid not in sim["players"]:
                 continue
@@ -133,7 +137,11 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
         if kind == "prop":
             nm = r["name"]
             if nm not in pid_cache:
-                pid_cache[nm] = lookup(nm)
+                try:
+                    pid_cache[nm] = lookup(nm)
+                except SystemExit:
+                    pid_cache[nm] = None   # no history in the data: can't price
+                    rep.setdefault("unpriced", []).append(nm)
             pid = pid_cache[nm]
             if pid not in sim["players"]:
                 continue

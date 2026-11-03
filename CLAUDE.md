@@ -11,7 +11,10 @@ from the log (`python nfl.py log summary`).
 * Never bet model spreads or totals (both failed walk-forward tests vs real closing lines). Game lines are priced
   only around the big-book consensus line (`gameline` / report).
 * Flag model blind spots and keep them out of bets: multi-back committees after returns from IR, direct
-  "next man up" backups, players with unknown status.
+  "next man up" backups, a team's pass catchers when a new/third-string QB starts (model has no QB-quality
+  adjustment for props), and players with no current-season usage.
+* Treat any player who is not ruled out as PLAYING (missed practice or not) until the news says otherwise.
+* Big-book prop lines are often not posted until 1-2 days before kickoff; re-check before game day.
 
 ## When asked for a game ("run TNF", "CHI at SEA tonight", etc.)
 1. `cd betting_model && python nfl.py update`
