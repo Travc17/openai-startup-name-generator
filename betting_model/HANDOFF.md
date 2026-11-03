@@ -101,3 +101,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Renamed SizzleSims (Travis). Now the MEDIAN game (`export.py --mode median`, default): players at exact medians,
   QB = sum of receivers (JAX 14/24 157 vs Lawrence's own median 19/29 234; BAL 15/25 123 vs 18/28 164), no
   placeholder rows. Page opens at 90 seconds, Clean feed removed, both box scores side by side. Published v3.
+* Fixed the QB vs receivers gap (Travis): QB line = his median (Lawrence 19/29 234, Fagnano 18/28 164); receivers at
+  one common percentile (JAX ~59-63rd, BAL ~58-61st) so they add up exactly. Proof it is not a model bug: in each sim
+  QB and receivers agree (median gap 5 yds, 0 cmp); median of the receivers' TOTAL is 227 vs QB 234 (BAL 167 vs 164);
+  only the SUM of individual medians (157) falls short. Published v4.

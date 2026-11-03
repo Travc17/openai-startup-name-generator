@@ -81,9 +81,10 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    `python simcast/export.py projections/<file>.json` (reruns the exact sims and stops on any mismatch), then
    `python simcast/build_page.py`, then publish `betting_model/simcast/simcast.html` with the Artifact tool to
    https://claude.ai/artifact/Bx8jZgufz7Amfk5FgysjRh (read it first; same URL every time; all games share one
-   page with a picker). Commit `simcast/games/*.json`. Default is the MEDIAN game (Travis): every RB/WR/TE at his
-   exact median, each QB line = the sum of his receivers (every completion to a named player, never a placeholder),
-   the QB's own median shown under his box; score = median score. Opens at the 90-second clip; both box scores show.
+   page with a picker). Commit `simcast/games/*.json`. Default is the MEDIAN game (Travis): each QB line is his exact median;
+   receivers all sit at one common percentile of their own ranges, solved so catches/targets/yards add up EXACTLY to
+   the QB line (sum of individual medians undercounts lopsided receiving yards); every completion to a named player,
+   never a placeholder; rushers at their own medians; score = median score. Opens at the 90-second clip; both box scores show.
 6. Before kickoff, record closing prices for logged picks (`python nfl.py picks close --game G --label L --price P`).
    After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
    review in `betting_model/reviews/`.

@@ -453,7 +453,7 @@ td.bump { animation: bump 1100ms ease-out; }
       catchers.length ? catchers.map((pid) => { const s = S(pid); return `<tr><td>${name(pid)}</td>${cell(s.rec || 0, pid + "rc")}${cell(s.targets, pid + "tg")}${cell(s.rec_yds || 0, pid + "cy")}${cell(s.rec ? s.rec_lng : 0, pid + "cl")}${cell(s.rec_td || 0, pid + "ct")}</tr>`; }).join("")
       : '<tr><td colspan="6">No targets yet</td></tr>'}</tbody></table></div>`;
     const m = b.qb.median;
-    if (m) html += `<p class="progress-label" style="margin:0">${esc(b.qb.name)}'s own median: ${m.cmp}/${m.att}, ${m.yds} yds, ${m.td} TD, ${m.int} INT. The line above adds up his receivers' medians, so every completion goes to a named player.</p>`;
+    if (b.pct) html += `<p class="progress-label" style="margin:0">${esc(b.qb.name)}'s line is his median. Each receiver sits at the same point of his own range (about the ${b.pct.rec_yds}th percentile for yards, ${b.pct.rec}th for catches) so the receivers add up to it exactly; every completion goes to a named player.${b.throwaways ? ` ${b.throwaways} incompletion${b.throwaways > 1 ? "s" : ""} thrown away.` : ""}</p>`;
     return `<div class="teambox">${html}</div>`;
   }
   function renderBox(st, animate) {
@@ -538,8 +538,8 @@ td.bump { animation: bump 1100ms ease-out; }
     const made = (G.made_utc || "").replace("T", " ").slice(0, 16) + " UTC";
     if (T.mode === "median") {
       $("about").innerHTML = `<h2>How this game was made</h2><ul>
-      <li><b>Every running back and receiver</b> shows his median from the model's ${T.sims.toLocaleString()} simulated games (the same run as the saved projections, ${esc(made)}): half the sims were above each number, half below.</li>
-      <li><b>Each QB's line</b> is the sum of his receivers' medians, so every completion goes to a named player. Medians of separate players do not add up to the QB's own median, which is shown under his team's box score.</li>
+      <li><b>Each QB's line</b> is his median from the model's ${T.sims.toLocaleString()} simulated games (the same run as the saved projections, ${esc(made)}). <b>Rushers</b> show their own medians.</li>
+      <li><b>Receivers</b> all sit at the same point of their own ranges, chosen so they add up exactly to their QB's median (every completion goes to a named player). Why not each receiver's own median: receiving yards are lopsided (most games modest, a few big), so adding every receiver's median comes up short of the team total; in a typical game one or two of them have a big day. Each receiver's own median and his prop odds are in the lines file and the bet finder.</li>
       <li><b>The final score</b> is the median score from the model's score simulation, anchored to the market line (${esc(fav)}). ${G.away} ${G.final[G.away]}, ${G.home} ${G.final[G.home]} came up in ${T.score_count} of ${T.sims.toLocaleString()} sims.</li>
       <li><b>Filled in around the model's numbers</b>, because the model does not simulate them: the order of plays, drives, downs, field position, the clock, kicks, and how each player's yards split across his touches. No sacks, penalties or fumbles. Every play is checked so the final box score matches exactly.</li>
     </ul>`;

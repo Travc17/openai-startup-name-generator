@@ -1,7 +1,8 @@
 # SizzleSims (formerly SimCast): watch the model's median game
 
-Default (`--mode median`, Travis 2026-11-03): every RB/WR/TE at his exact median, each QB line = the sum of his
-receivers so every completion goes to a named player (his own median is shown under his box), score = median score.
+Default (`--mode median`, Travis 2026-11-03): each QB line is his exact median; receivers sit at one common
+percentile of their own ranges, solved so they add up exactly to the QB line (every completion to a named
+player); rushers at their own medians; score = median score.
 `--mode typical` keeps the old single most typical sim.
 
 Turns a saved projections file into a broadcast-style page: score bug, field with the line of

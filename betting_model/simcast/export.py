@@ -133,34 +133,86 @@ def med(v) -> int:
     return int(np.floor(np.percentile(np.asarray(v, float), 50) + 0.5))
 
 
+def _common_pct(arrs: list[np.ndarray], total: float) -> tuple[float, np.ndarray]:
+    """The one percentile p at which the players' own quantiles add up to `total` (bisection; each player's
+    quantile is non-decreasing in p, so the sum is too). Returns p and each player's value at p."""
+    q = lambda x: np.array([np.quantile(a, x) for a in arrs])
+    lo, hi = 0.0, 1.0
+    if q(hi).sum() <= total:
+        return 1.0, q(1.0)
+    if q(lo).sum() >= total:
+        return 0.0, q(0.0)
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if q(mid).sum() < total else (lo, mid)
+    return hi, q(hi)
+
+
+def _to_ints(v: np.ndarray, total: int) -> np.ndarray:
+    """Round to whole numbers that add up to exactly `total` (largest remainder)."""
+    base = np.floor(v).astype(int)
+    left = int(total - base.sum())
+    order = np.argsort(-(v - base))
+    if left > 0:
+        base[order[:left]] += 1
+    elif left < 0:
+        for j in np.argsort(v - base)[: -left]:
+            base[j] -= 1
+    return base
+
+
 def median_box(run: dict, team: str) -> dict:
-    """The median game (Travis, 2026-11-03): every RB/WR/TE shows his exact median from the sims. Medians of
-    separate players do not add up to the QB's median, so the QB line is the SUM of his receivers (every
-    completion goes to a named player, never to a placeholder); his own median is kept in qb['median']."""
+    """The median game (Travis, 2026-11-03). The QB shows his exact median line. Each receiver sits at the SAME
+    percentile of his own range, chosen so the team's catches, targets and yards add up to that QB line (every
+    completion goes to a named player). Why not every receiver's own median: receiving yards are lopsided, so
+    the sum of medians (JAX 157) is far below the median of the team total (227) that the QB's 234 reflects.
+    Rushers show their exact medians (no QB total to match)."""
     sim, info, names = run["sim"]["players"], run["sim"]["info"], run["names"]
     pids = [p for p in sim if info[p]["team"] == team]
     qb_pid = next(p for p in pids if "pass_yds" in sim[p])
-    players = []
-    for p in pids:
-        if p == qb_pid:
-            continue
-        s = sim[p]
-        tg, rec, ry, ra, rr = (med(s[k]) for k in ("targets", "rec", "rec_yds", "rush_att", "rush_yds"))
-        rec = min(rec, tg)
-        ry = 0 if rec == 0 else int(np.clip(ry, -3 * rec, 75 * rec))
-        rr = 0 if ra == 0 else int(np.clip(rr, -6 * ra, 70 * ra))
-        players.append({"pid": p, "name": names[p], "pos": info[p].get("pos", "WR"), "targets": tg, "rec": rec,
-                        "rec_yds": ry, "rush_att": ra, "rush_yds": rr, "projected": True})
     q = sim[qb_pid]
-    own = {k: med(q[k]) for k in ("pass_att", "pass_cmp", "pass_yds", "pass_td", "int")}
-    cmp_, yds = sum(p["rec"] for p in players), sum(p["rec_yds"] for p in players)
-    att = sum(p["targets"] for p in players)
-    ra, rr = med(q["rush_att"]), med(q["rush_yds"])
+    R = [p for p in pids if p != qb_pid]
+    A = lambda p, k: np.rint(np.asarray(sim[p][k], float))
+    att, cmp_, yds = med(q["pass_att"]), med(q["pass_cmp"]), med(q["pass_yds"])
+    away = int(max(0, round(float(np.median(A(qb_pid, "pass_att") - sum(A(p, "targets") for p in R))))))
+    n_tg = max(cmp_, att - away)                                 # targets to named players; the rest thrown away
+    p_rec, v = _common_pct([A(p, "rec") for p in R], cmp_)
+    rec = _to_ints(v, cmp_)
+    p_tg, v = _common_pct([A(p, "targets") for p in R], n_tg)
+    tg = _to_ints(v, n_tg)
+    for i in range(len(R)):                                      # a catch needs a target: move spare targets over
+        while rec[i] > tg[i]:
+            spare = [j for j in range(len(R)) if j != i and tg[j] > rec[j]]
+            j = max(spare, key=lambda k: tg[k] - rec[k])
+            tg[j] -= 1; tg[i] += 1
+    has = [i for i in range(len(R)) if rec[i] > 0]               # yards only for players with a catch
+    p_yds, v = _common_pct([A(R[i], "rec_yds") for i in has], yds)
+    yd = np.zeros(len(R), int)
+    yd[has] = _to_ints(v, yds)
+    for i in has:                                                # keep yards per catch football-sane
+        lo, hi = -3 * rec[i], 75 * rec[i]
+        extra = yd[i] - int(np.clip(yd[i], lo, hi))
+        if extra:
+            yd[i] -= extra
+            room = [j for j in has if j != i and lo <= yd[j] + np.sign(extra) <= 75 * rec[j]]
+            yd[max(room, key=lambda j: rec[j])] += extra
+    players = []
+    for i, p in enumerate(R):
+        s = sim[p]
+        ra, rr = med(s["rush_att"]), med(s["rush_yds"])
+        players.append({"pid": p, "name": names[p], "pos": info[p].get("pos", "WR"), "targets": int(tg[i]),
+                        "rec": int(rec[i]), "rec_yds": int(yd[i]), "rush_att": ra,
+                        "rush_yds": 0 if ra == 0 else int(np.clip(rr, -6 * ra, 70 * ra)), "projected": True,
+                        "median": {"targets": med(s["targets"]), "rec": med(s["rec"]), "rec_yds": med(s["rec_yds"])}})
+    qra, qrr = med(q["rush_att"]), med(q["rush_yds"])
     qb = {"pid": qb_pid, "name": names[qb_pid], "att": att, "cmp": cmp_, "yds": yds,
-          "td": min(own["pass_td"], cmp_), "int": min(own["int"], att - cmp_),
-          "rush_att": ra, "rush_yds": 0 if ra == 0 else int(np.clip(rr, -6 * ra, 70 * ra)),
-          "median": {"att": own["pass_att"], "cmp": own["pass_cmp"], "yds": own["pass_yds"], "td": own["pass_td"], "int": own["int"]}}
-    return {"abbr": team, "qb": qb, "players": players, "others": []}
+          "td": min(med(q["pass_td"]), cmp_), "int": min(med(q["int"]), att - cmp_),
+          "rush_att": qra, "rush_yds": 0 if qra == 0 else int(np.clip(qrr, -6 * qra, 70 * qra)),
+          "median": {"att": att, "cmp": cmp_, "yds": yds, "td": med(q["pass_td"]), "int": med(q["int"])}}
+    assert sum(pl["rec"] for pl in players) == cmp_ and sum(pl["rec_yds"] for pl in players) == yds
+    return {"abbr": team, "qb": qb, "players": players, "others": [],
+            "pct": {"rec": round(p_rec * 100), "targets": round(p_tg * 100), "rec_yds": round(p_yds * 100)},
+            "throwaways": att - int(tg.sum())}
 
 
 def build_events(lay, slots, teams, boxes, tries, names, receive_first):
