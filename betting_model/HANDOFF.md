@@ -115,3 +115,6 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   (0 table rows). `build_page.py` now runs `simcast/snapshot.js` (Playwright) to bake the newest game's final into
   the file; with scripts off it shows the final, box scores, predictions and play by play plus an "open in Chrome or
   Safari" note; with scripts on it plays as before. Newest game opens first. Published v6.
+* X: SizzleSims link is shared "anyone with the link" (Travis set it). Clip tool `simcast/clip.py` (+ `record_clip.js`):
+  gameplay recorded at 1080x1920, end cards spliced as stills (recorder drops frames on static screens). JAX@BAL clip
+  1:51.6 sent to Travis (not in git).
