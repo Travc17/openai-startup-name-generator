@@ -36,10 +36,17 @@ def ev_per_dollar(p_win: float, price: Price) -> float:
     return p_win * price.net_odds - (1 - p_win)
 
 
+MAX_BET_FRAC = 0.10  # single bet cap: 10% of current bankroll
+
+
 def stake(p_win: float, price: Price, bankroll: float = 2000, min_bet: float = 50,
-          max_bet: float = 250, kelly_frac: float = 0.25, min_edge: float = 0.02,
+          max_bet: float | None = None, kelly_frac: float = 0.25, min_edge: float = 0.02,
           big_edge: float = 0.04) -> tuple[float, str]:
-    """Apply the bankroll rules. Edge = model probability minus breakeven probability."""
+    """Apply the bankroll rules. Edge = model probability minus breakeven probability.
+    Cap defaults to 10% of the CURRENT bankroll, so it grows and shrinks with results."""
+    if max_bet is None:
+        max_bet = round(bankroll * MAX_BET_FRAC / 5) * 5
+    min_bet = min(min_bet, max_bet)
     edge = p_win - price.breakeven
     if edge < min_edge:
         return 0.0, f"PASS (edge {edge:+.1%} below {min_edge:.0%})"

@@ -419,8 +419,8 @@ def main():
         sp.add_argument("--week", type=int, help="Week being projected (default: next week in the data)")
         sp.add_argument("--out", action="append", help="Player ruled out (repeatable)")
         sp.add_argument("--mult", action="append", help="'NAME=1.10' share multiplier for role news")
-        sp.add_argument("--fee", type=float, default=0.0, help="Fee per $1 contract, e.g. 0.01")
-        sp.add_argument("--bankroll", type=float, default=2000)
+        sp.add_argument("--fee", type=float, default=0.02, help="Fee per $1 contract (Robinhood charged 2c on bet #1)")
+        sp.add_argument("--bankroll", type=float, default=None, help="Default: current bankroll from the bet log")
 
     g = sub.add_parser("game", help="Projections for every key player in a game")
     common(g)
@@ -481,6 +481,8 @@ def main():
     p.add_argument("--defense", choices=["team", "pos_ypt", "pos_ypt_long", "pos_volume", "zone", "zone_volume"],
                    help="Defense vs position lever (default pos_ypt_long)")
     a = p.parse_args()
+    if getattr(a, "bankroll", 0) is None:
+        a.bankroll = ledger.current_bankroll()
     global DEFENSE
     DEFENSE = a.defense
     a.func(a)

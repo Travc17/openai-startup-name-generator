@@ -75,3 +75,7 @@ def summary(bankroll_start: float = 2000) -> str:
     if bankroll_start + pnl <= 1000:
         lines.append("Bankroll at or below $1,000: STOP per the rules.")
     return "\n".join(lines)
+
+
+def current_bankroll(start: float = 2000) -> float:
+    return start + sum(float(r["pnl"]) for r in _read() if r["result"])
