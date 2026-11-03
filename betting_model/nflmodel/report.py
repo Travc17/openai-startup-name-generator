@@ -262,6 +262,11 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                        "median": float(np.median(v)), "blind": r["blind"],
                        "team": sim["info"][r["pid"]]["team"]})
     rep["market"] = sorted(market, key=lambda m: -m["p_model"])   # highest hit rate first
+    # full book: every rung on the board (Yes and No), highest hit rate first
+    rep["full_book"] = sorted(({"player": l["player"], "team": sim["info"][l["pid"]]["team"], "stat": l["stat"],
+                                "line": l["x"], "side": l["side"], "price": l["price"], "p": l["p"], "edge": l["edge"],
+                                "median": float(np.median(sim["players"][l["pid"]][l["stat"]])), "blind": l["blind"]}
+                               for l in legs), key=lambda r: (-r["p"], r["player"]))
     for t in box:
         for row in box[t]:
             row["book"] = {b["stat"]: b["line"] for b in book if b["player"] == row["name"]}
@@ -565,6 +570,24 @@ def render(rep, title):
                    '<p class="note">Ranked by how often every leg hits together in the sims, regardless of edge. Ticket = product of the Robinhood leg '
                    'prices (no combo discount), 5c to 40c. Edge includes the 2c fee; only tickets with edge of +2 or more qualify as model bets. '
                    'Blind spots excluded.</p></div></section>')
+
+    # full book
+    if rep.get("full_book"):
+        rows = []
+        for r in rep["full_book"]:
+            q = (not r["blind"]) and r["edge"] >= 0.02
+            cls = "good" if r["edge"] >= 0.02 else ("bad" if r["edge"] <= -0.05 else "muted")
+            flag = ' <span class="pill warn">blind spot</span>' if r["blind"] else (' <span class="pill good">qualifies</span>' if q else "")
+            side = "" if r["side"] == "yes" else "NO "
+            rows.append(f'<tr><td><b>{_e(r["player"])}</b> <span class="muted">{r["team"]}</span>{flag}</td><td>{side}{r["line"]:g}+ {STAT_SHORT[r["stat"]]}</td>'
+                        f'<td class="num"><b>{_pct(r["p"])}</b></td><td class="num">{r["price"]*100:.0f}c</td>'
+                        f'<td class="num {cls}">{r["edge"]*100:+.1f}</td><td class="num">{r["median"]:.0f}</td></tr>')
+        out.append(f'<section><h2>Full book: every line on the board ({len(rows)}), highest hit rate first</h2><details><summary>Show all lines</summary>'
+                   '<div class="panel tbl"><table><tr><th>Player</th><th>Line</th><th class="num">Hits</th><th class="num">Price</th>'
+                   '<th class="num">Edge pts</th><th class="num">Median</th></tr>' + "".join(rows) + '</table>'
+                   '<p class="note">Hits = share of the sims where the line cashes. Edge = hits minus price minus the 2c fee. '
+                   '"Qualifies" = edge of +2 or more and not a blind spot. Robinhood prices are the displayed quotes; thin ladders can be stale.</p>'
+                   '</div></details></section>')
 
     # Robinhood main lines vs model
     if rep.get("market"):
