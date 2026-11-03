@@ -1,0 +1,2 @@
+id,date,sport,bet,price_taken,stake,model_prob,closing_price,result,pnl,notes
+1,2026-11-03,NFL,"CHI@SEA wk8 4-leg combo: Johnson 10+ rush yds, Loveland 2+ rec, Smith-Njigba 4+ rec, Odunze 2+ rec",36.8c,149.78,0.3990,,,,filled 407 @ 34.8c + 8.14 fees; payout 407.00; model fair ~40c
