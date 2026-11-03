@@ -112,6 +112,7 @@ changes soak up most vacated looks. k fitted on 2022 and 2023 alone gave
 | Zero touch games | nflverse snap counts | Backups and QB rushing error down 2 to 7% | ON |
 | Usage tiered share prior | learned from prior seasons only | Backups now calibrated (median line hit 47 to 53%, was 34 to 43%); starters unchanged | ON |
 | Depth chart role changes | nflverse daily depth charts (game day snapshot) | Promoted: targets x1.12, carries x1.15. Demoted: x0.82. Fitted 2022 to 2024, held on 2025 (x1.22 / x0.77) | ON |
+| Return from long absence (IR, ACL) | 2022-25, 128 return games | Game 1 back: targets x0.73, carries x0.72; game 2: x0.90. Held on both 2022-23 and 2024-25 | ON (auto) |
 | Defense vs position lever | play by play | Paired test, 2,223 player games 2024-25: 5 versions (yds/target 12 game & full season, target volume, field zones, zones+volume) all within noise (abs t < 2). Full season yds/target was neutral | ON as a lever (`--defense` to switch) |
 
 ## Honest limits

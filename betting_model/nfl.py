@@ -22,7 +22,7 @@ from itertools import combinations
 
 import numpy as np
 
-from nflmodel import absences, backtest, data, depth, ledger
+from nflmodel import absences, backtest, data, depth, ledger, returns
 from nflmodel.game import STAT_LABEL, GameModel, Player, american
 from nflmodel.pricing import ev_per_dollar, no_vig, parse_price, stake
 
@@ -108,7 +108,8 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     # Depth chart: add today's starters the usage history misses (e.g. a back returning from IR)
     dep = depth_status(model, a, key, (team_a, team_b))
     for pid, (now, prev, rank, pos, team) in dep.items():
-        if now and pos in ("WR", "TE", "RB") and pid in model._pg_by and pid not in outs:
+        top = now or (pos == "RB" and rank <= 3) or (pos == "WR" and rank <= 4)
+        if top and pos in ("WR", "TE", "RB") and pid in model._pg_by and pid not in outs:
             pids.setdefault(pid, team)
     for pid in extra:
         team = current_team(model, pid)
@@ -147,7 +148,13 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
         if pid in outs:
             continue
         dm_t, dm_c = 1.0, 1.0
-        if pid in dep:
+        nth = games_back(model, pid, t, key)
+        rp = returns.load()
+        if nth:
+            dm_t, dm_c = rp.get(f"t_game{nth}", 1.0), rp.get(f"c_game{nth}", 1.0)
+            print(f"RETURN: {name_of(pid)} ({t}) game {nth} back from a long absence: "
+                  f"targets x{dm_t:.2f}, carries x{dm_c:.2f} (fitted on real returns)")
+        elif pid in dep:
             now, prev, rank, pos, _ = dep[pid]
             change = "promoted" if now and not prev else ("demoted" if prev and not now else "same")
             dm_t, dm_c = depth.multipliers(dp, change)
@@ -156,6 +163,25 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
         players.append(Player(pid, t, share_mult=boost_t[t] * dm_t * mults.get(pid, 1.0),
                               carry_mult=boost_c[t] * dm_c * mults.get(pid, 1.0)))
     return players
+
+
+def games_back(model: GameModel, pid: str, team: str, key: int, min_missed: int = 4) -> int:
+    """1 or 2 if this is the player's 1st/2nd game back after missing min_missed+ team games."""
+    h = model._pg_by.get(pid)
+    if h is None:
+        return 0
+    keys = sorted(h[h.key < key].key)
+    if not keys:
+        return 0
+    tk = sorted(model.tg[(model.tg.posteam == team) & (model.tg.key < key)].key.unique())
+    missed_now = sum(1 for k in tk if k > keys[-1])
+    if missed_now >= min_missed:
+        return 1
+    if len(keys) >= 2 and missed_now == 0:
+        gap = sum(1 for k in tk if keys[-2] < k < keys[-1])
+        if gap >= min_missed and keys[-1] // 100 == key // 100:
+            return 2
+    return 0
 
 
 def depth_status(model: GameModel, a, key: int, teams) -> dict:
