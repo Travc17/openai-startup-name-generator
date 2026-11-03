@@ -54,13 +54,16 @@ def collect(model: GameModel, seasons: list[int], min_week: int = 4) -> pd.DataF
             sk = "t_share" if kind == "t" else "c_share"
             vac = sum(inputs[p][sk] for p in missing if p in inputs)
             first = any(regulars.loc[p, "last"] == prev_keys[-1] for p in missing)
+            all_keys = sorted(model.tg[(model.tg.posteam == team) & (model.tg.key < key)].key.unique())
+            weeks_out = max([sum(1 for k in all_keys if k > model._pg_by[p][model._pg_by[p].key < key].key.max())
+                             for p in missing if p in model._pg_by and (model._pg_by[p].key < key).any()] or [0]) + 1
             team_total = g.targets if kind == "t" else g.rushes
             for p in present:
                 if p not in inputs or inputs[p][sk] < 0.05:
                     continue
                 rows.append({"key": key, "team": team, "kind": kind, "pid": p,
                              "pos": inputs[p]["pos"], "pred": inputs[p][sk], "vacated": vac,
-                             "first_miss": bool(first) if vac > 0 else None,
+                             "first_miss": bool(first) if vac > 0 else None, "weeks_out": weeks_out,
                              "actual": actual.loc[p, cnt] / max(team_total, 1), "team_total": team_total})
     return pd.DataFrame(rows)
 

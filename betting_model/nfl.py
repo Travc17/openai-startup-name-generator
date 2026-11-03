@@ -123,6 +123,12 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
         if team not in vac_t:
             continue
         inp = model.player_inputs(Player(pid, team), team_b if team == team_a else team_a, key)
+        tk = model.tg[(model.tg.posteam == team) & (model.tg.key < key)].key.unique()
+        weeks_missed = int((tk > model._pg_by[pid].key.max()).sum())
+        if weeks_missed >= 2:
+            print(f"OUT: {name_of(pid)} ({team}) has missed {weeks_missed} straight games: no boost, "
+                  "teammates' recent games already reflect it (absence data only supports weeks 1-2)")
+            continue
         vac_t[team] += inp["t_share"]
         vac_c[team] += inp["c_share"]
         last_team_game = model.tg[(model.tg.posteam == team) & (model.tg.key < key)].key.max()
