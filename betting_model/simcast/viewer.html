@@ -1,0 +1,599 @@
+<title>SimCast NFL</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Barlow+Semi+Condensed:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a night-game broadcast. Stage (score bug, field, lower third, controls) on the left,
+   live box score and play by play on the right; one column on phones so it records cleanly in portrait. */
+:root {
+  --night: #0a0f17;        /* page */
+  --panel: #111925;        /* cards */
+  --panel-2: #172234;      /* raised rows, inputs */
+  --rule: #24314a;         /* hairlines */
+  --chalk: #eef2f8;        /* primary text */
+  --muted: #8f9bb4;        /* secondary text */
+  --first-down: #ffd23f;   /* the yellow line, also highlights */
+  --scrimmage: #3d8bff;    /* the blue line */
+  --turf-a: #2e6a36;
+  --turf-b: #295f31;
+  --paint: rgba(255, 255, 255, 0.82);
+  --display: "Big Shoulders Display", "Oswald", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow Semi Condensed", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--night); color: var(--chalk); }
+body { font-family: var(--body); font-size: 15px; line-height: 1.4; }
+button, select, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--first-down); outline-offset: 2px; }
+
+.app {
+  max-width: 1320px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 14px 28px;
+  display: grid; gap: 14px;
+}
+.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 16px; }
+.brand { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.brand b { font-family: var(--display); font-weight: 900; font-size: 26px; letter-spacing: 0.02em; text-transform: uppercase; }
+.brand b span { color: var(--first-down); }
+.brand small { color: var(--muted); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; }
+.gamepick { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 13px; }
+.gamepick select { background: var(--panel-2); border: 1px solid var(--rule); border-radius: 6px; padding: 6px 8px; }
+
+.grid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1000px) { .grid { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: start; } }
+.stage { display: grid; gap: 10px; min-width: 0; }
+
+/* ---------- score bug ---------- */
+.bug { display: grid; grid-template-columns: 1fr 1fr auto; border-radius: 8px; overflow: hidden;
+  background: var(--panel); border: 1px solid var(--rule); min-height: 64px; }
+.side-team { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; padding: 6px 14px; position: relative; min-width: 0; }
+.side-team .abbr { font-family: var(--display); font-weight: 800; font-size: 24px; letter-spacing: 0.04em; }
+.side-team .rec { font-size: 12px; color: rgba(255,255,255,0.72); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.side-team .pts { font-family: var(--display); font-weight: 900; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; min-width: 1.4ch; text-align: right; }
+.side-team .poss { position: absolute; top: 50%; left: 2px; transform: translateY(-50%); width: 0; height: 0;
+  border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 8px solid var(--first-down); opacity: 0; }
+.side-team.has-ball .poss { opacity: 1; }
+.clockbox { display: grid; align-content: center; justify-items: center; padding: 6px 16px; background: var(--panel-2); min-width: 120px; gap: 2px; }
+.clockbox .qc { font-family: var(--display); font-weight: 800; font-size: 22px; font-variant-numeric: tabular-nums; letter-spacing: 0.03em; }
+.clockbox .dd { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--first-down); min-height: 1.2em; }
+@keyframes jitter {
+  0% { transform: scale(1); } 15% { transform: scale(1.45) rotate(-4deg); } 30% { transform: scale(1.3) rotate(4deg); }
+  45% { transform: scale(1.35) rotate(-3deg); } 60% { transform: scale(1.2) rotate(2deg); } 100% { transform: scale(1) rotate(0); }
+}
+.pts.pop { animation: jitter 900ms ease-out; color: var(--first-down); }
+@media (max-width: 520px) {
+  .bug { grid-template-columns: 1fr 1fr; }
+  .clockbox { grid-column: 1 / -1; grid-auto-flow: column; justify-content: space-between; min-width: 0; padding: 4px 14px; }
+  .side-team .rec { display: none; }
+  .side-team .pts { font-size: 34px; }
+}
+
+/* ---------- field ---------- */
+.field-wrap { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); background: var(--turf-a); }
+.field-wrap svg { display: block; width: 100%; height: auto; }
+.banner { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.banner span { font-family: var(--display); font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em;
+  font-size: clamp(28px, 7vw, 76px); padding: 0.05em 0.5em; color: #fff; border-radius: 6px;
+  transform: skewX(-8deg) scale(0.6); opacity: 0; transition: transform 260ms ease-out, opacity 260ms ease-out; text-align: center; }
+.banner.show span { transform: skewX(-8deg) scale(1); opacity: 1; }
+
+/* ---------- lower third ---------- */
+.lower { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; display: grid; gap: 4px; min-height: 76px; }
+.lower .meta { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+.lower .txt { font-size: 19px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
+.lower .txt em { font-style: normal; color: var(--first-down); }
+
+/* ---------- controls ---------- */
+.controls { display: grid; gap: 10px; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.btn { background: var(--panel-2); border: 1px solid var(--rule); border-radius: 6px; padding: 7px 12px; cursor: pointer; font-weight: 600; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--first-down); color: #1a1405; border-color: var(--first-down); min-width: 92px; }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.seg button { background: transparent; border: 0; padding: 7px 10px; cursor: pointer; font-weight: 600; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--panel-2); color: var(--chalk); box-shadow: inset 0 -2px 0 var(--first-down); }
+.spacer { flex: 1; }
+input[type="range"] { width: 100%; accent-color: var(--first-down); }
+.progress-label { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.clean .controls, .clean .about, .clean .gamepick { display: none; }
+
+/* ---------- side: box score + play by play ---------- */
+.side { display: grid; gap: 14px; min-width: 0; }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; min-width: 0; }
+.card h2 { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 12px 0; flex-wrap: wrap; }
+.tabs { display: inline-flex; gap: 4px; }
+.tabs button { background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 4px 10px; cursor: pointer; color: var(--muted); font-weight: 700; letter-spacing: 0.04em; }
+.tabs button[aria-selected="true"] { color: var(--chalk); border-color: var(--rule); background: var(--panel-2); }
+.box-body { padding: 8px 12px 12px; display: grid; gap: 10px; }
+.tw { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; }
+th { text-align: right; font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; padding: 4px 6px; border-bottom: 1px solid var(--rule); }
+th:first-child, td:first-child { text-align: left; }
+td { text-align: right; padding: 4px 6px; border-bottom: 1px solid rgba(36, 49, 74, 0.55); white-space: nowrap; }
+td:first-child { white-space: normal; }
+td .pos { color: var(--muted); font-size: 11px; margin-left: 4px; }
+td .dag { color: var(--first-down); margin-left: 2px; }
+caption { caption-side: top; text-align: left; font-family: var(--display); font-weight: 800; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 2px 0 4px; }
+@keyframes bump { from { background: rgba(255, 210, 63, 0.38); } to { background: transparent; } }
+td.bump { animation: bump 1100ms ease-out; }
+.teamstats td:nth-child(2), .teamstats td:nth-child(3), .teamstats th:nth-child(2), .teamstats th:nth-child(3) { width: 25%; }
+.pbp { max-height: 460px; overflow-y: auto; padding: 4px 0 8px; }
+.pbp ol { list-style: none; margin: 0; padding: 0; }
+.pbp li { display: grid; grid-template-columns: 74px 1fr; gap: 2px 10px; padding: 7px 12px; border-bottom: 1px solid rgba(36, 49, 74, 0.55); border-left: 3px solid transparent; }
+.pbp li .when { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pbp li .sit { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.pbp li .what { font-size: 14px; min-width: 0; }
+.pbp li.score .what { font-weight: 700; }
+.pbp li.newest { background: rgba(255, 210, 63, 0.07); }
+.pbp .empty { padding: 14px 12px; color: var(--muted); }
+
+.about { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; display: grid; gap: 8px; }
+.about h2 { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0; }
+.about ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; max-width: 80ch; color: #cfd7e6; }
+.about b { color: var(--chalk); }
+
+@media (prefers-reduced-motion: reduce) {
+  .pts.pop, td.bump { animation: none; }
+  .banner span { transition: none; }
+}
+</style>
+
+<div class="app" id="app">
+  <header class="top">
+    <div class="brand"><b>Sim<span>Cast</span></b><small id="subtitle">Most typical of 25,000 sims</small></div>
+    <label class="gamepick" for="game">Game <select id="game"></select></label>
+  </header>
+
+  <main class="grid">
+    <section class="stage" aria-label="Broadcast">
+      <div class="bug" id="bug">
+        <div class="side-team" id="bug-away"><i class="poss"></i><span class="abbr"></span><span class="rec"></span><span class="pts">0</span></div>
+        <div class="side-team" id="bug-home"><i class="poss"></i><span class="abbr"></span><span class="rec"></span><span class="pts">0</span></div>
+        <div class="clockbox"><span class="qc" id="qc">1ST 15:00</span><span class="dd" id="dd">Kickoff</span></div>
+      </div>
+
+      <div class="field-wrap">
+        <svg id="field" viewBox="0 0 1200 533" role="img" aria-label="Field with ball position, line of scrimmage and first down line"></svg>
+        <div class="banner" id="banner" aria-live="polite"><span></span></div>
+      </div>
+
+      <div class="lower" aria-live="polite">
+        <div class="meta" id="lt-meta">Pregame</div>
+        <div class="txt" id="lt-txt">Press play to start the game.</div>
+      </div>
+
+      <div class="controls">
+        <div class="row">
+          <button class="btn primary" id="play" type="button">Play</button>
+          <button class="btn" id="prev" type="button" aria-label="Previous play">Back</button>
+          <button class="btn" id="next" type="button" aria-label="Next play">Next</button>
+          <button class="btn" id="restart" type="button">Restart</button>
+          <button class="btn" id="final" type="button">Jump to final</button>
+          <span class="spacer"></span>
+          <div class="seg" role="group" aria-label="Game length">
+            <button type="button" data-speed="broadcast" aria-pressed="true">8 min</button>
+            <button type="button" data-speed="fast" aria-pressed="false">3 min</button>
+            <button type="button" data-speed="clip" aria-pressed="false">X clip 90s</button>
+          </div>
+          <button class="btn" id="clean" type="button" aria-pressed="false">Clean feed</button>
+        </div>
+        <input type="range" id="scrub" min="0" max="1" value="0" aria-label="Game progress">
+        <div class="row"><span class="progress-label" id="plabel">Play 0 of 0</span><span class="spacer"></span><span class="progress-label">Space plays and pauses. Arrow keys step.</span></div>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="card" aria-label="Box score">
+        <div class="card-head">
+          <h2>Box score</h2>
+          <div class="tabs" role="tablist" id="tabs"></div>
+        </div>
+        <div class="box-body" id="box"></div>
+      </section>
+      <section class="card" aria-label="Play by play">
+        <div class="card-head"><h2>Play by play</h2><span class="progress-label">Newest first</span></div>
+        <div class="pbp" id="pbp"></div>
+      </section>
+    </aside>
+  </main>
+
+  <section class="about" id="about"></section>
+</div>
+
+<script id="games-data" type="application/json">/*__GAMES__*/[]</script>
+<script>
+(() => {
+  const GAMES = JSON.parse(document.getElementById("games-data").textContent);
+  const SPEEDS = { broadcast: 480, fast: 180, clip: 90 };
+  const WEIGHT = { run: 1, catch: 1, inc: 0.75, throw: 0.75, int: 1.8, kickoff: 0.9, punt: 1.0, fg: 1.8, xp: 0.7, two: 0.9, tod: 1.3, safety: 2.2, end: 1.8 };
+  const REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (id) => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const QN = ["", "1ST", "2ND", "3RD", "4TH"];
+  const ORD = ["", "1st", "2nd", "3rd", "4th"];
+
+  let G, EV, N, players, durs, idx = 0, playing = false, speed = "broadcast", timer = null, raf = null, tab = null, prevStats = {};
+
+  // ---------------- data helpers ----------------
+  function buildPlayers() {
+    players = {};
+    for (const t of [G.away, G.home]) {
+      const b = G.box[t];
+      players[b.qb.pid] = { name: b.qb.name, team: t, pos: "QB", projected: true };
+      for (const p of b.players) players[p.pid] = { name: p.name, team: t, pos: p.pos, projected: true };
+      for (const p of b.others) players[p.pid] = { name: p.name, team: t, pos: p.pos, projected: false };
+    }
+  }
+  const weight = (e) => (e.td ? 3.0 : WEIGHT[e.type] || 1);
+  function computeDurs() {
+    const tot = EV.reduce((s, e) => s + weight(e), 0);
+    durs = EV.map((e) => (SPEEDS[speed] * 1000 * weight(e)) / tot);
+  }
+  const dir = (team) => (team === G.away ? 1 : -1);
+  const X = (x) => 100 + x * 10;   // field yard (0 = away goal line) to SVG x
+
+  function stateAt(n) {
+    const st = { stats: {}, team: {}, score: { [G.away]: 0, [G.home]: 0 } };
+    for (const t of [G.away, G.home]) st.team[t] = { yds: 0, pass: 0, rush: 0, plays: 0, fd: 0, t3a: 0, t3c: 0, top: 0 };
+    for (let i = 0; i < n; i++) {
+      const e = EV[i];
+      for (const [pid, k, v] of e.box) {
+        const s = (st.stats[pid] = st.stats[pid] || {});
+        s[k] = (s[k] || 0) + v;
+        if (k === "rush_yds") s.rush_lng = Math.max(s.rush_lng ?? -99, v);
+        if (k === "rec_yds") s.rec_lng = Math.max(s.rec_lng ?? -99, v);
+      }
+      const T = st.team[e.off];
+      if (e.down) {
+        T.plays += 1;
+        if (e.type === "run" || e.type === "catch") {
+          T.yds += e.yards;
+          if (e.type === "run") T.rush += e.yards; else T.pass += e.yards;
+        }
+        if (e.fd) T.fd += 1;
+        if (e.down === 3) { T.t3a += 1; if (e.fd) T.t3c += 1; }
+      }
+      const nx = EV[i + 1];
+      const halfEnd = e.half === 1 ? 1800 : 3600;
+      const dt = (nx && nx.half === e.half ? nx.el : halfEnd) - e.el;
+      if (e.type !== "kickoff" && e.type !== "end") T.top += Math.max(0, dt);
+      st.score = e.score;
+    }
+    return st;
+  }
+
+  // ---------------- field ----------------
+  let ballG, losLine, fdLine, trail, fieldTeamText = [];
+  function el(tag, attrs, parent) {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function drawField() {
+    const svg = $("field");
+    svg.textContent = "";
+    const css = getComputedStyle(document.documentElement);
+    const ta = css.getPropertyValue("--turf-a").trim(), tb = css.getPropertyValue("--turf-b").trim();
+    for (let i = 0; i < 20; i++) el("rect", { x: 100 + i * 50, y: 0, width: 50, height: 533, fill: i % 2 ? tb : ta }, svg);
+    const [ac1] = G.colors[G.away], [hc1] = G.colors[G.home];
+    el("rect", { x: 0, y: 0, width: 100, height: 533, fill: ac1 }, svg);
+    el("rect", { x: 1100, y: 0, width: 100, height: 533, fill: hc1 }, svg);
+    const ez = (x, txt, rot) => {
+      const t = el("text", { x, y: 266, fill: "#ffffff", "fill-opacity": 0.9, "font-family": "Big Shoulders Display, Impact, sans-serif",
+        "font-weight": 900, "font-size": 64, "text-anchor": "middle", "dominant-baseline": "central", "letter-spacing": 8,
+        transform: `rotate(${rot} ${x} 266)` }, svg);
+      t.textContent = txt;
+    };
+    ez(50, G.away, -90); ez(1150, G.home, 90);
+    for (let yd = 0; yd <= 100; yd += 5) {
+      el("line", { x1: X(yd), x2: X(yd), y1: 0, y2: 533, stroke: "#ffffff", "stroke-opacity": yd % 10 ? 0.45 : 0.75, "stroke-width": yd === 0 || yd === 100 ? 5 : 2 }, svg);
+    }
+    for (let yd = 1; yd < 100; yd++) {
+      if (yd % 5 === 0) continue;
+      for (const y of [6, 205, 322, 521]) el("line", { x1: X(yd), x2: X(yd), y1: y - 6, y2: y + 6, stroke: "#ffffff", "stroke-opacity": 0.5, "stroke-width": 1.5 }, svg);
+    }
+    for (let yd = 10; yd <= 90; yd += 10) {
+      const lab = String(yd <= 50 ? yd : 100 - yd);
+      for (const [y, rot] of [[470, 0], [63, 180]]) {
+        const t = el("text", { x: X(yd), y, fill: "#ffffff", "fill-opacity": 0.8, "font-family": "Big Shoulders Display, Impact, sans-serif",
+          "font-weight": 800, "font-size": 46, "text-anchor": "middle", "dominant-baseline": "central", transform: `rotate(${rot} ${X(yd)} ${y})` }, svg);
+        t.textContent = lab.split("").join(" ");
+      }
+    }
+    trail = el("rect", { x: 0, y: 236, width: 0, height: 60, fill: "#ffffff", "fill-opacity": 0.13, rx: 6 }, svg);
+    losLine = el("line", { x1: 0, x2: 0, y1: 0, y2: 533, stroke: "#3d8bff", "stroke-width": 6, opacity: 0 }, svg);
+    fdLine = el("line", { x1: 0, x2: 0, y1: 0, y2: 533, stroke: "#ffd23f", "stroke-width": 6, opacity: 0 }, svg);
+    ballG = el("g", {}, svg);
+    el("ellipse", { cx: 0, cy: 6, rx: 15, ry: 5, fill: "#000000", "fill-opacity": 0.28 }, ballG);
+    const ball = el("g", { class: "ball-body" }, ballG);
+    el("ellipse", { cx: 0, cy: 0, rx: 16, ry: 10, fill: "#7a4420", stroke: "#3b1f0d", "stroke-width": 2 }, ball);
+    el("line", { x1: -6, x2: 6, y1: 0, y2: 0, stroke: "#ffffff", "stroke-width": 2 }, ball);
+    for (const x of [-3, 0, 3]) el("line", { x1: x, x2: x, y1: -3, y2: 3, stroke: "#ffffff", "stroke-width": 1.5 }, ball);
+  }
+  function placeBall(x, lift) {
+    ballG.setAttribute("transform", `translate(${X(x)} ${266 - (lift || 0)})`);
+    ballG.querySelector(".ball-body").setAttribute("transform", `scale(${1 + (lift || 0) / 160})`);
+  }
+  function restingBall(n) {
+    if (n === 0) return EV[0].x0;
+    const last = EV[n - 1];
+    const nx = EV[n];
+    if (nx && (nx.down || nx.type === "kickoff")) return nx.x0;
+    if (last.type === "fg" || last.type === "xp" || last.type === "two") return last.x1 + (last.x1 >= 50 ? 10 : -10) * (last.type === "fg" ? 1 : 0);
+    return last.x1;
+  }
+  function drawLines(n) {
+    const nx = EV[n];
+    if (nx && nx.down) {
+      const x0 = nx.x0;
+      losLine.setAttribute("x1", X(x0)); losLine.setAttribute("x2", X(x0)); losLine.setAttribute("opacity", 0.95);
+      if (!nx.goal) {
+        const xf = x0 + dir(nx.off) * nx.togo;
+        fdLine.setAttribute("x1", X(xf)); fdLine.setAttribute("x2", X(xf)); fdLine.setAttribute("opacity", 0.95);
+      } else fdLine.setAttribute("opacity", 0);
+      const start = driveStart(n);
+      const a = Math.min(X(start), X(x0)), b = Math.max(X(start), X(x0));
+      trail.setAttribute("x", a); trail.setAttribute("width", Math.max(0, b - a));
+      trail.setAttribute("fill", G.colors[nx.off][1] || "#ffffff");
+      trail.setAttribute("fill-opacity", 0.32);
+    } else {
+      losLine.setAttribute("opacity", 0); fdLine.setAttribute("opacity", 0); trail.setAttribute("width", 0);
+    }
+  }
+  function driveStart(n) {
+    const d = EV[n].drive;
+    let i = n;
+    while (i > 0 && EV[i - 1].drive === d && EV[i - 1].type !== "kickoff") i--;
+    const first = EV[i];
+    return first.down ? first.x0 : first.x1;
+  }
+
+  // ---------------- banner ----------------
+  let bannerTimer = null;
+  function banner(text, team, ms) {
+    const b = $("banner"), s = b.querySelector("span");
+    s.textContent = text;
+    s.style.background = team ? G.colors[team][0] : "#111925";
+    s.style.boxShadow = team ? `0 0 0 4px ${G.colors[team][1]}` : "none";
+    b.classList.add("show");
+    clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(() => b.classList.remove("show"), ms);
+  }
+  function bannerFor(e, ms) {
+    if (e.td) return banner(`Touchdown ${e.off}`, e.off, ms);
+    if (e.type === "fg") return banner(`Field goal ${e.off}`, e.off, ms);
+    if (e.type === "int") return banner("Intercepted", opp(e.off), ms);
+    if (e.type === "tod") return banner("Turnover on downs", opp(e.off), ms);
+    if (e.type === "safety") return banner(`Safety ${opp(e.off)}`, opp(e.off), ms);
+    if (e.type === "two" ) return banner("Two-point try good", e.off, ms);
+    if (e.type === "end") return banner(e.half === 1 ? "Halftime" : "Final", null, ms);
+  }
+  const opp = (t) => (t === G.away ? G.home : G.away);
+
+  // ---------------- render ----------------
+  function render(n, opts = {}) {
+    idx = n;
+    const st = stateAt(n);
+    // score bug
+    for (const [side, t] of [["away", G.away], ["home", G.home]]) {
+      const box = $(`bug-${side}`);
+      const [c1, c2] = G.colors[t];
+      box.style.background = `linear-gradient(90deg, ${c1}, ${c1} 70%, ${shade(c1)})`;
+      box.style.borderBottom = `4px solid ${c2}`;
+      box.querySelector(".abbr").textContent = t;
+      const qb = G.box[t].qb;
+      const s = st.stats[qb.pid] || {};
+      box.querySelector(".rec").textContent = `${short(qb.name)} ${s.cmp || 0}/${s.att || 0}, ${s.pass_yds || 0} yds`;
+      const pts = box.querySelector(".pts");
+      const old = Number(pts.textContent);
+      const now = st.score[t] || 0;
+      pts.textContent = now;
+      if (opts.animate && now !== old && !REDUCED) { pts.classList.remove("pop"); void pts.offsetWidth; pts.classList.add("pop"); }
+    }
+    const nx = EV[n];
+    const last = n ? EV[n - 1] : null;
+    $("bug-away").classList.toggle("has-ball", !!nx && nx.down && nx.off === G.away);
+    $("bug-home").classList.toggle("has-ball", !!nx && nx.down && nx.off === G.home);
+    if (n >= N) { $("qc").textContent = "FINAL"; $("dd").textContent = `${G.away} ${st.score[G.away]}, ${G.home} ${st.score[G.home]}`; }
+    else if (nx.type === "end") { $("qc").textContent = `${QN[nx.q]} 0:00`; $("dd").textContent = nx.half === 1 ? "End of half" : "Final"; }
+    else {
+      $("qc").textContent = `${QN[nx.q]} ${nx.clock}`;
+      $("dd").textContent = nx.down ? `${ORD[nx.down]} & ${nx.goal ? "Goal" : nx.togo}` : ({ kickoff: "Kickoff", punt: "Punt", fg: "Field goal try", xp: "Extra point", two: "Two-point try", tod: "4th down", safety: "Safety" }[nx.type] || "");
+    }
+    // field
+    placeBall(restingBall(n), 0);
+    drawLines(n);
+    // lower third
+    if (!last) { $("lt-meta").textContent = `${G.away} at ${G.home} · ${G.season} week ${G.week} · pregame`; $("lt-txt").textContent = "Press play to start the game."; }
+    else {
+      const sit = last.down ? ` · ${ORD[last.down]} & ${last.goal ? "goal" : last.togo} at ${last.spotText}` : "";
+      $("lt-meta").textContent = `${QN[last.q]} ${last.clock} · ${last.off}${sit}`;
+      $("lt-txt").innerHTML = esc(last.text).replace(/(TOUCHDOWN|INTERCEPTED|FIRST DOWN|GOOD|SAFETY|NO GOOD)/g, "<em>$1</em>");
+    }
+    // progress
+    $("scrub").max = N; $("scrub").value = n;
+    $("plabel").textContent = `Play ${n} of ${N}`;
+    renderBox(st, opts.animate);
+    renderPbp(n);
+  }
+  function shade(hex) {
+    const v = parseInt(hex.slice(1), 16);
+    const r = Math.round(((v >> 16) & 255) * 0.72), g = Math.round(((v >> 8) & 255) * 0.72), b = Math.round((v & 255) * 0.72);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const short = (n) => { const p = n.split(" "); return p.length < 2 ? n : `${p[0][0]}. ${p.slice(1).join(" ")}`; };
+  const mmss = (s) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
+
+  function renderTabs() {
+    const tabs = $("tabs");
+    tabs.textContent = "";
+    for (const t of [G.away, G.home, "TEAM"]) {
+      const b = document.createElement("button");
+      b.type = "button"; b.role = "tab"; b.textContent = t === "TEAM" ? "Team" : t;
+      b.setAttribute("aria-selected", String(t === tab));
+      b.addEventListener("click", () => { tab = t; renderTabs(); render(idx); });
+      tabs.appendChild(b);
+    }
+  }
+  function cell(v, key, cls) {
+    const changed = prevStats[key] !== undefined && prevStats[key] !== v;
+    prevStats[key] = v;
+    return `<td class="${cls || ""}${changed ? " bump" : ""}">${v}</td>`;
+  }
+  function renderBox(st, animate) {
+    const box = $("box");
+    if (!animate) prevStats = {};
+    if (tab === "TEAM") {
+      const A = st.team[G.away], H = st.team[G.home];
+      const rows = [["Total yards", A.yds, H.yds], ["Passing", A.pass, H.pass], ["Rushing", A.rush, H.rush], ["Plays", A.plays, H.plays],
+        ["Yards per play", A.plays ? (A.yds / A.plays).toFixed(1) : "0.0", H.plays ? (H.yds / H.plays).toFixed(1) : "0.0"],
+        ["First downs", A.fd, H.fd], ["3rd down", `${A.t3c}/${A.t3a}`, `${H.t3c}/${H.t3a}`], ["Possession", mmss(A.top), mmss(H.top)]];
+      box.innerHTML = `<div class="tw"><table class="teamstats"><thead><tr><th>Team</th><th>${G.away}</th><th>${G.home}</th></tr></thead><tbody>${
+        rows.map(([k, a, h]) => `<tr><td>${k}</td>${cell(a, "T" + k + "a")}${cell(h, "T" + k + "h")}</tr>`).join("")}</tbody></table></div>`;
+      return;
+    }
+    const t = tab, b = G.box[t];
+    const S = (pid) => st.stats[pid] || {};
+    const name = (pid) => { const p = players[pid]; return `${esc(p.name)}<span class="pos">${p.pos}</span>${p.projected ? "" : '<span class="dag" title="Not individually projected">&dagger;</span>'}`; };
+    const qb = S(b.qb.pid);
+    let html = `<div class="tw"><table><caption>Passing</caption><thead><tr><th>Player</th><th>C/Att</th><th>Yds</th><th>TD</th><th>Int</th></tr></thead><tbody>
+      <tr><td>${name(b.qb.pid)}</td>${cell(`${qb.cmp || 0}/${qb.att || 0}`, t + "ca")}${cell(qb.pass_yds || 0, t + "py")}${cell(qb.pass_td || 0, t + "ptd")}${cell(qb.int || 0, t + "int")}</tr></tbody></table></div>`;
+    const all = [b.qb.pid, ...b.players.map((p) => p.pid), ...b.others.map((p) => p.pid)];
+    const rushers = all.filter((pid) => (S(pid).rush_att || 0) > 0).sort((x, y) => (S(y).rush_yds || 0) - (S(x).rush_yds || 0));
+    html += `<div class="tw"><table><caption>Rushing</caption><thead><tr><th>Player</th><th>Car</th><th>Yds</th><th>Avg</th><th>Lng</th><th>TD</th></tr></thead><tbody>${
+      rushers.length ? rushers.map((pid) => { const s = S(pid); return `<tr><td>${name(pid)}</td>${cell(s.rush_att, pid + "ra")}${cell(s.rush_yds, pid + "ry")}${cell((s.rush_yds / s.rush_att).toFixed(1), pid + "rv")}${cell(s.rush_lng, pid + "rl")}${cell(s.rush_td || 0, pid + "rt")}</tr>`; }).join("")
+      : '<tr><td colspan="6">No carries yet</td></tr>'}</tbody></table></div>`;
+    const catchers = all.filter((pid) => (S(pid).targets || 0) > 0).sort((x, y) => (S(y).rec_yds || 0) - (S(x).rec_yds || 0) || (S(y).targets || 0) - (S(x).targets || 0));
+    html += `<div class="tw"><table><caption>Receiving</caption><thead><tr><th>Player</th><th>Rec</th><th>Tgt</th><th>Yds</th><th>Lng</th><th>TD</th></tr></thead><tbody>${
+      catchers.length ? catchers.map((pid) => { const s = S(pid); return `<tr><td>${name(pid)}</td>${cell(s.rec || 0, pid + "rc")}${cell(s.targets, pid + "tg")}${cell(s.rec_yds || 0, pid + "cy")}${cell(s.rec ? s.rec_lng : 0, pid + "cl")}${cell(s.rec_td || 0, pid + "ct")}</tr>`; }).join("")
+      : '<tr><td colspan="6">No targets yet</td></tr>'}</tbody></table></div>`;
+    box.innerHTML = html;
+  }
+  function renderPbp(n) {
+    const pbp = $("pbp");
+    if (!n) { pbp.innerHTML = '<p class="empty">Plays show up here as the game runs, newest on top.</p>'; return; }
+    const items = [];
+    for (let i = n - 1; i >= 0 && items.length < 400; i--) {
+      const e = EV[i];
+      const scoring = e.td || e.type === "fg" || e.type === "safety" || (e.type === "xp" && /GOOD\./.test(e.text) && !/NO GOOD/.test(e.text)) || e.type === "two";
+      const sit = e.down ? `${ORD[e.down]} & ${e.goal ? "goal" : e.togo} · ${e.spotText}` : e.off;
+      const stripe = scoring ? `border-left-color:${G.colors[e.type === "safety" ? opp(e.off) : e.off][1]}` : "";
+      items.push(`<li class="${scoring ? "score" : ""}${i === n - 1 ? " newest" : ""}" style="${stripe}"><span class="when">${QN[e.q]} ${e.clock}</span><span class="what">${esc(e.text)}</span><span></span><span class="sit">${esc(sit)} · ${e.score[G.away]}-${e.score[G.home]}</span></li>`);
+    }
+    pbp.innerHTML = `<ol>${items.join("")}</ol>`;
+    pbp.scrollTop = 0;
+  }
+
+  // ---------------- playback ----------------
+  function animateEvent(i, ms, done) {
+    const e = EV[i];
+    const from = i === 0 ? e.x0 : (e.down ? e.x0 : restingBall(i));
+    let to = e.x1;
+    if (e.type === "fg") to = e.x1 + dir(e.off) * 10;
+    const arc = { catch: 70, int: 70, punt: 150, kickoff: 160, fg: 120, xp: 90, two: 40 }[e.type] || 0;
+    if (REDUCED || ms < 60) { done(); return; }
+    const t0 = performance.now();
+    const step = (now) => {
+      const k = Math.min(1, (now - t0) / ms);
+      const ease = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      const x = from + (to - from) * ease;
+      placeBall(Math.max(-10, Math.min(110, x)), arc * Math.sin(Math.PI * k));
+      if (k < 1) raf = requestAnimationFrame(step); else done();
+    };
+    raf = requestAnimationFrame(step);
+  }
+  function stop() {
+    playing = false;
+    clearTimeout(timer); cancelAnimationFrame(raf);
+    $("play").textContent = idx >= N ? "Replay" : "Play";
+  }
+  function tick() {
+    if (!playing) return;
+    if (idx >= N) { stop(); return; }
+    const d = durs[idx];
+    const e = EV[idx];
+    const travel = e.type === "end" ? 0 : d * 0.55;
+    animateEvent(idx, travel, () => {
+      render(idx + 1, { animate: true });
+      const big = e.td || ["fg", "int", "tod", "safety", "end", "two"].includes(e.type);
+      if (big) bannerFor(e, Math.max(700, d * 0.5));
+      timer = setTimeout(tick, d - travel);
+    });
+  }
+  function play() {
+    if (idx >= N) render(0);
+    playing = true;
+    $("play").textContent = "Pause";
+    tick();
+  }
+
+  function loadGame(k) {
+    stop();
+    G = GAMES[k]; EV = G.events; N = EV.length;
+    tab = G.away;
+    buildPlayers(); computeDurs(); drawField(); renderTabs();
+    $("subtitle").textContent = `Most typical of ${G.typical.sims.toLocaleString()} sims`;
+    renderAbout();
+    render(0);
+  }
+  function renderAbout() {
+    const T = G.typical, L = G.line;
+    const fav = L.fav ? `${L.fav} −${L.spread}, total ${L.total}` : "no market line";
+    const made = (G.made_utc || "").replace("T", " ").slice(0, 16) + " UTC";
+    $("about").innerHTML = `<h2>How this game was made</h2><ul>
+      <li><b>Player and QB stats</b> are one simulated game from the model's ${T.sims.toLocaleString()} (the same run as the saved projections, ${esc(made)}): sim #${T.player_sim.toLocaleString()}, the closest to the median across ${T.stats_scored} player stats among the ${T.consistent.toLocaleString()} sims whose numbers add up (catches never exceed targets, the QB line matches his receivers, passing TDs fit the score). It ranks #${T.rank} of all ${T.sims.toLocaleString()}.</li>
+      <li><b>The final score</b> comes from the model's score simulation, which is anchored to the market line (${esc(fav)}). ${G.away} ${G.final[G.away]}, ${G.home} ${G.final[G.home]} is the median score and came up in ${T.score_count} of ${T.sims.toLocaleString()} sims.</li>
+      <li><b>Filled in around the model's numbers</b>, because the model does not simulate them: the order of plays, drives, downs, field position, the clock, kicks, and how each player's yards split across his touches. No sacks, penalties or fumbles. Every play is checked so the final box score matches the simulated game exactly.</li>
+      <li><span style="color:var(--first-down)">&dagger;</span> Receivers the model does not project one by one. Their catches come from the team's "everyone else" share, assigned to the team's other recent targets.</li>
+    </ul>`;
+  }
+
+  // ---------------- wiring ----------------
+  const sel = $("game");
+  GAMES.forEach((g, k) => { const o = document.createElement("option"); o.value = k; o.textContent = `${g.season} wk ${g.week}: ${g.away} at ${g.home}`; sel.appendChild(o); });
+  sel.addEventListener("change", () => loadGame(Number(sel.value)));
+  $("play").addEventListener("click", () => (playing ? stop() : play()));
+  $("next").addEventListener("click", () => { stop(); if (idx < N) { render(idx + 1); } });
+  $("prev").addEventListener("click", () => { stop(); if (idx > 0) render(idx - 1); });
+  $("restart").addEventListener("click", () => { stop(); render(0); });
+  $("final").addEventListener("click", () => { stop(); render(N); });
+  $("scrub").addEventListener("input", (ev) => { stop(); render(Number(ev.target.value)); });
+  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => {
+    speed = b.dataset.speed;
+    document.querySelectorAll(".seg button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    computeDurs();
+  }));
+  $("clean").addEventListener("click", () => {
+    const on = !$("app").classList.contains("clean");
+    $("app").classList.toggle("clean", on);
+    $("clean").setAttribute("aria-pressed", String(on));
+    if (on) document.addEventListener("dblclick", exitClean, { once: true });
+  });
+  function exitClean() { $("app").classList.remove("clean"); $("clean").setAttribute("aria-pressed", "false"); }
+  document.addEventListener("keydown", (ev) => {
+    if (ev.target.closest("select, input")) return;
+    if (ev.key === " ") { ev.preventDefault(); playing ? stop() : play(); }
+    else if (ev.key === "ArrowRight") { stop(); if (idx < N) render(idx + 1); }
+    else if (ev.key === "ArrowLeft") { stop(); if (idx > 0) render(idx - 1); }
+    else if (ev.key === "Escape") exitClean();
+  });
+
+  function start(data) {
+    if (!GAMES.length) { $("lt-txt").textContent = "No games exported yet."; return; }
+    const k = Math.min(data.game || 0, GAMES.length - 1);
+    sel.value = k;
+    loadGame(k);
+    if (data.speed && SPEEDS[data.speed]) document.querySelector(`.seg button[data-speed="${data.speed}"]`).click();
+    if (data.idx) render(Math.min(data.idx, N));
+  }
+  window.claude?.hot?.snapshot?.(() => ({ game: Number(sel.value), idx, speed }));
+  window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+})();
+</script>
