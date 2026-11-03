@@ -641,8 +641,12 @@ def main():
 
     sub.add_parser("update").set_defaults(func=cmd_update)
     pk = sub.add_parser("picks", help="Grade and summarize the paper-trading log")
-    pk.add_argument("action", choices=["grade", "summary"])
-    pk.set_defaults(func=lambda a: print(picks.grade(build_model()) if a.action == "grade" else picks.summary()))
+    pk.add_argument("action", choices=["grade", "summary", "close"])
+    pk.add_argument("--game", help="close: game as logged, e.g. JAX@BAL")
+    pk.add_argument("--label", help="close: pick label exactly as logged")
+    pk.add_argument("--price", type=float, help="close: last price before kickoff, e.g. 0.43")
+    pk.set_defaults(func=lambda a: print(picks.grade(build_model()) if a.action == "grade" else
+                                         picks.set_close(a.game, a.label, a.price) if a.action == "close" else picks.summary()))
 
     lg = sub.add_parser("log")
     lg.add_argument("action", choices=["add", "settle", "summary"])

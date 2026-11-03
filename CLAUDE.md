@@ -28,7 +28,8 @@ from the log (`python nfl.py log summary`).
    Run `python regression_check.py` after `update` or any code change; if it prints DRIFT, fix before publishing.
 5. Publish the HTML with the Artifact tool (same file path per game to keep the URL), then reply with: score
    prediction, edges (or "pass"), best bet with stake, top singles/parlays, and anything the model can't price.
-6. After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
+6. Before kickoff, record closing prices for logged picks (`python nfl.py picks close --game G --label L --price P`).
+   After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
    review in `betting_model/reviews/`.
 
 Paper-trading log (`picks_log.csv`): `report` records every qualifying pick before kickoff and refuses games

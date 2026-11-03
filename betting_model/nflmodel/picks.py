@@ -11,11 +11,31 @@ from pathlib import Path
 import pandas as pd
 
 LOG = Path(__file__).resolve().parent.parent / "picks_log.csv"
-COLS = ["logged_utc", "key", "game", "kind", "label", "legs", "price", "fee", "model_p", "edge", "stake", "result", "profit_per_1"]
+COLS = ["logged_utc", "key", "game", "kind", "label", "legs", "price", "fee", "model_p", "edge", "stake", "result",
+        "profit_per_1", "close_price"]
 
 
 def _read():
-    return pd.read_csv(LOG) if LOG.exists() else pd.DataFrame(columns=COLS)
+    df = pd.read_csv(LOG) if LOG.exists() else pd.DataFrame(columns=COLS)
+    for c in COLS:
+        if c not in df.columns:
+            df[c] = None
+    for c in ("price", "fee", "model_p", "edge", "stake", "profit_per_1", "close_price"):
+        df[c] = pd.to_numeric(df[c], errors="coerce").astype(float)
+    for c in ("logged_utc", "game", "kind", "label", "legs", "result"):
+        df[c] = df[c].astype(object).where(df[c].notna(), "")
+    return df[COLS]
+
+
+def set_close(game: str, label: str, close: float) -> str:
+    """Record the last price before kickoff (same basis as `price`, fee excluded) for closing line value."""
+    df = _read()
+    hit = (df.game.str.upper() == game.upper()) & (df.label.str.lower() == label.lower())
+    if not hit.any():
+        return f"No logged pick '{label}' for {game}."
+    df.loc[hit, "close_price"] = close
+    df.to_csv(LOG, index=False)
+    return f"Close {close:.2f} recorded for {label} ({game})."
 
 
 def log_report(rep: dict, key: int) -> int:
@@ -33,7 +53,7 @@ def log_report(rep: dict, key: int) -> int:
                             price=p["ticket"], model_p=p["p"], edge=p["edge"], stake=p["stake"]))
     if not new:
         return 0
-    add = pd.DataFrame(new).assign(logged_utc=now, key=key, game=game, fee=rep["fee"], result="", profit_per_1="")
+    add = pd.DataFrame(new).assign(logged_utc=now, key=key, game=game, fee=rep["fee"], result="", profit_per_1=None, close_price=None)
     # one row per (game, label): re-running a report updates the price/prob instead of duplicating
     df = df[~((df.game == game) & (df.key == key) & df.label.isin(add.label) & (df.result.fillna("") == ""))]
     pd.concat([df, add[COLS]], ignore_index=True).to_csv(LOG, index=False)
@@ -78,9 +98,14 @@ def grade(model) -> str:
 
 def summary() -> str:
     df = _read()
-    g = df[df.result.isin(["win", "loss"])] if not df.empty else df
-    if g.empty:
-        return f"{len(df)} picks logged, none graded yet."
-    roi = pd.to_numeric(g.profit_per_1).mean()
-    return (f"{len(df)} picks logged, {len(g)} graded: {(g.result == 'win').mean():.1%} won "
-            f"(model expected {g.model_p.mean():.1%}), flat-stake ROI {roi:+.1%}")
+    g = df[df.result.isin(["win", "loss"])]
+    out = [f"{len(df)} picks logged, none graded yet." if g.empty else
+           f"{len(df)} picks logged, {len(g)} graded: {(g.result == 'win').mean():.1%} won "
+           f"(model expected {pd.to_numeric(g.model_p).mean():.1%}), flat-stake ROI "
+           f"{pd.to_numeric(g.profit_per_1).mean():+.1%}"]
+    close = pd.to_numeric(df.close_price, errors="coerce")
+    if close.notna().any():
+        clv = close[close.notna()] - pd.to_numeric(df.price[close.notna()])
+        out.append(f"Closing line value on {len(clv)} picks: avg {clv.mean() * 100:+.1f}c, beat the close on "
+                   f"{(clv > 0).mean():.0%} (positive = the market moved toward the pick)")
+    return "\n".join(out)

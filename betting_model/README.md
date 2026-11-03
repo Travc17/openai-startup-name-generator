@@ -198,6 +198,8 @@ correlated, one game): 4 of 15 won (26.7%) vs 38.9% expected, flat ROI -28.4%. M
 ## Paper-trading record and regression check
 * `report` writes every qualifying pick (stake > 0) to `picks_log.csv` with a UTC timestamp, price, fee and
   model probability. It refuses to log a game that is already in the play by play (no hindsight rows).
+* `python nfl.py picks close --game JAX@BAL --label "Zay Flowers 5+ catches" --price 0.43` records the last price
+  before kickoff; `picks summary` then reports closing line value (the fastest honest signal of edge).
 * `python nfl.py picks grade` settles open picks from the data (a player with no snaps, or a QB with no
   attempts, voids the pick); `python nfl.py picks summary` prints hit rate vs expected and flat-stake ROI.
 * `python regression_check.py` re-runs the live model on 2025 weeks 10-13 (fixed seeds, about 30 seconds)
