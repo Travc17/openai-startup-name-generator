@@ -1,0 +1,31 @@
+parlay,legs,sim_hit,lift,naive_c,edge,books_hit,max_c,injury_or_unpriced
+Tuten NO 70+ rush yds + Rodriguez NO 30+ rush yds,2,0.3636,1.0240272019837169,20,0.1386,,32,True
+Henry NO 75+ rush yds + Rodriguez NO 30+ rush yds,2,0.37548,0.9705541541425855,22,0.13407999999999998,,33,True
+Washington NO 60+ rec yds + Rodriguez NO 30+ rush yds,2,0.35804,0.982037932666099,20,0.13304000000000005,,31,True
+Henry NO 75+ rush yds + Washington NO 50+ rec yds,2,0.35948,0.9944541878159974,21,0.12888000000000002,0.1575,31,False
+Henry NO 75+ rush yds + Washington NO 60+ rec yds,2,0.41844,0.9948096820002077,27,0.12843999999999994,0.213,37,False
+Washington NO 50+ rec yds + Rodriguez NO 30+ rush yds,2,0.30748,0.9813339532984305,16,0.12758,,26,True
+Washington NO 50+ rec yds + Tuten NO 70+ rush yds,2,0.3242,0.97718707403897,20,0.10919999999999999,0.15372,28,True
+Washington NO 60+ rec yds + Tuten NO 70+ rush yds,2,0.37888,0.9814386248983848,25,0.10887999999999998,0.207888,33,True
+Henry NO 75+ rush yds + Tuten NO 70+ rush yds,2,0.3916,0.9559614887232984,27,0.10159999999999997,0.244,35,True
+Henry NO 75+ rush yds + Washington NO 60+ rec yds + Rodriguez NO 30+ rush yds,3,0.23032,0.9455835234082091,11,0.09961999999999999,,19,True
+Washington NO 60+ rec yds + Tuten NO 70+ rush yds + Rodriguez NO 30+ rush yds,3,0.22044,0.9860826141612715,10,0.09794,,18,True
+Henry NO 75+ rush yds + Tuten NO 70+ rush yds + Rodriguez NO 30+ rush yds,3,0.226,0.9527250564130776,11,0.0953,,18,True
+Henry NO 75+ rush yds + Washington NO 50+ rec yds + Rodriguez NO 30+ rush yds,3,0.19776,0.9447348488202749,9,0.091414,,15,True
+Washington NO 50+ rec yds + Tuten NO 70+ rush yds + Rodriguez NO 30+ rush yds,3,0.18896,0.9835490373144999,8,0.08900999999999999,,14,True
+Henry NO 75+ rush yds + Washington NO 60+ rec yds + Tuten NO 70+ rush yds,3,0.2412,0.9352124891140717,14,0.0862,0.103944,20,True
+Henry NO 75+ rush yds + Washington NO 50+ rec yds + Tuten NO 70+ rush yds,3,0.20632,0.9308454099319943,11,0.08102000000000001,0.07686,16,True
+Washington NO 50+ rec yds + Strange NO 30+ rec yds,2,0.26736,1.0232829385775977,17,0.07965999999999998,0.113715,22,False
+Strange NO 30+ rec yds + Rodriguez NO 30+ rush yds,2,0.27496,0.9833128969042231,18,0.07866000000000001,,23,True
+Washington NO 60+ rec yds + Strange NO 30+ rec yds,2,0.31096,1.0228232468804286,22,0.07596000000000003,0.15378599999999998,27,False
+Henry NO 75+ rush yds + Washington NO 60+ rec yds + Strange NO 30+ rec yds,3,0.20688,1.0185587862322518,12,0.07078000000000001,0.07689299999999999,16,False
+Henry NO 75+ rush yds + Strange NO 30+ rec yds,2,0.3228,1.000612300332837,23,0.07059999999999994,0.1805,28,False
+Henry NO 75+ rush yds + Washington NO 50+ rec yds + Strange NO 30+ rec yds,3,0.1784,1.0220347911924221,9,0.067842,0.0568575,13,False
+Washington NO 60+ rec yds + Strange NO 30+ rec yds + Rodriguez NO 30+ rush yds,3,0.1728,0.9815247043040485,9,0.06465000000000001,,13,True
+Henry NO 75+ rush yds + Strange NO 30+ rec yds + Rodriguez NO 30+ rush yds,3,0.1782,0.95389691711623,10,0.062998,,13,True
+Washington NO 50+ rec yds + Strange NO 30+ rec yds + Rodriguez NO 30+ rush yds,3,0.14836,0.9805676458959804,7,0.05960299999999999,,10,True
+Tuten NO 70+ rush yds + Strange NO 30+ rec yds + Rodriguez NO 30+ rush yds,3,0.1676,0.9775127143974652,9,0.05945,,12,True
+Washington NO 60+ rec yds + Tuten NO 70+ rush yds + Strange NO 30+ rec yds,3,0.184,0.987052084516709,11,0.056499999999999995,0.075047568,14,True
+Tuten NO 70+ rush yds + Strange NO 30+ rec yds,2,0.28968,0.978375295879495,22,0.054680000000000006,0.176168,24,True
+Washington NO 50+ rec yds + Tuten NO 70+ rush yds + Strange NO 30+ rec yds,3,0.15712,0.9807469257110725,8,0.05327,0.055492919999999994,11,True
+Henry NO 75+ rush yds + Tuten NO 70+ rush yds + Strange NO 30+ rec yds,3,0.18516,0.936064268817667,12,0.04905999999999999,0.088084,14,True

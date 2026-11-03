@@ -24,6 +24,14 @@ from the log (`python nfl.py log summary`).
   after the fee. Kalshi's fee is priced at 2c per contract (`--fee kalshi=0.02`, the default in market.py) until a
   real fill shows the actual fee; replace it then. Robinhood (2c on bet #1) is no longer used.
 * Stake: $50 when edge is 2-4%; quarter Kelly above 4%. Max 3 bets per slate.
+* Bet requests (Travis, 2026-11-03): whenever Travis asks for a bet for the bankroll, answer with EITHER one
+  single prop + one parlay OR two single props + one parlay. A parlay is required every time, shown with its
+  SIM HIT RATE (joint, from the same sims as the projections, correlation included) next to its price's
+  break-even (with fee) and the books' implied hit rate. Parlay legs: no blind spots, no TD/INT, and no leg that
+  repeats a single in the same answer. Every bet still needs edge >= 2% after fee; if the best parlay fails,
+  show it anyway, marked "no bet". Stakes via `pricing.plan_game` (max 3 bets, 10% per-game cap).
+  Price parlays by replaying the report's sim (same roster, QBs, spread, seed 7), NOT `nfl.py parlay`, which
+  re-simulates without spread/total/QB settings.
 * Cap: ALL bets on one game combined <= 10% of current bankroll (approved 2026-11-03). The report's
   "Bet plan" applies it: best expected profit first, no repeated player+stat, stakes scaled down together
   (never below $50); if the minimums alone break the cap, the weakest bet is dropped.

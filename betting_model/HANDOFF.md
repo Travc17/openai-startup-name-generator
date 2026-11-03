@@ -65,6 +65,18 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
    (Kalshi prices must be in cents in the quotes CSV; Odds API gives American odds).
 3. `update` does not fetch what the model needs on a fresh container (CLAUDE.md step 2 workaround).
 4. BETFINDER_PROMPT.md lists Caesars and a 500-credit free plan; neither matches this account.
+5. `nfl.py parlay` calls `simulate` without spread/total (no game script), without the QB starters, and with
+   default sims, so its parlay odds do not match the projections. JAX@BAL parlays were priced by replaying
+   the report's sim (`markets/2026_wk09_JAX_at_BAL_parlays_v3.csv`; replay matched saved projections
+   exactly). Fix: make `cmd_parlay` take --fav/--spread/--total/--qb and seed 7 like `report`.
+6. QB rushing (rush_yds for QBs) is not in the regression check or any backtest. Proposed (not approved):
+   treat it like TD/INT, no bets until checked. Lawrence 15+ rush No was skipped for this reason.
+
+### Bet recommendation in the new format (2026-11-03 ~21:00 UTC, not placed)
+* Single: Kalshi NO Justice Hill 20+ rush yds at <= 66c, $155 (model 82.7%; books ~63.5%).
+* Parlay: Kalshi NO Derrick Henry 75+ rush yds + NO Parker Washington 60+ rec yds. Sim hit 41.8%
+  (legs 66.8% x 63.0%, correlation x0.99); leg asks multiply to 27c (cost 29% with fee); books ~21%;
+  pay at most 37c. $65. Plan total $220 of the $225 cap. Real Kalshi combo quote still needed.
 
 ## After the game
 1. Settle any model bets in `bets.csv` with closing prices; `python nfl.py picks grade`.
