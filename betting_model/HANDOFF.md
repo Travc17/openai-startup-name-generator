@@ -105,3 +105,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   one common percentile (JAX ~59-63rd, BAL ~58-61st) so they add up exactly. Proof it is not a model bug: in each sim
   QB and receivers agree (median gap 5 yds, 0 cmp); median of the receivers' TOTAL is 227 vs QB 234 (BAL 167 vs 164);
   only the SUM of individual medians (157) falls short. Published v4.
+* Predictions panel (each player's own median, 80% range, A/B/C grade) + scorecard for played games. CHI@SEA re-sim
+  added (`projections/2026_wk08_CHI_at_SEA_resim.json`, meta.resim = true, made after the game with pre-game inputs):
+  44 of 46 inside the 80% range (A 18/18, B 8/10, C 18/18); misses Swift 27 carries, Charbonnet 6. Score missed
+  (pred SEA 25-22, actual CHI 34-17). One game: watch whether coverage stays above 80% (ranges too wide). Published v5.
+* Proposed next (not built): X prediction card image per game, scorecard post after each game, season tracker,
+  model-vs-book-line comparison (needs book captures for every game).

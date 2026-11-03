@@ -109,6 +109,10 @@ input[type="range"] { width: 100%; accent-color: var(--first-down); }
 @media (min-width: 900px) { .boxes { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .teambox { display: grid; gap: 10px; align-content: start; min-width: 0; }
 .teambox h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: 0.06em; padding-left: 10px; border-left: 5px solid var(--rule); }
+.g { display: inline-block; min-width: 1.7em; text-align: center; border-radius: 4px; font-weight: 700; font-size: 12px; padding: 1px 4px; }
+.gA { background: #1f6f43; color: #eafff2; } .gB { background: #24477a; color: #e8f0ff; } .gC { background: #3a4253; color: #c9d1e0; }
+.hit { color: #5fd38d; font-weight: 700; } .miss { color: #ff7a7a; font-weight: 700; }
+.scorecard { font-size: 15px; line-height: 1.45; margin: 0; }
 .tabs { display: inline-flex; gap: 4px; }
 .tabs button { background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 4px 10px; cursor: pointer; color: var(--muted); font-weight: 700; letter-spacing: 0.04em; }
 .tabs button[aria-selected="true"] { color: var(--chalk); border-color: var(--rule); background: var(--panel-2); }
@@ -200,6 +204,11 @@ td.bump { animation: bump 1100ms ease-out; }
   <section class="card" aria-label="Box score">
     <div class="card-head"><h2>Box score</h2></div>
     <div class="box-body" id="box"></div>
+  </section>
+
+  <section class="card" aria-label="Predictions">
+    <div class="card-head"><h2>Predictions</h2><span class="progress-label" id="pred-sub"></span></div>
+    <div class="box-body" id="pred"></div>
   </section>
 
   <section class="about" id="about"></section>
@@ -530,7 +539,36 @@ td.bump { animation: bump 1100ms ease-out; }
     buildPlayers(); computeDurs(); drawField();
     $("subtitle").textContent = G.typical.mode === "median" ? `Median of ${G.typical.sims.toLocaleString()} sims` : `Most typical of ${G.typical.sims.toLocaleString()} sims`;
     renderAbout();
+    renderPred();
     render(0);
+  }
+  const PRED_LABEL = { pass_cmp: "Completions", pass_att: "Attempts", pass_yds: "Pass yds", pass_td: "Pass TD", int: "INT",
+    rush_att: "Carries", rush_yds: "Rush yds", rec: "Receptions", rec_yds: "Rec yds" };
+  const PRED_ORDER = ["pass_cmp", "pass_att", "pass_yds", "pass_td", "int", "rush_att", "rush_yds", "rec", "rec_yds"];
+  function renderPred() {
+    const P = G.pred || [], A = G.actual;
+    const f = (x) => (Math.round(x * 10) / 10).toString();
+    $("pred-sub").textContent = A ? "Graded against the final" : "Before kickoff";
+    let head = `<p class="progress-label" style="margin:0">Prediction = the model's median (half of ${G.typical.sims.toLocaleString()} sims above, half below). 80% range = the middle 80% of sims. Grade: <span class="g gA">A</span> tested stat, clear role · <span class="g gB">B</span> rushing (ranges run a bit narrow in tests) or a lighter role · <span class="g gC">C</span> blind spot, depth player or untested stat.</p>`;
+    if (A) {
+      const c = A.card, tot = ["A", "B", "C"].reduce((s, k) => [s[0] + c[k][0], s[1] + c[k][1]], [0, 0]);
+      head = `<p class="scorecard"><b>Scorecard:</b> ${tot[0]} of ${tot[1]} inside the 80% range (${Math.round(tot[0] / tot[1] * 100)}%; 80% expected) · A ${c.A[0]}/${c.A[1]} · B ${c.B[0]}/${c.B[1]} · C ${c.C[0]}/${c.C[1]}.<br>Predicted score ${G.away} ${G.final[G.away]}, ${G.home} ${G.final[G.home]} · actual ${G.away} ${A.final[G.away]}, ${G.home} ${A.final[G.home]}.${G.resim ? " Re-simulated after the game using only pre-game inputs (closing line, inactives)." : ""}</p>` + head;
+    }
+    const team = (t) => {
+      const rows = P.filter((r) => r.team === t);
+      const best = {};
+      rows.forEach((r) => { best[r.name] = Math.max(best[r.name] || 0, r.pos === "QB" ? 1e9 : (r.stat.endsWith("yds") ? r.median : 0)); });
+      rows.sort((x, y) => (best[y.name] - best[x.name]) || x.name.localeCompare(y.name) || PRED_ORDER.indexOf(x.stat) - PRED_ORDER.indexOf(y.stat));
+      const th = `<tr><th>Player</th><th>Stat</th><th>Pred</th><th>80% range</th><th>Grade</th>${A ? "<th>Actual</th><th></th>" : ""}</tr>`;
+      let last = "";
+      const body = rows.map((r) => {
+        const nm = r.name === last ? "" : `${esc(r.name)}<span class="pos">${r.pos}</span>`; last = r.name;
+        const act = A ? (r.actual === undefined ? "<td>-</td><td></td>" : `<td>${f(r.actual)}</td><td class="${r.in_range ? "hit" : "miss"}">${r.in_range ? "&#10003;" : "&#10007;"}</td>`) : "";
+        return `<tr><td>${nm}</td><td>${PRED_LABEL[r.stat]}</td><td>${f(r.median)}</td><td>${f(r.lo)} to ${f(r.hi)}</td><td><span class="g g${r.grade}">${r.grade}</span></td>${act}</tr>`;
+      }).join("");
+      return `<div class="teambox"><h3 style="border-left-color:${G.colors[t][0]}">${t}</h3><div class="tw"><table><thead>${th}</thead><tbody>${body}</tbody></table></div></div>`;
+    };
+    $("pred").innerHTML = head + `<div class="boxes">${team(G.away)}${team(G.home)}</div>`;
   }
   function renderAbout() {
     const T = G.typical, L = G.line;

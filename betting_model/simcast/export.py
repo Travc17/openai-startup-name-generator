@@ -215,6 +215,69 @@ def median_box(run: dict, team: str) -> dict:
             "throwaways": att - int(tg.sum())}
 
 
+# ---------------- predictions card: each player's own median, 80% range, grade (Travis, 2026-11-03) ----------------
+# Grades are rules, not judgment. A: passing/receiving stats whose 10-90 ranges passed the regression check, for a
+# player with a clear role. B: rushing (the check found rush ranges a bit narrow: under-p90 83-86% vs 90%) or a
+# lighter role. C: blind spots, depth players and untested stats (TDs, INTs, QB rushing).
+PRED_STATS = {"QB": ("pass_cmp", "pass_att", "pass_yds", "pass_td", "int"), "RUSH": ("rush_att", "rush_yds"),
+              "REC": ("rec", "rec_yds")}
+UNTESTED = {"pass_td", "int"}
+
+
+def grade(pl: dict, stat: str) -> str:
+    b, st_ = pl.get("blind"), pl["stats"]
+    if b == "all" or (b and stat in b) or stat in UNTESTED:
+        return "C"
+    if pl["pos"] == "QB":
+        return "A"
+    if stat in ("rush_att", "rush_yds"):
+        return "B" if st_.get("rush_att", {}).get("mean", 0) >= 5 else "C"
+    return "A" if st_.get("targets", {}).get("mean", 0) >= 4 else ("B" if st_.get("targets", {}).get("mean", 0) >= 2 else "C")
+
+
+def predictions(run: dict) -> list[dict]:
+    out = []
+    for name, pl in run["proj"]["players"].items():
+        st_ = pl["stats"]
+        keys = list(PRED_STATS["QB"]) if pl["pos"] == "QB" else []
+        if pl["pos"] != "QB" and st_.get("rush_att", {}).get("mean", 0) >= 1.5:
+            keys += PRED_STATS["RUSH"]
+        if pl["pos"] != "QB" and st_.get("targets", {}).get("mean", 0) >= 1.0:
+            keys += PRED_STATS["REC"]
+        for k in keys:
+            if k in st_:
+                q = st_[k]["q"]
+                out.append({"pid": pl["pid"], "name": name, "team": pl["team"], "pos": pl["pos"], "stat": k,
+                            "median": q[2], "lo": q[0], "hi": q[4], "grade": grade(pl, k)})
+    return out
+
+
+def actuals(run: dict) -> dict | None:
+    """Real results when the game is already in the data (pre-game inputs only went into the sims)."""
+    import pandas as pd
+    m, key = run["model"], run["key"]
+    gid = m.pg[(m.pg.key == key) & (m.pg.posteam.isin([run["home"], run["away"]]))].game_id.unique()
+    if not len(gid):
+        return None
+    gid = gid[0]
+    act = m.pg[m.pg.game_id == gid].set_index("pid")
+    qa = m.qbm.p[m.qbm.p.game_id == gid].groupby("passer_player_id").agg(
+        pass_att=("yards", "size"), pass_cmp=("complete", "sum"), pass_yds=("yards", "sum"), pass_td=("td", "sum"), int=("int", "sum"))
+    pb = pd.read_parquet(nfl_data_dir() / f"pbp_{key // 100}.parquet", columns=["game_id", "home_team", "away_team", "home_score", "away_score"])
+    g = pb[pb.game_id == gid].iloc[0]
+    stats = {}
+    for pid, r in act.iterrows():
+        stats[pid] = {k: float(r[k]) for k in ("targets", "rec", "rec_yds", "rush_att", "rush_yds")}
+    for pid, r in qa.iterrows():
+        stats.setdefault(pid, {}).update({k: float(r[k]) for k in ("pass_att", "pass_cmp", "pass_yds", "pass_td", "int")})
+    return {"final": {g.home_team: int(g.home_score), g.away_team: int(g.away_score)}, "stats": stats}
+
+
+def nfl_data_dir():
+    from nflmodel import data
+    return data.DATA_DIR
+
+
 def build_events(lay, slots, teams, boxes, tries, names, receive_first):
     away, home = teams
     opp = {away: home, home: away}
@@ -461,7 +524,25 @@ def export(proj_path: str, seed: int | None = None, mode: str = "median") -> dic
         "drives": [{"team": s["team"], "half": s["half"], "outcome": s["outcome"], "start": s["S"], "end": s["E"],
                     "plays": len(s["plays"])} for s in slots],
         "medians": {"away": float(np.median(gs["away"])), "home": float(np.median(gs["home"]))},
+        **pred_block(run),
     }
+
+
+def pred_block(run: dict) -> dict:
+    pred = predictions(run)
+    act = actuals(run)
+    out = {"pred": pred, "resim": bool(run["proj"].get("meta", {}).get("resim"))}
+    if act:
+        card = {"A": [0, 0], "B": [0, 0], "C": [0, 0]}
+        for r in pred:
+            a = act["stats"].get(r["pid"], {}).get(r["stat"])
+            if a is None:
+                continue
+            r["actual"] = a
+            r["in_range"] = bool(r["lo"] <= a <= r["hi"])
+            card[r["grade"]][0] += r["in_range"]; card[r["grade"]][1] += 1
+        out["actual"] = {"final": act["final"], "card": card}
+    return out
 
 
 if __name__ == "__main__":

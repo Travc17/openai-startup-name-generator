@@ -84,7 +84,10 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    page with a picker). Commit `simcast/games/*.json`. Default is the MEDIAN game (Travis): each QB line is his exact median;
    receivers all sit at one common percentile of their own ranges, solved so catches/targets/yards add up EXACTLY to
    the QB line (sum of individual medians undercounts lopsided receiving yards); every completion to a named player,
-   never a placeholder; rushers at their own medians; score = median score. Opens at the 90-second clip; both box scores show.
+   never a placeholder; rushers at their own medians; score = median score. The page's Predictions panel is the X
+   prediction (Travis: accuracy for his X account): each player's OWN median + 80% range + rule-based grade (A tested
+   stat, clear role / B rushing or lighter role / C blind spot, depth, untested). Played games get a scorecard
+   (share inside the 80% range by grade). Final run 90 minutes before kickoff, after inactives. Opens at the 90-second clip; both box scores show.
 6. Before kickoff, record closing prices for logged picks (`python nfl.py picks close --game G --label L --price P`).
    After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
    review in `betting_model/reviews/`.
