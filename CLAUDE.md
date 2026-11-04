@@ -87,8 +87,12 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    never a placeholder; rushers at their own medians; score = median score. The page's Predictions panel is the X
    prediction (Travis: accuracy for his X account): each player's OWN median + 80% range + rule-based grade (A tested
    stat, clear role / B rushing or lighter role / C blind spot, depth, untested). Played games get a scorecard
-   (share inside the 80% range by grade). Final run 90 minutes before kickoff, after inactives. X clip: `python simcast/clip.py out.mp4` (1080x1920 MP4:
-   90 s median game, then each team's final box score 6 s; under X's 2:20 limit). Never commit the MP4. Opens at the 90-second clip; both box scores show.
+   (share inside the 80% range by grade). Final run 90 minutes before kickoff, after inactives. X clip: `python simcast/clip.py out.mp4` (Travis 2026-11-04: LANDSCAPE
+   1920x1080 broadcast like a TV game: score bug + pregame win chance on top, tilted field, each team's live box score
+   on its side (relevant players only), one-line caption, no buttons, nothing cut off; confetti on scores; then the
+   full final box score for both teams 10 s; original synthesized soundtrack (`simcast/sound.py`: music bed, whistles,
+   crowd on scores) at -16 LUFS; `--portrait` keeps the old vertical clip). No NFL logos (trademarks): abbreviations,
+   city names, team colors only. No licensed music. Never commit the MP4. Opens at the 90-second clip; both box scores show.
 6. Before kickoff, record closing prices for logged picks (`python nfl.py picks close --game G --label L --price P`).
    After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
    review in `betting_model/reviews/`.

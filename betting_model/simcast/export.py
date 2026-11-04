@@ -531,7 +531,10 @@ def export(proj_path: str, seed: int | None = None, mode: str = "median") -> dic
 def pred_block(run: dict) -> dict:
     pred = predictions(run)
     act = actuals(run)
-    out = {"pred": pred, "resim": bool(run["proj"].get("meta", {}).get("resim"))}
+    gs = run["score"]
+    h, aw = np.asarray(gs["home"]), np.asarray(gs["away"])
+    out = {"pred": pred, "resim": bool(run["proj"].get("meta", {}).get("resim")),
+           "win": {run["home"]: round(float((h > aw).mean()), 3), run["away"]: round(float((aw > h).mean()), 3)}}
     if act:
         card = {"A": [0, 0], "B": [0, 0], "C": [0, 0]}
         for r in pred:

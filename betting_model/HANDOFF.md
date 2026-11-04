@@ -122,3 +122,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   panels with white text, white buttons. Play-by-play list removed (one-line caption stays); the box score sits in
   its place and follows the team with the ball (both teams at the final). QB line removed from the score bug.
   Published v8; X clip re-recorded (1:50) and sent.
+* X clip is now LANDSCAPE broadcast (`simcast/record_broadcast.js`, page `#broadcast` mode): team-color stadium glows,
+  midfield SizzleSims logo, confetti on scores, live side box scores, 10 s full final box score, original soundtrack
+  (`simcast/sound.py`; crowd +5-6 dB on TDs, +1-3 dB on FGs; -16.2 LUFS). JAX@BAL clip 1:48 sent. Canva hosts and
+  licensed music were not usable (Canva download hosts blocked by the network policy; music rights). Page v9.
