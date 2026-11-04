@@ -5,7 +5,8 @@
 * Music bed: 124 BPM stadium beat (kick, clap, hats, synth bass, chord pad, brass stabs) on a I-V-vi-IV loop in D;
   drums only before kickoff, full band during play, lower and fading under the end card.
 * Referee whistle: two short blasts at kickoff, one long at the final.
-* Crowd: a roar on touchdowns, a smaller cheer on field goals, a short one on extra points; music ducks under it.
+* Fireworks on scores (Travis): two shells on touchdowns, one on field goals, a small crackle on extra points;
+  music dips slightly. A crowd cheer only at the final whistle.
 Cue times come from the recorder (seconds since the page opened); OFFSET_S maps them onto the video timeline.
 """
 from __future__ import annotations
@@ -108,6 +109,47 @@ def crowd(sec: float, size: float) -> np.ndarray:
     return x / np.abs(x).max()
 
 
+def launch() -> np.ndarray:
+    """Rising whistle of a firework shell going up (0.7 s)."""
+    n = int(0.7 * SR); t = np.arange(n) / SR
+    f = 700 + 1900 * (t / 0.7) ** 1.4
+    x = np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.6 + 0.4 * band(RNG.standard_normal(n), 1500, 6000)
+    return x / np.abs(x).max() * np.minimum(1, t / 0.08) * (0.35 + 0.65 * t / 0.7) * np.minimum(1, (0.7 - t) / 0.05)
+
+
+def burst(size: float = 1.0) -> np.ndarray:
+    """Boom (low thump + noise) followed by a sparkling crackle that fades out."""
+    sec = 1.2 + 0.8 * size
+    n = int(sec * SR); t = np.arange(n) / SR
+    boom = sosfilt(butter(2, 700, fs=SR, output="sos"), RNG.standard_normal(n)) * env(n, 0.003, 0.18)
+    boom = boom / np.abs(boom).max() + 0.8 * np.sin(2 * np.pi * 58 * t) * env(n, 0.002, 0.25)
+    crackle = np.zeros(n)
+    for _ in range(int(140 * size)):                            # sparse tiny pops, denser early
+        at = int(SR * (0.12 + RNG.exponential(0.45 * size)))
+        if at >= n - 400:
+            continue
+        m = int(SR * RNG.uniform(0.002, 0.006))
+        crackle[at:at + m] += RNG.uniform(0.3, 1.0) * band(RNG.standard_normal(m + 200), 2500, 9000)[200:]
+    crackle *= np.exp(-t / (0.9 * size))
+    x = 0.9 * boom / np.abs(boom).max() + 0.55 * crackle / max(1e-9, np.abs(crackle).max())
+    return x / np.abs(x).max()
+
+
+def fireworks(pts: int) -> tuple[np.ndarray, float]:
+    """Touchdown: two shells; field goal: one; extra point / two-point try: a small crackle. Returns (sound, lead):
+    the sound starts `lead` seconds before the score so the first burst lands as the confetti flies."""
+    if pts >= 6:
+        x = np.zeros(int(3.6 * SR))
+        add(x, launch(), 0.0, 0.35); add(x, burst(1.0), 0.65, 1.0)
+        add(x, launch(), 0.3, 0.3); add(x, burst(0.8), 0.95, 0.8)
+        return x, 0.45
+    if pts >= 3:
+        x = np.zeros(int(2.6 * SR))
+        add(x, launch(), 0.0, 0.3); add(x, burst(0.8), 0.65, 0.85)
+        return x, 0.45
+    return burst(0.35) * 0.45, 0.0
+
+
 # ---------------- arrangement ----------------
 def build(cues: list[dict], offset: float, total: float, end_card: float) -> np.ndarray:
     L = np.zeros(int(total * SR) + SR)
@@ -156,10 +198,10 @@ def build(cues: list[dict], offset: float, total: float, end_card: float) -> np.
         if cu["kind"] != "score":
             continue
         at = cu["t"] + offset
-        size, sec, g = (1.0, 4.2, 1.9) if cu["pts"] >= 6 else ((0.6, 2.6, 1.25) if cu["pts"] >= 3 else (0.3, 1.2, 0.6))
-        add(sfx, crowd(sec, size), at - 0.1, g)
-        i0, i1 = int(at * SR), int((at + sec) * SR)
-        duck[i0:i1] = np.minimum(duck[i0:i1], 0.42 if cu["pts"] >= 3 else 0.7)
+        fw, lead = fireworks(cu["pts"])                         # Travis 2026-11-04: fireworks on scores, not a crowd roar
+        add(sfx, fw, at - lead, 0.85 if cu["pts"] >= 6 else (0.7 if cu["pts"] >= 3 else 0.5))
+        i0, i1 = int((at - lead) * SR), int((at - lead) * SR + len(fw))
+        duck[max(i0, 0):i1] = np.minimum(duck[max(i0, 0):i1], 0.78)
     duck = np.convolve(duck, np.ones(2205) / 2205, mode="same")   # 50 ms smoothing so the ducking doesn't click
     mix = music * lvl * duck * 0.55 + sfx
     mix = mix[: int(total * SR)]
@@ -183,5 +225,5 @@ if __name__ == "__main__":
     x = build(cues, offset, total, card)
     write_wav(out, x)
     n_score = sum(1 for c in cues if c["kind"] == "score")
-    print(f"{out}: {total:.1f} s, {n_score} crowd cues, peak {20 * np.log10(np.abs(x).max()):.1f} dBFS, "
+    print(f"{out}: {total:.1f} s, {n_score} score cues (fireworks), peak {20 * np.log10(np.abs(x).max()):.1f} dBFS, "
           f"rms {20 * np.log10(np.sqrt((x ** 2).mean())):.1f} dBFS")

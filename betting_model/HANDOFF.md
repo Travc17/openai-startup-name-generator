@@ -126,3 +126,4 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   midfield SizzleSims logo, confetti on scores, live side box scores, 10 s full final box score, original soundtrack
   (`simcast/sound.py`; crowd +5-6 dB on TDs, +1-3 dB on FGs; -16.2 LUFS). JAX@BAL clip 1:48 sent. Canva hosts and
   licensed music were not usable (Canva download hosts blocked by the network policy; music rights). Page v9.
+* Score sound changed to fireworks (Travis 2026-11-04: crowd roar too much); crowd cheer kept only at the final whistle.

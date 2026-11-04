@@ -91,7 +91,7 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    1920x1080 broadcast like a TV game: score bug + pregame win chance on top, tilted field, each team's live box score
    on its side (relevant players only), one-line caption, no buttons, nothing cut off; confetti on scores; then the
    full final box score for both teams 10 s; original synthesized soundtrack (`simcast/sound.py`: music bed, whistles,
-   crowd on scores) at -16 LUFS; `--portrait` keeps the old vertical clip). No NFL logos (trademarks): abbreviations,
+   FIREWORKS on scores (Travis: the crowd roar was too much), a crowd cheer only at the final) at -16 LUFS; `--portrait` keeps the old vertical clip). No NFL logos (trademarks): abbreviations,
    city names, team colors only. No licensed music. Never commit the MP4. Opens at the 90-second clip; both box scores show.
 6. Before kickoff, record closing prices for logged picks (`python nfl.py picks close --game G --label L --price P`).
    After the game: settle bets in the log with the closing price, run `python nfl.py picks grade`, and write a
