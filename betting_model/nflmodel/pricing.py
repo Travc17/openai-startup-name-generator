@@ -37,24 +37,38 @@ def ev_per_dollar(p_win: float, price: Price) -> float:
 
 
 MAX_BET_FRAC = 0.10  # single bet cap: 10% of current bankroll
+# Approved by Travis 2026-11-05 after the 2025/2026 closing-line tests (reviews/hist_2026_model_vs_market.md):
+MIN_EDGE = 0.10      # model edge after fee; 2-10% edges were about break-even (the model is overconfident)
+STAKE_FRAC = 0.05    # 5% of the CURRENT bankroll per bet (about half Kelly on the MEASURED edge, not the stated one)
+
+
+def rule_ok(side: str, stat: str, pos: str | None = None) -> tuple[bool, str]:
+    """Direction rules (CLAUDE.md 2026-11-05): unders only (NO on a rung); low-rung overs only through the floor
+    check (FLOOR_PROMPT.md / floor_legs.py), never auto-staked; no QB passing-yards unders; no QB rushing props."""
+    if pos == "QB" and stat in ("rush_yds", "rush_att", "rec_rush_yds"):
+        return False, "no QB rushing props"
+    under = side in ("no", "under")
+    if not under:
+        return False, "over: floor check only"
+    if stat == "pass_yds":
+        return False, "no QB pass-yds unders"
+    return True, ""
 
 
 def stake(p_win: float, price: Price, bankroll: float = 2000, min_bet: float = 50,
-          max_bet: float | None = None, kelly_frac: float = 0.25, min_edge: float = 0.02,
-          big_edge: float = 0.04) -> tuple[float, str]:
-    """Apply the bankroll rules. Edge = model probability minus breakeven probability.
-    Cap defaults to 10% of the CURRENT bankroll, so it grows and shrinks with results."""
+          max_bet: float | None = None, kelly_frac: float | None = None, min_edge: float = MIN_EDGE,
+          big_edge: float | None = None, frac: float = STAKE_FRAC) -> tuple[float, str]:
+    """Apply the bankroll rules. Edge = model probability minus breakeven probability (fee included).
+    Stake = 5% of the CURRENT bankroll (min $50, max 10%); the 10% per-game cap is applied in plan_game.
+    kelly_frac and big_edge are accepted for old callers and ignored (quarter Kelly retired 2026-11-05)."""
     if max_bet is None:
         max_bet = round(bankroll * MAX_BET_FRAC / 5) * 5
     min_bet = min(min_bet, max_bet)
     edge = p_win - price.breakeven
     if edge < min_edge:
         return 0.0, f"PASS (edge {edge:+.1%} below {min_edge:.0%})"
-    if edge < big_edge:
-        return min_bet, f"BET minimum (edge {edge:+.1%})"
-    k = (p_win * price.net_odds - (1 - p_win)) / price.net_odds
-    amt = max(min_bet, min(max_bet, round(bankroll * k * kelly_frac / 5) * 5))
-    return float(amt), f"BET quarter Kelly (edge {edge:+.1%}, full Kelly {k:.1%})"
+    amt = max(min_bet, min(max_bet, round(bankroll * frac / 5) * 5))
+    return float(amt), f"BET {frac:.0%} of bankroll (edge {edge:+.1%})"
 
 
 GAME_CAP_FRAC = 0.10  # ALL bets on one game combined: 10% of current bankroll (approved 2026-11-03)

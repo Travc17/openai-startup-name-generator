@@ -210,12 +210,11 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   after fee; flat $50 stakes; no QB pass-yds unders; predictions show the 20/80 best estimate.
 * `floor_legs.py --books <books CSV>` enforces "over below the book line" and "no QB pass-yds unders"; parlay max price
   now uses a 10% edge (`--min-edge`).
-* OPEN (code still on old rules; override by hand until fixed, then run regression_check):
-  1. `market.find` / `nfl.py price --min-edge` default 0.02 -> 0.10; unders-only + low-rung-over filter in the verdicts.
-  2. `pricing.stake` / `plan_game`: flat $50 instead of quarter Kelly; report.py edge >= 0.02 checks (incl. which picks
-     go to picks_log.csv) -> 0.10.
-  3. SizzleSims Predictions panel: add the best estimate (needs the book main line per player).
-  4. Next credit cycle: pull historical ALT-line markets for 2026 (~4 markets x 121 games x 10 = ~4,800 credits): the
+* DONE in code (2026-11-05 ~5:40 PM ET; regression check no drift): 10% min edge, 5% stakes under the 10% game cap
+  (Travis chose 5% over flat $50), unders only + "low-rung over: floor check" + no QB pass-yds unders + no QB rushing
+  in `market.find`/report (picks_log follows the same rules), game lines never staked, SizzleSims best estimate
+  (`export.py --books`).
+* OPEN: next credit cycle: pull historical ALT-line markets for 2026 (~4 markets x 121 games x 10 = ~4,800 credits): the
      rules above were tested on main lines only, and Travis bets alt lines.
 
 ## Model lab batch 1 result (merged 2026-11-05, every switch OFF; tonight's sims replay identically)

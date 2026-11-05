@@ -99,8 +99,20 @@ def market_probs(quotes: list[dict]) -> dict:
     return {k: (sum(v) / len(v), len(v)) for k, v in agg.items()}
 
 
-def find(proj: dict, quotes: list[dict], min_edge: float = 0.02) -> list[dict]:
+BET_VERDICTS = {"BOTH AGREE", "model only", "model vs market"}
+
+
+def find(proj: dict, quotes: list[dict], min_edge: float = 0.10) -> list[dict]:
+    """min_edge 10% and the direction rules approved 2026-11-05 (CLAUDE.md): Travis bets alt rungs only, unders only;
+    an over on a rung BELOW the books' main line is flagged for the floor check; no QB pass-yds unders."""
+    from .pricing import rule_ok
     mk = market_probs(quotes)
+    mains = defaultdict(list)                         # books' MAIN line per player+stat (not alt, not cent venues)
+    for q in quotes:
+        v = q["venue"].lower()
+        if q["rung"] is None and v.split()[0] not in CENT_VENUES and "alt" not in v:
+            mains[(name_key(q["player"]), q["stat"])].append(q["line"])
+    main_line = {k: sorted(v)[len(v) // 2] for k, v in mains.items()}
     players = {name_key(n): (n, v) for n, v in proj["players"].items()}
     out = []
     for q in quotes:
@@ -126,6 +138,17 @@ def find(proj: dict, quotes: list[dict], min_edge: float = 0.02) -> list[dict]:
                 row["verdict"] = "blind spot"
             elif q["stat"] in NO_BET_STATS:
                 row["verdict"] = "not calibrated"
+        if row["verdict"] in BET_VERDICTS:
+            v = q["venue"].lower()
+            ml = main_line.get((name_key(q["player"]), q["stat"]))
+            ok, why = rule_ok(q["side"], q["stat"], pl.get("pos") if pl else None)
+            if v.split()[0] not in CENT_VENUES:
+                row["verdict"] = "book (reference)"     # Travis never bets book lines
+            elif not ok and why.startswith("over"):
+                row["verdict"] = "low-rung over: floor check" if ml is not None and q["line"] < ml else "rule: unders only"
+            elif not ok:
+                row["verdict"] = "rule: " + why
+        row["main_line"] = main_line.get((name_key(q["player"]), q["stat"]))
         row["proj_name"] = pname
         out.append(row)
     best = {}
@@ -138,8 +161,9 @@ def find(proj: dict, quotes: list[dict], min_edge: float = 0.02) -> list[dict]:
     return sort_rows(out)
 
 
-RANK = {"BOTH AGREE": 0, "market only": 1, "model only": 2, "model vs market": 3, "blind spot": 4,
-        "not calibrated": 5, "pass": 6, "no projection": 7}
+RANK = {"BOTH AGREE": 0, "market only": 1, "model only": 2, "model vs market": 3, "low-rung over: floor check": 4,
+        "blind spot": 5, "not calibrated": 6, "rule: unders only": 7, "rule: no QB pass-yds unders": 7, "rule: no QB rushing props": 7,
+        "book (reference)": 8, "pass": 9, "no projection": 10}
 
 
 def sort_rows(rows: list[dict]) -> list[dict]:

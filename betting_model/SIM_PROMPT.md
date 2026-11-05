@@ -92,7 +92,8 @@ Seed 7 (the default) so every later replay (parlays, SizzleSims, floor legs) mat
 ## 6. Save and publish
 * Commit and push the projections file, the news file and `simcast/games/*.json` before kickoff. Never edit a
   projections file after kickoff.
-* SizzleSims (CLAUDE.md 5c): export, build, publish to the same artifact URL (no video clip unless Travis asks).
+* SizzleSims (CLAUDE.md 5c): `python simcast/export.py projections/<file>.json --books markets/<file>_books_<when>.csv`
+  (adds the best estimate), build, publish to the same artifact URL (no video clip unless Travis asks).
 
 ## 7. Reply (Travis reads it on his phone)
 First line: predicted score and win chance. Then:

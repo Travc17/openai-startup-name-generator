@@ -75,7 +75,7 @@ step 6 rules. Save the table to `markets/<file>_floor_legs_close.csv`.
   sim hit rate, correlation lift, the books' implied joint rate, Kalshi's price (Travis supplies combo quotes), and
   the most to pay for a 10% edge. Rank candidates by sim hit rate, then keep only those that clear the edge.
 * Show the BEST ESTIMATE (20% model median / 80% book main line) beside the model median for every player listed.
-* Stakes: flat $50 per bet (10% per-game cap on the current bankroll still applies).
+* Stakes: 5% of the current bankroll per bet; all bets on the game together <= 10% (`pricing.plan_game`).
 
 ## 6. Reply (Travis reads it on his phone)
 First line: the verdict (the bets, or "pass"). Then one table: Bet | Venue | Price limit | Stake | Sim hit % |

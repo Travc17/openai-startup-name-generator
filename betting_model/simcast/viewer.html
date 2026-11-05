@@ -656,7 +656,7 @@ td.bump { animation: bump 1100ms ease-out; }
     const P = G.pred || [], A = G.actual;
     const f = (x) => (Math.round(x * 10) / 10).toString();
     $("pred-sub").textContent = A ? "Graded against the final" : "Before kickoff";
-    let head = `<p class="progress-label" style="margin:0">Prediction = the model's median (half of ${G.typical.sims.toLocaleString()} sims above, half below). 80% range = the middle 80% of sims. Grade: <span class="g gA">A</span> tested stat, clear role · <span class="g gB">B</span> rushing (ranges run a bit narrow in tests) or a lighter role · <span class="g gC">C</span> blind spot, depth player or untested stat.</p>`;
+    let head = `<p class="progress-label" style="margin:0">Prediction = the model's median (half of ${G.typical.sims.toLocaleString()} sims above, half below).${G.best_w ? ` Best = ${Math.round(G.best_w * 100)}% model + ${Math.round((1 - G.best_w) * 100)}% the books' main line, the mix that tested most accurate on 2025-26 closing lines (a dash means no book line).` : ""} 80% range = the middle 80% of sims. Grade: <span class="g gA">A</span> tested stat, clear role · <span class="g gB">B</span> rushing (ranges run a bit narrow in tests) or a lighter role · <span class="g gC">C</span> blind spot, depth player or untested stat.</p>`;
     if (A) {
       const c = A.card, tot = ["A", "B", "C"].reduce((s, k) => [s[0] + c[k][0], s[1] + c[k][1]], [0, 0]);
       head = `<p class="scorecard"><b>Scorecard:</b> ${tot[0]} of ${tot[1]} inside the 80% range (${Math.round(tot[0] / tot[1] * 100)}%; 80% expected) · A ${c.A[0]}/${c.A[1]} · B ${c.B[0]}/${c.B[1]} · C ${c.C[0]}/${c.C[1]}.<br>Predicted score ${G.away} ${G.final[G.away]}, ${G.home} ${G.final[G.home]} · actual ${G.away} ${A.final[G.away]}, ${G.home} ${A.final[G.home]}.${G.resim ? " Re-simulated after the game using only pre-game inputs (closing line, inactives)." : ""}</p>` + head;
@@ -666,12 +666,13 @@ td.bump { animation: bump 1100ms ease-out; }
       const best = {};
       rows.forEach((r) => { best[r.name] = Math.max(best[r.name] || 0, r.pos === "QB" ? 1e9 : (r.stat.endsWith("yds") ? r.median : 0)); });
       rows.sort((x, y) => (best[y.name] - best[x.name]) || x.name.localeCompare(y.name) || PRED_ORDER.indexOf(x.stat) - PRED_ORDER.indexOf(y.stat));
-      const th = `<tr><th>Player</th><th>Stat</th><th>Pred</th><th>80% range</th><th>Grade</th>${A ? "<th>Actual</th><th></th>" : ""}</tr>`;
+      const th = `<tr><th>Player</th><th>Stat</th><th>Pred</th>${G.best_w ? "<th>Best</th>" : ""}<th>80% range</th><th>Grade</th>${A ? "<th>Actual</th><th></th>" : ""}</tr>`;
       let last = "";
       const body = rows.map((r) => {
         const nm = r.name === last ? "" : `${esc(r.name)}<span class="pos">${r.pos}</span>`; last = r.name;
         const act = A ? (r.actual === undefined ? "<td>-</td><td></td>" : `<td>${f(r.actual)}</td><td class="${r.in_range ? "hit" : "miss"}">${r.in_range ? "&#10003;" : "&#10007;"}</td>`) : "";
-        return `<tr><td>${nm}</td><td>${PRED_LABEL[r.stat]}</td><td>${f(r.median)}</td><td>${f(r.lo)} to ${f(r.hi)}</td><td><span class="g g${r.grade}">${r.grade}</span></td>${act}</tr>`;
+        const bc = G.best_w ? `<td>${r.best === undefined ? "-" : f(r.best)}</td>` : "";
+        return `<tr><td>${nm}</td><td>${PRED_LABEL[r.stat]}</td><td>${f(r.median)}</td>${bc}<td>${f(r.lo)} to ${f(r.hi)}</td><td><span class="g g${r.grade}">${r.grade}</span></td>${act}</tr>`;
       }).join("");
       return `<div class="teambox"><h3 style="border-left-color:${G.colors[t][0]}">${t}</h3><div class="tw"><table><thead>${th}</thead><tbody>${body}</tbody></table></div></div>`;
     };

@@ -34,7 +34,7 @@ step. This skill only says which file to run, in what order, and what every mode
 * PFF: route-based role is ON (refreshed by `nfl.py update`). PFF data stays in `betting_model/data/` and is never
   committed or shared outside the model's outputs. The key lives in the environment, never in chat or the repo.
 * Bets (2026-11-05): alt rungs only; unders only except labeled low-rung overs below the book line; edge 10% or
-  more after fee; flat $50 stakes; no QB pass-yds unders; 10% per-game cap; no TD/INT, no blind spots, no
+  more after fee; 5% of bankroll per bet, 10% per game; no QB pass-yds unders; 10% per-game cap; no TD/INT, no blind spots, no
   QB rushing. Model-only bets are labeled. Never place a bet or move money: Travis places every bet himself.
 * Never hand-edit `picks_log.csv`. Never commit an MP4. No NFL logos or licensed music in SizzleSims.
 

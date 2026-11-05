@@ -709,7 +709,7 @@ def main():
     pc.add_argument("--quotes", help="Quotes CSV: venue,player,stat,line,side,price,captured_at")
     pc.add_argument("--board", help="Or the report's board CSV (Robinhood rungs + book rows)")
     pc.add_argument("--fee", action="append", help="'venue=0.02' fee per contract (Robinhood default 0.02)")
-    pc.add_argument("--min-edge", type=float, default=0.02)
+    pc.add_argument("--min-edge", type=float, default=0.10, help="model edge after fee (CLAUDE.md 2026-11-05: 10%%)")
     pc.add_argument("--top", type=int, default=40)
     pc.add_argument("--csv", help="Write every priced quote to this CSV")
     pc.set_defaults(func=cmd_price)

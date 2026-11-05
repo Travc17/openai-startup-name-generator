@@ -44,15 +44,18 @@ def load_news(path):
         return json.load(f)
 
 
-def _kelly_stake(p, cost, bankroll, min_bet=50, frac=0.25, cap=0.10):
-    edge = p - cost
-    if edge < 0.02:
+def _kelly_stake(p, cost, bankroll, min_bet=50, frac=None, cap=0.10):
+    """Stake rule (approved 2026-11-05; name kept for old callers): 5% of the bankroll when the edge after fee is
+    10% or more; the per-game cap is applied later in plan_game."""
+    from .pricing import MIN_EDGE, STAKE_FRAC
+    if p - cost < MIN_EDGE:
         return 0
-    if edge < 0.04:
-        return min_bet
-    b = (1 - cost) / cost
-    k = (p * b - (1 - p)) / b
-    return int(max(min_bet, min(round(bankroll * cap / 5) * 5, round(bankroll * k * frac / 5) * 5)))
+    return int(max(min_bet, min(round(bankroll * cap / 5) * 5, round(bankroll * (frac or STAKE_FRAC) / 5) * 5)))
+
+
+def _leg_ok(l, pos=None):
+    from .pricing import rule_ok
+    return rule_ok(l.get("side", "yes"), l["stat"], pos)[0]
 
 
 def hit_rate_parlays(usable, fee, min_legs=3, max_legs=6, lo=0.05, hi=0.40, beam=300, n=10):
@@ -261,7 +264,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                 continue
             lines.append({"label": lab, "p": float(p), "price": price, "cost": cost, "edge": float(p - cost)})
     for l in lines:
-        l["stake"] = _kelly_stake(l["p"], l["cost"], bankroll)
+        l["stake"] = 0     # game lines are shown, never bet (CLAUDE.md: never bet model spreads/totals; alt props only)
     rep["lines"] = sorted(lines, key=lambda l: -l["edge"])
     rep["book"] = sorted(book, key=lambda b: -abs(b["p_over"] - 0.5))
     # Robinhood "main line" per player+stat: the ladder rung priced closest to 50c (the market's own line)
@@ -287,8 +290,8 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
             row["book"] = {b["stat"]: b["line"] for b in book if b["player"] == row["name"]}
 
     usable = [l for l in legs if not l["blind"]]
-    for l in usable:
-        l["stake"] = _kelly_stake(l["p"], l["cost"], bankroll)
+    for l in usable:      # unders only; overs go through the floor check; no QB pass-yds unders (2026-11-05)
+        l["stake"] = _kelly_stake(l["p"], l["cost"], bankroll) if _leg_ok(l, sim["info"].get(l["pid"], {}).get("pos")) else 0
     singles, seen = [], set()
     for l in sorted(usable, key=lambda l: -l["edge"]):
         k = (l["player"], l["stat"])
@@ -329,7 +332,9 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
     for c in combos:
         if any(len(set(c["legs"]) & set(u)) >= len(c["legs"]) - 1 for u in used):
             continue  # keep the list varied
-        c["stake"] = _kelly_stake(c["p"], c["cost"], bankroll)
+        c["stake"] = _kelly_stake(c["p"], c["cost"], bankroll) if all(
+            _leg_ok({"side": "no" if len(ld) > 3 else "yes", "stat": ld[1]}, sim["info"].get(ld[0], {}).get("pos"))
+            for ld in c["legs_data"]) else 0
         top.append(c)
         used.append(c["legs"])
         if len(top) == 10:
@@ -386,7 +391,7 @@ def canva_brief(rep: dict, title: str) -> str:
         out += [f'- {b["label"]}: hits {b["p"]:.0%} in sims, {b["cost"]*100:.0f}c with fee, edge {b["edge"]*100:+.1f} pts, stake ${b["stake"]:.0f}'
                 for b in pl["bets"]]
     else:
-        out.append('Banner: "Model verdict: PASS. Nothing on the board clears our 2% edge rule."')
+        out.append('Banner: "Model verdict: PASS. Nothing on the board clears our 10% edge rule."')
     if rep.get("blind"):
         out.append('Small note: "Not bet (model blind spots): ' + "; ".join(rep["blind"]) + '."')
     # pages 2-3: full box score per team
@@ -590,8 +595,8 @@ def render(rep, title):
     if rep.get("full_book"):
         rows = []
         for r in rep["full_book"]:
-            q = (not r["blind"]) and r["edge"] >= 0.02
-            cls = "good" if r["edge"] >= 0.02 else ("bad" if r["edge"] <= -0.05 else "muted")
+            q = (not r["blind"]) and r["edge"] >= 0.10
+            cls = "good" if r["edge"] >= 0.10 else ("bad" if r["edge"] <= -0.05 else "muted")
             flag = ' <span class="pill warn">blind spot</span>' if r["blind"] else (' <span class="pill good">qualifies</span>' if q else "")
             side = "" if r["side"] == "yes" else "NO "
             rows.append(f'<tr><td><b>{_e(r["player"])}</b> <span class="muted">{r["team"]}</span>{flag}</td><td>{side}{r["line"]:g}+ {STAT_SHORT[r["stat"]]}</td>'

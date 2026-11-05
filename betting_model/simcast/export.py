@@ -528,6 +528,30 @@ def export(proj_path: str, seed: int | None = None, mode: str = "median") -> dic
     }
 
 
+BEST_W = 0.20   # model weight in the best estimate (approved 2026-11-05; fit on 2025 closing lines, held up on 2026)
+
+
+def add_best(g: dict, books_csv: str) -> None:
+    """Best estimate = 20% model median + 80% books' main line (median across books, alt lines excluded).
+    Tested on 2025-26 closing lines: more accurate than the model alone and slightly better than the line alone."""
+    import pandas as pd
+    sys.path.insert(0, str(HERE.parent))
+    from nflmodel.market import name_key
+    b = pd.read_csv(books_csv)
+    b = b[~b.venue.str.contains("alt", case=False, na=False) & ~b.stat.isin(["spreads", "totals"])]
+    main = b.assign(k=b.player.map(name_key)).groupby(["k", "stat"]).line.median().to_dict()
+    n = 0
+    for r in g.get("pred", []):
+        ml = main.get((name_key(r["name"]), r["stat"]))
+        if ml is not None:
+            r["book"] = float(ml)
+            r["best"] = round(BEST_W * r["median"] + (1 - BEST_W) * float(ml), 1)
+            n += 1
+    g["best_w"] = BEST_W
+    g["books_file"] = Path(books_csv).name
+    print(f"best estimate added to {n} of {len(g.get('pred', []))} predictions (book lines from {Path(books_csv).name})")
+
+
 def pred_block(run: dict) -> dict:
     pred = predictions(run)
     act = actuals(run)
@@ -555,8 +579,11 @@ if __name__ == "__main__":
     ap.add_argument("--seed", type=int)
     ap.add_argument("--mode", choices=("median", "typical"), default="median",
                     help="median (default): every player at his median, QB = sum of receivers; typical: one sim game")
+    ap.add_argument("--books", help="big-book main lines CSV (nfl.py odds): adds the BEST ESTIMATE to each prediction")
     a = ap.parse_args()
     g = export(a.proj, a.seed, a.mode)
+    if a.books:
+        add_best(g, a.books)
     out = a.out or str(HERE / "games" / (Path(a.proj).stem + ".json"))
     Path(out).parent.mkdir(parents=True, exist_ok=True)
     Path(out).write_text(json.dumps(g, separators=(",", ":"), default=int))

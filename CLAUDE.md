@@ -31,15 +31,17 @@ from the log (`python nfl.py log summary`).
   passing-yards unders (lost in both seasons). Every prediction shows the BEST ESTIMATE (20% model / 80% book line,
   the blend that beat the line alone out of sample) beside the model's own median. The historical test used book
   main lines; alt-line results are still untested (pull alt-line history when credits allow).
-* Stake: flat $50 per bet until the live record confirms the edge (approved 2026-11-05; replaces quarter Kelly,
-  which would size on inflated edges). Max 3 bets per slate. Code still defaults to 2% and quarter Kelly
-  (`pricing.stake`, `market.find`, report): override by hand until fixed (HANDOFF open item).
+* Stake: 5% of the CURRENT bankroll per bet (Travis, 2026-11-05; about half Kelly on the measured edge, not the
+  model's inflated one), min $50, and every bet on one game together <= 10% (cap below): 1 bet = 5%, 2 bets about 5%
+  each, 3 bets scaled to about 3.3% each. Max 3 bets per slate. In code: `pricing.MIN_EDGE`, `STAKE_FRAC`,
+  `rule_ok` (unders only, no QB pass-yds unders, no QB rushing; overs only via the floor check), used by
+  `market.find`, `nfl.py price` and the report's bet plan.
 * Bet requests (Travis, 2026-11-03): whenever Travis asks for a bet for the bankroll, answer with EITHER one
   single prop + one parlay OR two single props + one parlay. A parlay is required every time, shown with its
   SIM HIT RATE (joint, from the same sims as the projections, correlation included) next to its price's
   break-even (with fee) and the books' implied hit rate. Parlay legs: no blind spots, no TD/INT, and no leg that
   repeats a single in the same answer. Every bet still needs edge >= 10% after fee; if the best parlay fails,
-  show it anyway, marked "no bet". Stakes: flat $50 each (max 3 bets, 10% per-game cap).
+  show it anyway, marked "no bet". Stakes: 5% of bankroll each, all bets on the game <= 10% (`pricing.plan_game`).
   Price parlays by replaying the report's sim (same roster, QBs, spread, seed 7), NOT `nfl.py parlay`, which
   re-simulates without spread/total/QB settings.
 * Cap: ALL bets on one game combined <= 10% of current bankroll (approved 2026-11-03). The report's
@@ -97,7 +99,8 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    never a placeholder; rushers at their own medians; score = median score. The page's Predictions panel is the
    prediction of record (Travis 2026-11-05: accuracy for himself and friends; no X posting): each player's OWN median + 80% range + rule-based grade (A tested
    stat, clear role / B rushing or lighter role / C blind spot, depth, untested). Played games get a scorecard
-   (share inside the 80% range by grade). Final run 90 minutes before kickoff, after inactives. Video clip: OPTIONAL, only when Travis asks (2026-11-05: "forget X"): `python simcast/clip.py out.mp4` (Travis 2026-11-04: LANDSCAPE
+   (share inside the 80% range by grade). Export with `--books <books CSV>` so each prediction also shows the BEST
+   estimate (20% model + 80% book main line). Final run 90 minutes before kickoff, after inactives. Video clip: OPTIONAL, only when Travis asks (2026-11-05: "forget X"): `python simcast/clip.py out.mp4` (Travis 2026-11-04: LANDSCAPE
    1920x1080 broadcast like a TV game: score bug + pregame win chance on top, tilted field, each team's live box score
    on its side (relevant players only), one-line caption, no buttons, nothing cut off; confetti on scores; then the
    full final box score for both teams 10 s; original synthesized soundtrack (`simcast/sound.py`: music bed, whistles,
