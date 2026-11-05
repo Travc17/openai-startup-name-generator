@@ -174,3 +174,5 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Noted, not modeled: Travon Walker (JAX DE) and Nate Wiggins (BAL CB) questionable, Hawkins (BAL S) out, Vega Ioane
   (BAL OL) returning, Moody (K) elevated, rain 17% at kickoff rising to 35-40% after 9 PM, wind 2-5 mph.
 * SizzleSims republished (version 11). FINAL pass after inactives (~6:50 PM ET): rerun with real inactives, clip.
+* Skill `/nfl-game AWAY HOME [sim|bets|floor|final|grade|full]` (`.claude/skills/nfl-game/SKILL.md`) chains SIM_PROMPT,
+  GAMEDAY_PROMPT, FLOOR_PROMPT and the after-game grading. Loads in sessions started after this commit.
