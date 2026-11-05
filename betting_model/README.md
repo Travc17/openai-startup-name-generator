@@ -159,6 +159,50 @@ receptions -0.60% (t=-2.43), receiving yards -0.20% (n.s.). Route-based share al
 | Slot vs wide vs defense | +0.00% | **+0.70% WORSE (t=+3.98)** | +0.00% |
 | Man/zone per route (PFF, incl. 2026) | -0.04% (t=-0.67) | +0.05% | -0.05% (t=-0.88) |
 
+## PFF matchup features, model lab batch 1 (2026-11-05): all five families FAILED, all switches OFF
+Code: `nflmodel/pff_matchups.py` (features, only games before the projected one), switches `Config.pff_pass_pro`,
+`pff_run_block`, `pff_rb_eff`, `pff_coverage`, `pff_missing_def` (default OFF; they need `model.pffm =
+PFFMatchups(model)`), new neutral `Player.ypc_mult` (1.0 = no change; regression check identical before and after).
+Harness: `lab/pff_batch1.py` = the `regression_check.py` scoring loop (route blend, real starting QB, closing spread,
+calibration ON), 2,000 sims, same seed OFF and ON. Slopes: fit on 2023 weeks 6-18 residuals of the production model
+(`pff_matchups.json` key `coef`), so 2024-26 are out of sample; shrinkage constants were set before any scored run
+(k = 200 dropbacks, 4 team-games, 80 RB attempts; 12-game window). Facets pulled to `data/pff/<facet>/` (2023-26).
+Hypotheses and signs were written before each run (pressure, better coverage and better run defense cut yards).
+
+| Feature (lever) | 2023 slope (SE) | 2024-25 wk 4+, % CRPS (t) | 2026 wk 4-8, % CRPS (t) | max coverage move | Verdict |
+|---|---|---|---|---|---|
+| Pass pro x pass rush, log5 pressure odds (team yds/target + QB completion rate) | ypt +0.013 (0.057), cmp -0.037 (0.032) | rec -0.05 (-1.69); rec yds -0.01 (-0.85); QB cmp -0.17 (-1.44); QB yds +0.02 (+0.63) | rec **+0.18 (+2.36)**; rec yds +0.05 (+0.94); QB cmp +0.40 (+1.58); QB yds -0.30 (-2.95) | 1.4 pts | OFF |
+| Same, a priori slope (ypt -0.04, cmp -0.05) | n/a | rec -0.07 (-1.87); rec yds **-0.06 (-2.77)**; QB cmp -0.20 (-1.30); QB yds -0.12 (-1.53) | rec **+0.20 (+2.25)**; rec yds +0.11 (+1.80); QB cmp +0.59 (+1.73); QB yds +0.19 (+0.93) | 1.4 pts | OFF |
+| Run-block grade (OL+TE) minus run-defense grade (RB ypc) | +0.0014/pt (0.0080) | rush yds +0.00 (+0.12) | rush yds +0.02 (+0.57) | 0.5 pts | OFF |
+| RB yards after contact/att, shrunk (RB ypc) | -0.001 (0.062) | rush yds +0.00 (+0.42) | rush yds -0.00 (-0.38) | 0.5 pts | OFF |
+| Coverage grade: WR<-CB, TE<-S+LB, RB<-LB (receiver yds) | **+0.0085/pt (0.0061)** | rec yds +0.01 (+0.16); QB yds -0.15 (-1.40) | rec yds -0.07 (-0.61); QB yds -0.46 (-1.45) | 0.7 pts | OFF |
+| Missing regulars (>=50% snaps) x grade above 60 (opp. pass and rush yds) | ypt -0.044 (0.036), ypc +0.058 (0.045) | rec yds +0.02 (+1.01); rush yds -0.00 (-0.02); QB yds -0.03 (-0.23) | rec yds +0.09 (+1.75); rush yds +0.26 (+1.37); QB yds +0.27 (+1.06) | 1.0 pts | OFF |
+
+n: 2024-25 = 448 games, 5,096 player-games (3,794 receiver, 1,324 rusher, 896 QB starts); 2026 = 73 games, 846
+player-games (632 / 206 / 146). Coverage move = largest change in any P10/P50/P90 share, ON vs OFF (all within 3).
+Numbers above are "split" runs: each team simulated first once, keeping only that team's rows, so a lever on one
+team cannot reshuffle the random draws of the other (see "surprises"). The pre-registered single-call runs gave the
+same verdicts (e.g. a priori pass pro: QB yds -0.17% t=-1.91 in 2024-25, +0.39% t=+1.70 in 2026).
+Secondary, exploratory (decided after seeing the above, slopes refit on 2023-24 `coef_2023_24`, scored 2025 and 2026):
+pass pro QB cmp -0.45% (t=-2.38), rec yds -0.06% (t=-2.17) in 2025 but rec +0.19% (t=+2.39) worse in 2026; run block
++0.05% / +0.09%; RB YACo +0.03% / +0.01%; coverage QB yds -0.19% (t=-1.16) / -0.51% (t=-1.42); missing defenders ~0.
+No family passes the bar in either test.
+
+Surprises and leads:
+* Coverage grades point the WRONG way, consistently: defenses with better prior PFF coverage grades allow MORE yards
+  per target than the model expects (residual slope +0.0085, +0.0110, +0.0103, +0.0127 per grade point in 2023, 2024,
+  2025, 2026). Likely the model's yards-allowed defense factor over-trusts recent results (good defenses regress to
+  the mean more than its shrinkage assumes). Next test: heavier `opp_shrink_targets` / position-defense shrink.
+* Pressure lowers completions vs the model in every season (residual slope -0.037, -0.045, -0.096, -0.015) and yards
+  per attempt in 2024-25, but the size swings by season and 2026 (146 QB starts) got worse with any slope. Model
+  completions ran 3.6% high in 2025 and 1.4% low in 2026, so a downward lever helps one and hurts the other.
+* Random-stream artifact in single-call paired tests: one team's lever changes a Poisson/binomial draw, which
+  reshuffles every later draw in the game, so stats the lever cannot touch show |t| > 2 by chance (single-call
+  coverage run: rush att t=+2.27 in 2024-25, targets t=+2.31 in 2026). Split runs remove it for team-level levers;
+  completion levers (binomial) still reshuffle draws within the team.
+* `pff_missing_def` reads who played in the projected game from PFF rows (same convention as the backtests, which
+  assume inactives are known); live use would need the inactive list mapped to PFF ids.
+
 ## Model review (2026-11-03): every test, passed and failed
 
 Full-season walk-forward run of the live model (routes + QB layer + game script), weeks 4+, real starting QBs,
@@ -185,6 +229,13 @@ TDs at the low end): still no TD bets.** INT 1+ 49.7% vs 48.4%: close, but no IN
 | Draft-capital prior for backup QBs | held out | 0.2071 to 0.2065, below the bar | OFF |
 | Team-volume correlation/SD fit only on prior games (leakage fix) | paired CRPS, 2024-26, same seeds | every stat within 0.2%, no abs t >= 2 | ON (removes look-ahead, no cost) |
 | Combo price discount (ticket vs product of legs) | 0.93 to 0.99 on the two Robinhood tickets seen | not enough evidence | parlays now priced with no discount (conservative) |
+| PFF pass protection x pass rush (`pff_pass_pro`, lab 2026-11-05) | paired CRPS, 2023-fit slopes, 2024-25 wk 4+ (3,794 receiver / 896 QB games) and 2026 wk 4-8 (632 / 146) | 2024-25: rec -0.05% (t=-1.69), QB cmp -0.17% (t=-1.44); 2026: rec **+0.18% (t=+2.36) worse**, QB yds -0.30% (t=-2.95) | OFF (fails: no target-stat gain in both periods, rec worse in 2026) |
+| Same, slope set a priori from pressure arithmetic (b_cmp -0.05, b_ypt -0.04) | same games | 2024-25: rec yds -0.06% (t=-2.77), rec -0.07% (t=-1.87); 2026: rec **+0.20% (t=+2.25) worse**, QB cmp +0.59% (t=+1.73) | OFF (helps 2024-25, hurts 2026) |
+| Same, slopes refit on 2023-24 (secondary, exploratory) | scored 2025 wk 4+ and 2026 | 2025: QB cmp -0.45% (t=-2.38), rec yds -0.06% (t=-2.17); 2026: rec **+0.19% (t=+2.39) worse** | OFF (same 2025-good / 2026-bad split) |
+| PFF run blocking vs run defense grades (`pff_run_block`, RB ypc) | 1,324 / 206 RB games | rush yds +0.00% (t=+0.12) / +0.02% (t=+0.57); refit 2023-24: +0.05% / +0.09% | OFF (neutral) |
+| PFF RB yards after contact per attempt (`pff_rb_eff`, RB ypc) | same | rush yds +0.00% (t=+0.42) / -0.00% (t=-0.38); 2023 slope ~0 | OFF (neutral) |
+| PFF coverage grade by defender group (`pff_coverage`, receiver yds) | 3,794 / 632 receiver games | rec yds +0.01% (t=+0.16) / -0.07% (t=-0.61); QB yds -0.15% (t=-1.40) / -0.46% (t=-1.45) | OFF (n.s.; slope sign is the OPPOSITE of the hypothesis, see below) |
+| PFF missing regular defenders x grade (`pff_missing_def`) | 5,096 / 846 player games | rec yds +0.02% (t=+1.01) / +0.09% (t=+1.75); rush yds -0.00% / +0.26% (t=+1.37) | OFF (neutral to slightly worse) |
 
 Leakage audit of fitted constants: `absences.json`, `depth.json`, `returns.json`, `copula.json` and the
 game-script slope were fit on 2022-25, so 2024-25 backtests are partly in-sample for those few constants;

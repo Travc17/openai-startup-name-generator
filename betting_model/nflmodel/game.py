@@ -65,6 +65,13 @@ class Config:
     vol_walkforward: bool = True   # team-volume correlation/SD fit only on games before the one projected
     calibrate: bool = True     # per-stat calibration maps (calibration.json); backtests turn this off
     prior_mode: str = "tiered"        # share prior: "tiered" by recent usage, "all", or "regulars"
+    # PFF matchup features (model lab 2026-11-05, nflmodel/pff_matchups.py; need model.pffm attached). All OFF:
+    # see README "Model review" for each paired test before turning any on.
+    pff_pass_pro: bool = False      # F1 offense pressures allowed x defense pressure rate -> yds/target, completions
+    pff_run_block: bool = False     # F2 run-block grade vs run-defense grade -> RB yards per carry
+    pff_rb_eff: bool = False        # F3 RB yards after contact per attempt -> RB yards per carry
+    pff_coverage: bool = False      # F4 defense coverage grade by defender group -> receiver yards per target
+    pff_missing_def: bool = False   # F5 missing regular defenders x PFF grade -> opponent pass/rush yards
 
 
 def decay_weights(keys: np.ndarray, cfg: Config) -> np.ndarray:
@@ -82,6 +89,7 @@ class Player:
     carry_mult: float = 1.0   # manual carry share adjustment for news
     catch_rate: float | None = None  # manual catch-rate override (e.g. a deep threat's real rate)
     yds_mult: float = 1.0            # receiving-yards multiplier (e.g. coverage matchup)
+    ypc_mult: float = 1.0            # rushing yards-per-carry multiplier (1.0 = no change)
 
 
 class GameModel:
@@ -466,6 +474,11 @@ class GameModel:
             opp = opp_of[team]
             rec_mult, rush_mult = self._opp_mult(opp, key, "rec"), self._opp_mult(opp, key, "rush")
             rec_mult *= 1 + wfx["ypa_r"]   # wind lowers yards per pass
+            pffm = getattr(self, "pffm", None)
+            pf = pffm.mults(cfg, team, opp, key) if pffm is not None else None
+            if pf is not None:
+                rec_mult *= pf["ypt"]
+                rush_mult *= pf["rush"]
             left_t, left_c = team_vol[team][0].copy(), team_vol[team][1].copy()
             share_left_t, share_left_c = np.ones(n), np.ones(n)
             qbm = getattr(self, "qbm", None)
@@ -475,11 +488,15 @@ class GameModel:
             qy_mult, qc_mult = 1.0, 1.0
             if qb is not None and qb_adjust:
                 qy_mult, qc_mult, _ = qbm.adjustment(qb, team, key)
+            if pf is not None:
+                qc_mult *= pf["cmp"]
             team_rec, team_yds, listed = np.zeros(n), np.zeros(n), []
             for p in [p for p in players if p.team == team]:
                 inp = self.player_inputs(p, opp, key)
                 p_rec_mult, vol_mult = self.defense_adjust(p.pid, opp, key, inp["pos"], rec_mult)
                 p_rec_mult *= p.yds_mult
+                if pf is not None:
+                    p_rec_mult *= pf["cov"].get(inp["pos"], 1.0)
                 inp["t_share"] = float(np.clip(inp["t_share"] * vol_mult, 0.0, 0.6))
                 st = rng.beta(max(inp["t_share"], 1e-3) * cfg.target_concentration,
                               max(1 - inp["t_share"], 1e-3) * cfg.target_concentration, n) if inp["t_share"] > 0.002 else np.zeros(n)
@@ -514,13 +531,16 @@ class GameModel:
                 mc = max(int(ca.max()), 1)
                 idx = rng.choice(len(inp["pool_ry"]), size=(n, mc), p=inp["pool_rp"])
                 m = np.arange(mc)[None, :] < ca[:, None]
-                rush_yds = (inp["pool_ry"][idx] * m).sum(1) * rush_mult
+                p_rush_mult = rush_mult * p.ypc_mult
+                if pf is not None and inp["pos"] == "RB":
+                    p_rush_mult *= pf["rb_ypc"] * pffm.rb_eff_mult(cfg, p.pid, key)
+                rush_yds = (inp["pool_ry"][idx] * m).sum(1) * p_rush_mult
 
                 out[p.pid] = {"targets": tg, "rec": rec, "rec_yds": rec_yds,
                               "rush_att": ca, "rush_yds": rush_yds, "rec_rush_yds": rec_yds + rush_yds}
                 team_rec = team_rec + rec; team_yds = team_yds + rec_yds; listed.append(p.pid)
                 info[p.pid] = {**{k: v for k, v in inp.items() if not k.startswith("pool")},
-                               "team": team, "opp": opp, "rec_mult": p_rec_mult, "rush_mult": rush_mult}
+                               "team": team, "opp": opp, "rec_mult": p_rec_mult, "rush_mult": p_rush_mult}
             if qb is not None:
                 # Targets to receivers not simulated individually, from the team's recent targets to them
                 rc_, ry_ = qbm.rest_pool(team, key, set(listed))
