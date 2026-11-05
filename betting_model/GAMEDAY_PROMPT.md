@@ -31,7 +31,7 @@ WebSearch every source (WebFetch is blocked for many news sites: cite the search
   usually means news: find the news.
 Append every item with its URL to `news/<season>_wk<NN>_<AWAY>_at_<HOME>.json`.
 
-## 2. Re-run stage 1 (PROJECTION_PROMPT.md) on the final inputs
+## 2. Re-run stage 1 on the final inputs (SIM_PROMPT.md: the full input sweep, scenarios and sanity checks)
 * `report` with `--out` for anyone ruled out or inactive, the current consensus `--fav/--spread/--total`, `--news`,
   blind spots (existing plus new ones: a committee after an injury, a direct next-man-up backup, a new or
   third-string QB's pass catchers), `--sims 25000 --no-log --proj projections/<file>.json`.

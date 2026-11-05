@@ -2,6 +2,7 @@
 
 Say: "Run projections for AWAY at HOME, week N" (or a list of games for a slate).
 Stage 2 (`BETFINDER_PROMPT.md`) reads what this stage saves. This stage never decides a bet.
+Full input checklist, status scenarios and sanity checks for a game-day run: `SIM_PROMPT.md`.
 
 ---
 
