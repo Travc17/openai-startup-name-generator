@@ -145,3 +145,10 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   each (model-only). JAX RB props held until inactives.
 * FINAL pass: inactives (Tuten), Hill/Henry/Walker status, weather, re-pull books + Kalshi (close), re-run price,
   SizzleSims export/build/publish + clip, final recommendation, then log fills.
+* PLACED (Travis, ~11:20 AM ET, on ROBINHOOD, not Kalshi): bet #2 parlay NO Henry 80+ / NO Hill 20+ rush, 113 contracts,
+  fill 41.5c, cost $49.60 (~2.4c/contract fees), pays $113; bet #3 NO Strange 40+ rec yds, 90 contracts at 55c, cost
+  $50.85 (1.5c/contract), pays $90. Logged in bets.csv with exact fills. $100.45 at risk; bankroll $2,257.22 until settled.
+* Observed fees (first real prediction-market fills since bet #1): single 1.5c/contract at 55c, 2-leg combo ~2.4c/contract.
+  CLAUDE.md still assumes 2c flat; proposed (needs Travis's OK): 1.5c singles, 2.5c combos. Venue question open: the
+  rules say Kalshi, the fills are Robinhood (prices matched Kalshi's quotes today).
+* Final pass: record closing prices for #2 and #3 (Kalshi quotes as the proxy for Robinhood's close), then grade after.
