@@ -66,16 +66,16 @@ step 6 rules. Save the table to `markets/<file>_floor_legs_close.csv`.
 
 ## 5. Pick the bets (CLAUDE.md rules, Travis's game-day format)
 * 1 or 2 single props and 1 or 2 parlays, HARD MAX 3 bets total (slate cap), at least one parlay.
-* Every bet: edge of 2% or more after the 2c fee; no blind spots, no TD/INT; skip QB rushing props (never tested;
-  proposed rule); no parlay leg repeating a single.
+* Every bet: edge of 10% or more after the fee (CLAUDE.md, 2026-11-05); alt rungs only; UNDERS only, except a
+  low-rung over (rung below the book's main line, FLOOR_PROMPT checks pass, labeled untested); no QB pass-yds
+  unders; no blind spots, no TD/INT; skip QB rushing props; no parlay leg repeating a single.
 * Prefer BOTH AGREE (model and books). A model-only bet is labeled as such, with the rule stake shown and the
   $50 minimum recommended; Travis decides. If nothing passes, the first line says "pass".
 * Parlays: price by replaying the report's sim (same roster, QBs, spread, seed 7), never `nfl.py parlay`. Show the
   sim hit rate, correlation lift, the books' implied joint rate, Kalshi's price (Travis supplies combo quotes), and
-  the most to pay for a 2% edge. Rank candidates by sim hit rate, then keep only those that clear the edge.
-* Re-check bet #2 (Kalshi parlay: NO Henry 80+ rush yds and NO Washington 60+ rec yds, quoted 32.8c, planned
-  $50) at the final prices: keep, resize or drop.
-* Stakes: `pricing.plan_game` (10% per-game cap on the current bankroll).
+  the most to pay for a 10% edge. Rank candidates by sim hit rate, then keep only those that clear the edge.
+* Show the BEST ESTIMATE (20% model median / 80% book main line) beside the model median for every player listed.
+* Stakes: flat $50 per bet (10% per-game cap on the current bankroll still applies).
 
 ## 6. Reply (Travis reads it on his phone)
 First line: the verdict (the bets, or "pass"). Then one table: Bet | Venue | Price limit | Stake | Sim hit % |

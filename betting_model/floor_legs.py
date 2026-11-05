@@ -88,6 +88,11 @@ def main(a):
     singles = {(name_key(s.split(":")[0]), s.split(":")[1]) for s in a.singles}
     q = pd.read_csv(a.quotes)
     q["k"] = q.player.map(name_key)
+    main_line = {}
+    if a.books:                                   # big-book MAIN lines (nfl.py odds without --alt): median per player+stat
+        b = pd.read_csv(a.books)
+        b = b[~b.venue.str.contains("alt", case=False, na=False)]
+        main_line = b.assign(k=b.player.map(name_key)).groupby(["k", "stat"]).line.median().to_dict()
     m = nfl.build_model()
     D = defense(m, season, key)
     rows = []
@@ -158,14 +163,19 @@ def main(a):
                 if injured: why.append("injury designation")
                 if side == "under" and mates: why.append("teammate " + ", ".join(mates) + " questionable/out: role may grow")
                 if (name_key(name), stat) in singles: why.append("repeats a single")
+                ml = main_line.get((name_key(name), stat))
+                if side == "over" and a.books and (ml is None or x >= ml):
+                    why.append("over not below the book line" if ml is not None else "no book line to compare")
+                if side == "under" and pos == "QB" and stat == "pass_yds": why.append("no QB pass-yds unders")
                 if price is None: why.append("no price posted")
                 elif blend < cost: why.append("hit rate high, price too high" if blend >= 0.8 else "blend below price")
                 rows.append(dict(player=name, team=team, stat=stat, leg=f"{'' if side == 'over' else 'NO '}{x:g}+", rung_type=label,
+                                 book_line=ml,
                                  side=side, rung=x, season=f"{hits}/{n}", last4=f"{last4}/{min(4, n)}", values=" ".join(f"{v:g}" for v in vals),
                                  sim=round(sim, 3), blend=round(blend, 3), matchup=f"{r_opp:.2f}x lg, rank {rk}",
                                  price_c=price, cost=None if cost is None else round(cost, 3),
                                  value=None if cost is None else round(blend - cost, 3),
-                                 verdict="ADD" if not why else "skip: " + "; ".join(why)))
+                                 verdict=("ADD (low-rung over, untested)" if side == "over" else "ADD") if not why else "skip: " + "; ".join(why)))
     R = pd.DataFrame(rows)
     if R.empty:
         print("No floor or ceiling candidates with posted rungs."); return
@@ -174,7 +184,7 @@ def main(a):
     print(R[["player", "stat", "leg", "rung_type", "season", "last4", "sim", "blend", "matchup", "price_c", "value", "verdict"]].to_string(index=False))
     if a.out:
         R.to_csv(a.out, index=False); print(f"\nsaved {len(R)} candidates -> {a.out}")
-    adds = R[R.verdict == "ADD"]
+    adds = R[R.verdict.str.startswith("ADD")]
     if a.base:
         parlays(a, proj, R, adds)
 
@@ -202,7 +212,7 @@ def parlays(a, proj, R, adds):
         combo = None if any(p is None for p in prices) else np.prod([p / 100 for p in prices])
         cost = None if combo is None else combo + a.fee_combo
         print(f"  {' + '.join(lb for lb, _, _ in legs):<95} sim hit {j:6.1%}  lift {j / ind:4.2f}"
-              + ("" if cost is None else f"  price ~{combo * 100:4.1f}c  cost {cost:5.1%}  edge {j - cost:+6.1%}  max {max(j - a.fee_combo - 0.02, 0) * 100:4.1f}c"))
+              + ("" if cost is None else f"  price ~{combo * 100:4.1f}c  cost {cost:5.1%}  edge {j - cost:+6.1%}  max {max(j - a.fee_combo - a.min_edge, 0) * 100:4.1f}c"))
     print("\nParlays (joint sim hit rate from the replayed sims; price = legs multiplied unless quoted):")
     show(base)
     in_base = {name_key(b.split(':')[0]) for b in a.base}
@@ -231,6 +241,8 @@ if __name__ == "__main__":
     ap.add_argument("--quotes", required=True, help="venue ladder quotes (kalshi_quotes.py format: cents, yes/no on x+ rungs)")
     ap.add_argument("--news")
     ap.add_argument("--base", nargs="*", default=[], help='parlay legs "Player:stat:over|under:x[:price_cents]"')
+    ap.add_argument("--books", help="big-book main lines CSV (nfl.py odds): over legs must sit BELOW the book line")
+    ap.add_argument("--min-edge", type=float, default=0.10, help="parlay edge required (CLAUDE.md 2026-11-05: 10%%)")
     ap.add_argument("--singles", nargs="*", default=[], help='"Player:stat" already bet as singles (no parlay leg repeats a single)')
     ap.add_argument("--out")
     ap.add_argument("--k", type=float, default=10.0, help="games the sim counts for in the blend")

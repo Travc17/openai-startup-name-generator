@@ -20,16 +20,26 @@ in `betting_model/bets.csv`; commit and push the log after every change. Current
 from the log (`python nfl.py log summary`).
 
 ## Rules (non negotiable)
-* Execution venue is Kalshi (Travis, 2026-11-03: "forget Robinhood, I will use Kalshi"). Bet only when edge >= 2%
-  after the fee. Kalshi's fee is priced at 2c per contract (`--fee kalshi=0.02`, the default in market.py) until a
+* Execution venue is Kalshi (Travis, 2026-11-03: "forget Robinhood, I will use Kalshi"). Bet only when edge >= 10%
+  after the fee (approved 2026-11-05: on 2025 and 2026 closing lines, model edges of 2-10% were about break-even;
+  the model is overconfident, so its stated edges are inflated). Kalshi's fee is priced at 2c per contract (`--fee kalshi=0.02`, the default in market.py) until a
   real fill shows the actual fee; replace it then. Robinhood (2c on bet #1) is no longer used.
-* Stake: $50 when edge is 2-4%; quarter Kelly above 4%. Max 3 bets per slate.
+* What to bet (approved 2026-11-05, evidence in `betting_model/reviews/hist_2026_model_vs_market.md`):
+  Travis bets ALT LINES ONLY (Kalshi x+ rungs), never book main lines. UNDERS only (NO on a rung). Exception
+  (Travis): an OVER on an alt rung BELOW the book's main line may be shown and bet when the matchup and season hit
+  rate are strong (FLOOR_PROMPT.md checks pass) and the edge is >= 10%; label it "low-rung over (untested)". No QB
+  passing-yards unders (lost in both seasons). Every prediction shows the BEST ESTIMATE (20% model / 80% book line,
+  the blend that beat the line alone out of sample) beside the model's own median. The historical test used book
+  main lines; alt-line results are still untested (pull alt-line history when credits allow).
+* Stake: flat $50 per bet until the live record confirms the edge (approved 2026-11-05; replaces quarter Kelly,
+  which would size on inflated edges). Max 3 bets per slate. Code still defaults to 2% and quarter Kelly
+  (`pricing.stake`, `market.find`, report): override by hand until fixed (HANDOFF open item).
 * Bet requests (Travis, 2026-11-03): whenever Travis asks for a bet for the bankroll, answer with EITHER one
   single prop + one parlay OR two single props + one parlay. A parlay is required every time, shown with its
   SIM HIT RATE (joint, from the same sims as the projections, correlation included) next to its price's
   break-even (with fee) and the books' implied hit rate. Parlay legs: no blind spots, no TD/INT, and no leg that
-  repeats a single in the same answer. Every bet still needs edge >= 2% after fee; if the best parlay fails,
-  show it anyway, marked "no bet". Stakes via `pricing.plan_game` (max 3 bets, 10% per-game cap).
+  repeats a single in the same answer. Every bet still needs edge >= 10% after fee; if the best parlay fails,
+  show it anyway, marked "no bet". Stakes: flat $50 each (max 3 bets, 10% per-game cap).
   Price parlays by replaying the report's sim (same roster, QBs, spread, seed 7), NOT `nfl.py parlay`, which
   re-simulates without spread/total/QB settings.
 * Cap: ALL bets on one game combined <= 10% of current bankroll (approved 2026-11-03). The report's

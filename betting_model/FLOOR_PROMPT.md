@@ -62,8 +62,11 @@ A floor or ceiling leg joins a parlay only if ALL of these hold:
 1. The matchup fits its direction (step 3) and the role and news checks pass (step 4).
 2. Blended probability is at least its price plus fee (it does not dilute the parlay's value).
 3. The parlay's JOINT sim hit rate (replay the report's sim: same roster, QBs, spread, seed 7; correlation included)
-   still clears the combo price plus fee plus 2% edge.
-4. At most 2 floor or ceiling legs per parlay; no leg repeats a single; CLAUDE.md caps (3 bets, 10% per game).
+   still clears the combo price plus fee plus 10% edge (CLAUDE.md, 2026-11-05).
+4. Over (floor) legs: the rung is BELOW the book's main line for that player and stat (Travis 2026-11-05: alt
+   lines only; low-rung overs allowed only with a strong matchup and hit rate), labeled "low-rung over (untested)".
+   Under legs: never QB passing yards.
+5. At most 2 floor or ceiling legs per parlay; no leg repeats a single; CLAUDE.md caps (3 bets, 10% per game).
 
 ## 7. Output
 Table: Player | Stat | Rung (x+ or under) | Season hits (e.g. 7/7) | Last 4 | Sim % | Blended % | Matchup (opponent

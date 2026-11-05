@@ -203,3 +203,17 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * PROPOSED rule change (needs Travis's OK, CLAUDE.md not edited): unders only; edge >= 10% vs Kalshi price + fee;
   no QB pass-yds unders; flat $50 stakes until the live record confirms (stated edges are inflated); predictions show
   the 20/80 best estimate beside the model median.
+
+## New bet rules APPROVED by Travis (2026-11-05 ~5:10 PM ET), now in CLAUDE.md
+* Alt rungs only (never book main lines); unders only; exception: low-rung overs BELOW the book's main line when
+  matchup and season hit rate are strong (FLOOR_PROMPT checks), labeled "low-rung over (untested)"; edge >= 10%
+  after fee; flat $50 stakes; no QB pass-yds unders; predictions show the 20/80 best estimate.
+* `floor_legs.py --books <books CSV>` enforces "over below the book line" and "no QB pass-yds unders"; parlay max price
+  now uses a 10% edge (`--min-edge`).
+* OPEN (code still on old rules; override by hand until fixed, then run regression_check):
+  1. `market.find` / `nfl.py price --min-edge` default 0.02 -> 0.10; unders-only + low-rung-over filter in the verdicts.
+  2. `pricing.stake` / `plan_game`: flat $50 instead of quarter Kelly; report.py edge >= 0.02 checks (incl. which picks
+     go to picks_log.csv) -> 0.10.
+  3. SizzleSims Predictions panel: add the best estimate (needs the book main line per player).
+  4. Next credit cycle: pull historical ALT-line markets for 2026 (~4 markets x 121 games x 10 = ~4,800 credits): the
+     rules above were tested on main lines only, and Travis bets alt lines.
