@@ -32,7 +32,7 @@ step. This skill only says which file to run, in what order, and what every mode
 * Only tested inputs move the numbers (SIM_PROMPT.md section 1). Defensive and OL injuries, rain, short week,
   coaching and kicker changes are noted with URLs and never hand-adjusted.
 * PFF: route-based role is ON (refreshed by `nfl.py update`). PFF data stays in `betting_model/data/` and is never
-  committed, posted or quoted on X. The key lives in the environment, never in chat or the repo.
+  committed or shared outside the model's outputs. The key lives in the environment, never in chat or the repo.
 * Bets: edge 2% or more after fee, stakes via `pricing.plan_game`, 10% per-game cap, no TD/INT, no blind spots, no
   QB rushing. Model-only bets are labeled. Never place a bet or move money: Travis places every bet himself.
 * Never hand-edit `picks_log.csv`. Never commit an MP4. No NFL logos or licensed music in SizzleSims.
