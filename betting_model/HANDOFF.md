@@ -176,3 +176,12 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * SizzleSims republished (version 11). FINAL pass after inactives (~6:50 PM ET): rerun with real inactives, clip.
 * Skill `/nfl-game AWAY HOME [sim|bets|floor|final|grade|full]` (`.claude/skills/nfl-game/SKILL.md`) chains SIM_PROMPT,
   GAMEDAY_PROMPT, FLOOR_PROMPT and the after-game grading. Loads in sessions started after this commit.
+
+## Model lab (2026-11-05, MODEL_LAB_PROMPT.md)
+* Batch 1 (PFF pass pro vs pass rush, run blocking vs run D, RB efficiency, coverage grades, missing defenders)
+  running in a separate git worktree, every switch OFF. Production model FROZEN for tonight's final pass.
+  Review its results after the game; turn on only what passes the bar, refresh the regression baseline.
+* Confirmed 2026-11-05: PFF facets reachable (passing, pressure, depth, rushing, blocking, pass/run blocking,
+  defense, pass rush, coverage). Odds API historical endpoint works (1 credit per event list).
+* Waiting on Travis: OK to spend credits on historical closing props (one season of 5 markets ~13,000 of 19,900;
+  a 60-game sample ~3,000), and whether X predictions may blend market lines (product B).
