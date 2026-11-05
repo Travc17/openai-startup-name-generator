@@ -235,5 +235,75 @@
   "source": "Covers / Cleatz",
   "url": "https://www.covers.com/nfl/jaguars-vs-ravens-prediction-picks-nov-5-2026",
   "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Bhayshul Tuten",
+  "team": "JAX RB",
+  "status": "Questionable (game-time decision; Coen more encouraging, inactives ~6:50 PM ET)",
+  "url": "https://sports.yahoo.com/articles/bhayshul-tuten-playing-tonight-jaguars-140800452.html",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Austin Reed",
+  "team": "BAL QB",
+  "status": "Signed to 53 (backup QB; Jackson, Huntley on IR)",
+  "url": "https://sports.yahoo.com/articles/ravens-place-lamar-jackson-tyler-211008287.html",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Jake Moody, Adisa Isaac",
+  "team": "BAL K, OLB",
+  "status": "Elevated from practice squad (note only)",
+  "url": "https://sports.yahoo.com/articles/ravens-place-lamar-jackson-tyler-211008287.html",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Vega Ioane",
+  "team": "BAL OL",
+  "status": "Set to return (note only)",
+  "url": "https://www.baltimoreravens.com/news/ravens-jaguars-injury-report-vega-ioane-nate-wiggins-bhayshul-tuten",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Ezra Cleveland",
+  "team": "JAX OL",
+  "status": "Limited Wed, no designation (note only)",
+  "url": "https://www.bleachernation.com/stats-and-news/2026/11/04/ravens-vs-jaguars-injury-report-inactives-week-9/",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Travon Walker",
+  "team": "JAX DE",
+  "status": "Questionable, rib (note only)",
+  "url": "https://athlonsports.com/nfl/trending/final-injury-report-for-jaguars-ravens-will-lamar-jackson-bhayshul-tuten-play",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Nate Wiggins",
+  "team": "BAL CB",
+  "status": "Questionable, stinger/illness (note only)",
+  "url": "https://athlonsports.com/nfl/trending/final-injury-report-for-jaguars-ravens-will-lamar-jackson-bhayshul-tuten-play",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Adam Randall",
+  "team": "BAL RB",
+  "status": "Questionable, neck (not in projections)",
+  "url": "https://athlonsports.com/nfl/trending/final-injury-report-for-jaguars-ravens-will-lamar-jackson-bhayshul-tuten-play",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Weather",
+  "team": "Baltimore",
+  "status": "Upper 60s, cloudy, wind 2-5 mph (one source gusts ~12); rain 17% at kickoff, 35-40% after 9 PM (note only, no --wind)",
+  "url": "https://dknetwork.draftkings.com/2026/11/05/jaguars-vs-ravens-weather-forecast-tnf/",
+  "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Game line",
+  "team": "JAX@BAL",
+  "status": "Consensus JAX -9.5 (3 of 5 books; DK/BetMGM -10), total 39.5 unchanged since midday",
+  "url": "https://the-odds-api.com/",
+  "found": "2026-11-05T21:35Z"
  }
 ]

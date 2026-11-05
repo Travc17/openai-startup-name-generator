@@ -161,3 +161,16 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   + Meyers 20+: 45.7% / 33.9c = 1.35x; + Lawrence 175+: 1.26x). Not added to bet #2 (already placed).
 * After the game: grade every row of the floor CSV (did 7/7 rungs hit more often than sim and price?). One game is
   noise; keep logging until about 50 graded rungs before drawing a conclusion.
+
+## Full sim, afternoon pass (2026-11-05 21:28 UTC, SIM_PROMPT.md)
+* Data through week 8 (pbp, snaps, PFF routes w8); regression check printed stat rows and "No drift."
+* Line: consensus JAX -9.5 (3 of 5 books; DK/BetMGM -10), total 39.5 (`markets/*_books_afternoon*`). Nothing moved
+  10% or more vs the midday projections.
+* Median game: JAX 25, BAL 16; JAX win 77.4%. Lawrence 19/29 234; Fagnano 18/28 164; Henry 16-60; Tuten 16-60.
+* Tuten-out scenario (scratchpad only): Rodriguez 7-26 -> 11-43, Abdullah 2-5 -> 4-11; Lawrence rush yds median
+  1.9 -> 10.3 (looks like a model quirk: vacated RB carries partly going to the QB; QB rushing is untested anyway).
+* 80%-range check vs last 4 games: Strange is the outlier. Model median 3 rec / 31 yds; last 4 games 7/95, 7/68,
+  5/44, 2/55 (all 40+). That is the main risk to bet #3 (NO Strange 40+).
+* Noted, not modeled: Travon Walker (JAX DE) and Nate Wiggins (BAL CB) questionable, Hawkins (BAL S) out, Vega Ioane
+  (BAL OL) returning, Moody (K) elevated, rain 17% at kickoff rising to 35-40% after 9 PM, wind 2-5 mph.
+* SizzleSims republished (version 11). FINAL pass after inactives (~6:50 PM ET): rerun with real inactives, clip.
