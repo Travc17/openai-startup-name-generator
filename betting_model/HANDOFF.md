@@ -1,8 +1,8 @@
 # Handoff (2026-11-03, session 2, 20:35 UTC): open items for the next session
 
-Working branch: `claude/robinhood-trading-mcp-qo26do` (see CLAUDE.md "Session start"). This session's
-commits are on `claude/tender-faraday-offel8` (fast-forward of the working branch); Travis has not yet
-chosen how they reach master (PR #1 is open from the working branch).
+Working branch: `claude/tender-faraday-offel8` (all work through 2026-11-05; it is a fast-forward of
+`claude/robinhood-trading-mcp-qo26do`, which is now behind). Travis has not yet chosen how it reaches master
+(PR #1 is open from the older branch). Game day: run `betting_model/GAMEDAY_PROMPT.md`.
 Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE_PROMPT.md` first.
 
 ## State
