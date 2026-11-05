@@ -217,3 +217,11 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   3. SizzleSims Predictions panel: add the best estimate (needs the book main line per player).
   4. Next credit cycle: pull historical ALT-line markets for 2026 (~4 markets x 121 games x 10 = ~4,800 credits): the
      rules above were tested on main lines only, and Travis bets alt lines.
+
+## Model lab batch 1 result (merged 2026-11-05, every switch OFF; tonight's sims replay identically)
+* PFF pass pro vs pass rush, run block vs run D, RB yards after contact, coverage grades, missing defenders x grade:
+  NONE passed. Pass pro helped 2024-25 slightly but made receptions worse in 2026 (t=+2.36). README has the table.
+* Lead for batch 2: better prior PFF coverage grades go with MORE yards allowed than the model expects, every season
+  (2023-26). Likely the defense factor is under-shrunk: test heavier `opp_shrink_targets` / position-defense shrink.
+* Method note: single-call paired tests can show chance t > 2 on stats a feature cannot touch (random draws
+  reshuffle); use `lab/pff_batch1.py --split` for team-level levers. Earlier ad-hoc PFF tests may carry that noise.
