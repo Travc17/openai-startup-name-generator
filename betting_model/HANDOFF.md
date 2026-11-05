@@ -197,3 +197,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   UNDERS with edge beat blind unders by ~3-7 pts ROI in both halves; model OVERS lost; pass yds unders lost.
 * Proposed (needs Travis's OK, after confirming on 2026 wk1-8 and/or 2024): unders only; no pass yds unders; the
   "best estimate" = 80% market / 20% model probability. 2026 wk1-8 (~6,000 credits) is the clean out-of-sample test.
+* 2026 wk1-8 pulled (121 games, ~6,000 credits; about 320 left: enough for tonight's close capture, then thin until
+  the reset). Out-of-sample results confirm: market more accurate; 20/80 blend slightly better than market; model
+  unders with edge >= 10% profitable both seasons; overs and pass-yds unders lose. See README and reviews/hist_2026*.
+* PROPOSED rule change (needs Travis's OK, CLAUDE.md not edited): unders only; edge >= 10% vs Kalshi price + fee;
+  no QB pass-yds unders; flat $50 stakes until the live record confirms (stated edges are inflated); predictions show
+  the 20/80 best estimate beside the model median.

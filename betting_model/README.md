@@ -244,6 +244,20 @@ bet is dropped and the other two scale to $75 + $70.
 * No TD, INT, kicker or defense props. Starters leaving a game early (injury, blowout benching) is not simulated.
 * NFL only.
 
+## Model vs the books' closing lines (2026-11-05; `hist_props.py`, `hist_compare.py`)
+Closing props for 2025 (271 games, 8 books) and 2026 weeks 1-8 (121 games), 5 markets, scored against the live
+model's walk-forward raw sims. Details: `reviews/hist_2025_model_vs_market.md`, `reviews/hist_2026_model_vs_market.md`.
+
+| Test | 2025 wk 4-18 (partly in-sample) | 2026 wk 1-8 (out of sample) |
+|---|---|---|
+| Brier, model vs market (lower is better) | 0.2588 vs 0.2477 | 0.2610 vs 0.2483 |
+| 20% model / 80% market blend, Brier | 0.2449 held out (wk 12-18) | 0.2474 (weight fit on 2025) |
+| Model unders, edge >= 10%, Kalshi-like price | +10.8% (n=2,522) | +9.3% (n=1,086, CI +2.4% to +16.0%) |
+| Model unders, edge >= 2% | +7.3% | +3.7% (CI -1.3% to +8.7%) |
+| Model overs, edge >= 2% | -6.8% | -4.4% |
+| Blind unders | +3.9% | +0.9% |
+The market is the better predictor; the model adds a little as a blend and finds value only in strong unders.
+
 ## Two-stage pipeline (2026-11-03)
 * **Stage 1, projections** (`nflmodel/projections.py`, `report --proj`): every player's distribution
   saved as P(stat >= k) on a half-unit grid, plus mean and 10/25/50/75/90th percentiles, game meta,

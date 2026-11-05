@@ -154,7 +154,8 @@ def main(a):
     df = df[df.y != df.line]                                  # pushes (whole-number lines) dropped
     lines = [f"# Model vs closing lines, {a.season} weeks {w0}-{w1}", "",
              f"{len(df)} player props matched ({df.game_id.nunique()} games). Raw sims ({a.sims} per game), no calibration map.",
-             "Caveat: some fitted constants used 2022-25 data, so this is partly in-sample for the model (favors the model).", "",
+             ("Caveat: some fitted constants used 2022-25 data, so this is partly in-sample for the model (favors the model)."
+              if a.season <= 2025 else "Out of sample: the fitted constants used 2022-25 data only (raw sims; the calibrated column uses a map fit on 2024-26)."), "",
              "## Accuracy (lower is better)", "",
              "| Stat | n | Median abs error: model | closing line | Brier: model | model calibrated | market | Log loss: model | market |",
              "|---|---|---|---|---|---|---|---|---|"]
@@ -181,6 +182,10 @@ def main(a):
               f"market {brier(test.p_mkt, test.over):.4f}, blend {brier(w_best * test.p_mod + (1 - w_best) * test.p_mkt, test.over):.4f}.",
               f"* Median blend: model weight {wm:.2f}. Held-out median abs error: model {np.mean(np.abs(test.med - test.y)):.2f}, "
               f"line {np.mean(np.abs(test.line - test.y)):.2f}, blend {np.mean(np.abs(wm * test.med + (1 - wm) * test.line - test.y)):.2f}."]
+    if a.blend_w is not None:                                 # a weight fit on an EARLIER season, applied here
+        w = a.blend_w
+        lines.append(f"* Fixed blend from an earlier season (model weight {w:.2f}), all rows: Brier model {brier(df.p_mod, df.over):.4f}, "
+                     f"market {brier(df.p_mkt, df.over):.4f}, blend {brier(w * df.p_mod + (1 - w) * df.p_mkt, df.over):.4f}.")
     # paper bets: model edge >= min_edge vs the best book price on that side at the consensus line
     bets = []
     for r in df.itertuples():
@@ -216,5 +221,6 @@ if __name__ == "__main__":
     ap.add_argument("--weeks", default="4-18")
     ap.add_argument("--sims", type=int, default=4000)
     ap.add_argument("--min-edge", type=float, default=0.02)
+    ap.add_argument("--blend-w", type=float, help="also score a model weight fit on an earlier season (e.g. 0.20 from 2025)")
     ap.add_argument("--out")
     main(ap.parse_args())
