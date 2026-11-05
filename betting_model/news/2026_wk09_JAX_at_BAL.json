@@ -118,5 +118,122 @@
   "detail": "Groin; Jake Moody kicks Thursday per Jesse Minter. Not used by the prop model.",
   "source": "Baltimore Beatdown",
   "url": "https://www.baltimorebeatdown.com/baltimore-ravens-news/87372/ravens-could-place-tyler-loop-on-ir-jake-moody-to-kick-vs-jaguars"
+ },
+ {
+  "player": "Bhayshul Tuten",
+  "team": "JAX RB",
+  "status": "Questionable (game-time decision)",
+  "detail": "Ankle/foot; no practice all week; Coen: game-time decision after a pregame workout. Jaguars On SI: all 27 Coen-era players who did not practice all week missed the game. Rule: treat as playing until ruled out; JAX backfield props held until inactives.",
+  "source": "Jaguars.com / NBC Sports",
+  "url": "https://www.jaguars.com/news/wednesday-quick-hits-tuten-a-game-time-decision-ahead-of-week-9-vs-ravens",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Tuten history note",
+  "team": "JAX",
+  "status": "Context",
+  "detail": "27 of 27 Coen-era players who missed every practice that week sat out the game.",
+  "source": "Yahoo Sports (Jaguars On SI)",
+  "url": "https://sports.yahoo.com/articles/jaguars-ravens-injury-report-why-221340808.html",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Travon Walker",
+  "team": "JAX DE",
+  "status": "Questionable",
+  "detail": "Ribs. Defensive injury: noted for matchup, model not adjusted.",
+  "source": "Black and Teal",
+  "url": "https://blackandteal.com/final-injury-report-antonio-johnson-gives-jaguars-a-spark-ravens-aren-t-ready-for-thursday-night",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Antonio Johnson",
+  "team": "JAX S",
+  "status": "Playing (no designation)",
+  "detail": "Cleared after a limited Wednesday.",
+  "source": "Black and Teal",
+  "url": "https://blackandteal.com/final-injury-report-antonio-johnson-gives-jaguars-a-spark-ravens-aren-t-ready-for-thursday-night",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Jakobi Meyers",
+  "team": "JAX WR",
+  "status": "Playing (no designation)",
+  "detail": "Hamstring/ankle; off the final report.",
+  "source": "NBC Sports / CBS",
+  "url": "https://www.nbcsports.com/fantasy/football/player-news/2026-11-04/jakobi-meyers-hamstring-ankle-will-face-ravens",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Justice Hill",
+  "team": "BAL RB",
+  "status": "Playing",
+  "detail": "Full practice Tue and Wed; removed from the injury report.",
+  "source": "NBC Sports",
+  "url": "https://www.nbcsports.com/fantasy/football/player-news/2026-11-04/justice-hill-groin-good-to-go-for-week-9",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Tyler Huntley",
+  "team": "BAL QB",
+  "status": "Out (season, IR)",
+  "detail": "Turf toe, season over per Schefter.",
+  "source": "NFL.com",
+  "url": "https://www.nfl.com/news/ravens-qb-tyler-huntley-out-for-season-turf-toe-injury",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Joe Fagnano",
+  "team": "BAL QB",
+  "status": "Starting",
+  "detail": "First career start, practiced in an ankle brace; backup Kedon Slovis. Jacoby Brissett signing reported but unconfirmed.",
+  "source": "Athlon / Heavy",
+  "url": "https://athlonsports.com/nfl/baltimore-ravens/ravens-tyler-huntley-injured-reserve-joe-fagnano-jaguars",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Nate Wiggins",
+  "team": "BAL CB",
+  "status": "Questionable",
+  "detail": "Stinger and illness; did not practice Wednesday. Defensive injury: noted for matchup.",
+  "source": "Baltimore Sun",
+  "url": "https://www.baltimoresun.com/2026/11/04/ravens-injury-report-nate-wiggins-vega-ioane/",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Jaylinn Hawkins",
+  "team": "BAL S",
+  "status": "Out",
+  "detail": "Knee; third straight game missed. Defensive injury: noted.",
+  "source": "Yahoo Sports",
+  "url": "https://sports.yahoo.com/articles/ravens-injury-report-nate-wiggins-201453352.html",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Roquan Smith / Mark Andrews",
+  "team": "BAL LB / TE",
+  "status": "Playing",
+  "detail": "Both full on the final report.",
+  "source": "CBS Sports / Yahoo",
+  "url": "https://www.cbssports.com/fantasy/football/news/ravens-roquan-smith-looking-good-for-thursday/",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Adam Randall",
+  "team": "BAL RB",
+  "status": "Questionable",
+  "detail": "Details not found in search results.",
+  "source": "Black and Teal",
+  "url": "https://blackandteal.com/final-injury-report-antonio-johnson-gives-jaguars-a-spark-ravens-aren-t-ready-for-thursday-night",
+  "captured": "2026-11-05 midday"
+ },
+ {
+  "player": "Weather",
+  "team": "Baltimore",
+  "status": "Mild, light wind",
+  "detail": "Upper 60s; wind ~7 mph (newest preview, gusts ~16); shower chance varies by source (0 to 69%). No --wind adjustment (under 8 mph); recheck at final pass.",
+  "source": "Covers / Cleatz",
+  "url": "https://www.covers.com/nfl/jaguars-vs-ravens-prediction-picks-nov-5-2026",
+  "captured": "2026-11-05 midday"
  }
 ]

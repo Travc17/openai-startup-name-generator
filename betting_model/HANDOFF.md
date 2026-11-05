@@ -128,3 +128,20 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   licensed music were not usable (Canva download hosts blocked by the network policy; music rights). Page v9.
 * Score sound changed to fireworks (Travis 2026-11-04: crowd roar too much); crowd cheer kept only at the final whistle.
 * Look: blue with depth (white stadium-light haze -> Kentucky blue -> deep navy, faint diagonal light streaks) and neon edges (blue on bug/field/caption, team color on side panels); page cards get a soft neon edge. Page v10; clip re-recorded 1:49.
+
+## Game day 2026-11-05: afternoon pass done (16:10 UTC); FINAL pass after inactives (~6:45 PM ET)
+* Captures: `markets/*_books_midday.csv` (9 books, 123 two-sided lines), `*_kalshi_midday.csv` (new tool
+  `kalshi_quotes.py`), `*_priced_midday.csv`. Projections re-run at JAX -10 / 39.5 (total down from 40.5).
+  `/tmp`-only Tuten-out scenario: Rodriguez 11 car / 43 yds; Henry, Hill, Washington, Meyers, Strange unchanged.
+* News: Tuten questionable, no practice all week (27/27 Coen-era such players sat); market prices him out (books
+  pulled his line; Kalshi Rodriguez 30+ 60c -> 87c). Hill full practice, off report. Fagnano starts, Huntley IR.
+  JAX: Walker (DE) questionable, A. Johnson cleared, Meyers no designation. BAL: Wiggins (CB) questionable, Hawkins
+  (S) out, Roquan/Andrews cleared. Weather mild, wind ~7 mph (no --wind).
+* Matchup (2026 to date): JAX run D #1 (58 RB rush yds/g allowed); BAL WR D #28 (178/g), BAL TE D #11.
+* No leg passes the books' check (all -4 to -8). Model + matchup agree on Henry and Hill rushing unders.
+* Afternoon recommendation (not placed): parlay NO Henry 80+ rush + NO Hill 20+ rush (sim hit 60.0%, lift 1.01,
+  ~41c if priced as product, max 55c) replacing bet #2 (Washington leg dropped: BAL WR D #28, CB/S injuries);
+  single NO Strange 40+ rec yds at <=55c (model 61.9%, cost 57%). Rule stakes $160 + $60 = $220; recommended $50
+  each (model-only). JAX RB props held until inactives.
+* FINAL pass: inactives (Tuten), Hill/Henry/Walker status, weather, re-pull books + Kalshi (close), re-run price,
+  SizzleSims export/build/publish + clip, final recommendation, then log fills.
