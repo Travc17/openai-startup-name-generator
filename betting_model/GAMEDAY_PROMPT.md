@@ -59,6 +59,10 @@ Show side by side:
 * Verdict: does the matchup support the hit rate or argue against it? A high hit rate is not a bet when the price
   already reflects it. Hit rate alone is never the test (EDGE_PROMPT.md H8).
 
+## 4b. Floor and ceiling legs
+Run FLOOR_PROMPT.md: season game logs, the rung each player reached in every game (or never reached), matchup for
+that direction, sim and blended probability, price. Its qualifying legs can join a parlay under its step 6 rules.
+
 ## 5. Pick the bets (CLAUDE.md rules, Travis's game-day format)
 * 1 or 2 single props and 1 or 2 parlays, HARD MAX 3 bets total (slate cap), at least one parlay.
 * Every bet: edge of 2% or more after the 2c fee; no blind spots, no TD/INT; skip QB rushing props (never tested;
