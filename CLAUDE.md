@@ -84,10 +84,10 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    page with a picker). Commit `simcast/games/*.json`. Default is the MEDIAN game (Travis): each QB line is his exact median;
    receivers all sit at one common percentile of their own ranges, solved so catches/targets/yards add up EXACTLY to
    the QB line (sum of individual medians undercounts lopsided receiving yards); every completion to a named player,
-   never a placeholder; rushers at their own medians; score = median score. The page's Predictions panel is the X
-   prediction (Travis: accuracy for his X account): each player's OWN median + 80% range + rule-based grade (A tested
+   never a placeholder; rushers at their own medians; score = median score. The page's Predictions panel is the
+   prediction of record (Travis 2026-11-05: accuracy for himself and friends; no X posting): each player's OWN median + 80% range + rule-based grade (A tested
    stat, clear role / B rushing or lighter role / C blind spot, depth, untested). Played games get a scorecard
-   (share inside the 80% range by grade). Final run 90 minutes before kickoff, after inactives. X clip: `python simcast/clip.py out.mp4` (Travis 2026-11-04: LANDSCAPE
+   (share inside the 80% range by grade). Final run 90 minutes before kickoff, after inactives. Video clip: OPTIONAL, only when Travis asks (2026-11-05: "forget X"): `python simcast/clip.py out.mp4` (Travis 2026-11-04: LANDSCAPE
    1920x1080 broadcast like a TV game: score bug + pregame win chance on top, tilted field, each team's live box score
    on its side (relevant players only), one-line caption, no buttons, nothing cut off; confetti on scores; then the
    full final box score for both teams 10 s; original synthesized soundtrack (`simcast/sound.py`: music bed, whistles,

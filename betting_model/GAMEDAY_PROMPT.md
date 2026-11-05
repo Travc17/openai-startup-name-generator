@@ -37,8 +37,7 @@ Append every item with its URL to `news/<season>_wk<NN>_<AWAY>_at_<HOME>.json`.
   third-string QB's pass catchers), `--sims 25000 --no-log --proj projections/<file>.json`.
 * Independence rule: do NOT look at prop prices while setting adjustments; only the spread and total. Every
   adjustment needs a news URL.
-* SizzleSims (CLAUDE.md 5c): export, build, publish; `python simcast/clip.py <scratchpad>/clip.mp4` and send
-  Travis the MP4 for X.
+* SizzleSims (CLAUDE.md 5c): export, build, publish (the page is for Travis and friends; no clip unless he asks).
 
 ## 3. Prices (close capture, saved to `markets/`)
 * Books: `python nfl.py odds AWAY HOME --alt --out markets/<file>_books_close.csv`.

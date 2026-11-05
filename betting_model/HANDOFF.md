@@ -185,3 +185,8 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   defense, pass rush, coverage). Odds API historical endpoint works (1 credit per event list).
 * Waiting on Travis: OK to spend credits on historical closing props (one season of 5 markets ~13,000 of 19,900;
   a 60-game sample ~3,000), and whether X predictions may blend market lines (product B).
+* Travis 2026-11-05: "forget X", accuracy for himself and friends. Video clips dropped (only on request); SizzleSims
+  page stays. Market blend for a "best estimate" approved (MODEL_LAB_PROMPT rule 7); bets still use the model only.
+* Historical props measured 2026-11-05: 10 credits per market per game (1 test call: 7 books, 178 rec-yds outcomes).
+  Full 2025 season, 5 markets = about 13,700 credits (he has 19,899 on what looks like the $30/month 20K plan).
+  Waiting on his go before pulling.

@@ -19,11 +19,12 @@ wide alignment) made receiving yards 0.7% WORSE (t=+3.98). Adding data without a
 4. One feature family per batch. Combinations only after the singles pass.
 5. Every test, passed or failed, goes in README "Model review" with n, % change and t. Failed switches stay in
    `Config` (OFF) so the result can be reproduced.
-6. Licensing: PFF data stays in `betting_model/data/` (gitignored), never committed, never posted or quoted on X.
+6. Licensing: PFF data stays in `betting_model/data/` (gitignored), never committed, never posted or shared outside the model's outputs.
    Only model outputs (projections) leave the machine. Keys live in the environment, never in chat or the repo.
-7. Two products, two scoreboards. The BETTING model stays independent of prop prices (otherwise it can never
-   disagree with the market). The X PREDICTION may blend in market lines only if Travis approves it and a held-out
-   test shows lower error. Every X prediction says which kind it is.
+7. Goal is accuracy (Travis 2026-11-05: predictions are for himself and friends, no X). Two numbers per player:
+   the MODEL median (independent of prop prices, used for every bet, so it can disagree with the market) and the
+   BEST ESTIMATE (model blended with the closing line at the weight that tested most accurate on held-out games;
+   approved 2026-11-05). The best estimate is never used to find bets: it already contains the price.
 8. Credits and money: ask Travis before spending more than 1,000 Odds API credits in one batch.
 
 ## 1. Inventory: every tool and data source (update `MODEL_INVENTORY.md` each run)
@@ -91,7 +92,8 @@ a sample (e.g. 60 games, about 3,000 credits). Then:
 * Disagreement test: when the model and the line differ by 10% or more, who was closer, and how often.
 * Paper profit: apply the real bet rules (2% edge after fee, Kalshi-style pricing from no-vig) and report hit rate,
   ROI and how it varies by stat. This answers "does an edge exist" before 50 real bets do.
-* Blend (product B, only with Travis's OK): weight w on the market median, fit on one season, scored on the next.
+* Blend (the best estimate, approved): weight w on the closing line, fit on one season, scored on the next; report
+  the error of model, market and blend side by side.
 
 ## 7. Report (Travis reads it on his phone)
 First line: did accuracy improve, by how much, on which stats (or "no change"). Then the scoreboard before and
