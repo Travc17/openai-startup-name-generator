@@ -190,3 +190,10 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Historical props measured 2026-11-05: 10 credits per market per game (1 test call: 7 books, 178 rec-yds outcomes).
   Full 2025 season, 5 markets = about 13,700 credits (he has 19,899 on what looks like the $30/month 20K plan).
   Waiting on his go before pulling.
+
+## Historical closing lines, 2025 (pulled 2026-11-05; `hist_props.py`, `hist_compare.py`)
+* 271 games, 126,607 quotes, 8 books, 13,438 credits (6,461 left). Raw data in data/odds_hist (gitignored).
+* Results: `reviews/hist_2025_model_vs_market.md`. Closing line more accurate than the model on every stat; model
+  UNDERS with edge beat blind unders by ~3-7 pts ROI in both halves; model OVERS lost; pass yds unders lost.
+* Proposed (needs Travis's OK, after confirming on 2026 wk1-8 and/or 2024): unders only; no pass yds unders; the
+  "best estimate" = 80% market / 20% model probability. 2026 wk1-8 (~6,000 credits) is the clean out-of-sample test.
