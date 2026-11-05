@@ -60,8 +60,10 @@ Show side by side:
   already reflects it. Hit rate alone is never the test (EDGE_PROMPT.md H8).
 
 ## 4b. Floor and ceiling legs
-Run FLOOR_PROMPT.md: season game logs, the rung each player reached in every game (or never reached), matchup for
-that direction, sim and blended probability, price. Its qualifying legs can join a parlay under its step 6 rules.
+Run FLOOR_PROMPT.md with `floor_legs.py` (close Kalshi quotes, final news file, the planned parlay as `--base`, the
+planned singles as `--singles`): season game logs, the rung each player reached in every game (or never reached),
+matchup for that direction, sim and blended probability, price. Its qualifying legs can join a parlay under its
+step 6 rules. Save the table to `markets/<file>_floor_legs_close.csv`.
 
 ## 5. Pick the bets (CLAUDE.md rules, Travis's game-day format)
 * 1 or 2 single props and 1 or 2 parlays, HARD MAX 3 bets total (slate cap), at least one parlay.

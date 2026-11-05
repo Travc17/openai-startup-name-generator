@@ -10,6 +10,17 @@ What the data says first (2026-11-05): Strange's catches were 2, 2, 3, 7, 7, 5, 
 yds in 8 of 8 games, yet the sim gives him 70% tonight against the NFL's best run defense. A 7-for-7 record is not
 100%: a true 80% player goes 7-for-7 about 21% of the time. So the season record is evidence to blend, never a promise.
 
+Script (does steps 1 to 6 in about 15 seconds; read its skips, never just its ADD list):
+
+    python floor_legs.py --proj projections/<file>.json --quotes markets/<file>_kalshi_<when>.csv \
+        --news news/<file>.json --base "Player:stat:under|over:x:price_cents" ... --singles "Player:stat" ... \
+        --out markets/<file>_floor_legs_<when>.csv
+
+It uses each player's LATEST news status, skips under legs when a same-position teammate is questionable or out
+(his share can grow: Tuten out makes Rodriguez's 7/7 "never 60+" sample stale), applies the QB-change check to
+receiving stats only, and skips any player+stat already bet as a single (`--singles`). It does NOT see players who
+played in the sample but are absent tonight without a news item: check the inactives by hand.
+
 ---
 
 For every player in tonight's projections (skip blind spots, TD/INT, QB rushing, and anyone with fewer than 4 games):
@@ -34,7 +45,8 @@ position vs league, yards per game, and rank.
 
 ## 4. Role and news checks (any failure = skip)
 * Last 4 weeks of snaps, routes and target or carry share are not below his season level.
-* No injury designation; his QB is the same one who threw to him in the sample (otherwise skip).
+* No injury designation; for receiving legs, his QB is the same one who threw to him in the sample (otherwise skip).
+* Under/ceiling legs: no same-position teammate questionable or out tonight (his role may grow past the sample).
 * Not a blind spot under CLAUDE.md.
 
 ## 5. Probability and price

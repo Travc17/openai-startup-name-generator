@@ -152,3 +152,12 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   CLAUDE.md still assumes 2c flat; proposed (needs Travis's OK): 1.5c singles, 2.5c combos. Venue question open: the
   rules say Kalshi, the fills are Robinhood (prices matched Kalshi's quotes today).
 * Final pass: record closing prices for #2 and #3 (Kalshi quotes as the proxy for Robinhood's close), then grade after.
+
+## Floor and ceiling legs (2026-11-05, Travis's idea; FLOOR_PROMPT.md + `floor_legs.py`)
+* Midday run saved to `markets/2026_wk09_JAX_at_BAL_floor_legs_midday.csv` (24 candidates). Qualifying (model-only,
+  books not checked): Meyers 20+ rec yds (7/7, blend .859 vs 77c), Meyers 25+ (6/7), Lawrence 175+ pass yds (7/7,
+  barely: +.012). Rodriguez NO 60+ rush (7/7, 53c) is SKIPPED: Tuten questionable, so the sample is stale.
+* Adding any of them LOWERS the parlay's return per dollar (base Henry80/Hill20: 60.0% / 43.4c cost = 1.38x;
+  + Meyers 20+: 45.7% / 33.9c = 1.35x; + Lawrence 175+: 1.26x). Not added to bet #2 (already placed).
+* After the game: grade every row of the floor CSV (did 7/7 rungs hit more often than sim and price?). One game is
+  noise; keep logging until about 50 graded rungs before drawing a conclusion.
