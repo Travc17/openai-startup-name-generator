@@ -1,0 +1,78 @@
+{
+ "fitted_on": "2023 weeks 6-18 (production-model residuals, lab/pff_batch1.py --fit)",
+ "coef": {
+  "pass_pro": {
+   "b_ypt": 0.012860033481427934,
+   "se_ypt": 0.05728600459940815,
+   "b_cmp": -0.0365011165107697,
+   "se_cmp": 0.03210540372254803,
+   "n": 388,
+   "unit": "logit pressure rate"
+  },
+  "run_block": {
+   "b": 0.0013961407399097627,
+   "se": 0.00801098150343413,
+   "n": 521,
+   "unit": "PFF grade points"
+  },
+  "rb_eff": {
+   "b": -0.001255126909317517,
+   "se": 0.06195862750501919,
+   "n": 521,
+   "unit": "yards after contact per attempt"
+  },
+  "coverage": {
+   "b": 0.008491102839598131,
+   "se": 0.006132158633915999,
+   "n": 1624,
+   "unit": "PFF coverage grade points"
+  },
+  "missing_def": {
+   "b_ypt": -0.04398586451593148,
+   "se_ypt": 0.03556655888616546,
+   "b_ypc": 0.058034227644696394,
+   "se_ypc": 0.04488402197302624,
+   "n_qb": 388,
+   "n_rb": 521,
+   "unit": "snap share x (grade - 60)/10"
+  }
+ },
+ "coef_2023_24": {
+  "pass_pro": {
+   "b_ypt": -0.012979547086484137,
+   "se_ypt": 0.03740266017920978,
+   "b_cmp": -0.04280576990079112,
+   "se_cmp": 0.02155588040225117,
+   "n": 836,
+   "unit": "logit pressure rate"
+  },
+  "run_block": {
+   "b": 0.00555781100487354,
+   "se": 0.005264054676641934,
+   "n": 1098,
+   "unit": "PFF grade points"
+  },
+  "rb_eff": {
+   "b": 0.011475319507661752,
+   "se": 0.04265754529839002,
+   "n": 1098,
+   "unit": "yards after contact per attempt"
+  },
+  "coverage": {
+   "b": 0.009705133130519851,
+   "se": 0.004289433056672161,
+   "n": 3437,
+   "unit": "PFF coverage grade points"
+  },
+  "missing_def": {
+   "b_ypt": -0.0035636694154634685,
+   "se_ypt": 0.02338906326666936,
+   "b_ypc": 0.025797569108183607,
+   "se_ypc": 0.029261717025468374,
+   "n_qb": 836,
+   "n_rb": 1098,
+   "unit": "snap share x (grade - 60)/10"
+  }
+ },
+ "fitted_on_2023_24": "2023 weeks 6-18 + 2024 weeks 4-18 (production-model residuals, lab/pff_batch1.py --fit)"
+}
