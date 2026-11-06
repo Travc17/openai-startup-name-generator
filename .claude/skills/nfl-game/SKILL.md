@@ -23,7 +23,7 @@ step. This skill only says which file to run, in what order, and what every mode
 | `bets` | `GAMEDAY_PROMPT.md` steps 3 to 6 on the latest projections (step 4b runs `FLOOR_PROMPT.md`) | verdict table: 1 or 2 singles + 1 or 2 parlays, max 3, or "pass" |
 | `floor` | `FLOOR_PROMPT.md` via `floor_legs.py` (`--base` = planned or placed parlay, `--singles` = singles) | floor/ceiling table + parlay options |
 | `final` | `SIM_PROMPT.md` final pass (real inactives), then `bets` (SizzleSims page; no clip unless asked) | the prediction of record + final bets |
-| `grade` | GAMEDAY_PROMPT.md step 7 "After the game" + SIM_PROMPT.md section 8 + FLOOR_PROMPT.md step 8 | settled bets, scorecard, review in `reviews/` |
+| `grade` | `POSTGAME_PROMPT.md` (plus SIM_PROMPT.md section 8 and FLOOR_PROMPT.md step 8) | settled bets, scorecard, lessons ledger, self-grade, review in `reviews/` |
 | `full` | `sim`, then `bets` | both |
 
 ## Rules that bind every mode (CLAUDE.md wins on any conflict)

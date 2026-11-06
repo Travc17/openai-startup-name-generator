@@ -611,7 +611,7 @@ def cmd_log(a):
     if a.action == "add":
         print(f"Logged bet #{ledger.add(a.bet, a.price, a.stake, a.prob, a.sport, a.notes or '')}")
     elif a.action == "settle":
-        r = ledger.settle(int(a.bet), a.result, a.close)
+        r = ledger.settle(int(a.bet), a.result, a.close, a.pnl)
         print(f"Settled #{r['id']}: {r['result']} {r['pnl']}")
     print(ledger.summary(a.bankroll))
 
@@ -739,7 +739,8 @@ def main():
     lg = sub.add_parser("log")
     lg.add_argument("action", choices=["add", "settle", "summary"])
     lg.add_argument("bet", nargs="?")
-    lg.add_argument("result", nargs="?", choices=["win", "loss", "push"])
+    lg.add_argument("result", nargs="?", choices=["win", "loss", "push", "cashout"])
+    lg.add_argument("--pnl", type=float, help="exact profit for a cashout (sale credit minus total cost)")
     lg.add_argument("--price")
     lg.add_argument("--stake", type=float, default=50)
     lg.add_argument("--prob", type=float)

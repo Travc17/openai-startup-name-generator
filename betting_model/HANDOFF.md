@@ -235,3 +235,12 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Recommended bet #4 (not placed unless Travis fills): Kalshi NO Parker Washington 60+ rec yds, price limit 51c (close
   47c), model 63.4%, edge +14.4%, stake $115 (5%; game total $215 of the $225 cap). Model-only: books' line 62.5.
 * Fix made in the final pass: rush+rec yds props now inherit a player's receiving blind spot (market.find, report).
+
+## RESULT JAX 33, BAL 10 (graded 2026-11-05 ~11:45 PM ET from ESPN screenshots; review in reviews/)
+* Bet #2 LOST (Hill 9-85 incl. 65-yd TD; Henry 57 leg won): -$49.60. Bet #3 cashed out at 93c: +$32.43. Recommended #4
+  (Washington NO 60+) not placed; would have lost (61 yds, one 50-yd TD). Bankroll $2,240.05. CLV avg 0.0 (1 of 3).
+* Scorecard 44/54 inside 80% (81%); A 9/9, B 6/6, C 29/39. Model vs line vs best MAE 12.40 / 12.23 / 12.23. Floor legs 7/7.
+* New: POSTGAME_PROMPT.md (classify misses, lessons ledger `reviews/lessons.csv`, 3-game rule before any model test),
+  `nfl.py log settle <id> cashout --pnl X`.
+* OPEN after nflverse posts the game: `nfl.py update`, re-export SizzleSims with actuals (scorecard), `picks grade`,
+  confirm the screenshot actuals (zeros for players not in ESPN's tables).

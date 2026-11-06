@@ -1,0 +1,55 @@
+name,team,stat,grade,med,lo,hi,best,book,act,inside,side
+Zay Flowers,BAL,rec,C,5.0,2.0,8.0,4.6,4.5,3,True,in
+Zay Flowers,BAL,rec_yds,C,53.8,16.1,110.8,49.6,48.5,6,False,below
+Justice Hill,BAL,rush_att,C,2.0,0.0,6.0,,,9,False,above
+Justice Hill,BAL,rush_yds,C,6.5,0.0,28.7,12.1,13.5,85,False,above
+Justice Hill,BAL,rec,C,2.0,0.0,5.0,2.4,2.5,3,True,in
+Justice Hill,BAL,rec_yds,C,11.2,0.0,32.7,14.6,15.5,7,True,in
+Derrick Henry,BAL,rush_att,B,16.0,9.0,24.0,17.2,17.5,17,True,in
+Derrick Henry,BAL,rush_yds,B,60.1,25.9,107.2,68.4,70.5,57,True,in
+Derrick Henry,BAL,rec,C,1.0,0.0,3.0,1.4,1.5,0,True,in
+Derrick Henry,BAL,rec_yds,C,2.4,0.0,19.1,6.5,7.5,0,True,in
+Mark Andrews,BAL,rec,C,3.0,1.0,6.0,2.6,2.5,2,True,in
+Mark Andrews,BAL,rec_yds,C,21.4,3.8,48.9,19.9,19.5,19,True,in
+Rashod Bateman,BAL,rec,C,2.0,0.0,4.0,1.6,1.5,1,True,in
+Rashod Bateman,BAL,rec_yds,C,17.7,0.0,52.2,15.1,14.5,6,True,in
+Ja'Kobi Lane,BAL,rec,C,2.0,0.0,4.0,1.6,1.5,0,True,in
+Ja'Kobi Lane,BAL,rec_yds,C,16.1,0.0,49.0,15.6,15.5,0,True,in
+Rasheen Ali,BAL,rush_att,C,2.0,0.0,5.0,,,0,True,in
+Rasheen Ali,BAL,rush_yds,C,4.6,0.0,22.2,,,0,True,in
+Rasheen Ali,BAL,rec,C,0.0,0.0,2.0,,,0,True,in
+Rasheen Ali,BAL,rec_yds,C,0.0,0.0,15.9,,,0,True,in
+Devontez Walker,BAL,rec,C,0.0,0.0,2.0,,,0,True,in
+Devontez Walker,BAL,rec_yds,C,0.0,0.0,29.7,,,0,True,in
+Joe Fagnano,BAL,pass_cmp,C,18.0,11.0,24.0,17.6,17.5,10,False,below
+Joe Fagnano,BAL,pass_att,C,28.0,19.0,38.0,28.4,28.5,18,False,below
+Joe Fagnano,BAL,pass_yds,C,164.2,94.6,243.6,164.0,164.0,60,False,below
+Joe Fagnano,BAL,pass_td,C,1.0,0.0,2.0,,,0,True,in
+Joe Fagnano,BAL,int,C,0.0,0.0,2.0,,,2,True,in
+Parker Washington,JAX,rec,A,3.0,1.0,6.0,4.2,4.5,2,True,in
+Parker Washington,JAX,rec_yds,A,45.7,8.5,106.2,58.3,61.5,61,True,in
+Brenton Strange,JAX,rec,A,3.0,1.0,6.0,3.4,3.5,2,True,in
+Brenton Strange,JAX,rec_yds,A,31.3,4.0,75.8,33.1,33.5,22,True,in
+Jakobi Meyers,JAX,rec,A,3.0,1.0,6.0,3.4,3.5,4,True,in
+Jakobi Meyers,JAX,rec_yds,A,39.3,7.4,94.5,38.7,38.5,65,True,in
+Bhayshul Tuten,JAX,rush_att,B,16.0,9.0,23.0,14.8,14.5,12,True,in
+Bhayshul Tuten,JAX,rush_yds,B,59.9,27.1,106.7,60.4,60.5,29,True,in
+Bhayshul Tuten,JAX,rec,C,1.0,0.0,3.0,1.4,1.5,0,True,in
+Bhayshul Tuten,JAX,rec_yds,C,8.1,0.0,35.4,11.6,12.5,0,True,in
+Chris Rodriguez Jr.,JAX,rush_att,B,7.0,3.0,12.0,8.2,8.5,10,True,in
+Chris Rodriguez Jr.,JAX,rush_yds,B,26.2,6.5,59.9,30.4,31.5,19,True,in
+Brian Thomas Jr.,JAX,rec,C,2.0,0.0,5.0,1.6,1.5,0,True,in
+Brian Thomas Jr.,JAX,rec_yds,C,24.4,0.0,71.1,17.3,15.5,0,True,in
+Josh Cameron,JAX,rec,C,1.0,0.0,3.0,1.4,1.5,1,True,in
+Josh Cameron,JAX,rec_yds,C,7.4,0.0,42.5,9.1,9.5,6,True,in
+Travis Hunter,JAX,rec,C,0.0,0.0,2.0,1.2,1.5,1,True,in
+Travis Hunter,JAX,rec_yds,C,0.0,0.0,35.0,6.8,8.5,-1,False,below
+Nate Boerkircher,JAX,rec,C,1.0,0.0,3.0,0.6,0.5,2,True,in
+Nate Boerkircher,JAX,rec_yds,C,2.0,0.0,31.3,7.2,8.5,61,False,above
+Ameer Abdullah,JAX,rush_att,C,2.0,0.0,5.0,,,7,False,above
+Ameer Abdullah,JAX,rush_yds,C,4.7,0.0,22.5,,,30,False,above
+Trevor Lawrence,JAX,pass_cmp,A,19.0,12.0,26.0,19.0,19.0,16,True,in
+Trevor Lawrence,JAX,pass_att,A,29.0,20.0,39.0,29.4,29.5,26,True,in
+Trevor Lawrence,JAX,pass_yds,A,234.1,137.9,338.9,233.6,233.5,242,True,in
+Trevor Lawrence,JAX,pass_td,C,2.0,0.0,4.0,,,1,True,in
+Trevor Lawrence,JAX,int,C,0.0,0.0,2.0,,,0,True,in

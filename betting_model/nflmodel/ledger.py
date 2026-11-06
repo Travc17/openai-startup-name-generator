@@ -36,15 +36,20 @@ def add(bet: str, price: str, stake: float, model_prob: float | None, sport: str
     return new_id
 
 
-def settle(bet_id: int, result: str, closing_price: str | None = None) -> dict:
-    """result: win, loss, or push."""
+def settle(bet_id: int, result: str, closing_price: str | None = None, pnl: float | None = None) -> dict:
+    """result: win, loss, push, or cashout (sold before settlement: pass the exact pnl from the receipt)."""
     rows = _read()
     for r in rows:
         if int(r["id"]) == bet_id:
             p = parse_price(r["price_taken"])
             s = float(r["stake"])
             r["result"] = result
-            r["pnl"] = f"{(s * p.net_odds) if result == 'win' else (-s if result == 'loss' else 0):.2f}"
+            if result == "cashout":
+                if pnl is None:
+                    raise ValueError("cashout needs --pnl (sale credit minus total cost, from the receipt)")
+                r["pnl"] = f"{pnl:.2f}"
+            else:
+                r["pnl"] = f"{(s * p.net_odds) if result == 'win' else (-s if result == 'loss' else 0):.2f}"
             if closing_price:
                 r["closing_price"] = closing_price
             _write(rows)

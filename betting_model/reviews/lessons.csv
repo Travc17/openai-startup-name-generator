@@ -1,0 +1,4 @@
+first_seen,last_seen,games,category,lesson,evidence,status,next_step
+2026-11-05,2026-11-05,1,pattern,RB2/RB3 carry spike when the offense leans on the run (bad QB) or the starter plays hurt,"JAX@BAL wk9: Hill 9 car (pred 2, 80% 0-6), Abdullah 7 (pred 2); Tuten 12 car at 2.4 ypc while questionable",watch,"At 3 games: backtest RB2 carry share vs QB quality and starter injury tag (MODEL_LAB)"
+2026-11-05,2026-11-05,1,blind_spot_confirmed,Undrafted/third-string QB far below the average-backup prior,"JAX@BAL wk9: Fagnano 10/18 60 yds 2 INT (pred 164, 80% 95-244); BAL receivers all low",rule_holds,"Keep blind spot; counts toward the draft-capital QB prior test (REVIEW_PROMPT known gaps)"
+2026-11-05,2026-11-05,1,variance,Rush-yds unders on a change-of-pace back are exposed to one long run,"JAX@BAL wk9: Hill 65-yd TD run (model P(20+)=18%)",no_change,"None: inside the model's tail. Recheck if rush-yds unders lose 3+ games in a row"

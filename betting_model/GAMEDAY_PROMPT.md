@@ -85,5 +85,5 @@ sources as links. Confidence tags [Certain] / [Likely] / [Guessing]. Never write
 ## 7. After Travis fills
 * Log every fill in `bets.csv` (`python nfl.py log add ...`), record closing prices (`picks close`), commit, push,
   update HANDOFF.md.
-* After the game: settle, `picks grade`, grade every rung and quote (EDGE_PROMPT.md step 4), add the SizzleSims
-  scorecard, write the review in `reviews/`.
+* After the game: run POSTGAME_PROMPT.md (settle incl. cash-outs, grade every prediction and bet, classify misses,
+  update `reviews/lessons.csv`, self-grade, write the review). One game changes nothing.
