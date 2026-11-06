@@ -244,3 +244,5 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   `nfl.py log settle <id> cashout --pnl X`.
 * OPEN after nflverse posts the game: `nfl.py update`, re-export SizzleSims with actuals (scorecard), `picks grade`,
   confirm the screenshot actuals (zeros for players not in ESPN's tables).
+* Scheduled: post-game review for JAX@BAL fires 2026-11-06 8:30 AM ET (trigger trig_014rNuvXn8hxsDuW4tNPGZ45); it
+  reschedules itself +3h if nflverse has not posted the game yet.
