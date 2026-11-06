@@ -1,7 +1,7 @@
 # Review: JAX 33 at BAL 10, week 9 2026 (TNF, 2026-11-05)
 
-Graded from the ESPN final box score (Travis's screenshots; `reviews/2026_wk09_JAX_at_BAL_actuals.json`). nflverse data
-is not in yet: rerun `simcast/export.py` and `nfl.py picks grade` after the next `update` to confirm.
+Graded from the ESPN box score, CONFIRMED against nflverse on 2026-11-06 (all stats match; only Lawrence's kneel differs,
+and Rasheen Ali had 0 snaps so his 4 predictions are ungraded).
 
 ## Model bankroll
 | Bet | Result | P&L | CLV |
@@ -33,3 +33,27 @@ Bankroll $2,257.22 -> $2,240.05. Lifetime 3 bets settled: +$240.05; CLV average 
 ## What held
 Henry 17-57 (pred 16-60), Lawrence 242 yds (pred 234), Meyers/Washington/Strange inside their ranges, every A and B
 grade inside. The blind-spot rule avoided the worst miss of the night (BAL passing).
+
+## Morning review (2026-11-06, official data)
+* SizzleSims scorecard (published): 40 of 50 inside the 80% range (80%). A 9/9, B 6/6, C 25/35 (71%).
+* Paper log (`picks_log.csv`): 3 picks, 0 won (expected 47.7%). All three were Brian Thomas Jr. overs logged by the
+  Nov 3 report, before his role cut was made a blind spot and before the unders-only rule; he played 34% of snaps and
+  had 0 targets. One player, one outcome: it supports both later rules but proves little on its own.
+* Snaps and play by play reclassify the "RB2 carry spike": it was BLOWOUT GARBAGE TIME, not a role change.
+  * Hill: 29 snaps (52%, in line with 42-49% the last 4 weeks); 7 of his 9 carries came in the 4th quarter with BAL down
+    23 or more, including the 65-yd run. Bet #2's Hill leg lost to the final margin (JAX by 23 vs the 9.5 line).
+  * Abdullah: all 7 carries in the 4th quarter with JAX up 20-23 (clock-killing). Tuten: no 4th-quarter carries, 36% of
+    snaps (rested and banged up). Rodriguez: 5 of 10 carries in the 4th quarter.
+  * Class: known structural gap (README honest limits: starters pulled in blowouts are not simulated), not a new pattern.
+* Boerkircher: 55% of snaps (48-55% recent) yet projected at a 2-yd median as a depth add: pattern to watch (count 1).
+* Bug to check: after `update`, `simcast/export.py` replay no longer matches the saved projections exactly (Lawrence rush
+  yds median 1.9 vs 2.8). Week-9 data may be reaching a week-9 projection (look-ahead). Investigate before the next
+  backtest; the scorecard was attached from the confirmed actuals instead of a re-export.
+
+## Self-grade (final)
+* Process A-: rules held, final pass after inactives, blind spots kept BAL passing and BTJ out of bets; the rush+rec
+  blind gap was caught before any bet. Miss: no blowout flag on backup-RB unders with a 9.5-point spread.
+* Predictions B+: 80% inside the 80% ranges (calibrated); A and B grades 15/15; the line still slightly better on error.
+* Bets C: 1 of 2 (cash-out), -$17.17; the recommended #4 would have lost by 1 yard.
+* One process fix: when the spread is 9.5 or more, flag backup-RB rushing unders (both teams) as "blowout risk" in the
+  verdict table. Not a model change.

@@ -246,3 +246,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   confirm the screenshot actuals (zeros for players not in ESPN's tables).
 * Scheduled: post-game review for JAX@BAL fires 2026-11-06 8:30 AM ET (trigger trig_014rNuvXn8hxsDuW4tNPGZ45); it
   reschedules itself +3h if nflverse has not posted the game yet.
+* POST-GAME REVIEW DONE (2026-11-06 8:30 AM ET): actuals confirmed vs nflverse; SizzleSims scorecard published (40/50,
+  80%); picks_log graded (3 Nov-3 BTJ overs, 0/3); RB2 carry spike reclassified as blowout garbage time (known gap);
+  process fix: flag backup-RB rushing unders when |spread| >= 9.5. OPEN BUG: export replay mismatch after update
+  (possible look-ahead in a week-N projection), see reviews/lessons.csv.
+* Travis (2026-11-05, personal, not the model): hard stop if his own betting money falls below $10,000. Flag it whenever
+  he sends personal bets; suggested daily cap about $3,000 (the distance to that floor).

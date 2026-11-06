@@ -1,32 +1,165 @@
-{"source": "ESPN final box score (Travis screenshots, 2026-11-05 11:33 PM ET); final JAX 33, BAL 10",
- "final": {"JAX": 33, "BAL": 10},
- "stats": {
-  "Trevor Lawrence": {"pass_cmp": 16, "pass_att": 26, "pass_yds": 242, "pass_td": 1, "int": 0, "rush_att": 1, "rush_yds": -1},
-  "Parker Washington": {"targets": 7, "rec": 2, "rec_yds": 61},
-  "Brenton Strange": {"targets": 2, "rec": 2, "rec_yds": 22},
-  "Jakobi Meyers": {"targets": 6, "rec": 4, "rec_yds": 65},
-  "Bhayshul Tuten": {"rush_att": 12, "rush_yds": 29, "targets": 0, "rec": 0, "rec_yds": 0},
-  "Chris Rodriguez Jr.": {"rush_att": 10, "rush_yds": 19, "targets": 2, "rec": 2, "rec_yds": 13},
-  "Brian Thomas Jr.": {"targets": 0, "rec": 0, "rec_yds": 0},
-  "LeQuint Allen Jr.": {"targets": 2, "rec": 0, "rec_yds": 0, "rush_att": 0, "rush_yds": 0},
-  "Josh Cameron": {"targets": 1, "rec": 1, "rec_yds": 6},
-  "Travis Hunter": {"targets": 1, "rec": 1, "rec_yds": -1},
-  "Tanner Koziol": {"targets": 2, "rec": 2, "rec_yds": 15},
-  "Nate Boerkircher": {"targets": 3, "rec": 2, "rec_yds": 61},
-  "Quintin Morris": {"targets": 0, "rec": 0, "rec_yds": 0},
-  "Ameer Abdullah": {"rush_att": 7, "rush_yds": 30, "targets": 0, "rec": 0, "rec_yds": 0},
-  "Joe Fagnano": {"pass_cmp": 10, "pass_att": 18, "pass_yds": 60, "pass_td": 0, "int": 2, "rush_att": 3, "rush_yds": 13},
-  "Zay Flowers": {"targets": 6, "rec": 3, "rec_yds": 6, "rush_att": 3, "rush_yds": 17},
-  "Justice Hill": {"rush_att": 9, "rush_yds": 85, "targets": 3, "rec": 3, "rec_yds": 7},
-  "Derrick Henry": {"rush_att": 17, "rush_yds": 57, "targets": 0, "rec": 0, "rec_yds": 0},
-  "Mark Andrews": {"targets": 2, "rec": 2, "rec_yds": 19, "rush_att": 2, "rush_yds": 0},
-  "Rashod Bateman": {"targets": 2, "rec": 1, "rec_yds": 6},
-  "Ja'Kobi Lane": {"targets": 0, "rec": 0, "rec_yds": 0},
-  "Rasheen Ali": {"rush_att": 0, "rush_yds": 0, "targets": 0, "rec": 0, "rec_yds": 0},
-  "Devontez Walker": {"targets": 0, "rec": 0, "rec_yds": 0},
-  "LaJohntay Wester": {"targets": 1, "rec": 1, "rec_yds": 14},
-  "Matthew Hibner": {"targets": 2, "rec": 1, "rec_yds": 5},
-  "Josh Cuevas": {"targets": 0, "rec": 0, "rec_yds": 0},
-  "Nick Vannett": {"targets": 0, "rec": 0, "rec_yds": 0}
+{
+ "source": "ESPN final box score (Travis screenshots, 2026-11-05 11:33 PM ET); final JAX 33, BAL 10",
+ "final": {
+  "JAX": 33,
+  "BAL": 10
  },
- "notes": "Players not in the ESPN receiving/rushing tables are recorded as 0 (did not record a stat; snap data not yet available). Henry also threw a 1/1 pass for -3 yards (not graded)."}
+ "stats": {
+  "Trevor Lawrence": {
+   "pass_cmp": 16,
+   "pass_att": 26,
+   "pass_yds": 242,
+   "pass_td": 1,
+   "int": 0,
+   "rush_att": 0,
+   "rush_yds": 0
+  },
+  "Parker Washington": {
+   "targets": 7,
+   "rec": 2,
+   "rec_yds": 61
+  },
+  "Brenton Strange": {
+   "targets": 2,
+   "rec": 2,
+   "rec_yds": 22
+  },
+  "Jakobi Meyers": {
+   "targets": 6,
+   "rec": 4,
+   "rec_yds": 65
+  },
+  "Bhayshul Tuten": {
+   "rush_att": 12,
+   "rush_yds": 29,
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  },
+  "Chris Rodriguez Jr.": {
+   "rush_att": 10,
+   "rush_yds": 19,
+   "targets": 2,
+   "rec": 2,
+   "rec_yds": 13
+  },
+  "Brian Thomas Jr.": {
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  },
+  "LeQuint Allen Jr.": {
+   "targets": 2,
+   "rec": 0,
+   "rec_yds": 0,
+   "rush_att": 0,
+   "rush_yds": 0
+  },
+  "Josh Cameron": {
+   "targets": 1,
+   "rec": 1,
+   "rec_yds": 6
+  },
+  "Travis Hunter": {
+   "targets": 1,
+   "rec": 1,
+   "rec_yds": -1
+  },
+  "Tanner Koziol": {
+   "targets": 2,
+   "rec": 2,
+   "rec_yds": 15
+  },
+  "Nate Boerkircher": {
+   "targets": 3,
+   "rec": 2,
+   "rec_yds": 61
+  },
+  "Quintin Morris": {
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  },
+  "Ameer Abdullah": {
+   "rush_att": 7,
+   "rush_yds": 30,
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  },
+  "Joe Fagnano": {
+   "pass_cmp": 10,
+   "pass_att": 18,
+   "pass_yds": 60,
+   "pass_td": 0,
+   "int": 2,
+   "rush_att": 3,
+   "rush_yds": 13
+  },
+  "Zay Flowers": {
+   "targets": 6,
+   "rec": 3,
+   "rec_yds": 6,
+   "rush_att": 3,
+   "rush_yds": 17
+  },
+  "Justice Hill": {
+   "rush_att": 9,
+   "rush_yds": 85,
+   "targets": 3,
+   "rec": 3,
+   "rec_yds": 7
+  },
+  "Derrick Henry": {
+   "rush_att": 17,
+   "rush_yds": 57,
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  },
+  "Mark Andrews": {
+   "targets": 2,
+   "rec": 2,
+   "rec_yds": 19,
+   "rush_att": 2,
+   "rush_yds": 0
+  },
+  "Rashod Bateman": {
+   "targets": 2,
+   "rec": 1,
+   "rec_yds": 6
+  },
+  "Ja'Kobi Lane": {
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  },
+  "Devontez Walker": {
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  },
+  "LaJohntay Wester": {
+   "targets": 1,
+   "rec": 1,
+   "rec_yds": 14
+  },
+  "Matthew Hibner": {
+   "targets": 2,
+   "rec": 1,
+   "rec_yds": 5
+  },
+  "Josh Cuevas": {
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  },
+  "Nick Vannett": {
+   "targets": 0,
+   "rec": 0,
+   "rec_yds": 0
+  }
+ },
+ "notes": "Players not in the ESPN receiving/rushing tables are recorded as 0 (did not record a stat; snap data not yet available). Henry also threw a 1/1 pass for -3 yards (not graded).",
+ "note_nflverse": "Confirmed against nflverse 2026-11-06: all stats match except Lawrence rushing (nflverse 0-0, ESPN 1 for -1 kneel); Rasheen Ali 0 snaps (ungraded)."
+}

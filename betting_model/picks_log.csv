@@ -1,4 +1,4 @@
 logged_utc,key,game,kind,label,legs,price,fee,model_p,edge,stake,result,profit_per_1,close_price
-2026-11-03T16:07:15+00:00,202609,JAX@BAL,single,Brian Thomas Jr. 2+ catches,"[[""00-0039893"", ""rec"", 2.0]]",0.38,0.02,0.6234,0.22339999999999993,210.0,,,
-2026-11-03T16:07:15+00:00,202609,JAX@BAL,single,Brian Thomas Jr. 25+ rec yds,"[[""00-0039893"", ""rec_yds"", 25.0]]",0.25,0.02,0.48864,0.21864,170.0,,,
-2026-11-03T16:07:15+00:00,202609,JAX@BAL,parlay,Brian Thomas Jr. 2+ catches + Jakobi Meyers 40+ rec yds,"[[""00-0039893"", ""rec"", 2.0], [""00-0034960"", ""rec_yds"", 40.0]]",0.1938,0.02,0.31776,0.10396,75.0,,,
+2026-11-03T16:07:15+00:00,202609,JAX@BAL,single,Brian Thomas Jr. 2+ catches,"[[""00-0039893"", ""rec"", 2.0]]",0.38,0.02,0.6234,0.2233999999999999,210.0,loss,-1.0,
+2026-11-03T16:07:15+00:00,202609,JAX@BAL,single,Brian Thomas Jr. 25+ rec yds,"[[""00-0039893"", ""rec_yds"", 25.0]]",0.25,0.02,0.48864,0.21864,170.0,loss,-1.0,
+2026-11-03T16:07:15+00:00,202609,JAX@BAL,parlay,Brian Thomas Jr. 2+ catches + Jakobi Meyers 40+ rec yds,"[[""00-0039893"", ""rec"", 2.0], [""00-0034960"", ""rec_yds"", 40.0]]",0.1938,0.02,0.31776,0.10396,75.0,loss,-1.0,
