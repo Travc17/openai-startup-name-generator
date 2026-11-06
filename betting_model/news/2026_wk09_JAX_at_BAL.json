@@ -305,5 +305,54 @@
   "status": "Consensus JAX -9.5 (3 of 5 books; DK/BetMGM -10), total 39.5 unchanged since midday",
   "url": "https://the-odds-api.com/",
   "found": "2026-11-05T21:35Z"
+ },
+ {
+  "player": "Bhayshul Tuten",
+  "team": "JAX RB",
+  "status": "Expected to play (ESPN's Fowler: 'should be' good barring setbacks); official inactives not yet found",
+  "url": "https://blackandteal.com/jaguars-inactives-against-baltimore-bhayshul-tuten-good-to-go-thursday-night",
+  "found": "2026-11-05T23:58Z"
+ },
+ {
+  "player": "Bhayshul Tuten",
+  "team": "JAX RB",
+  "status": "Likely to play (books reposted his props at close: 4 books, 60.5 rush yds)",
+  "url": "https://sports.yahoo.com/articles/jaguars-rb-bhayshul-tuten-likely-230322843.html",
+  "found": "2026-11-05T23:58Z"
+ },
+ {
+  "player": "Adam Randall",
+  "team": "BAL RB",
+  "status": "Questionable (IR, return designation; needs activation); not in projections",
+  "url": "https://www.sportsbettingdime.com/news/nfl/final-ravens-vs-jaguars-injury-reports-updates-on-lamar-jackson-tyler-huntley-bhayshul-tuten-more/",
+  "found": "2026-11-05T23:58Z"
+ },
+ {
+  "player": "Game line",
+  "team": "JAX@BAL",
+  "status": "Close: JAX -9.5, total 40 (up from 39.5)",
+  "url": "https://the-odds-api.com/",
+  "found": "2026-11-05T23:58Z"
+ },
+ {
+  "player": "Bhayshul Tuten / Travon Walker",
+  "team": "JAX RB / DE",
+  "status": "Active (official inactives)",
+  "url": "https://www.espn.com/contributor/espn/3b5cd8df763c7",
+  "found": "2026-11-06T00:00Z"
+ },
+ {
+  "player": "C.J. Williams, Alijah Huzzie, Cam'ron Silmon-Craig, Wesley Williams",
+  "team": "JAX WR, CB, S, DE",
+  "status": "Inactive",
+  "url": "https://www.espn.com/contributor/espn/3b5cd8df763c7",
+  "found": "2026-11-06T00:00Z"
+ },
+ {
+  "player": "Bhayshul Tuten",
+  "team": "JAX RB",
+  "status": "Normal, if not heavy, workload planned (ESPN's Fowler)",
+  "url": "https://heavy.com/sports/nfl/jacksonville-jaguars/tuten-rip-injury-update/",
+  "found": "2026-11-06T00:00Z"
  }
 ]

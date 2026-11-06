@@ -134,7 +134,8 @@ def find(proj: dict, quotes: list[dict], min_edge: float = 0.10) -> list[dict]:
         row["verdict"] = verdict(row, min_edge)
         bl = pl.get("blind") if pl else None             # blind spots stay out of bets (CLAUDE.md)
         if row["verdict"] not in ("pass", "no projection"):
-            if bl and (bl == "all" or q["stat"] in bl):
+            rec_blind = bl and bl != "all" and q["stat"] == "rec_rush_yds" and any(s in bl for s in ("rec", "rec_yds", "targets"))
+            if bl and (bl == "all" or q["stat"] in bl or rec_blind):   # rush+rec yds carries the receiving blind spot
                 row["verdict"] = "blind spot"
             elif q["stat"] in NO_BET_STATS:
                 row["verdict"] = "not calibrated"

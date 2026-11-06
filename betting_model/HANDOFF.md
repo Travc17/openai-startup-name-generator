@@ -224,3 +224,14 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   (2023-26). Likely the defense factor is under-shrunk: test heavier `opp_shrink_targets` / position-defense shrink.
 * Method note: single-call paired tests can show chance t > 2 on stats a feature cannot touch (random draws
   reshuffle); use `lab/pff_batch1.py --split` for team-level levers. Earlier ad-hoc PFF tests may carry that noise.
+
+## FINAL PASS done (2026-11-05 ~7:00 PM ET; projections 23:57 UTC; credits left 301)
+* Official: Tuten and Travon Walker ACTIVE; JAX inactives C.J. Williams, Huzzie, Silmon-Craig, W. Williams (none
+  projected). Ravens inactives not found before the reply; Henry, Hill, Andrews presumed active (no news otherwise).
+* Close: JAX -9.5, total 40. Captures: `markets/*_books_close*`, `*_kalshi_close.csv`, `*_quotes_close.csv`,
+  `*_priced_close.csv`, `*_floor_legs_close.csv`. No median moved 10%+ vs the afternoon. Median game JAX 25, BAL 16.
+* CLOSING PRICES for settlement (`nfl.py log settle <id> <result> --close ...`): bet #2 legs NO Henry 80+ 61c, NO Hill
+  20+ 66c (product 40.3c vs 41.5c fill; no combo quote); bet #3 NO Strange 40+ 58c (filled 55c: +3c).
+* Recommended bet #4 (not placed unless Travis fills): Kalshi NO Parker Washington 60+ rec yds, price limit 51c (close
+  47c), model 63.4%, edge +14.4%, stake $115 (5%; game total $215 of the $225 cap). Model-only: books' line 62.5.
+* Fix made in the final pass: rush+rec yds props now inherit a player's receiving blind spot (market.find, report).

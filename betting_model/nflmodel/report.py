@@ -114,7 +114,10 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
         if nm_ not in blind_stats:
             return False
         st_ = blind_stats[nm_]
-        return st_ is None or (stat is not None and stat in st_)
+        if st_ is None:
+            return True
+        # rush+rec yds contains receiving: blind if any receiving stat is (2026-11-05)
+        return stat is not None and (stat in st_ or (stat == "rec_rush_yds" and bool({"rec", "rec_yds", "targets"} & set(st_))))
     blind_txt = sorted(nm_ if st_ is None else f"{nm_} ({', '.join(STAT_LABEL.get(x, x) for x in sorted(st_))})"
                        for nm_, st_ in blind_stats.items())
     rep = {"home": home, "away": away, "date": date.today().isoformat(), "sims": n_sims, "news": news,
