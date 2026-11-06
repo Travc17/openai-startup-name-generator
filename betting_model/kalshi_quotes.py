@@ -11,7 +11,12 @@ MK = {"player_pass_yds_alternate": "pass_yds", "player_pass_attempts_alternate":
       "player_pass_completions_alternate": "pass_cmp", "player_rush_yds_alternate": "rush_yds",
       "player_reception_yds_alternate": "rec_yds", "player_receptions_alternate": "rec",
       "player_rush_reception_yds_alternate": "rec_rush_yds"}
-CITY = {"JAX": "Jacksonville", "BAL": "Baltimore", "CHI": "Chicago", "SEA": "Seattle"}
+CITY = {"ARI": "Arizona", "ATL": "Atlanta", "BAL": "Baltimore", "BUF": "Buffalo", "CAR": "Carolina", "CHI": "Chicago",
+        "CIN": "Cincinnati", "CLE": "Cleveland", "DAL": "Dallas", "DEN": "Denver", "DET": "Detroit", "GB": "Green Bay",
+        "HOU": "Houston", "IND": "Indianapolis", "JAX": "Jacksonville", "KC": "Kansas City", "LV": "Las Vegas",
+        "LAC": "Chargers", "LAR": "Rams", "LA": "Rams", "MIA": "Miami", "MIN": "Minnesota", "NE": "New England",
+        "NO": "New Orleans", "NYG": "Giants", "NYJ": "Jets", "PHI": "Philadelphia", "PIT": "Pittsburgh",
+        "SF": "San Francisco", "SEA": "Seattle", "TB": "Tampa Bay", "TEN": "Tennessee", "WAS": "Washington"}
 
 
 def get(url):

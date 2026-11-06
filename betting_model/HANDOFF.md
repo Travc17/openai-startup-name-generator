@@ -252,3 +252,11 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   (possible look-ahead in a week-N projection), see reviews/lessons.csv.
 * Travis (2026-11-05, personal, not the model): hard stop if his own betting money falls below $10,000. Flag it whenever
   he sends personal bets; suggested daily cap about $3,000 (the distance to that floor).
+
+## CIN at ATL, week 9 (Madrid, Sun 2026-11-08 9:30 AM ET) — afternoon pass done Fri 2026-11-06 ~3:30 PM ET
+* Open line CIN -3, total 52.5 (`markets/2026_wk09_CIN_at_ATL_books_open*`). Outs: Brian Robinson Jr. (3rd game, no
+  bump), Zachariah Branch (first game, 5% of targets vacated). Blind: Zaccheaus (next man up) + auto depth adds.
+* Median game CIN 28, ATL 25 (CIN wins 60%). Burrow 27/38 298; Penix 18/29 217; Chase 7-83 (median), Higgins 5-78,
+  London 5-68, Bijan 18-88. Flags: Higgins (157/148/155 in 3 of last 4) and Burrow (428, 462) recent games sit above
+  the model's 80% ranges; Dotson recent yards too (87, 95). Avoid their unders unless the edge is large.
+* Final pass scheduled Sun 8:10 AM ET (trigger trig_01DCJusgncNN8MhZm6czbLWN). kalshi_quotes.py now maps all teams.

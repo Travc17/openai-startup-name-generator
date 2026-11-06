@@ -1,0 +1,86 @@
+[
+ {
+  "player": "Brian Robinson Jr.",
+  "team": "ATL RB",
+  "status": "Out (hamstring; 3rd straight game)",
+  "url": "https://sports.yahoo.com/articles/falcons-adjust-week-9-injury-151253352.html",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Zachariah Branch",
+  "team": "ATL WR",
+  "status": "Out (hamstring)",
+  "url": "https://sports.yahoo.com/articles/falcons-release-final-injury-report-171043213.html",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Khalil Herbert",
+  "team": "ATL RB",
+  "status": "Likely elevated from practice squad",
+  "url": "https://sports.yahoo.com/articles/falcons-release-final-injury-report-171043213.html",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Olamide Zaccheaus",
+  "team": "ATL WR",
+  "status": "Expected to replace Branch (returns); next man up",
+  "url": "https://sports.yahoo.com/articles/falcons-release-final-injury-report-171043213.html",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "James Pearce Jr.",
+  "team": "ATL DE",
+  "status": "Questionable (back; note only)",
+  "url": "https://atozsports.com/nfl/cincinnati-bengals-news/bengals-friday-injury-report-at-falcons-nfl-week-9-cedric-johnson-james-pearce-jr-questionable/",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Samson Ebukam",
+  "team": "ATL DE",
+  "status": "Out (IR; note only)",
+  "url": "https://heavy.com/sports/nfl/cincinnati-bengals/falcons-suddenly-rule-out-running-back-ahead-of-bengals-matchup-in-spain/",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Kyle Dugger",
+  "team": "CIN S",
+  "status": "Out (quad; note only)",
+  "url": "https://www.nfl.com/news/nfl-week-9-injury-report-2026-season",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Cedric Johnson",
+  "team": "CIN DE",
+  "status": "Questionable (ankle/foot; note only)",
+  "url": "https://atozsports.com/nfl/cincinnati-bengals-news/bengals-friday-injury-report-at-falcons-nfl-week-9-cedric-johnson-james-pearce-jr-questionable/",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "DJ Turner II",
+  "team": "CIN CB",
+  "status": "No designation (playing)",
+  "url": "https://www.cincyjungle.com/cincinnati-bengals-injuries/204735/bengals-vs-falcons-injury-report-dj-turner-brian-robinson",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Joe Burrow / Michael Penix Jr.",
+  "team": "CIN QB / ATL QB",
+  "status": "Starting (model default = last game's starter; no injury news found)",
+  "url": "https://www.bengals.com/news/bengals-falcons-week-9-2026-injury-report",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Venue",
+  "team": "Madrid",
+  "status": "Santiago Bernabeu (retractable roof; open or closed not announced); typical early-Nov 8-16 C; neutral site, both teams traveled (note only)",
+  "url": "https://bernabeu.realmadrid.com/en-US/news/2026-nfl-madrid-game-atlanta-falcons-y-cincinnati-bengals-jugaran-el-8-de-noviembre-en-el-bernabeu",
+  "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Game line",
+  "team": "CIN@ATL",
+  "status": "Open consensus CIN -3, total 52.5 (4 books)",
+  "url": "https://the-odds-api.com/",
+  "found": "2026-11-06T20:30Z"
+ }
+]
