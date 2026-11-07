@@ -1,0 +1,21 @@
+venue,player,stat,line,side,price,captured_at
+DraftKings,Atlanta Falcons,spreads,3.0,team,100,2026-11-07T04:00:00+00:00
+DraftKings,Cincinnati Bengals,spreads,-3.0,team,-120,2026-11-07T04:00:00+00:00
+DraftKings,Over,totals,52.5,over,-105,2026-11-07T04:00:00+00:00
+DraftKings,Under,totals,52.5,under,-115,2026-11-07T04:00:00+00:00
+Caesars,Atlanta Falcons,spreads,3.0,team,-105,2026-11-07T04:00:00+00:00
+Caesars,Cincinnati Bengals,spreads,-3.0,team,-115,2026-11-07T04:00:00+00:00
+Caesars,Over,totals,52.5,over,-110,2026-11-07T04:00:00+00:00
+Caesars,Under,totals,52.5,under,-109,2026-11-07T04:00:00+00:00
+FanDuel,Atlanta Falcons,spreads,3.0,team,-105,2026-11-07T04:00:00+00:00
+FanDuel,Cincinnati Bengals,spreads,-3.0,team,-115,2026-11-07T04:00:00+00:00
+FanDuel,Over,totals,52.5,over,-110,2026-11-07T04:00:00+00:00
+FanDuel,Under,totals,52.5,under,-110,2026-11-07T04:00:00+00:00
+BetMGM,Atlanta Falcons,spreads,3.0,team,100,2026-11-07T04:00:00+00:00
+BetMGM,Cincinnati Bengals,spreads,-3.0,team,-120,2026-11-07T04:00:00+00:00
+BetMGM,Over,totals,52.5,over,-108,2026-11-07T04:00:00+00:00
+BetMGM,Under,totals,52.5,under,-110,2026-11-07T04:00:00+00:00
+Fanatics,Atlanta Falcons,spreads,3.0,team,-105,2026-11-07T04:00:00+00:00
+Fanatics,Cincinnati Bengals,spreads,-3.0,team,-115,2026-11-07T04:00:00+00:00
+Fanatics,Over,totals,52.5,over,-110,2026-11-07T04:00:00+00:00
+Fanatics,Under,totals,52.5,under,-110,2026-11-07T04:00:00+00:00

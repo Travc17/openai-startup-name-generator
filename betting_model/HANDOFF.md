@@ -260,3 +260,11 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   London 5-68, Bijan 18-88. Flags: Higgins (157/148/155 in 3 of last 4) and Burrow (428, 462) recent games sit above
   the model's 80% ranges; Dotson recent yards too (87, 95). Avoid their unders unless the edge is large.
 * Final pass scheduled Sun 8:10 AM ET (trigger trig_01DCJusgncNN8MhZm6czbLWN). kalshi_quotes.py now maps all teams.
+* PRELIMINARY BETS (Fri 2026-11-06 ~11:15 PM ET; captures `markets/2026_wk09_CIN_at_ATL_*_prelim*`; line unchanged
+  CIN -3 / 52.5; credits 269): single NO Drake London 6+ catches (Kalshi 47c, limit 48c, model 60.0%, books 46%);
+  parlay NO Penix 33+ attempts + NO Penix 20+ completions (sim 57.1%, lift 1.32; max 44c, needs Travis's combo
+  quote). Stakes $110 each ($220 of the $224 cap). Both bets are one thesis: ATL passing volume stays low.
+  Skipped: Pitts unders (CIN allows the 2nd most to TEs, rank 31; his target share up 0.14 -> 0.19).
+  Travis's own favorite (Brown 3+ / Chase 5+ / Higgins 4+ catches at ~32c): sim 46.2% (+11.8 pts at 32c) but the legs
+  cost 76c x 84c x 81c = 51.7c on Kalshi, so 32c needs checking; not a model bet (Brown's matchup fails the floor rule).
+  Recheck everything at the Sunday 8:10 AM final pass.
