@@ -75,5 +75,33 @@
   "status": "Close consensus DAL -4.5, total 51.5",
   "url": "https://the-odds-api.com/",
   "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "George Pickens",
+  "team": "DAL WR",
+  "status": "INACTIVE (Schefter); Jordan Hudson elevated",
+  "url": "https://www.si.com/nfl/cowboys/onsi/dallas-cowboys-indianapolis-colts-inactives-who-in-out-week-9",
+  "found": "2026-11-08T16:46Z"
+ },
+ {
+  "player": "Luke Schoonmaker, Joey Porter Jr., DeMarvion Overshown",
+  "team": "DAL TE, CB, LB",
+  "status": "Inactive",
+  "url": "https://heavy.com/sports/nfl/dallas-cowboys/wide-receiver-george-pickens-inactive/",
+  "found": "2026-11-08T16:46Z"
+ },
+ {
+  "player": "Jake Ferguson",
+  "team": "DAL TE",
+  "status": "Not on the inactives list (active)",
+  "url": "https://www.si.com/nfl/cowboys/onsi/dallas-cowboys-indianapolis-colts-inactives-who-in-out-week-9",
+  "found": "2026-11-08T16:46Z"
+ },
+ {
+  "player": "Will Mallory, Pharaoh Brown, AJ Haulcy",
+  "team": "IND TE, TE, S",
+  "status": "Inactive",
+  "url": "https://www.si.com/nfl/cowboys/onsi/dallas-cowboys-indianapolis-colts-inactives-who-in-out-week-9",
+  "found": "2026-11-08T16:46Z"
  }
 ]

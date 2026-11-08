@@ -284,3 +284,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * BETS (only if Pickens is ACTIVE; recheck trigger 11:42 AM ET): single NO CeeDee Lamb 7+ catches (49c, limit 49c,
   model 61.7%, books 48.6%); parlay NO Lamb 90+ rec yds + NO Ryan Flournoy 4+ catches (sim 38.9%, legs 53c x 46c,
   max 26c). $110 each. Skipped: Daniel Jones 200+ pass yds low-rung over (+13 but only 4/8 season games at 200+).
+* 11:45 AM ET RECHECK: Pickens INACTIVE (also Schoonmaker, Porter Jr., Overshown; IND: Mallory, Haulcy). Ferguson active.
+  DAL bets CANCELLED (Lamb/Flournoy unders lose their edge without Pickens). Rerun with Pickens/Schoonmaker/Mallory out,
+  Flournoy and Mingo blind (next man up). Fresh Kalshi quotes (`*_kalshi_inactives.csv`): no under clears 10%. Only a
+  labeled low-rung over remains: Daniel Jones 125+ pass yds (78c, model 94.0%, 7 of 8 games, DAL rank 23 vs QBs).
