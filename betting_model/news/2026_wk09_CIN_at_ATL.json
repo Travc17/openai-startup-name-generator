@@ -82,5 +82,26 @@
   "status": "Open consensus CIN -3, total 52.5 (4 books)",
   "url": "https://the-odds-api.com/",
   "found": "2026-11-06T20:30Z"
+ },
+ {
+  "player": "Kyle Dugger",
+  "team": "CIN S",
+  "status": "Inactive (only CIN name posted when checked)",
+  "url": "https://sports.yahoo.com/articles/falcons-vs-bengals-live-updates-113110989.html",
+  "found": "2026-11-08T13:20Z"
+ },
+ {
+  "player": "Skill players",
+  "team": "CIN/ATL",
+  "status": "Official inactives not indexed yet; books posted props for Bijan, London, Pitts, Chase, Higgins, Brown, Dotson, both QBs at close (market signal they are active)",
+  "url": "https://the-odds-api.com/",
+  "found": "2026-11-08T13:20Z"
+ },
+ {
+  "player": "Game line",
+  "team": "CIN@ATL",
+  "status": "Close: CIN -3, total 52 (down from 52.5)",
+  "url": "https://the-odds-api.com/",
+  "found": "2026-11-08T13:20Z"
  }
 ]

@@ -268,3 +268,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   Travis's own favorite (Brown 3+ / Chase 5+ / Higgins 4+ catches at ~32c): sim 46.2% (+11.8 pts at 32c) but the legs
   cost 76c x 84c x 81c = 51.7c on Kalshi, so 32c needs checking; not a model bet (Brown's matchup fails the floor rule).
   Recheck everything at the Sunday 8:10 AM final pass.
+* FINAL PASS done (Sun 2026-11-08 8:30 AM ET): close CIN -3, total 52; no median moved 10%+; official skill-player
+  inactives not indexed (Dugger only), books posted props for every key player. Captures `*_close*` (credits 247).
+  FINAL BETS (not placed unless Travis fills): single NO Drake London 6+ catches (Kalshi 45c, limit 47c, model 59.9%,
+  books 45.5%); parlay NO Penix 33+ attempts + NO Penix 20+ completions (sim 57.1%, legs 54c x 46c, max 44c; needs
+  his combo quote). $110 each. Skipped: Pitts unders (CIN rank 31 vs TE, role up), Bijan 120+ rush+rec under (CIN rank
+  22 vs RB, carry share up 0.67 -> 0.71), Higgins/Burrow/Dotson unders (recent games above range).
