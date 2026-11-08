@@ -288,3 +288,13 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   DAL bets CANCELLED (Lamb/Flournoy unders lose their edge without Pickens). Rerun with Pickens/Schoonmaker/Mallory out,
   Flournoy and Mingo blind (next man up). Fresh Kalshi quotes (`*_kalshi_inactives.csv`): no under clears 10%. Only a
   labeled low-rung over remains: Daniel Jones 125+ pass yds (78c, model 94.0%, 7 of 8 games, DAL rank 23 vs QBs).
+
+## GB at NE, week 9 (Sun 2026-11-08 4:25 PM ET): no-price analysis (ANALYZE_PROMPT.md, new)
+* Travis asked for sims + alt-line hit rates + matchups only: no Kalshi, no props, no edges, no bets. 10,000 sims
+  after inactives (NE: A.J. Brown, TreVeyon Henderson out; GB: MarShawn Lloyd, Josh Whyle out), NE -3 / 44.5.
+  Sim score GB 21, NE 25; GB wins 37%. Files: `news/`, `projections/`, `analysis/2026_wk09_GB_at_NE.md`.
+* New tool `analyze_game.py` (ladders at 80/70/60/50%, matchups with role filter) and `analyze` mode in the
+  nfl-game skill. Odds API: 2 credits (spread/total only), about 216 left.
+* Best matchups: Golden and Watson receiving (NE allows 1.08x league to WRs), Jacobs receiving (1.10x).
+  Toughest: Henry (0.80x), Douglas (0.87x), Maye passing (0.88x, rank 5).
+* Not done: SizzleSims page for this game (only on request), no grading yet.

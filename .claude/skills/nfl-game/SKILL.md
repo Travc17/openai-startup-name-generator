@@ -1,6 +1,6 @@
 ---
 name: nfl-game
-description: Run Travis's NFL game-day chain for one game with the betting_model. Use when Travis says "/nfl-game AWAY HOME [mode]", "run the full sim", "game-day prompt", "best bets for the bankroll", "floor check", "final pass", or "grade the game". Modes are sim, bets, floor, final, grade and full.
+description: Run Travis's NFL game-day chain for one game with the betting_model. Use when Travis says "/nfl-game AWAY HOME [mode]", "run the full sim", "game-day prompt", "best bets for the bankroll", "floor check", "final pass", "analyze the game", "hit rates and matchups", or "grade the game". Modes are sim, analyze, bets, floor, final, grade and full.
 ---
 
 # NFL game-day chain (betting_model/)
@@ -20,6 +20,7 @@ step. This skill only says which file to run, in what order, and what every mode
 | Mode | Run | Output |
 |---|---|---|
 | `sim` | `SIM_PROMPT.md` (afternoon pass) | median box score, 80% ranges, status scenarios, SizzleSims republished |
+| `analyze` | `ANALYZE_PROMPT.md` (10,000 sims, spread and total only; no props, no Kalshi, no edges) | alt-rung hit rates at 80/70/60/50% for every skill player + matchups |
 | `bets` | `GAMEDAY_PROMPT.md` steps 3 to 6 on the latest projections (step 4b runs `FLOOR_PROMPT.md`) | verdict table: 1 or 2 singles + 1 or 2 parlays, max 3, or "pass" |
 | `floor` | `FLOOR_PROMPT.md` via `floor_legs.py` (`--base` = planned or placed parlay, `--singles` = singles) | floor/ceiling table + parlay options |
 | `final` | `SIM_PROMPT.md` final pass (real inactives), then `bets` (SizzleSims page; no clip unless asked) | the prediction of record + final bets |
