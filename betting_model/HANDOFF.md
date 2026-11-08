@@ -274,3 +274,13 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   books 45.5%); parlay NO Penix 33+ attempts + NO Penix 20+ completions (sim 57.1%, legs 54c x 46c, max 44c; needs
   his combo quote). $110 each. Skipped: Pitts unders (CIN rank 31 vs TE, role up), Bijan 120+ rush+rec under (CIN rank
   22 vs RB, carry share up 0.67 -> 0.71), Higgins/Burrow/Dotson unders (recent games above range).
+
+## DAL at IND, week 9 (Sun 2026-11-08 1:00 PM ET) — final pass ~11:20 AM ET (inactives not yet posted)
+* Close DAL -4.5, total 51.5. Turpin out (3rd game, no bump). Pickens (hamstring) and Ferguson (ankle) questionable:
+  books posted Pickens props, none for Ferguson. Blind: Malik Davis (IR return committee), Goodson, Giddens, James
+  Mitchell + auto depth adds. Median DAL 28, IND 24 (DAL 64.5%).
+* Scenarios: Ferguson out moves nothing 10%+; Pickens out raises Lamb 7+ catches 0.383 -> 0.497 and Flournoy 4+
+  0.416 -> 0.498 (kills those under edges).
+* BETS (only if Pickens is ACTIVE; recheck trigger 11:42 AM ET): single NO CeeDee Lamb 7+ catches (49c, limit 49c,
+  model 61.7%, books 48.6%); parlay NO Lamb 90+ rec yds + NO Ryan Flournoy 4+ catches (sim 38.9%, legs 53c x 46c,
+  max 26c). $110 each. Skipped: Daniel Jones 200+ pass yds low-rung over (+13 but only 4/8 season games at 200+).

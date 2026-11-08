@@ -1,0 +1,1395 @@
+venue,player,stat,line,side,price,captured_at
+DraftKings,Dak Prescott,pass_att,33.5,over,-105,2026-11-08T16:18:44+00:00
+DraftKings,Dak Prescott,pass_att,33.5,under,-121,2026-11-08T16:18:44+00:00
+DraftKings,Daniel Jones,pass_att,31.5,over,-122,2026-11-08T16:18:44+00:00
+DraftKings,Daniel Jones,pass_att,31.5,under,-104,2026-11-08T16:18:44+00:00
+DraftKings,Dak Prescott,pass_cmp,22.5,over,-112,2026-11-08T16:18:44+00:00
+DraftKings,Dak Prescott,pass_cmp,22.5,under,-114,2026-11-08T16:18:44+00:00
+DraftKings,Daniel Jones,pass_cmp,20.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings,Daniel Jones,pass_cmp,20.5,under,-111,2026-11-08T16:18:44+00:00
+DraftKings,Dak Prescott,pass_yds,267.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings,Dak Prescott,pass_yds,267.5,under,-111,2026-11-08T16:18:44+00:00
+DraftKings,Daniel Jones,pass_yds,204.5,over,-111,2026-11-08T16:18:44+00:00
+DraftKings,Daniel Jones,pass_yds,204.5,under,-113,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,179.5,over,-1540,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,189.5,over,-1060,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,199.5,over,-740,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,209.5,over,-520,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,219.5,over,-391,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,229.5,over,-291,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,239.5,over,-225,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,249.5,over,-175,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,259.5,over,-137,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,267.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,269.5,over,-108,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,279.5,over,118,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,289.5,over,149,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,299.5,over,189,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,309.5,over,239,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,319.5,over,296,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,329.5,over,373,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,339.5,over,463,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,349.5,over,572,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,359.5,over,700,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,369.5,over,870,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,379.5,over,1060,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,389.5,over,1320,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,399.5,over,1660,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,409.5,over,1980,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,419.5,over,2300,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,429.5,over,2600,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,pass_yds,439.5,over,2900,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,149.5,over,-467,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,159.5,over,-350,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,169.5,over,-266,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,179.5,over,-203,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,189.5,over,-158,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,199.5,over,-125,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,204.5,over,-111,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,209.5,over,100,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,219.5,over,125,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,229.5,over,153,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,239.5,over,190,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,249.5,over,238,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,259.5,over,297,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,269.5,over,364,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,279.5,over,451,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,289.5,over,554,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,299.5,over,680,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,309.5,over,830,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,319.5,over,1020,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,329.5,over,1220,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,339.5,over,1480,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,349.5,over,1760,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,359.5,over,2000,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,369.5,over,2300,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,pass_yds,379.5,over,2700,2026-11-08T16:18:44+00:00
+DraftKings,CeeDee Lamb,rec_yds,85.5,over,-114,2026-11-08T16:18:44+00:00
+DraftKings,CeeDee Lamb,rec_yds,85.5,under,-110,2026-11-08T16:18:44+00:00
+DraftKings,George Pickens,rec_yds,57.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings,George Pickens,rec_yds,57.5,under,-111,2026-11-08T16:18:44+00:00
+DraftKings,Ryan Flournoy,rec_yds,45.5,over,-114,2026-11-08T16:18:44+00:00
+DraftKings,Ryan Flournoy,rec_yds,45.5,under,-111,2026-11-08T16:18:44+00:00
+DraftKings,Josh Downs,rec_yds,43.5,over,-112,2026-11-08T16:18:44+00:00
+DraftKings,Josh Downs,rec_yds,43.5,under,-112,2026-11-08T16:18:44+00:00
+DraftKings,Keenan Allen,rec_yds,41.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings,Keenan Allen,rec_yds,41.5,under,-109,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Warren,rec_yds,40.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Warren,rec_yds,40.5,under,-109,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rec_yds,19.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rec_yds,19.5,under,-111,2026-11-08T16:18:44+00:00
+DraftKings,Laquon Treadwell,rec_yds,15.5,over,-110,2026-11-08T16:18:44+00:00
+DraftKings,Laquon Treadwell,rec_yds,15.5,under,-114,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rec_yds,7.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rec_yds,7.5,under,-111,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Goodson,rec_yds,4.5,over,-107,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Goodson,rec_yds,4.5,under,-117,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,29.5,over,-2100,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,39.5,over,-960,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,49.5,over,-523,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,59.5,over,-320,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,69.5,over,-206,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,79.5,over,-141,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,85.5,over,-114,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,89.5,over,102,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,99.5,over,146,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,109.5,over,204,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,119.5,over,278,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,129.5,over,386,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,139.5,over,534,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,149.5,over,730,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,159.5,over,990,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,169.5,over,1340,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,179.5,over,1820,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,189.5,over,2400,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec_yds,199.5,over,3000,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,9.5,over,-4300,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,14.5,over,-1920,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,19.5,over,-1120,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,24.5,over,-740,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,29.5,over,-501,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,39.5,over,-266,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,49.5,over,-159,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,57.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,59.5,over,-103,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,69.5,over,146,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,79.5,over,220,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,89.5,over,321,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,99.5,over,459,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,109.5,over,660,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,119.5,over,960,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,129.5,over,1340,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,139.5,over,1880,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec_yds,149.5,over,2500,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,9.5,over,-2100,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,14.5,over,-1020,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,19.5,over,-610,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,24.5,over,-391,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,29.5,over,-277,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,39.5,over,-154,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,45.5,over,-114,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,49.5,over,108,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,59.5,over,170,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,69.5,over,258,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,79.5,over,391,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,89.5,over,596,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,99.5,over,900,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,109.5,over,1300,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,119.5,over,1920,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,129.5,over,2600,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec_yds,139.5,over,3700,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,9.5,over,-1480,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,14.5,over,-830,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,19.5,over,-510,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,24.5,over,-344,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,29.5,over,-244,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,39.5,over,-138,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,43.5,over,-112,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,49.5,over,118,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,59.5,over,186,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,69.5,over,285,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,79.5,over,441,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,89.5,over,650,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,99.5,over,970,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,109.5,over,1400,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,119.5,over,2000,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,129.5,over,2800,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec_yds,139.5,over,3800,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,9.5,over,-1580,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,14.5,over,-790,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,19.5,over,-481,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,24.5,over,-320,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,29.5,over,-226,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,39.5,over,-128,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,41.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,49.5,over,132,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,59.5,over,212,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,69.5,over,329,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,79.5,over,500,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,89.5,over,770,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,99.5,over,1160,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,109.5,over,1660,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,119.5,over,2300,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec_yds,129.5,over,3300,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,9.5,over,-1800,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,14.5,over,-860,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,19.5,over,-510,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,24.5,over,-329,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,29.5,over,-227,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,39.5,over,-122,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,40.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,49.5,over,141,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,59.5,over,224,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,69.5,over,358,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,79.5,over,547,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,89.5,over,830,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,99.5,over,1220,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,109.5,over,1800,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,119.5,over,2600,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec_yds,129.5,over,3600,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,9.5,over,-294,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,14.5,over,-177,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,19.5,over,-116,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,24.5,over,124,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,29.5,over,174,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,39.5,over,321,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,49.5,over,570,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,59.5,over,940,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,69.5,over,1520,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,79.5,over,2300,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_yds,89.5,over,3500,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,9.5,over,-184,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,14.5,over,-121,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,15.5,over,-110,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,19.5,over,127,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,24.5,over,178,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,29.5,over,236,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,39.5,over,396,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,49.5,over,660,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,59.5,over,1080,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,69.5,over,1680,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,79.5,over,2500,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec_yds,89.5,over,3600,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,7.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,9.5,over,109,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,14.5,over,168,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,19.5,over,241,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,24.5,over,334,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,29.5,over,463,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,39.5,over,750,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,49.5,over,1140,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,59.5,over,1700,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,69.5,over,2500,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_yds,79.5,over,3500,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_yds,4.5,over,-107,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_yds,9.5,over,194,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_yds,14.5,over,345,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_yds,19.5,over,525,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_yds,24.5,over,780,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_yds,29.5,over,1140,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_yds,39.5,over,2300,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_yds,49.5,over,3900,2026-11-08T16:18:44+00:00
+DraftKings,CeeDee Lamb,rec,6.5,over,-116,2026-11-08T16:18:44+00:00
+DraftKings,CeeDee Lamb,rec,6.5,under,-110,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Warren,rec,5.5,over,119,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Warren,rec,5.5,under,-153,2026-11-08T16:18:44+00:00
+DraftKings,Keenan Allen,rec,4.5,over,-118,2026-11-08T16:18:44+00:00
+DraftKings,Keenan Allen,rec,4.5,under,-108,2026-11-08T16:18:44+00:00
+DraftKings,Ryan Flournoy,rec,4.5,over,124,2026-11-08T16:18:44+00:00
+DraftKings,Ryan Flournoy,rec,4.5,under,-159,2026-11-08T16:18:44+00:00
+DraftKings,George Pickens,rec,4.5,over,126,2026-11-08T16:18:44+00:00
+DraftKings,George Pickens,rec,4.5,under,-161,2026-11-08T16:18:44+00:00
+DraftKings,Josh Downs,rec,4.5,over,128,2026-11-08T16:18:44+00:00
+DraftKings,Josh Downs,rec,4.5,under,-164,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rec,2.5,over,-103,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rec,2.5,under,-124,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rec,1.5,over,-128,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rec,1.5,under,100,2026-11-08T16:18:44+00:00
+DraftKings,Laquon Treadwell,rec,1.5,over,111,2026-11-08T16:18:44+00:00
+DraftKings,Laquon Treadwell,rec,1.5,under,-142,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,3.5,over,-1080,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,4.5,over,-440,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,5.5,over,-215,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,6.5,over,-117,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,7.5,over,148,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,8.5,over,251,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,9.5,over,417,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,10.5,over,700,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,11.5,over,1120,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,12.5,over,1780,2026-11-08T16:18:44+00:00
+DraftKings alt,CeeDee Lamb,rec,13.5,over,2600,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,2.5,over,-1060,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,3.5,over,-372,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,4.5,over,-170,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,5.5,over,116,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,6.5,over,214,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,7.5,over,390,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,8.5,over,700,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,9.5,over,1220,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,10.5,over,1960,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Warren,rec,11.5,over,2800,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,1.5,over,-2900,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,2.5,over,-660,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,3.5,over,-254,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,4.5,over,-117,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,5.5,over,170,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,6.5,over,327,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,7.5,over,610,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,8.5,over,1100,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,9.5,over,1860,2026-11-08T16:18:44+00:00
+DraftKings alt,Keenan Allen,rec,10.5,over,2700,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,1.5,over,-1600,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,2.5,over,-423,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,3.5,over,-171,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,4.5,over,124,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,5.5,over,241,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,6.5,over,458,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,7.5,over,850,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,8.5,over,1480,2026-11-08T16:18:44+00:00
+DraftKings alt,Ryan Flournoy,rec,9.5,over,2300,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,1.5,over,-1560,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,2.5,over,-420,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,3.5,over,-170,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,4.5,over,126,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,5.5,over,253,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,6.5,over,486,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,7.5,over,930,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,8.5,over,1620,2026-11-08T16:18:44+00:00
+DraftKings alt,Josh Downs,rec,9.5,over,2500,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec,1.5,over,-1580,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec,2.5,over,-432,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec,3.5,over,-172,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec,4.5,over,125,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec,5.5,over,254,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec,6.5,over,507,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec,7.5,over,980,2026-11-08T16:18:44+00:00
+DraftKings alt,George Pickens,rec,8.5,over,1780,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec,1.5,over,-309,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec,2.5,over,-105,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec,3.5,over,229,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec,4.5,over,527,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec,5.5,over,1120,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec,6.5,over,2100,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec,1.5,over,-129,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec,2.5,over,203,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec,3.5,over,451,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec,4.5,over,940,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec,5.5,over,1660,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec,6.5,over,2800,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec,1.5,over,110,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec,2.5,over,341,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec,3.5,over,960,2026-11-08T16:18:44+00:00
+DraftKings alt,Laquon Treadwell,rec,4.5,over,2200,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rush_att,17.5,over,-117,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rush_att,17.5,under,-109,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rush_att,14.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rush_att,14.5,under,-113,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rec_rush_yds,89.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rec_rush_yds,89.5,under,-113,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rec_rush_yds,87.5,over,-111,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rec_rush_yds,87.5,under,-115,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Goodson,rec_rush_yds,27.5,over,-109,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Goodson,rec_rush_yds,27.5,under,-117,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,39.5,over,-1400,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,49.5,over,-700,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,59.5,over,-394,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,69.5,over,-246,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,79.5,over,-165,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,89.5,over,-113,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,99.5,over,126,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,109.5,over,173,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,119.5,over,242,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,129.5,over,331,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,139.5,over,460,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,149.5,over,630,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,159.5,over,850,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,169.5,over,1120,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,179.5,over,1500,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,189.5,over,2000,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,199.5,over,2600,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rec_rush_yds,209.5,over,3500,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,39.5,over,-1880,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,49.5,over,-810,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,59.5,over,-417,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,69.5,over,-248,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,79.5,over,-156,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,87.5,over,-111,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,89.5,over,-102,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,99.5,over,147,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,109.5,over,208,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,119.5,over,299,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,129.5,over,429,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,139.5,over,610,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,149.5,over,860,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,159.5,over,1200,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,169.5,over,1620,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,179.5,over,2100,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,189.5,over,3000,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rec_rush_yds,199.5,over,3900,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,24.5,over,-136,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,27.5,over,-109,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,39.5,over,192,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,49.5,over,326,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,59.5,over,547,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,69.5,over,850,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,79.5,over,1240,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,89.5,over,1860,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,99.5,over,2600,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rec_rush_yds,109.5,over,3600,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rush_yds,73.5,over,-111,2026-11-08T16:18:44+00:00
+DraftKings,Javonte Williams,rush_yds,73.5,under,-113,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rush_yds,63.5,over,-114,2026-11-08T16:18:44+00:00
+DraftKings,Jonathan Taylor,rush_yds,63.5,under,-110,2026-11-08T16:18:44+00:00
+DraftKings,Seth McGowan,rush_yds,27.5,over,-114,2026-11-08T16:18:44+00:00
+DraftKings,Seth McGowan,rush_yds,27.5,under,-110,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Goodson,rush_yds,18.5,over,-117,2026-11-08T16:18:44+00:00
+DraftKings,Tyler Goodson,rush_yds,18.5,under,-107,2026-11-08T16:18:44+00:00
+DraftKings,Daniel Jones,rush_yds,8.5,over,-111,2026-11-08T16:18:44+00:00
+DraftKings,Daniel Jones,rush_yds,8.5,under,-113,2026-11-08T16:18:44+00:00
+DraftKings,Dak Prescott,rush_yds,6.5,over,-107,2026-11-08T16:18:44+00:00
+DraftKings,Dak Prescott,rush_yds,6.5,under,-117,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,19.5,over,-2100,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,24.5,over,-1200,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,29.5,over,-770,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,39.5,over,-378,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,49.5,over,-216,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,59.5,over,-135,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,63.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,69.5,over,110,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,79.5,over,161,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,89.5,over,235,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,99.5,over,335,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,109.5,over,473,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,119.5,over,650,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,129.5,over,900,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,139.5,over,1260,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,149.5,over,1740,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,159.5,over,2300,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,169.5,over,2900,2026-11-08T16:18:44+00:00
+DraftKings alt,Jonathan Taylor,rush_yds,179.5,over,3700,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,29.5,over,-2400,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,39.5,over,-850,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,49.5,over,-401,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,59.5,over,-221,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,69.5,over,-133,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,73.5,over,-111,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,79.5,over,119,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,89.5,over,186,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,99.5,over,279,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,109.5,over,411,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,119.5,over,600,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,129.5,over,870,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,139.5,over,1260,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,149.5,over,1820,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,159.5,over,2500,2026-11-08T16:18:44+00:00
+DraftKings alt,Javonte Williams,rush_yds,169.5,over,3400,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,9.5,over,-515,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,14.5,over,-302,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,19.5,over,-191,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,24.5,over,-136,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,27.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,29.5,over,-103,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,39.5,over,164,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,49.5,over,255,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,59.5,over,387,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,69.5,over,534,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,79.5,over,660,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,89.5,over,920,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,99.5,over,1240,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,109.5,over,1640,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,119.5,over,2100,2026-11-08T16:18:44+00:00
+DraftKings alt,Seth McGowan,rush_yds,129.5,over,2700,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,9.5,over,-282,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,14.5,over,-164,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,18.5,over,-115,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,19.5,over,-106,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,24.5,over,137,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,29.5,over,192,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,39.5,over,349,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,49.5,over,593,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,59.5,over,950,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,69.5,over,1400,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,79.5,over,2000,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,89.5,over,2800,2026-11-08T16:18:44+00:00
+DraftKings alt,Tyler Goodson,rush_yds,99.5,over,3800,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,rush_yds,8.5,over,-110,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,rush_yds,9.5,over,102,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,rush_yds,14.5,over,180,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,rush_yds,19.5,over,285,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,rush_yds,24.5,over,429,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,rush_yds,29.5,over,650,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,rush_yds,39.5,over,1400,2026-11-08T16:18:44+00:00
+DraftKings alt,Daniel Jones,rush_yds,49.5,over,2600,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,rush_yds,6.5,over,-106,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,rush_yds,9.5,over,147,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,rush_yds,14.5,over,286,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,rush_yds,19.5,over,502,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,rush_yds,24.5,over,830,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,rush_yds,29.5,over,1300,2026-11-08T16:18:44+00:00
+DraftKings alt,Dak Prescott,rush_yds,39.5,over,2600,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,179.5,over,-1700,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,189.5,over,-1000,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,199.5,over,-750,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,209.5,over,-500,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,219.5,over,-380,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,229.5,over,-295,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,239.5,over,-230,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,249.5,over,-176,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,259.5,over,-130,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,269.5,over,-108,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,279.5,over,119,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,289.5,over,150,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,299.5,over,184,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,309.5,over,225,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,319.5,over,280,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,329.5,over,350,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,339.5,over,425,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,349.5,over,525,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,359.5,over,650,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,369.5,over,800,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,379.5,over,1000,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,389.5,over,1200,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,399.5,over,1500,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,pass_yds,409.5,over,1800,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,149.5,over,-500,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,159.5,over,-380,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,169.5,over,-290,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,179.5,over,-218,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,189.5,over,-173,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,199.5,over,-136,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,209.5,over,-105,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,219.5,over,125,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,229.5,over,158,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,239.5,over,193,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,249.5,over,240,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,259.5,over,300,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,269.5,over,370,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,279.5,over,450,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,289.5,over,550,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,299.5,over,675,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,309.5,over,800,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,319.5,over,1000,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,329.5,over,1100,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,339.5,over,1400,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,pass_yds,349.5,over,1750,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,9.5,over,-1450,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,99.5,over,700,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,109.5,over,950,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,19.5,over,-675,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,29.5,over,-325,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,39.5,over,-197,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,49.5,over,-115,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,59.5,over,142,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,69.5,over,220,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,79.5,over,330,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec_yds,89.5,over,475,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rec_yds,9.5,over,148,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rec_yds,19.5,over,425,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rec_yds,29.5,over,1100,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,99.5,over,137,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,109.5,over,194,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,119.5,over,270,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,129.5,over,380,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,139.5,over,525,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,149.5,over,700,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,159.5,over,1000,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,39.5,over,-1250,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,49.5,over,-625,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,59.5,over,-380,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,69.5,over,-240,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,79.5,over,-159,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec_yds,89.5,over,-108,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,9.5,over,-2000,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,19.5,over,-675,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,29.5,over,-320,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,39.5,over,-159,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,49.5,over,118,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,59.5,over,205,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,69.5,over,340,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,79.5,over,550,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec_yds,89.5,over,850,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,9.5,over,-1450,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,99.5,over,1100,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,19.5,over,-560,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,29.5,over,-290,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,39.5,over,-152,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,49.5,over,115,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,59.5,over,198,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,69.5,over,320,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,79.5,over,500,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec_yds,89.5,over,750,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec_yds,9.5,over,-275,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec_yds,19.5,over,-125,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec_yds,29.5,over,170,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec_yds,39.5,over,320,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec_yds,49.5,over,575,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec_yds,59.5,over,950,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec_yds,9.5,over,-114,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec_yds,19.5,over,210,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec_yds,29.5,over,450,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec_yds,39.5,over,850,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec_yds,9.5,over,-213,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec_yds,19.5,over,-103,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec_yds,29.5,over,184,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec_yds,39.5,over,330,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec_yds,49.5,over,550,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec_yds,59.5,over,900,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,99.5,over,450,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,109.5,over,625,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,119.5,over,850,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,129.5,over,1200,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,19.5,over,-1250,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,29.5,over,-590,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,39.5,over,-295,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,49.5,over,-176,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,59.5,over,-113,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,69.5,over,141,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,79.5,over,210,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec_yds,89.5,over,305,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,9.5,over,-2000,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,99.5,over,1000,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,19.5,over,-625,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,29.5,over,-325,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,39.5,over,-170,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,49.5,over,102,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,59.5,over,166,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,69.5,over,265,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,79.5,over,425,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec_yds,89.5,over,650,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec,2.5,over,-460,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec,3.5,over,-157,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec,4.5,over,118,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec,5.5,over,230,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec,6.5,over,425,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec,7.5,over,800,2026-11-08T16:18:44+00:00
+Caesars alt,George Pickens,rec,8.5,over,1600,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec,1.5,over,-325,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec,2.5,over,-107,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec,3.5,over,200,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec,4.5,over,400,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec,5.5,over,850,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rec,6.5,over,1800,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,9.5,over,1000,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,10.5,over,1750,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,2.5,over,-1450,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,3.5,over,-420,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,4.5,over,-176,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,5.5,over,109,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,6.5,over,188,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,7.5,over,330,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Warren,rec,8.5,over,550,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,9.5,over,370,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,10.5,over,600,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,11.5,over,1000,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,12.5,over,1700,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,3.5,over,-1250,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,4.5,over,-440,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,5.5,over,-213,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,6.5,over,-115,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,7.5,over,140,2026-11-08T16:18:44+00:00
+Caesars alt,CeeDee Lamb,rec,8.5,over,225,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec,2.5,over,-440,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec,3.5,over,-170,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec,4.5,over,129,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec,5.5,over,235,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec,6.5,over,425,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec,7.5,over,800,2026-11-08T16:18:44+00:00
+Caesars alt,Josh Downs,rec,8.5,over,1500,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec,9.5,over,1700,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec,2.5,over,-850,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec,3.5,over,-260,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec,4.5,over,-114,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec,5.5,over,153,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec,6.5,over,275,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec,7.5,over,475,2026-11-08T16:18:44+00:00
+Caesars alt,Keenan Allen,rec,8.5,over,900,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec,1.5,over,104,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec,2.5,over,255,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec,3.5,over,625,2026-11-08T16:18:44+00:00
+Caesars alt,Laquon Treadwell,rec,4.5,over,1500,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,9.5,over,1900,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,1.5,over,-1450,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,2.5,over,-360,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,3.5,over,-152,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,4.5,over,132,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,5.5,over,215,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,6.5,over,370,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,7.5,over,625,2026-11-08T16:18:44+00:00
+Caesars alt,Ryan Flournoy,rec,8.5,over,1100,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec,1.5,over,-134,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec,2.5,over,173,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec,3.5,over,375,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec,4.5,over,750,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rec,5.5,over,1600,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rush_yds,9.5,over,-380,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rush_yds,19.5,over,-114,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rush_yds,29.5,over,171,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rush_yds,39.5,over,340,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rush_yds,49.5,over,550,2026-11-08T16:18:44+00:00
+Caesars alt,Tyler Goodson,rush_yds,59.5,over,850,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,9.5,over,-475,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,19.5,over,-200,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,29.5,over,-110,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,39.5,over,156,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,49.5,over,260,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,59.5,over,375,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,69.5,over,500,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,79.5,over,650,2026-11-08T16:18:44+00:00
+Caesars alt,Seth McGowan,rush_yds,89.5,over,1200,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,99.5,over,360,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,109.5,over,500,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,119.5,over,700,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,129.5,over,1000,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,19.5,over,-2000,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,29.5,over,-800,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,39.5,over,-440,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,49.5,over,-250,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,59.5,over,-143,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,69.5,over,102,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,79.5,over,158,2026-11-08T16:18:44+00:00
+Caesars alt,Jonathan Taylor,rush_yds,89.5,over,240,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,rush_yds,9.5,over,-102,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,rush_yds,19.5,over,305,2026-11-08T16:18:44+00:00
+Caesars alt,Daniel Jones,rush_yds,29.5,over,800,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,99.5,over,275,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,109.5,over,400,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,119.5,over,600,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,129.5,over,850,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,29.5,over,-1700,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,39.5,over,-750,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,49.5,over,-390,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,59.5,over,-240,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,69.5,over,-136,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,79.5,over,115,2026-11-08T16:18:44+00:00
+Caesars alt,Javonte Williams,rush_yds,89.5,over,181,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,rush_yds,9.5,over,133,2026-11-08T16:18:44+00:00
+Caesars alt,Dak Prescott,rush_yds,19.5,over,475,2026-11-08T16:18:44+00:00
+FanDuel,Daniel Jones,pass_yds,201.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Daniel Jones,pass_yds,201.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Dak Prescott,pass_yds,262.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Dak Prescott,pass_yds,262.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,174.5,over,-1450,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,199.5,over,-600,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,224.5,over,-300,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,249.5,over,-160,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,274.5,over,116,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,299.5,over,200,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,324.5,over,350,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,349.5,over,580,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,374.5,over,920,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,pass_yds,399.5,over,1500,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,124.5,over,-800,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,149.5,over,-400,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,174.5,over,-220,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,199.5,over,-122,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,224.5,over,152,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,249.5,over,260,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,274.5,over,430,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,299.5,over,750,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,pass_yds,324.5,over,1200,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Goodson,rec_yds,5.5,over,-102,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Goodson,rec_yds,5.5,under,-125,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Warren,rec_yds,42.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Warren,rec_yds,42.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Laquon Treadwell,rec_yds,17.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Laquon Treadwell,rec_yds,17.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,CeeDee Lamb,rec_yds,83.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,CeeDee Lamb,rec_yds,83.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Keenan Allen,rec_yds,41.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Keenan Allen,rec_yds,41.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Javonte Williams,rec_yds,7.5,over,-128,2026-11-08T16:18:44+00:00
+FanDuel,Javonte Williams,rec_yds,7.5,under,100,2026-11-08T16:18:44+00:00
+FanDuel,Jonathan Taylor,rec_yds,18.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Jonathan Taylor,rec_yds,18.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Ryan Flournoy,rec_yds,47.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Ryan Flournoy,rec_yds,47.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Josh Downs,rec_yds,44.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Josh Downs,rec_yds,44.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,George Pickens,rec_yds,54.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,George Pickens,rec_yds,54.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rec_yds,4.5,over,-120,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rec_yds,9.5,over,168,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rec_yds,14.5,over,280,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rec_yds,19.5,over,410,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rec_yds,24.5,over,580,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rec_yds,29.5,over,800,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,39.5,over,-1200,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,49.5,over,-580,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,59.5,over,-330,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,69.5,over,-210,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,79.5,over,-136,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,89.5,over,108,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,99.5,over,154,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,109.5,over,220,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,124.5,over,350,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,149.5,over,700,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec_yds,174.5,over,1280,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,4.5,over,-400,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,9.5,over,-230,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,14.5,over,-146,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,19.5,over,102,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,24.5,over,142,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,29.5,over,188,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,39.5,over,310,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,49.5,over,470,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,59.5,over,700,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec_yds,69.5,over,920,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,14.5,over,-1600,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,19.5,over,-750,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,24.5,over,-450,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,29.5,over,-290,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,39.5,over,-144,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,49.5,over,136,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,59.5,over,230,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,69.5,over,390,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,79.5,over,630,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,89.5,over,880,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec_yds,99.5,over,1280,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec_yds,4.5,over,-205,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec_yds,9.5,over,102,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec_yds,14.5,over,174,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec_yds,19.5,over,270,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec_yds,24.5,over,400,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec_yds,29.5,over,580,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec_yds,39.5,over,920,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,4.5,over,-650,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,9.5,over,-290,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,14.5,over,-166,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,19.5,over,-106,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,24.5,over,142,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,29.5,over,194,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,39.5,over,350,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,49.5,over,580,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,59.5,over,880,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec_yds,69.5,over,1260,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,19.5,over,-1200,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,24.5,over,-670,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,29.5,over,-450,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,39.5,over,-250,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,49.5,over,-146,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,59.5,over,108,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,69.5,over,168,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,79.5,over,235,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,89.5,over,320,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,99.5,over,470,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,109.5,over,630,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec_yds,124.5,over,920,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,14.5,over,-1200,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,19.5,over,-650,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,24.5,over,-400,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,29.5,over,-270,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,39.5,over,-132,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,49.5,over,140,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,59.5,over,230,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,69.5,over,360,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,79.5,over,550,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,89.5,over,850,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,99.5,over,1200,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec_yds,109.5,over,1500,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,9.5,over,-1450,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,14.5,over,-800,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,19.5,over,-550,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,24.5,over,-380,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,29.5,over,-275,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,39.5,over,-166,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,49.5,over,-104,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,59.5,over,140,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,69.5,over,198,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,79.5,over,270,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,89.5,over,360,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,99.5,over,490,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,109.5,over,630,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,124.5,over,880,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec_yds,149.5,over,1400,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,14.5,over,-1200,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,19.5,over,-670,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,24.5,over,-420,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,29.5,over,-280,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,39.5,over,-154,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,49.5,over,116,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,59.5,over,182,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,69.5,over,280,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,79.5,over,410,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,89.5,over,630,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,99.5,over,850,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec_yds,109.5,over,1200,2026-11-08T16:18:44+00:00
+FanDuel,George Pickens,rec,3.5,over,-166,2026-11-08T16:18:44+00:00
+FanDuel,George Pickens,rec,3.5,under,124,2026-11-08T16:18:44+00:00
+FanDuel,Ryan Flournoy,rec,4.5,over,124,2026-11-08T16:18:44+00:00
+FanDuel,Ryan Flournoy,rec,4.5,under,-166,2026-11-08T16:18:44+00:00
+FanDuel,Jonathan Taylor,rec,2.5,over,-106,2026-11-08T16:18:44+00:00
+FanDuel,Jonathan Taylor,rec,2.5,under,-125,2026-11-08T16:18:44+00:00
+FanDuel,Keenan Allen,rec,4.5,over,-130,2026-11-08T16:18:44+00:00
+FanDuel,Keenan Allen,rec,4.5,under,-102,2026-11-08T16:18:44+00:00
+FanDuel,Josh Downs,rec,4.5,over,130,2026-11-08T16:18:44+00:00
+FanDuel,Josh Downs,rec,4.5,under,-174,2026-11-08T16:18:44+00:00
+FanDuel,CeeDee Lamb,rec,6.5,over,-114,2026-11-08T16:18:44+00:00
+FanDuel,CeeDee Lamb,rec,6.5,under,-114,2026-11-08T16:18:44+00:00
+FanDuel,Laquon Treadwell,rec,1.5,over,-114,2026-11-08T16:18:44+00:00
+FanDuel,Laquon Treadwell,rec,1.5,under,-114,2026-11-08T16:18:44+00:00
+FanDuel,Javonte Williams,rec,1.5,over,-138,2026-11-08T16:18:44+00:00
+FanDuel,Javonte Williams,rec,1.5,under,104,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Warren,rec,5.5,over,102,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Warren,rec,5.5,under,-136,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec,0.5,over,-500,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec,1.5,over,-114,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec,2.5,over,240,2026-11-08T16:18:44+00:00
+FanDuel alt,Laquon Treadwell,rec,3.5,over,550,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,2.5,over,-1200,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,3.5,over,-400,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,4.5,over,-182,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,5.5,over,112,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,6.5,over,200,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,7.5,over,360,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,8.5,over,630,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,9.5,over,920,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Warren,rec,10.5,over,1400,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec,0.5,over,-500,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec,1.5,over,-138,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec,2.5,over,182,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec,3.5,over,390,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rec,4.5,over,750,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,3.5,over,-1400,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,4.5,over,-470,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,5.5,over,-225,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,6.5,over,-114,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,7.5,over,154,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,8.5,over,265,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,9.5,over,430,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,10.5,over,700,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,11.5,over,1100,2026-11-08T16:18:44+00:00
+FanDuel alt,CeeDee Lamb,rec,12.5,over,1500,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,1.5,over,-900,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,2.5,over,-310,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,3.5,over,-152,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,4.5,over,124,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,5.5,over,205,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,6.5,over,320,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,7.5,over,490,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,8.5,over,640,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,9.5,over,880,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,10.5,over,1200,2026-11-08T16:18:44+00:00
+FanDuel alt,Ryan Flournoy,rec,11.5,over,1500,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec,2.5,over,-750,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec,3.5,over,-275,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec,4.5,over,-125,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec,5.5,over,158,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec,6.5,over,280,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec,7.5,over,490,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec,8.5,over,850,2026-11-08T16:18:44+00:00
+FanDuel alt,Keenan Allen,rec,9.5,over,1280,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec,2.5,over,-420,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec,3.5,over,-168,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec,4.5,over,130,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec,5.5,over,250,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec,6.5,over,470,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec,7.5,over,850,2026-11-08T16:18:44+00:00
+FanDuel alt,Josh Downs,rec,8.5,over,1400,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec,0.5,over,-1600,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec,1.5,over,-300,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec,2.5,over,-104,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec,3.5,over,210,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec,4.5,over,410,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec,5.5,over,750,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rec,6.5,over,1260,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec,2.5,over,-420,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec,3.5,over,-166,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec,4.5,over,136,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec,5.5,over,270,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec,6.5,over,520,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec,7.5,over,880,2026-11-08T16:18:44+00:00
+FanDuel alt,George Pickens,rec,8.5,over,1500,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Goodson,rec_rush_yds,28.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Goodson,rec_rush_yds,28.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Javonte Williams,rec_rush_yds,83.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Javonte Williams,rec_rush_yds,83.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Jonathan Taylor,rec_rush_yds,87.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Jonathan Taylor,rec_rush_yds,87.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Goodson,rush_yds,19.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Tyler Goodson,rush_yds,19.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Jonathan Taylor,rush_yds,62.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Jonathan Taylor,rush_yds,62.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Seth McGowan,rush_yds,25.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Seth McGowan,rush_yds,25.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Daniel Jones,rush_yds,7.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Daniel Jones,rush_yds,7.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Dak Prescott,rush_yds,5.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Dak Prescott,rush_yds,5.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel,Javonte Williams,rush_yds,70.5,over,-113,2026-11-08T16:18:44+00:00
+FanDuel,Javonte Williams,rush_yds,70.5,under,-113,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,rush_yds,4.5,over,-136,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,rush_yds,9.5,over,164,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,rush_yds,14.5,over,300,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,rush_yds,19.5,over,520,2026-11-08T16:18:44+00:00
+FanDuel alt,Dak Prescott,rush_yds,24.5,over,800,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,4.5,over,-1400,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,9.5,over,-490,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,14.5,over,-270,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,19.5,over,-180,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,24.5,over,-122,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,29.5,over,112,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,39.5,over,188,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,49.5,over,280,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,59.5,over,400,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,69.5,over,550,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,79.5,over,700,2026-11-08T16:18:44+00:00
+FanDuel alt,Seth McGowan,rush_yds,89.5,over,880,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,rush_yds,4.5,over,-200,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,rush_yds,9.5,over,118,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,rush_yds,14.5,over,225,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,rush_yds,19.5,over,370,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,rush_yds,24.5,over,580,2026-11-08T16:18:44+00:00
+FanDuel alt,Daniel Jones,rush_yds,29.5,over,880,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,29.5,over,-1800,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,39.5,over,-650,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,49.5,over,-330,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,59.5,over,-194,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,69.5,over,-120,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,79.5,over,128,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,89.5,over,188,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,99.5,over,270,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,109.5,over,370,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,124.5,over,640,2026-11-08T16:18:44+00:00
+FanDuel alt,Javonte Williams,rush_yds,149.5,over,1200,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,24.5,over,-1200,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,29.5,over,-700,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,39.5,over,-350,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,49.5,over,-215,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,59.5,over,-132,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,69.5,over,116,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,79.5,over,164,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,89.5,over,225,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,99.5,over,310,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,109.5,over,400,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,124.5,over,640,2026-11-08T16:18:44+00:00
+FanDuel alt,Jonathan Taylor,rush_yds,149.5,over,1200,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,4.5,over,-1100,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,9.5,over,-360,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,14.5,over,-194,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,19.5,over,-114,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,24.5,over,138,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,29.5,over,200,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,39.5,over,390,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,49.5,over,640,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,59.5,over,1000,2026-11-08T16:18:44+00:00
+FanDuel alt,Tyler Goodson,rush_yds,69.5,over,1400,2026-11-08T16:18:44+00:00
+BetMGM,Dak Prescott,pass_yds,261.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Dak Prescott,pass_yds,261.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Daniel Jones,pass_yds,205.5,over,-110,2026-11-08T16:18:44+00:00
+BetMGM,Daniel Jones,pass_yds,205.5,under,-120,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,pass_yds,299.5,over,200,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,pass_yds,299.5,over,750,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,pass_yds,199.5,over,-1000,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,pass_yds,199.5,over,-155,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,pass_yds,149.5,over,-1000,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,pass_yds,349.5,over,1600,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,pass_yds,249.5,over,230,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,pass_yds,249.5,over,-185,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,pass_yds,349.5,over,600,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rec_yds,8.5,over,-110,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rec_yds,8.5,under,-120,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Warren,rec_yds,42.5,over,-111,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Warren,rec_yds,42.5,under,-120,2026-11-08T16:18:44+00:00
+BetMGM,Jonathan Taylor,rec_yds,18.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Jonathan Taylor,rec_yds,18.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Ryan Flournoy,rec_yds,44.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Ryan Flournoy,rec_yds,44.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Keenan Allen,rec_yds,41.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Keenan Allen,rec_yds,41.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Laquon Treadwell,rec_yds,15.5,over,-120,2026-11-08T16:18:44+00:00
+BetMGM,Laquon Treadwell,rec_yds,15.5,under,-111,2026-11-08T16:18:44+00:00
+BetMGM,Josh Downs,rec_yds,42.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Josh Downs,rec_yds,42.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,CeeDee Lamb,rec_yds,85.5,over,-105,2026-11-08T16:18:44+00:00
+BetMGM,CeeDee Lamb,rec_yds,85.5,under,-125,2026-11-08T16:18:44+00:00
+BetMGM,George Pickens,rec_yds,56.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,George Pickens,rec_yds,56.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Goodson,rec_yds,4.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Goodson,rec_yds,4.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Warren,rec_yds,74.5,over,390,2026-11-08T16:18:44+00:00
+BetMGM alt,George Pickens,rec_yds,99.5,over,425,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,George Pickens,rec_yds,124.5,over,900,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Warren,rec_yds,24.5,over,-500,2026-11-08T16:18:44+00:00
+BetMGM alt,George Pickens,rec_yds,24.5,over,-1200,2026-11-08T16:18:44+00:00
+BetMGM alt,George Pickens,rec_yds,74.5,over,165,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Warren,rec_yds,99.5,over,950,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_yds,74.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Warren,rec_yds,124.5,over,1700,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_yds,99.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Warren,rec_yds,49.5,over,120,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_yds,24.5,over,390,2026-11-08T16:18:44+00:00
+BetMGM alt,Ryan Flournoy,rec_yds,99.5,over,775,2026-11-08T16:18:44+00:00
+BetMGM alt,Ryan Flournoy,rec_yds,74.5,over,300,2026-11-08T16:18:44+00:00
+BetMGM alt,George Pickens,rec_yds,49.5,over,-185,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_yds,49.5,over,1500,2026-11-08T16:18:44+00:00
+BetMGM alt,CeeDee Lamb,rec_yds,49.5,over,-800,2026-11-08T16:18:44+00:00
+BetMGM alt,Ryan Flournoy,rec_yds,49.5,over,100,2026-11-08T16:18:44+00:00
+BetMGM alt,CeeDee Lamb,rec_yds,74.5,over,-210,2026-11-08T16:18:44+00:00
+BetMGM alt,Ryan Flournoy,rec_yds,24.5,over,-525,2026-11-08T16:18:44+00:00
+BetMGM alt,Ryan Flournoy,rec_yds,124.5,over,1450,2026-11-08T16:18:44+00:00
+BetMGM alt,CeeDee Lamb,rec_yds,99.5,over,130,2026-11-08T16:18:44+00:00
+BetMGM alt,CeeDee Lamb,rec_yds,124.5,over,290,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_yds,99.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_yds,49.5,over,625,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_yds,74.5,over,1500,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_yds,24.5,over,135,2026-11-08T16:18:44+00:00
+BetMGM alt,Josh Downs,rec_yds,99.5,over,775,2026-11-08T16:18:44+00:00
+BetMGM alt,Josh Downs,rec_yds,74.5,over,333,2026-11-08T16:18:44+00:00
+BetMGM alt,Josh Downs,rec_yds,124.5,over,1450,2026-11-08T16:18:44+00:00
+BetMGM alt,Josh Downs,rec_yds,49.5,over,115,2026-11-08T16:18:44+00:00
+BetMGM alt,Josh Downs,rec_yds,24.5,over,-400,2026-11-08T16:18:44+00:00
+BetMGM alt,Keenan Allen,rec_yds,74.5,over,425,2026-11-08T16:18:44+00:00
+BetMGM alt,Keenan Allen,rec_yds,49.5,over,125,2026-11-08T16:18:44+00:00
+BetMGM alt,Keenan Allen,rec_yds,124.5,over,1800,2026-11-08T16:18:44+00:00
+BetMGM alt,Keenan Allen,rec_yds,24.5,over,-500,2026-11-08T16:18:44+00:00
+BetMGM alt,Keenan Allen,rec_yds,99.5,over,1100,2026-11-08T16:18:44+00:00
+BetMGM alt,CeeDee Lamb,rec_yds,149.5,over,600,2026-11-08T16:18:44+00:00
+BetMGM alt,Laquon Treadwell,rec_yds,49.5,over,525,2026-11-08T16:18:44+00:00
+BetMGM alt,Laquon Treadwell,rec_yds,24.5,over,140,2026-11-08T16:18:44+00:00
+BetMGM alt,Laquon Treadwell,rec_yds,74.5,over,1200,2026-11-08T16:18:44+00:00
+BetMGM alt,Laquon Treadwell,rec_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Laquon Treadwell,rec_yds,99.5,over,1900,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_yds,24.5,over,700,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_yds,99.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_yds,49.5,over,1850,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_yds,74.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM,Ryan Flournoy,rec,3.5,over,-145,2026-11-08T16:18:44+00:00
+BetMGM,Ryan Flournoy,rec,3.5,under,105,2026-11-08T16:18:44+00:00
+BetMGM,George Pickens,rec,4.5,over,120,2026-11-08T16:18:44+00:00
+BetMGM,George Pickens,rec,4.5,under,-160,2026-11-08T16:18:44+00:00
+BetMGM,CeeDee Lamb,rec,6.5,over,-135,2026-11-08T16:18:44+00:00
+BetMGM,CeeDee Lamb,rec,6.5,under,100,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rec,1.5,over,-135,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rec,1.5,under,100,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Warren,rec,5.5,over,120,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Warren,rec,5.5,under,-160,2026-11-08T16:18:44+00:00
+BetMGM,Keenan Allen,rec,4.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Keenan Allen,rec,4.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Laquon Treadwell,rec,1.5,over,110,2026-11-08T16:18:44+00:00
+BetMGM,Laquon Treadwell,rec,1.5,under,-150,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rush_att,17.5,over,100,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rush_att,17.5,under,-135,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rec_rush_yds,85.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rec_rush_yds,85.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Jonathan Taylor,rec_rush_yds,85.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Jonathan Taylor,rec_rush_yds,85.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Goodson,rec_rush_yds,27.5,over,-120,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Goodson,rec_rush_yds,27.5,under,-110,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_rush_yds,74.5,over,-220,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_rush_yds,99.5,over,135,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_rush_yds,124.5,over,333,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_rush_yds,49.5,over,-1200,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rec_rush_yds,149.5,over,700,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_rush_yds,124.5,over,333,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_rush_yds,49.5,over,-1200,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_rush_yds,99.5,over,135,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_rush_yds,74.5,over,-220,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rec_rush_yds,149.5,over,700,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_rush_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_rush_yds,49.5,over,310,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_rush_yds,74.5,over,850,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_rush_yds,24.5,over,-175,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rec_rush_yds,99.5,over,1600,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Goodson,rush_yds,20.5,over,-110,2026-11-08T16:18:44+00:00
+BetMGM,Tyler Goodson,rush_yds,20.5,under,-120,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rush_yds,73.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Javonte Williams,rush_yds,73.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Jonathan Taylor,rush_yds,63.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Jonathan Taylor,rush_yds,63.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM,Seth McGowan,rush_yds,24.5,over,-115,2026-11-08T16:18:44+00:00
+BetMGM,Seth McGowan,rush_yds,24.5,under,-115,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rush_yds,124.5,over,525,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rush_yds,49.5,over,-500,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rush_yds,74.5,over,-120,2026-11-08T16:18:44+00:00
+BetMGM alt,Javonte Williams,rush_yds,99.5,over,225,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,rush_yds,24.5,over,425,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,rush_yds,74.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,rush_yds,99.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,rush_yds,49.5,over,1500,2026-11-08T16:18:44+00:00
+BetMGM alt,Daniel Jones,rush_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rush_yds,49.5,over,-275,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rush_yds,99.5,over,340,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rush_yds,124.5,over,775,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rush_yds,74.5,over,130,2026-11-08T16:18:44+00:00
+BetMGM alt,Jonathan Taylor,rush_yds,24.5,over,-10000,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,rush_yds,74.5,over,1900,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,rush_yds,24.5,over,425,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,rush_yds,49.5,over,1500,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,rush_yds,99.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Dak Prescott,rush_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rush_yds,99.5,over,1850,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rush_yds,74.5,over,1250,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rush_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rush_yds,49.5,over,525,2026-11-08T16:18:44+00:00
+BetMGM alt,Tyler Goodson,rush_yds,24.5,over,115,2026-11-08T16:18:44+00:00
+BetMGM alt,Seth McGowan,rush_yds,124.5,over,2000,2026-11-08T16:18:44+00:00
+BetMGM alt,Seth McGowan,rush_yds,24.5,over,-130,2026-11-08T16:18:44+00:00
+BetMGM alt,Seth McGowan,rush_yds,99.5,over,1650,2026-11-08T16:18:44+00:00
+BetMGM alt,Seth McGowan,rush_yds,74.5,over,950,2026-11-08T16:18:44+00:00
+BetMGM alt,Seth McGowan,rush_yds,49.5,over,375,2026-11-08T16:18:44+00:00
+Fanatics,Daniel Jones,pass_att,31.5,over,-120,2026-11-08T16:18:44+00:00
+Fanatics,Daniel Jones,pass_att,31.5,under,-110,2026-11-08T16:18:44+00:00
+Fanatics,Daniel Jones,pass_cmp,20.5,over,-115,2026-11-08T16:18:44+00:00
+Fanatics,Daniel Jones,pass_cmp,20.5,under,-115,2026-11-08T16:18:44+00:00
+Fanatics,Dak Prescott,pass_yds,260.5,over,-120,2026-11-08T16:18:44+00:00
+Fanatics,Dak Prescott,pass_yds,260.5,under,-110,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,pass_yds,149.5,over,-500,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,pass_yds,174.5,over,-220,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,pass_yds,199.5,over,-115,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,pass_yds,224.5,over,160,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,pass_yds,249.5,over,290,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,pass_yds,274.5,over,525,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,pass_yds,299.5,over,950,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,pass_yds,199.5,over,-575,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,pass_yds,224.5,over,-285,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,pass_yds,249.5,over,-150,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,pass_yds,274.5,over,115,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,pass_yds,299.5,over,200,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,pass_yds,324.5,over,340,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,pass_yds,349.5,over,575,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,pass_yds,374.5,over,1000,2026-11-08T16:18:44+00:00
+Fanatics,Javonte Williams,rec_yds,10.5,over,115,2026-11-08T16:18:44+00:00
+Fanatics,Javonte Williams,rec_yds,10.5,under,-155,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,19.5,over,-750,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,24.5,over,-450,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,29.5,over,-300,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,39.5,over,-140,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,49.5,over,125,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,59.5,over,200,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,69.5,over,310,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,74.5,over,380,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,79.5,over,475,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,89.5,over,750,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec_yds,99.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,39.5,over,-1100,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,49.5,over,-600,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,59.5,over,-340,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,69.5,over,-205,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,74.5,over,-165,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,79.5,over,-135,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,89.5,over,105,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,99.5,over,145,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,109.5,over,200,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,119.5,over,275,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,124.5,over,310,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,129.5,over,360,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,139.5,over,475,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,149.5,over,650,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,159.5,over,850,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec_yds,169.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rec_yds,9.5,over,105,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rec_yds,19.5,over,260,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rec_yds,24.5,over,360,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rec_yds,29.5,over,475,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rec_yds,39.5,over,900,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,19.5,over,-1100,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,24.5,over,-700,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,29.5,over,-500,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,39.5,over,-265,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,49.5,over,-150,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,59.5,over,100,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,69.5,over,150,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,74.5,over,185,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,79.5,over,215,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,89.5,over,300,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,99.5,over,420,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,109.5,over,575,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,119.5,over,800,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,124.5,over,900,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec_yds,129.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,19.5,over,-750,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,24.5,over,-475,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,29.5,over,-320,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,39.5,over,-170,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,49.5,over,100,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,59.5,over,155,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,69.5,over,225,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,74.5,over,275,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,79.5,over,330,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,89.5,over,475,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,99.5,over,650,2026-11-08T16:18:44+00:00
+Fanatics alt,Ryan Flournoy,rec_yds,109.5,over,900,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec_yds,9.5,over,-330,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec_yds,19.5,over,-110,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec_yds,24.5,over,135,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec_yds,29.5,over,190,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec_yds,39.5,over,360,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec_yds,49.5,over,600,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec_yds,59.5,over,950,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rec_yds,9.5,over,150,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rec_yds,19.5,over,380,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rec_yds,24.5,over,575,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rec_yds,29.5,over,800,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,19.5,over,-550,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,24.5,over,-350,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,29.5,over,-245,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,39.5,over,-135,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,49.5,over,120,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,59.5,over,185,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,69.5,over,275,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,74.5,over,340,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,79.5,over,420,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,89.5,over,575,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,99.5,over,800,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec_yds,109.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec_yds,9.5,over,-220,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec_yds,19.5,over,110,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec_yds,24.5,over,150,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec_yds,29.5,over,210,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec_yds,39.5,over,340,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec_yds,49.5,over,550,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec_yds,59.5,over,900,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,19.5,over,-650,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,24.5,over,-425,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,29.5,over,-300,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,39.5,over,-155,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,49.5,over,110,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,59.5,over,170,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,69.5,over,260,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,74.5,over,310,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,79.5,over,380,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,89.5,over,550,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,99.5,over,800,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec_yds,109.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics,George Pickens,rec,4.5,over,125,2026-11-08T16:18:44+00:00
+Fanatics,George Pickens,rec,4.5,under,-170,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec,2.5,over,-1200,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec,3.5,over,-425,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec,4.5,over,-185,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec,5.5,over,105,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec,6.5,over,185,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec,7.5,over,330,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec,8.5,over,600,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Warren,rec,9.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec,3.5,over,-1300,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec,4.5,over,-525,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec,5.5,over,-235,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec,6.5,over,-120,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec,7.5,over,150,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec,8.5,over,250,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec,9.5,over,430,2026-11-08T16:18:44+00:00
+Fanatics alt,CeeDee Lamb,rec,10.5,over,700,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rec,1.5,over,-135,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rec,2.5,over,210,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rec,3.5,over,550,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec,2.5,over,-450,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec,3.5,over,-170,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec,4.5,over,125,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec,5.5,over,250,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec,6.5,over,475,2026-11-08T16:18:44+00:00
+Fanatics alt,George Pickens,rec,7.5,over,900,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec,1.5,over,-340,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec,2.5,over,-110,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec,3.5,over,215,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec,4.5,over,475,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rec,5.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec,2.5,over,-800,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec,3.5,over,-280,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec,4.5,over,-125,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec,5.5,over,155,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec,6.5,over,275,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec,7.5,over,525,2026-11-08T16:18:44+00:00
+Fanatics alt,Keenan Allen,rec,8.5,over,900,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec,2.5,over,-475,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec,3.5,over,-170,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec,4.5,over,125,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec,5.5,over,240,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec,6.5,over,450,2026-11-08T16:18:44+00:00
+Fanatics alt,Josh Downs,rec,7.5,over,850,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec,1.5,over,-110,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec,2.5,over,275,2026-11-08T16:18:44+00:00
+Fanatics alt,Laquon Treadwell,rec,3.5,over,700,2026-11-08T16:18:44+00:00
+Fanatics,Javonte Williams,rush_att,17.5,over,-110,2026-11-08T16:18:44+00:00
+Fanatics,Javonte Williams,rush_att,17.5,under,-120,2026-11-08T16:18:44+00:00
+Fanatics,Javonte Williams,rush_yds,70.5,over,-115,2026-11-08T16:18:44+00:00
+Fanatics,Javonte Williams,rush_yds,70.5,under,-115,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,39.5,over,-850,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,49.5,over,-400,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,59.5,over,-210,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,69.5,over,-125,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,74.5,over,105,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,79.5,over,125,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,89.5,over,190,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,99.5,over,275,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,109.5,over,400,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,119.5,over,550,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,124.5,over,650,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,129.5,over,750,2026-11-08T16:18:44+00:00
+Fanatics alt,Javonte Williams,rush_yds,139.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,rush_yds,9.5,over,110,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,rush_yds,19.5,over,310,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,rush_yds,24.5,over,475,2026-11-08T16:18:44+00:00
+Fanatics alt,Daniel Jones,rush_yds,29.5,over,700,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,39.5,over,-650,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,49.5,over,-300,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,59.5,over,-155,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,69.5,over,105,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,74.5,over,135,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,79.5,over,170,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,89.5,over,260,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,99.5,over,380,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,109.5,over,550,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,119.5,over,800,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,124.5,over,950,2026-11-08T16:18:44+00:00
+Fanatics alt,Jonathan Taylor,rush_yds,129.5,over,1100,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rush_yds,9.5,over,-425,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rush_yds,19.5,over,-115,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rush_yds,24.5,over,135,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rush_yds,29.5,over,210,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rush_yds,39.5,over,420,2026-11-08T16:18:44+00:00
+Fanatics alt,Tyler Goodson,rush_yds,49.5,over,750,2026-11-08T16:18:44+00:00
+Fanatics alt,Seth McGowan,rush_yds,9.5,over,-950,2026-11-08T16:18:44+00:00
+Fanatics alt,Seth McGowan,rush_yds,19.5,over,-235,2026-11-08T16:18:44+00:00
+Fanatics alt,Seth McGowan,rush_yds,24.5,over,-140,2026-11-08T16:18:44+00:00
+Fanatics alt,Seth McGowan,rush_yds,29.5,over,110,2026-11-08T16:18:44+00:00
+Fanatics alt,Seth McGowan,rush_yds,39.5,over,210,2026-11-08T16:18:44+00:00
+Fanatics alt,Seth McGowan,rush_yds,49.5,over,350,2026-11-08T16:18:44+00:00
+Fanatics alt,Seth McGowan,rush_yds,59.5,over,575,2026-11-08T16:18:44+00:00
+Fanatics alt,Seth McGowan,rush_yds,69.5,over,950,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,rush_yds,9.5,over,135,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,rush_yds,19.5,over,360,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,rush_yds,24.5,over,550,2026-11-08T16:18:44+00:00
+Fanatics alt,Dak Prescott,rush_yds,29.5,over,800,2026-11-08T16:18:44+00:00

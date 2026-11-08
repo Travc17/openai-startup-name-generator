@@ -1,0 +1,42 @@
+player,team,stat,leg,rung_type,book_line,side,rung,season,last4,values,sim,blend,matchup,price_c,cost,value,verdict
+Laquon Treadwell,IND,rec_yds,15+,CONSISTENCY,15.5,over,15.0,7/8,4/4,0 61 20 42 34 21 19 18,0.58,0.711,"1.10x lg, rank 26",54.0,0.555,0.156,"ADD (low-rung over, untested)"
+Keenan Allen,IND,rec_yds,30+,CONSISTENCY,41.5,over,30.0,6/7,4/4,32 5 63 45 82 31 67,0.699,0.764,"1.10x lg, rank 26",67.0,0.685,0.079,"ADD (low-rung over, untested)"
+Daniel Jones,IND,pass_yds,125+,CONSISTENCY,204.5,over,125.0,7/8,3/4,166 210 235 143 267 269 108 144,0.942,0.912,"1.07x lg, rank 23",85.0,0.865,0.047,"ADD (low-rung over, untested)"
+Javonte Williams,DAL,rush_yds,40+,CONSISTENCY,72.0,over,40.0,7/8,4/4,41 30 98 62 45 41 155 56,0.884,0.88,"1.12x lg, rank 27",82.0,0.835,0.045,"ADD (low-rung over, untested)"
+Daniel Jones,IND,pass_att,27+,CONSISTENCY,31.5,over,27.0,7/8,3/4,31 31 36 34 44 41 22 28,0.807,0.837,"1.07x lg, rank 23",78.0,0.795,0.042,"ADD (low-rung over, untested)"
+Dak Prescott,DAL,pass_att,29+,CONSISTENCY,33.5,over,29.0,7/8,3/4,34 31 40 45 42 54 27 29,0.761,0.812,"1.11x lg, rank 28",76.0,0.775,0.037,"ADD (low-rung over, untested)"
+Jonathan Taylor,IND,rec,NO 5+,CEILING,2.5,under,5.0,8/8,4/4,3 4 2 1 3 2 2 4,0.855,0.919,"0.90x lg, rank 11",87.0,0.885,0.034,ADD
+Ryan Flournoy,DAL,rec_yds,20+,FLOOR,45.5,over,20.0,8/8,4/4,22 23 22 37 90 40 70 38,0.705,0.836,"1.03x lg, rank 19",81.0,0.825,0.011,"ADD (low-rung over, untested)"
+Tyler Warren,IND,rec,NO 10+,CEILING,5.5,under,10.0,6/6,4/4,3 6 9 5 7 4,0.947,0.967,"0.99x lg, rank 15",95.0,0.965,0.002,ADD
+Ryan Flournoy,DAL,rec,2+,FLOOR,4.5,over,2.0,8/8,4/4,2 5 2 4 3 7 4 3,0.796,0.887,"1.03x lg, rank 19",87.0,0.885,0.002,"ADD (low-rung over, untested)"
+Jonathan Taylor,IND,rec_yds,NO 60+,CEILING,18.5,under,60.0,8/8,4/4,23 40 4 2 37 57 15 24,0.938,0.966,"0.90x lg, rank 11",95.0,0.965,0.001,ADD
+Seth McGowan,IND,rush_yds,NO 50+,CEILING,25.5,under,50.0,8/8,4/4,0 0 14 31 16 27 46 29,0.86,0.922,"1.14x lg, rank 29",76.0,0.775,0.147,"skip: matchup wrong way (1.14x league, rank 29)"
+Jonathan Taylor,IND,rush_yds,40+,CONSISTENCY,63.5,over,40.0,7/8,3/4,98 92 68 95 45 94 95 23,0.84,0.855,"1.14x lg, rank 29",73.0,0.745,0.11,skip: role shrinking (c_share last4 0.55 vs season 0.67)
+George Pickens,DAL,rec_yds,40+,CONSISTENCY,56.5,over,40.0,7/8,4/4,28 40 82 75 130 73 57 48,0.654,0.752,"1.03x lg, rank 19",66.0,0.675,0.077,skip: injury designation
+Jonathan Taylor,IND,rush_yds,NO 100+,CEILING,63.5,under,100.0,8/8,4/4,98 92 68 95 45 94 95 23,0.752,0.862,"1.14x lg, rank 29",78.0,0.795,0.067,"skip: matchup wrong way (1.14x league, rank 29); role shrinking (c_share last4 0.55 vs season 0.67)"
+Josh Downs,IND,rec_yds,15+,FLOOR,43.5,over,15.0,8/8,4/4,37 72 77 16 47 40 18 23,0.852,0.918,"1.10x lg, rank 26",87.0,0.885,0.033,skip: role shrinking (t_share last4 0.18 vs season 0.20)
+Jonathan Taylor,IND,rec,2+,CONSISTENCY,2.5,over,2.0,7/8,4/4,3 4 2 1 3 2 2 4,0.66,0.756,"0.90x lg, rank 11",71.0,0.725,0.031,"skip: matchup wrong way (0.90x league, rank 11)"
+Ryan Flournoy,DAL,rec_yds,NO 100+,CEILING,45.5,under,100.0,8/8,4/4,22 23 22 37 90 40 70 38,0.928,0.96,"1.03x lg, rank 19",92.0,0.935,0.025,"skip: matchup wrong way (1.03x league, rank 19); teammate George Pickens, KaVontae Turpin questionable/out: role may grow"
+Josh Downs,IND,rec,2+,FLOOR,4.5,over,2.0,8/8,4/4,2 7 5 3 3 4 2 4,0.869,0.927,"1.10x lg, rank 26",89.0,0.905,0.022,skip: role shrinking (t_share last4 0.18 vs season 0.20)
+Daniel Jones,IND,pass_cmp,NO 26+,CEILING,20.5,under,26.0,8/8,4/4,19 22 24 19 24 22 13 19,0.796,0.887,"1.07x lg, rank 23",85.0,0.865,0.022,"skip: matchup wrong way (1.07x league, rank 23)"
+Dak Prescott,DAL,pass_yds,NO 350+,CEILING,262.0,under,350.0,8/8,4/4,175 279 276 335 316 258 212 195,0.869,0.927,"1.11x lg, rank 28",89.0,0.905,0.022,"skip: matchup wrong way (1.11x league, rank 28); no QB pass-yds unders"
+Josh Downs,IND,rec_yds,NO 80+,CEILING,43.5,under,80.0,8/8,4/4,37 72 77 16 47 40 18 23,0.792,0.884,"1.10x lg, rank 26",85.0,0.865,0.019,"skip: matchup wrong way (1.10x league, rank 26); role shrinking (t_share last4 0.18 vs season 0.20)"
+Tyler Warren,IND,rec,3+,FLOOR,5.5,over,3.0,6/6,4/4,3 6 9 5 7 4,0.816,0.885,"0.99x lg, rank 15",86.0,0.875,0.01,"skip: matchup wrong way (0.99x league, rank 15)"
+Javonte Williams,DAL,rec_yds,NO 40+,CEILING,8.0,under,40.0,8/8,4/4,31 20 5 21 17 9 0 1,0.943,0.968,"1.56x lg, rank 32",95.0,0.965,0.003,"skip: matchup wrong way (1.56x league, rank 32); role shrinking (t_share last4 0.04 vs season 0.08)"
+Josh Downs,IND,rec,NO 8+,CEILING,4.5,under,8.0,8/8,4/4,2 7 5 3 3 4 2 4,0.922,0.957,"1.10x lg, rank 26",94.0,0.955,0.002,"skip: matchup wrong way (1.10x league, rank 26); role shrinking (t_share last4 0.18 vs season 0.20)"
+Keenan Allen,IND,rec,NO 9+,CEILING,4.5,under,9.0,7/7,4/4,6 1 6 5 8 3 7,0.942,0.966,"1.10x lg, rank 26",95.0,0.965,0.001,"skip: matchup wrong way (1.10x league, rank 26)"
+CeeDee Lamb,DAL,rec,5+,CONSISTENCY,6.5,over,5.0,7/8,3/4,5 8 7 17 2 9 5 7,0.674,0.763,"1.03x lg, rank 19",75.0,0.765,-0.002,skip: repeats a single; blend below price
+Dak Prescott,DAL,pass_yds,175+,FLOOR,262.0,over,175.0,8/8,4/4,175 279 276 335 316 258 212 195,0.861,0.923,"1.11x lg, rank 28",91.0,0.925,-0.002,"skip: hit rate high, price too high"
+Daniel Jones,IND,pass_cmp,16+,CONSISTENCY,20.5,over,16.0,7/8,3/4,19 22 24 19 24 22 13 19,0.84,0.856,"1.07x lg, rank 23",85.0,0.865,-0.009,"skip: hit rate high, price too high"
+Ryan Flournoy,DAL,rec,NO 8+,CEILING,4.5,under,8.0,8/8,4/4,2 5 2 4 3 7 4 3,0.958,0.976,"1.03x lg, rank 19",97.0,0.985,-0.009,"skip: matchup wrong way (1.03x league, rank 19); teammate George Pickens, KaVontae Turpin questionable/out: role may grow; hit rate high, price too high"
+Tyler Warren,IND,rec_yds,NO 90+,CEILING,42.5,under,90.0,6/6,4/4,13 21 55 41 83 18,0.91,0.944,"0.99x lg, rank 15",94.0,0.955,-0.011,"skip: hit rate high, price too high"
+Keenan Allen,IND,rec,3+,CONSISTENCY,4.5,over,3.0,6/7,4/4,6 1 6 5 8 3 7,0.756,0.798,"1.10x lg, rank 26",80.0,0.815,-0.017,skip: blend below price
+Tyler Warren,IND,rec_yds,15+,CONSISTENCY,42.5,over,15.0,5/6,4/4,13 21 55 41 83 18,0.86,0.85,"0.99x lg, rank 15",86.0,0.875,-0.025,"skip: matchup wrong way (0.99x league, rank 15); hit rate high, price too high"
+Daniel Jones,IND,pass_yds,NO 275+,CEILING,204.5,under,275.0,8/8,4/4,166 210 235 143 267 269 108 144,0.711,0.84,"1.07x lg, rank 23",85.0,0.865,-0.025,"skip: matchup wrong way (1.07x league, rank 23); no QB pass-yds unders; hit rate high, price too high"
+Keenan Allen,IND,rec_yds,NO 90+,CEILING,41.5,under,90.0,7/7,4/4,32 5 63 45 82 31 67,0.856,0.915,"1.10x lg, rank 26",93.0,0.945,-0.03,"skip: matchup wrong way (1.10x league, rank 26); hit rate high, price too high"
+Laquon Treadwell,IND,rec_yds,NO 70+,CEILING,15.5,under,70.0,8/8,4/4,0 61 20 42 34 21 19 18,0.919,0.955,"1.10x lg, rank 26",97.0,0.985,-0.03,"skip: matchup wrong way (1.10x league, rank 26); hit rate high, price too high"
+Dak Prescott,DAL,pass_cmp,18+,CONSISTENCY,22.5,over,18.0,7/8,3/4,22 26 25 32 24 34 15 19,0.793,0.83,"1.11x lg, rank 28",85.0,0.865,-0.035,"skip: hit rate high, price too high"
+Tyler Warren,IND,rec,4+,CONSISTENCY,5.5,over,4.0,5/6,4/4,3 6 9 5 7 4,0.679,0.737,"0.99x lg, rank 15",76.0,0.775,-0.038,"skip: matchup wrong way (0.99x league, rank 15); blend below price"
+CeeDee Lamb,DAL,rec_yds,40+,CONSISTENCY,85.5,over,40.0,7/8,3/4,44 153 112 189 9 70 74 58,0.773,0.818,"1.03x lg, rank 19",86.0,0.875,-0.057,"skip: hit rate high, price too high"
+George Pickens,DAL,rec_yds,NO 140+,CEILING,56.5,under,140.0,8/8,4/4,28 40 82 75 130 73 57 48,0.951,0.973,"1.03x lg, rank 19",,,,"skip: matchup wrong way (1.03x league, rank 19); injury designation; teammate KaVontae Turpin questionable/out: role may grow; no price posted"
+Javonte Williams,DAL,rec,NO 6+,CEILING,1.5,under,6.0,8/8,4/4,5 3 2 5 2 2 0 1,0.975,0.986,"1.56x lg, rank 32",,,,"skip: matchup wrong way (1.56x league, rank 32); role shrinking (t_share last4 0.04 vs season 0.08); no price posted"

@@ -1,0 +1,79 @@
+[
+ {
+  "player": "KaVontae Turpin",
+  "team": "DAL WR",
+  "status": "Out (ribs)",
+  "url": "https://sports.yahoo.com/articles/cowboys-week-9-injury-report-203345632.html",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "George Pickens",
+  "team": "DAL WR",
+  "status": "Questionable (hamstring); traveled; team hopeful; props posted at 4 books at close",
+  "url": "https://www.si.com/betting/george-pickens-injury-update-betting-impact-for-cowboys-vs-colts-in-nfl-week-9-2026",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "Jake Ferguson",
+  "team": "DAL TE",
+  "status": "Questionable (ankle); DNP Wed/Thu, limited Fri; NO props posted at any book at close",
+  "url": "https://www.si.com/betting/jake-ferguson-injury-update-betting-impact-for-cowboys-vs-colts-in-nfl-week-9-2026",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "Luke Schoonmaker",
+  "team": "DAL TE",
+  "status": "Questionable (groin)",
+  "url": "https://www.si.com/nfl/cowboys/onsi/george-pickens-joey-porter-jr-7-dallas-cowboys-questionable-nfl-week-9",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "Jordan Hudson, James Mitchell",
+  "team": "DAL WR, TE",
+  "status": "Elevated from practice squad",
+  "url": "https://sports.yahoo.com/articles/cowboys-add-two-offensive-players-033306222.html",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "Malik Davis",
+  "team": "DAL RB",
+  "status": "First game back from a long absence (model RETURN); committee blind spot",
+  "url": "https://github.com/nflverse/nflverse-data",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "Joey Porter Jr., DeMarvion Overshown",
+  "team": "DAL CB, LB",
+  "status": "Questionable (note only)",
+  "url": "https://athlonsports.com/nfl/trending/final-injury-report-for-cowboys-colts-will-george-pickens-jake-ferguson-play",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "Justin Walley, Akeem Davis-Gaither",
+  "team": "IND CB, LB",
+  "status": "Out (note only)",
+  "url": "https://sports.yahoo.com/articles/colts-vs-cowboys-week-9-140412135.html",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "A.J. Haulcy, Jalen Travis",
+  "team": "IND S, OT",
+  "status": "Questionable (note only)",
+  "url": "https://lwosports.com/colts-vs-cowboys-injury-report-pickens-among-9-questionable/",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "Venue",
+  "team": "Indianapolis",
+  "status": "Lucas Oil Stadium (retractable roof; no wind input)",
+  "url": "https://sports.yahoo.com/articles/watch-stream-listen-colts-vs-114809926.html",
+  "found": "2026-11-08T16:25Z"
+ },
+ {
+  "player": "Game line",
+  "team": "DAL@IND",
+  "status": "Close consensus DAL -4.5, total 51.5",
+  "url": "https://the-odds-api.com/",
+  "found": "2026-11-08T16:25Z"
+ }
+]
