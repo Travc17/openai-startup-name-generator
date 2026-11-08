@@ -298,3 +298,12 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Best matchups: Golden and Watson receiving (NE allows 1.08x league to WRs), Jacobs receiving (1.10x).
   Toughest: Henry (0.80x), Douglas (0.87x), Maye passing (0.88x, rank 5).
 * Not done: SizzleSims page for this game (only on request), no grading yet.
+* UPDATE ~4:00 PM ET: Travis asked for the normal SizzleSims run. Projections rerun at 25,000 sims (overwrote the
+  10k file before kickoff), Mack Hollins added (`--players`, blind spot: active off IR, missing from the model's
+  roster; DK posts 2.5 rec / 34.5 yds). Book main lines pulled after the sims (`markets/..._books_close.csv`,
+  10 credits, 206 left), consensus unchanged NE -3 / 44.5. Wind forecast not found (no `--wind`). SizzleSims
+  exported with `--books` (Best estimate on 35 of 50 predictions), published (artifact version 20). Score GB 21,
+  NE 24, GB 37%.
+* Process gap to fix: the roster rule misses a WR returning from IR who the books expect to play (Hollins).
+  SIM_PROMPT 2k says to check this; analyze runs should too. Candidate code fix: add active IR returns that
+  books post props for. Not changed yet.

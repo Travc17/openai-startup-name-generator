@@ -1,4 +1,4 @@
-# GB at NE: 10,000 sims (no prices)
+# GB at NE: 25,000 sims (no prices)
 
 Line used for game script: NE -3, total 44.5.
 
@@ -6,38 +6,39 @@ Line used for game script: NE -3, total 44.5.
 
 | Team | Player | Stat | Median | 80% | 70% | 60% | 50% | Flag |
 |---|---|---|---|---|---|---|---|---|
-| GB | Jordan Love | pass yds | 253.5 | 180+ | 210+ | 230+ | 250+ |  |
-| GB | Jordan Love | completions | 23 | 18+ | 20+ | 22+ | 23+ |  |
-| GB | Jordan Love | attempts | 36 | 30+ | 32+ | 34+ | 36+ |  |
+| GB | Jordan Love | pass yds | 252.6 | 180+ | 210+ | 230+ | 250+ |  |
+| GB | Jordan Love | completions | 23 | 18+ | 20+ | 21+ | 23+ |  |
+| GB | Jordan Love | attempts | 36 | 29+ | 32+ | 34+ | 36+ |  |
 | GB | Matthew Golden | catches | 4 | 3+ | 3+ | 4+ | 4+ |  |
-| GB | Matthew Golden | rec yds | 54.2 | 25+ | 35+ | 45+ | 50+ |  |
+| GB | Matthew Golden | rec yds | 55.2 | 25+ | 35+ | 40+ | 55+ |  |
 | GB | Christian Watson | catches | 4 | 2+ | 3+ | 4+ | 4+ |  |
-| GB | Christian Watson | rec yds | 57.2 | 20+ | 35+ | 45+ | 55+ |  |
-| GB | Savion Williams | catches | 2 | - | 1+ | 1+ | 2+ |  |
-| GB | Savion Williams | rec yds | 16.8 | - | - | 10+ | 15+ |  |
+| GB | Christian Watson | rec yds | 56.2 | 20+ | 35+ | 45+ | 55+ |  |
+| GB | Savion Williams | catches | 2 | 1+ | 1+ | 1+ | 2+ |  |
+| GB | Savion Williams | rec yds | 17.8 | - | - | 10+ | 15+ |  |
 | GB | Bo Melton | catches | 1 | - | - | - | 1+ |  |
 | GB | Tucker Kraft | catches | 4 | 2+ | 3+ | 3+ | 4+ |  |
 | GB | Tucker Kraft | rec yds | 37 | 15+ | 20+ | 25+ | 35+ |  |
-| GB | Josh Jacobs | carries | 14 | 9+ | 11+ | 12+ | 14+ |  |
+| GB | Josh Jacobs | carries | 14 | 9+ | 11+ | 13+ | 14+ |  |
 | GB | Josh Jacobs | rush yds | 49 | 25+ | 35+ | 40+ | 45+ |  |
 | GB | Josh Jacobs | catches | 2 | 1+ | 1+ | 2+ | 2+ |  |
 | GB | Josh Jacobs | rec yds | 13.7 | - | - | - | 10+ |  |
 | GB | Pierre Strong | carries | 3 | - | 2+ | 3+ | 3+ | blind spot (low trust) |
 | GB | Pierre Strong | rush yds | 10.8 | - | - | - | 10+ | blind spot (low trust) |
 | GB | Pierre Strong | catches | 1 | - | 1+ | 1+ | 1+ | blind spot (low trust) |
-| NE | Drake Maye | pass yds | 219.2 | 150+ | 170+ | 200+ | 210+ |  |
+| NE | Drake Maye | pass yds | 223.8 | 160+ | 180+ | 200+ | 220+ |  |
 | NE | Drake Maye | completions | 20 | 15+ | 17+ | 18+ | 20+ |  |
-| NE | Drake Maye | attempts | 30 | 23+ | 26+ | 28+ | 30+ |  |
+| NE | Drake Maye | attempts | 30 | 24+ | 26+ | 28+ | 30+ |  |
 | NE | DeMario Douglas | catches | 4 | 2+ | 3+ | 3+ | 4+ |  |
-| NE | DeMario Douglas | rec yds | 45.1 | 15+ | 25+ | 35+ | 45+ |  |
+| NE | DeMario Douglas | rec yds | 47.1 | 15+ | 25+ | 35+ | 45+ |  |
 | NE | Efton Chism III | catches | 3 | 1+ | 2+ | 2+ | 3+ | blind spot (low trust) |
-| NE | Efton Chism III | rec yds | 28.4 | - | 15+ | 20+ | 25+ | blind spot (low trust) |
+| NE | Efton Chism III | rec yds | 29.4 | - | 15+ | 20+ | 25+ | blind spot (low trust) |
+| NE | Mack Hollins | catches | 2 | 1+ | 1+ | 2+ | 2+ | blind spot (low trust) |
+| NE | Mack Hollins | rec yds | 22.6 | - | 10+ | 15+ | 20+ | blind spot (low trust) |
 | NE | Kyle Williams | catches | 2 | 1+ | 1+ | 1+ | 2+ | blind spot (low trust) |
 | NE | Kyle Williams | rec yds | 21.6 | - | - | 10+ | 20+ | blind spot (low trust) |
 | NE | Hunter Henry | catches | 3 | 2+ | 2+ | 3+ | 3+ |  |
-| NE | Hunter Henry | rec yds | 31.4 | 10+ | 15+ | 25+ | 30+ |  |
-| NE | Eli Raridon | catches | 2 | 1+ | 1+ | 2+ | 2+ | blind spot (low trust) |
-| NE | Eli Raridon | rec yds | 21.9 | - | 10+ | 15+ | 20+ | blind spot (low trust) |
+| NE | Hunter Henry | rec yds | 32.3 | 10+ | 15+ | 25+ | 30+ |  |
+| NE | Eli Raridon | catches | 1 | - | - | 1+ | 1+ | blind spot (low trust) |
 | NE | Rhamondre Stevenson | carries | 15 | 10+ | 12+ | 13+ | 15+ |  |
 | NE | Rhamondre Stevenson | rush yds | 58.7 | 30+ | 40+ | 50+ | 55+ |  |
 | NE | Rhamondre Stevenson | catches | 3 | 1+ | 2+ | 2+ | 3+ |  |
@@ -64,6 +65,7 @@ Line used for game script: NE -3, total 44.5.
 | NE | Drake Maye | passing | 0.88x | 5 | starter | 374 235 321 199 |
 | NE | DeMario Douglas | receiving | 0.87x | 6 | 18% vs 16% (up) | 65 86 23 76 |
 | NE | Efton Chism III (blind spot) | receiving | 0.87x | 6 | 13% vs 11% (up) | 57 0 16 37 |
+| NE | Mack Hollins (blind spot) | receiving | 0.87x | 6 | 17% vs 17% (steady) | 51 18 87 53 |
 | NE | Kyle Williams (blind spot) | receiving | 0.87x | 6 | 5% vs 6% (steady) | 91 12 0 43 |
 | NE | Hunter Henry | receiving | 0.80x | 6 | 17% vs 15% (up) | 44 48 71 30 |
 | NE | Eli Raridon (blind spot) | receiving | 0.80x | 6 | 15% vs 11% (up) | 57 11 56 5 |

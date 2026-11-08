@@ -1,0 +1,21 @@
+venue,player,stat,line,side,price,captured_at
+DraftKings,Green Bay Packers,spreads,3.0,team,100,2026-11-08T20:48:24+00:00
+DraftKings,New England Patriots,spreads,-3.0,team,-120,2026-11-08T20:48:24+00:00
+DraftKings,Over,totals,44.5,over,-112,2026-11-08T20:48:24+00:00
+DraftKings,Under,totals,44.5,under,-108,2026-11-08T20:48:24+00:00
+Caesars,Green Bay Packers,spreads,3.0,team,102,2026-11-08T20:48:24+00:00
+Caesars,New England Patriots,spreads,-3.0,team,-122,2026-11-08T20:48:24+00:00
+Caesars,Over,totals,44.5,over,-112,2026-11-08T20:48:24+00:00
+Caesars,Under,totals,44.5,under,-109,2026-11-08T20:48:24+00:00
+FanDuel,Green Bay Packers,spreads,3.0,team,100,2026-11-08T20:48:24+00:00
+FanDuel,New England Patriots,spreads,-3.0,team,-120,2026-11-08T20:48:24+00:00
+FanDuel,Over,totals,44.5,over,-110,2026-11-08T20:48:24+00:00
+FanDuel,Under,totals,44.5,under,-110,2026-11-08T20:48:24+00:00
+BetMGM,Green Bay Packers,spreads,3.5,team,-120,2026-11-08T20:48:24+00:00
+BetMGM,New England Patriots,spreads,-3.5,team,100,2026-11-08T20:48:24+00:00
+BetMGM,Over,totals,45.0,over,-108,2026-11-08T20:48:24+00:00
+BetMGM,Under,totals,45.0,under,-110,2026-11-08T20:48:24+00:00
+Fanatics,Green Bay Packers,spreads,3.0,team,100,2026-11-08T20:48:24+00:00
+Fanatics,New England Patriots,spreads,-3.0,team,-120,2026-11-08T20:48:24+00:00
+Fanatics,Over,totals,44.5,over,-110,2026-11-08T20:48:24+00:00
+Fanatics,Under,totals,44.5,under,-110,2026-11-08T20:48:24+00:00
