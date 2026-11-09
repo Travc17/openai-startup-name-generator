@@ -77,3 +77,15 @@ neutral as an extra lever). Blind spots: the model's numbers are least reliable 
 MIN sack rate 10.6% (league 6.2%), INT rate 4.0% (2.1%). BUF sack rate allowed 5.4%.
 BUF targets in MIN's softer zones (middle + screens): Shakir 27 of 38, Ty Johnson 10 of 15 screens, Kincaid 16 of 35,
 Moore 7 of 27, Coleman 7 of 27. Small samples (22 to 38 targets per zone); zone matchups tested neutral as a model input.
+
+## BUF pass defense by zone, and Wentz's MIN profile (2026 wks 1-8; Wentz = 7 MIN games 2025-26, 207 targets; context only)
+| Zone | vs BUF: share, yds/tgt, comp | League | Wentz: share, yds/tgt |
+|---|---|---|---|
+| Outside under 20 air yds | 54%, 7.6, 65% | 50%, 6.8, 65% | 47%, 6.5 |
+| Outside deep 20+ | 7%, 6.5, 26% | 9%, 11.1, 34% | 10%, 13.3 |
+| Middle 10+ | 12%, 10.9, 53% | 9%, 12.5, 60% | 7%, 14.4 |
+| Middle short | 9%, 5.8, 75% | 10%, 6.7, 74% | 12%, 6.9 |
+| Screens | 18%, 3.7, 71% | 22%, 4.3, 75% | 24%, 4.1 |
+BUF faces 38.3 pass attempts per game (league 32.9 per team); sack rate 5.1% (league 6.2%); INT 1.5% (2.1%).
+Per target vs BUF: WR 7.8 (league 8.0), TE 7.7 (7.2), RB 5.1 (5.7); targets per game WR 19.7, TE 9.1, RB 8.7.
+Wentz targets outside under 20: Addison 26 of 37, Jefferson 25 of 63 (+12 deep outside, 10 middle 10+), Hockenson 16 of 37 (+14 middle short).
