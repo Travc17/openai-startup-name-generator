@@ -89,3 +89,19 @@ Moore 7 of 27, Coleman 7 of 27. Small samples (22 to 38 targets per zone); zone 
 BUF faces 38.3 pass attempts per game (league 32.9 per team); sack rate 5.1% (league 6.2%); INT 1.5% (2.1%).
 Per target vs BUF: WR 7.8 (league 8.0), TE 7.7 (7.2), RB 5.1 (5.7); targets per game WR 19.7, TE 9.1, RB 8.7.
 Wentz targets outside under 20: Addison 26 of 37, Jefferson 25 of 63 (+12 deep outside, 10 middle 10+), Hockenson 16 of 37 (+14 middle short).
+
+## Scenario pass (NOT the prediction of record; untested inputs; `lab/scenario_2026_wk09_BUF_at_MIN.py`)
+Pass-1 inputs plus (A) zone fit as a yards-per-target multiplier relative to each defense's overall level and
+(B) Wentz-era target split among Jefferson / Addison / Hockenson / RBs (group total unchanged), both shrunk 50%;
+variant B adds +6% MIN pass volume. 25,000 sims, seed 7, vs a pass-1 baseline from the same code path.
+| Leg | Pass 1 | Scenario A | Scenario B |
+|---|---|---|---|
+| Jefferson 50+ rec yds | 57% (med 55.6) | 55% (55.3) | 59% (58.8) |
+| Hockenson 25+ rec yds | 53% (26.9) | 58% (30.5) | 61% (32.4) |
+| Hockenson 2+ catches | 79% | 83% | 84% |
+| Addison 20+ rec yds | 73% (38.0) | 69% (35.5) | 72% (37.4) |
+| Addison 2+ catches | 83% | 80% | 82% |
+| A. Jones 10+ rec yds | 47% | 43% | 46% |
+| Shakir 20+ rec yds | 70% | 72% | 72% |
+| Wentz 200+ pass yds | 40% (183) | 39% (181) | 45% (192) |
+| Cook 60+ rush yds | 80% | 79% | 80% |
