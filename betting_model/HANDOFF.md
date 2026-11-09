@@ -330,3 +330,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   SizzleSims v22 with best estimate. Regression check No drift.
 * Scheduled: pass 2 at 12:30 PM ET (trig_01QLNEYzfJbDek41doMHy8Z5), pass 3 at 6:55 PM ET after inactives
   (trig_01KJzyFuZZSGMByH1js12wZv). Pending: practice-squad elevations (MIN WR, DeeJay Dallas), Murray "test the leg".
+* PASS 2 done 12:40 PM ET (scheduled trigger): `nfl.py update` + regression No drift. Line moved to BUF -3.5, total 45
+  (from -3 / 44; no news cause, back toward the Nov 5 open of -3.5 / 45.5). No Monday status changes found; DeeJay
+  Dallas on the 53 since Nov 4 (already in sims). Rerun 25k: BUF 24, MIN 21, BUF 62% (was 60%); every key leg within
+  1 point of pass 1. Books mid capture `markets/2026_wk09_BUF_at_MIN_books_mid*.csv` (10 credits, 186 left). SizzleSims v23.
+  Scenario pass (zone fit + Wentz split, NOT the record) saved in analysis/ and `lab/scenario_2026_wk09_BUF_at_MIN.py`.
+  Pass 3 at 6:55 PM ET after inactives (trig_01KJzyFuZZSGMByH1js12wZv).

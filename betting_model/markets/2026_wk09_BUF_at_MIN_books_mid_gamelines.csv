@@ -1,0 +1,21 @@
+venue,player,stat,line,side,price,captured_at
+DraftKings,Buffalo Bills,spreads,-3.5,team,-105,2026-11-09T17:32:09+00:00
+DraftKings,Minnesota Vikings,spreads,3.5,team,-115,2026-11-09T17:32:09+00:00
+DraftKings,Over,totals,44.5,over,-112,2026-11-09T17:32:09+00:00
+DraftKings,Under,totals,44.5,under,-108,2026-11-09T17:32:09+00:00
+Caesars,Buffalo Bills,spreads,-3.0,team,-117,2026-11-09T17:32:09+00:00
+Caesars,Minnesota Vikings,spreads,3.0,team,-103,2026-11-09T17:32:09+00:00
+Caesars,Over,totals,45.0,over,-107,2026-11-09T17:32:09+00:00
+Caesars,Under,totals,45.0,under,-113,2026-11-09T17:32:09+00:00
+FanDuel,Buffalo Bills,spreads,-3.0,team,-120,2026-11-09T17:32:09+00:00
+FanDuel,Minnesota Vikings,spreads,3.0,team,100,2026-11-09T17:32:09+00:00
+FanDuel,Over,totals,44.5,over,-110,2026-11-09T17:32:09+00:00
+FanDuel,Under,totals,44.5,under,-110,2026-11-09T17:32:09+00:00
+BetMGM,Buffalo Bills,spreads,-3.5,team,-102,2026-11-09T17:32:09+00:00
+BetMGM,Minnesota Vikings,spreads,3.5,team,-115,2026-11-09T17:32:09+00:00
+BetMGM,Over,totals,45.0,over,-108,2026-11-09T17:32:09+00:00
+BetMGM,Under,totals,45.0,under,-110,2026-11-09T17:32:09+00:00
+Fanatics,Buffalo Bills,spreads,-3.5,team,100,2026-11-09T17:32:09+00:00
+Fanatics,Minnesota Vikings,spreads,3.5,team,-120,2026-11-09T17:32:09+00:00
+Fanatics,Over,totals,45.0,over,-110,2026-11-09T17:32:09+00:00
+Fanatics,Under,totals,45.0,under,-110,2026-11-09T17:32:09+00:00
