@@ -1,5 +1,7 @@
 # Post-game prompt: grade everything, learn slowly (Travis, 2026-11-05)
 
+For a whole week's accuracy use GRADE_PROMPT.md (`grade_week.py`); this prompt settles one game's bets.
+
 Say: "Run the post-game review for AWAY at HOME" (or `/nfl-game AWAY HOME grade`). Attach the final box score and
 your fill/sell screenshots if the game ended tonight; otherwise run `python nfl.py update` first and use the data.
 
@@ -27,6 +29,7 @@ Save `reviews/<game>_scorecard.csv` and `reviews/<game>_actuals.json` (or confir
 | Class | Test | Action |
 |---|---|---|
 | Variance | One play explains it (a 65-yd run, a 50-yd catch), or the result sits inside the model's tail | None |
+| In-game exit | The player or a teammate left hurt or was pulled (play-by-play injury note, last touch before halftime, news link) | None now; count it in the ledger (MODEL_LAB test queued) |
 | Known blind spot confirmed | A CLAUDE.md blind spot (rookie QB, committee, depth player) | None; note that the rule kept it out of bets (or did not) |
 | Signal we had and did not use | The news or market showed it before kickoff (with the link) | Process fix in the prompts, not the model |
 | Pattern to watch | A model error with a plausible cause (usage, QB quality, injury) | Add or update a row in `reviews/lessons.csv` |

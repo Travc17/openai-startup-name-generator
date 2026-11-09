@@ -1,6 +1,6 @@
 ---
 name: nfl-game
-description: Run Travis's NFL game-day chain for one game with the betting_model. Use when Travis says "/nfl-game AWAY HOME [mode]", "run the full sim", "game-day prompt", "best bets for the bankroll", "floor check", "final pass", "analyze the game", "hit rates and matchups", or "grade the game". Modes are sim, analyze, bets, floor, final, grade and full.
+description: Run Travis's NFL game-day chain for one game with the betting_model. Use when Travis says "/nfl-game AWAY HOME [mode]", "run the full sim", "game-day prompt", "best bets for the bankroll", "floor check", "final pass", "analyze the game", "hit rates and matchups", "grade the game", or "grade the week". Modes are sim, analyze, bets, floor, final, grade, grade-week and full. `grade-week` takes a week number instead of teams.
 ---
 
 # NFL game-day chain (betting_model/)
@@ -25,6 +25,7 @@ step. This skill only says which file to run, in what order, and what every mode
 | `floor` | `FLOOR_PROMPT.md` via `floor_legs.py` (`--base` = planned or placed parlay, `--singles` = singles) | floor/ceiling table + parlay options |
 | `final` | `SIM_PROMPT.md` final pass (real inactives), then `bets` (SizzleSims page; no clip unless asked) | the prediction of record + final bets |
 | `grade` | `POSTGAME_PROMPT.md` (plus SIM_PROMPT.md section 8 and FLOOR_PROMPT.md step 8) | settled bets, scorecard, lessons ledger, self-grade, review in `reviews/` |
+| `grade-week` | `GRADE_PROMPT.md` via `grade_week.py --week N --league --simcast` (saved files, no reruns; in-game injuries checked) | every projected game graded, league panel, lessons ledger, code fixes only for bugs |
 | `full` | `sim`, then `bets` | both |
 
 ## Rules that bind every mode (CLAUDE.md wins on any conflict)

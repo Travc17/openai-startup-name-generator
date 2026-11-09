@@ -307,3 +307,15 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Process gap to fix: the roster rule misses a WR returning from IR who the books expect to play (Hollins).
   SIM_PROMPT 2k says to check this; analyze runs should too. Candidate code fix: add active IR returns that
   books post props for. Not changed yet.
+
+## Week 9 graded (2026-11-09 ~12:30 AM ET, GRADE_PROMPT.md + grade_week.py, new)
+* All 4 week 9 games graded from saved files: A+B 89% inside the 80% range (90/101), winners 3 of 4. League panel
+  (13 games) calibrated. Book beat the model on mean miss (15.6 vs 16.5); best estimate 15.7. Review:
+  `reviews/2026_wk09_week_review.md`; numbers `reviews/2026_wk09_grade.md`; every row `reviews/grades_log.csv`.
+* GB@NE in-game exits: Jacobs (finger, Q1), Stevenson (knee, Q3). Process miss: Hollins left out (news said
+  active). Bug: Kaleb Johnson skipped by the depth rule (RB4 behind inactive Lloyd).
+* Code (bugs only, regression_check No drift): `roster_check` (ROSTER CHECK lines in every report),
+  depth rank among players not ruled out, replays use the game-day depth chart. Replay mismatch closed: NOT
+  look-ahead (week 9 rows change nothing); data revisions. SizzleSims v21 has every scorecard.
+* OPEN, in order: (1) regrade week 9 after nflverse snap counts post (`python grade_week.py --week 9 --league
+  --simcast`, rebuild, publish); (2) MODEL_LAB test: early-exit simulation (ledger row 0); (3) historical alt-line pull.

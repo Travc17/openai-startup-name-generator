@@ -84,6 +84,11 @@ Seed 7 (the default) so every later replay (parlays, SizzleSims, floor legs) mat
 * Each team's median points vs its implied total from the spread and total (within about 3 points).
 * QB median attempts and yards inside his season range, or a stated reason (new QB, game script).
 * No ruled-out player in the box score; every confirmed starter present; carries and targets go to real players.
+* ZERO "ROSTER CHECK" lines in the report output (2026-11-09, Hollins): every RB/WR/TE the news or the team's
+  inactives report lists as active, activated off IR, designated to return or elevated is in the sims. Fix with
+  `--players "Name" --blind "Name"` (first game back = blind spot). Never write "not modeled" for an active player.
+* Final pass: `python nfl.py update` AFTER inactives post, so the depth chart is game day's (it adds starters the
+  usage history misses, ranked among players not ruled out).
 * Each key player's 80% range covers most of his last 4 games, or a stated reason (role change, injury).
 * `python simcast/export.py projections/<file>.json` passes its replay check (exact rerun of the 25,000 sims) and
   the median box score adds up (receivers sum exactly to the QB line).

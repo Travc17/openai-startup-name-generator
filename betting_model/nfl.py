@@ -121,7 +121,13 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
             pids[pid] = t
     # Depth chart: add today's starters the usage history misses (e.g. a back returning from IR)
     dep = depth_status(model, a, key, (team_a, team_b))
+    # Rank among players who are not ruled out (GB at NE 2026-11-08: Kaleb Johnson was RB4 behind the
+    # inactive MarShawn Lloyd, so the RB-top-3 rule skipped him; he took 14 carries)
+    eff = {}
     for pid, (now, prev, rank, pos, team) in dep.items():
+        eff[pid] = rank - sum(1 for q, v in dep.items() if q in outs and v[3] == pos and v[4] == team and v[2] < rank)
+    for pid, (now, prev, rank, pos, team) in dep.items():
+        rank = eff[pid]
         top = now or (pos == "RB" and rank <= 3) or (pos == "WR" and rank <= 4)
         if top and pos in ("WR", "TE", "RB") and pid in model._pg_by and pid not in outs:
             pids.setdefault(pid, team)
@@ -234,6 +240,33 @@ def games_back(model: GameModel, pid: str, team: str, key: int, min_missed: int 
     return 0
 
 
+ACTIVE_WORDS = ("active", "activated", "off ir", "returns", "return from", "designated to return", "elevated", "will play", "starting")
+
+
+def roster_check(model: GameModel, news: list, roster: list, a) -> list[str]:
+    """Every RB/WR/TE the news lists as active, activated, off IR or elevated must be in the sims.
+    GB at NE 2026-11-08: Mack Hollins (first game back from IR) was 'active' in the news file but not in the
+    roster (no snaps in the last 2 games), so his ~5 targets went to teammates. Prints a loud warning;
+    fix with --players "Name" (and --blind "Name" for a first game back)."""
+    have = {p.pid for p in roster}
+    outs = {lookup(model, n)[0] for n in (a.out or [])}
+    missing = []
+    for it in (news.get("items", []) if isinstance(news, dict) else news) or []:
+        st, tm = str(it.get("status", "")).lower(), str(it.get("team", "")).upper()
+        if not any(w in st for w in ACTIVE_WORDS) or "inactive" in st or not any(p in tm for p in ("RB", "WR", "TE")):
+            continue
+        try:
+            pid = lookup(model, it.get("player", ""))[0]
+        except SystemExit:
+            continue
+        if pid not in have and pid not in outs and pid not in missing:
+            missing.append(pid)
+            print(f"ROSTER CHECK: {name_of(pid)} ({tm}) is '{it.get('status')}' in the news but NOT in the sims. "
+                  f"Rerun with --players \"{name_of(pid)}\" --blind \"{name_of(pid)}\" (source: {it.get('url', 'no url')})")
+    a.roster_missing = missing
+    return missing
+
+
 def depth_status(model: GameModel, a, key: int, teams) -> dict:
     """Starter status from the depth chart on game day vs at each team's previous game."""
     import pandas as pd
@@ -245,7 +278,11 @@ def depth_status(model: GameModel, a, key: int, teams) -> dict:
     if "dt" not in raw.columns:
         return {}
     gd = data.game_dates([season])
-    today = getattr(a, "date", None) or raw.dt.str[:10].max()
+    # Game day: this week's game date when the game is already in the data (a replay after the game), so the
+    # chart is the one published by kickoff; live (game not played yet) it is the newest chart. Using the newest
+    # chart in a replay read post-game depth charts (2026-11-08 replay mismatch, reviews/lessons.csv).
+    wk = gd[(gd.season == season) & (gd.week == key % 100) & (gd.home_team.isin(teams) | gd.away_team.isin(teams))]
+    today = getattr(a, "date", None) or (wk.game_date.min() if len(wk) else raw.dt.str[:10].max())
     out = {}
     for team in teams:
         prev = gd[((gd.home_team == team) | (gd.away_team == team)) & (gd.game_date < today)].game_date.max()
@@ -500,6 +537,7 @@ def cmd_report(a):
     roster = roster_for(model, a, key, [lookup(model, n)[0] for n in (a.players or [])])
     board = report.load_board(a.board)
     news = report.load_news(a.news)
+    roster_check(model, news, roster, a)
     blind = set(a.blind or [])
     for pid in sorted(getattr(a, "depth_added", ())):
         print(f"DEPTH ADD: {name_of(pid)} (recent snaps; auto blind spot until depth-player tails are calibrated)")

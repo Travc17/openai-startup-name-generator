@@ -32,7 +32,8 @@ python nfl.py report AWAY HOME --week N --fav TEAM --spread X --total Y [--qb "T
 python analyze_game.py projections/<season>_wk<NN>_<AWAY>_at_<HOME>.json --out analysis/<season>_wk<NN>_<AWAY>_at_<HOME>.md
 ```
 Seed 7 (default). Sanity checks from SIM_PROMPT.md section 5: team points near the implied totals, no ruled-out
-player in the box score, QB volume inside his season range or a stated reason.
+player in the box score, QB volume inside his season range or a stated reason. Zero "ROSTER CHECK" lines: an
+active or off-IR player missing from the sims is added with `--players` and `--blind` before reading anything.
 
 ## 5. How to read the output
 * Hit-rate ladder: for each player and stat, the HIGHEST alt rung (x+) the sims cleared at least 80 / 70 / 60 / 50%
