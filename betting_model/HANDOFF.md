@@ -336,3 +336,12 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   1 point of pass 1. Books mid capture `markets/2026_wk09_BUF_at_MIN_books_mid*.csv` (10 credits, 186 left). SizzleSims v23.
   Scenario pass (zone fit + Wentz split, NOT the record) saved in analysis/ and `lab/scenario_2026_wk09_BUF_at_MIN.py`.
   Pass 3 at 6:55 PM ET after inactives (trig_01KJzyFuZZSGMByH1js12wZv).
+* FINAL PASS (prediction of record) 7:15 PM ET (scheduled trigger): update + regression No drift. Inactives with URLs
+  (MIN: Murray, Jennings, Claiborne, S Thomas, CB Demmings, DL Banks; BUF: WR Skyler Bell, LT Dawkins, LG Anderson,
+  DL Gaines, OLB Danna, S Kilgore; BUF elevated WR Sherfield, S Stone). Line BUF -3.5, total 45.5 (spread/total only,
+  2 credits, before the sims). 25k: BUF 25, MIN 22, BUF 62%. Sherfield and Shavers added with --players + blind
+  (zero ROSTER CHECK lines). Close books AFTER the sims: `markets/2026_wk09_BUF_at_MIN_books_close*.csv` (10 credits,
+  174 left). SizzleSims v24. Bug fixed: simcast/rerun.py ordered 2+ --players adds from a set, so the replay check
+  failed; now keeps the projections file's order (replay passes). Analysis refreshed: analysis/2026_wk09_BUF_at_MIN_final.md.
+* NEXT: grade BUF@MIN after the game (`python grade_week.py --week 9 --league --simcast`, GRADE_PROMPT.md), including
+  the scenario pass vs actuals (did zone fit / Wentz split help?).

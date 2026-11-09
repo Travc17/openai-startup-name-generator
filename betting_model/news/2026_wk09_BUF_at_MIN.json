@@ -173,5 +173,89 @@
   "status": "Midday consensus BUF -3.5, total 45 (5 books 17:32 UTC; pass 1 was -3 / 44). No news cause found; Nov 5 preview had -3.5 / 45.5, so the overnight dip reverted",
   "url": "https://www.predictem.com/?p=215180",
   "found_utc": "2026-11-09T17:32Z"
+ },
+ {
+  "player": "Kyler Murray",
+  "team": "MIN QB",
+  "status": "Inactive; Wentz starts, Brosmer backup",
+  "url": "https://www.vikings.com/news/inactives-buffalo-bills-week-9-2026",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Jauan Jennings",
+  "team": "MIN WR",
+  "status": "Inactive",
+  "url": "https://www.vikings.com/news/inactives-buffalo-bills-week-9-2026",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Demond Claiborne",
+  "team": "MIN RB",
+  "status": "Inactive",
+  "url": "https://www.vikings.com/news/inactives-buffalo-bills-week-9-2026",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "MIN other inactives",
+  "team": "MIN D",
+  "status": "S Jakobe Thomas, CB Chuck Demmings, DL Caleb Banks inactive; S Theo Jackson and S Jay Ward not on the list (active) [defense: noted, not modeled]",
+  "url": "https://www.vikings.com/news/inactives-buffalo-bills-week-9-2026",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Skyler Bell",
+  "team": "BUF WR",
+  "status": "Inactive",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-vikings-week-9-mnf",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Dion Dawkins",
+  "team": "BUF LT",
+  "status": "Inactive [OL: noted, not modeled]",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-vikings-week-9-mnf",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Alec Anderson",
+  "team": "BUF LG",
+  "status": "Inactive [OL: noted, not modeled]",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-vikings-week-9-mnf",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "BUF other inactives",
+  "team": "BUF D",
+  "status": "DL Greg Gaines, OLB Mike Danna, S Jalon Kilgore inactive [defense: noted, not modeled]",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-vikings-week-9-mnf",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Trent Sherfield",
+  "team": "BUF WR",
+  "status": "Elevated from practice squad (active); added with --players, blind spot",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-vikings-week-9-mnf",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Geno Stone",
+  "team": "BUF S",
+  "status": "Elevated from practice squad [defense: noted, not modeled]",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-vikings-week-9-mnf",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Tyrell Shavers",
+  "team": "BUF WR",
+  "status": "Active (was questionable, not on the inactive list); no 2026 snaps; added with --players, blind spot",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-inactives-vs-vikings-week-9-mnf",
+  "found_utc": "2026-11-09T23:57Z"
+ },
+ {
+  "player": "Line",
+  "team": "BUF@MIN",
+  "status": "Final-pass consensus BUF -3.5, total 45.5 (6 books, 00:00 UTC Nov 10; spread/total only, 2 credits)",
+  "url": "https://the-odds-api.com/",
+  "found_utc": "2026-11-09T23:57Z"
  }
 ]

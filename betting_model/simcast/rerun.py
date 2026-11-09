@@ -39,7 +39,9 @@ def rerun(proj_path: str) -> dict:
         t, n = spec.split("=", 1)
         qbs[t.upper()] = nfl.lookup(model, n)[0]
     # players named with --players at report time are not stored; add any saved player the roster lacks
-    extra = [pid for pid in saved_pids - have if pid not in qbs.values()]
+    # keep the projections file's player order: a set here reorders 2+ --players adds and shifts the draws
+    # (BUF at MIN 2026-11-09 final pass: Sherfield + Shavers replay mismatch)
+    extra = [v["pid"] for v in proj["players"].values() if v["pid"] not in have and v["pid"] not in qbs.values()]
     if extra:
         roster = nfl.roster_for(model, a, key, extra)
     for t, q in qbs.items():
