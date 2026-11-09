@@ -319,3 +319,14 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   look-ahead (week 9 rows change nothing); data revisions. SizzleSims v21 has every scorecard.
 * OPEN, in order: (1) regrade week 9 after nflverse snap counts post (`python grade_week.py --week 9 --league
   --simcast`, rebuild, publish); (2) MODEL_LAB test: early-exit simulation (ledger row 0); (3) historical alt-line pull.
+
+## BUF at MIN, MNF week 9 (Mon 2026-11-09 8:15 PM ET): pass 1 of 3 done (~12:25 AM ET)
+* SIM_PROMPT pass 1, 25,000 sims: BUF 24, MIN 21, BUF wins 60%. Consensus BUF -3, total 44 (5 books 05:17 UTC).
+  `--qb "MIN=Carson Wentz"` (Murray out, hamstring); out: Murray, Claiborne, Jauan Jennings, Josh Palmer.
+  Blind: Aaron Jones rushing, Jordan Mason (committee after Mason's IR return; Jones knee). Zero ROSTER CHECK lines.
+* Sanity flag with stated reason: Allen median 17/26, 176 yds (season median 31 att, 253 yds) because MIN allows
+  180 rec yds/game (league 233) and 27.4 targets (31.4). Book 234; best estimate 222.
+* Books (open, read only after the sims): `markets/2026_wk09_BUF_at_MIN_books_open*.csv`, 10 credits, 196 left.
+  SizzleSims v22 with best estimate. Regression check No drift.
+* Scheduled: pass 2 at 12:30 PM ET (trig_01QLNEYzfJbDek41doMHy8Z5), pass 3 at 6:55 PM ET after inactives
+  (trig_01KJzyFuZZSGMByH1js12wZv). Pending: practice-squad elevations (MIN WR, DeeJay Dallas), Murray "test the leg".

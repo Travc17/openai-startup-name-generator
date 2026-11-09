@@ -1,0 +1,156 @@
+[
+ {
+  "player": "Kyler Murray",
+  "team": "MIN QB",
+  "status": "Out (hamstring strain, week-to-week); Carson Wentz starts, Max Brosmer backup",
+  "url": "https://www.fox9.com/sports/kyler-murray-week-to-week-carson-wentz-set-2nd-start-vikings-host-bills",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Carson Wentz",
+  "team": "MIN QB",
+  "status": "Starting (2nd start of 2026; relieved Murray week 1, started week 2)",
+  "url": "https://www.valleynewslive.com/2026/11/05/vikings-sit-murray-with-hamstring-strain-will-start-wentz-qb-against-bills-monday-night/",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Demond Claiborne",
+  "team": "MIN RB",
+  "status": "Out (knee), ruled out Saturday",
+  "url": "https://www.minnesotasportsfan.com/minnesota-vikings/jauan-jennings-demond-claiborne-out-bills/",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Jauan Jennings",
+  "team": "MIN WR",
+  "status": "Out (calf), ruled out Saturday",
+  "url": "https://www.minnesotasportsfan.com/minnesota-vikings/jauan-jennings-demond-claiborne-out-bills/",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Theo Jackson",
+  "team": "MIN S",
+  "status": "Questionable (quad) [defense: noted, not modeled]",
+  "url": "https://www.startribune.com/minnesota-vikings-kyler-murray-injury-report-buffalo-bills-nfl-week-9-game-monday-night-football/601908198",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Jay Ward",
+  "team": "MIN S",
+  "status": "Questionable (knee) [defense: noted, not modeled]",
+  "url": "https://www.startribune.com/minnesota-vikings-kyler-murray-injury-report-buffalo-bills-nfl-week-9-game-monday-night-football/601908198",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Vikings WR depth",
+  "team": "MIN WR",
+  "status": "Possible practice-squad WR elevation for depth (not posted yet; check pass 2)",
+  "url": "https://www.startribune.com/minnesota-vikings-kyler-murray-injury-report-buffalo-bills-nfl-week-9-game-monday-night-football/601908198",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Josh Palmer",
+  "team": "BUF WR",
+  "status": "Out (hamstring)",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Tyrell Shavers",
+  "team": "BUF WR",
+  "status": "Questionable (knee)",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "DJ Moore",
+  "team": "BUF WR",
+  "status": "No designation, cleared",
+  "url": "https://www.si.com/nfl/bills/onsi/injury-report-week-9-final-dj-moore-cleared-two-ol-starters-questionable-at-vikings",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Keon Coleman",
+  "team": "BUF WR",
+  "status": "No designation",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Dalton Kincaid",
+  "team": "BUF TE",
+  "status": "No designation (chest/ribs earlier in week)",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Khalil Shakir",
+  "team": "BUF WR",
+  "status": "No designation; returned to practice Saturday after excused absence Friday",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Dion Dawkins",
+  "team": "BUF LT",
+  "status": "Questionable (ribs) [OL: noted, not modeled]",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Alec Anderson",
+  "team": "BUF LG",
+  "status": "Questionable (ankle) [OL: noted, not modeled]",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Jordan Hancock",
+  "team": "BUF DB",
+  "status": "Questionable (hamstring) [defense: noted, not modeled]",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Greg Gaines",
+  "team": "BUF DL",
+  "status": "Questionable (calf) [defense: noted, not modeled]",
+  "url": "https://www.buffalobills.com/news/buffalo-bills-injury-report-vs-vikings-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Line",
+  "team": "BUF@MIN",
+  "status": "Consensus BUF -3, total 44 (5 books, 2026-11-09 05:17 UTC); Murray news moved the line",
+  "url": "https://www.si.com/betting/kyler-murray-injury-uncertainty-moves-bills-vs-vikings-odds-in-nfl-week-9",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Weather",
+  "team": "MIN (indoor)",
+  "status": "U.S. Bank Stadium, fixed roof: no wind or weather input",
+  "url": "https://www.pro-football-reference.com/boxscores/202611090min.htm",
+  "found_utc": "2026-11-09T05:19Z"
+ },
+ {
+  "player": "Aaron Jones",
+  "team": "MIN RB",
+  "status": "Playing (not on final report); knee issue since week 7, 8 and 5 carries weeks 7-8, left week 8 in Q4. Committee with Jordan Mason: rushing = blind spot, not hand-adjusted",
+  "url": "https://www.nbcsports.com/fantasy/football/player-news/2026-11-01/jones-held-to-7-touches-in-week-8",
+  "found_utc": "2026-11-09T05:22Z"
+ },
+ {
+  "player": "Jordan Mason",
+  "team": "MIN RB",
+  "status": "Playing; back from IR week 7, led week 8 with 8 carries; committee after IR return = blind spot",
+  "url": "https://www.minnesotasportsfan.com/minnesota-vikings/running-back-rotation-review-lions-week-8/",
+  "found_utc": "2026-11-09T05:22Z"
+ },
+ {
+  "player": "DeeJay Dallas",
+  "team": "MIN RB",
+  "status": "Practice squad; out-snapped Mason week 8 when elevated. Week 9 elevation not posted yet (check pass 2)",
+  "url": "https://www.minnesotasportsfan.com/minnesota-vikings/running-back-rotation-review-lions-week-8/",
+  "found_utc": "2026-11-09T05:22Z"
+ }
+]
