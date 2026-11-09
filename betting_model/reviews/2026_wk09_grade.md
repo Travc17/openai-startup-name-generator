@@ -1,6 +1,6 @@
 # Grades: 2026 week 9
 
-Graded 2026-11-09 05:07 UTC from the saved pre-kickoff files (no reruns). Actuals: nflverse play by play.
+Graded 2026-11-09 05:13 UTC from the saved pre-kickoff files (no reruns). Actuals: nflverse play by play.
 
 ## Scores
 
@@ -70,3 +70,21 @@ Regrade after nflverse posts snap counts (usually 1 to 2 days).
 | CIN_at_ATL | Ja'Marr Chase | rec_yds | 83.3 | 30.9 to 152.3 | 77.5 | 155 | 0.91 |  |
 
 Predicted but no stat line (inactive or no snaps; check the news file): 2026_wk09_CIN_at_ATL: Tahj Brooks rush_att, Tahj Brooks rush_yds, Erick All rec, Erick All rec_yds; 2026_wk09_DAL_at_IND: DJ Giddens rush_att, DJ Giddens rush_yds, Malik Davis rush_att, Malik Davis rush_yds; 2026_wk09_GB_at_NE: Bo Melton rec, Bo Melton rec_yds, Jonnu Smith rec, Jonnu Smith rec_yds; 2026_wk09_JAX_at_BAL: Rasheen Ali rush_att, Rasheen Ali rush_yds, Rasheen Ali rec, Rasheen Ali rec_yds
+
+## Every game of 2026 week 9 (live model, real starting QBs, closing spread, players who played)
+
+Calibrated reads 10 / 50 / 90. Baseline = regression sample (2025 weeks 10-13).
+
+| Stat | n | under p10 | under p50 | under p90 | baseline p10 / p50 / p90 |
+|---|---|---|---|---|---|
+| targets | 115 | 8% | 48% | 93% | 7.1 / 49.6 / 91.3 |
+| rec | 115 | 8% | 50% | 92% | 9.4 / 48.4 / 91.3 |
+| rec_yds | 115 | 10% | 46% | 93% | 11.2 / 49.2 / 90.6 |
+| rush_att | 35 | 11% | 43% | 91% | 12.6 / 40.4 / 83.1 |
+| rush_yds | 35 | 6% | 46% | 100% | 9.8 / 42.6 / 85.8 |
+| pass_att | 26 | 8% | 54% | 100% | 11.9 / 55.1 / 89.8 |
+| pass_cmp | 26 | 12% | 62% | 100% | 12.7 / 64.4 / 91.5 |
+| pass_yds | 26 | 8% | 58% | 92% | 7.6 / 58.5 / 96.6 |
+
+under p50 above 50% = results came in BELOW the model's median more often than they should (model high);
+below 50% = model low. One week of about 14 games moves these by several points on noise alone.
