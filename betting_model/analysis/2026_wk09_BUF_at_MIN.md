@@ -66,3 +66,14 @@ Line used for game script: BUF -3, total 44.
 
 Matchup rates are context, not a model input beyond what the sims already use (defense-vs-position tested
 neutral as an extra lever). Blind spots: the model's numbers are least reliable there.
+
+## Where offenses find success vs MIN, and BUF's fit (2026 weeks 1-8, nflverse play by play; context only)
+| Zone | vs MIN: tgt, yds/tgt, comp | League yds/tgt, comp | BUF yds/tgt, comp |
+|---|---|---|---|
+| Outside (any depth) | 118, 5.6, 51% | 7.5, 60% | 8.2, 60% (110 tgt) |
+| Middle 10+ air yds | 24, 12.7, 42% | 12.5, 60% | 15.3, 66% (29 tgt) |
+| Middle short | 22, 5.2, 64% | 6.7, 74% | 7.6, 61% (18 tgt) |
+| Screens (air yds <= 0) | 38, 4.8, 79% (YAC 9.3) | 4.3, 75% (YAC 8.7) | 6.6, 81% (48 tgt) |
+MIN sack rate 10.6% (league 6.2%), INT rate 4.0% (2.1%). BUF sack rate allowed 5.4%.
+BUF targets in MIN's softer zones (middle + screens): Shakir 27 of 38, Ty Johnson 10 of 15 screens, Kincaid 16 of 35,
+Moore 7 of 27, Coleman 7 of 27. Small samples (22 to 38 targets per zone); zone matchups tested neutral as a model input.
