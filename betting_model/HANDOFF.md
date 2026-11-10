@@ -352,3 +352,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   `trig_01A7qMBRsWJsd7EsoccmMFTL` at 9:30 AM ET to finish it (grade + scenario test).
 * New process fix: INACTIVE CHECK in roster_check (news says inactive/out but player still in sims) + SIM_PROMPT rule
   to --out every inactive skill player. regression_check No drift. Ledger row added.
+* WEEK 9 FULLY GRADED 2026-11-10 9:40 AM ET (scheduled follow-up): BUF@MIN added. 5 games: A+B 88% inside (112/127),
+  model miss 15.4 vs book 14.9 vs best 15.0; model-under-book side 63% (50/79). BUF@MIN: model beat the book (11.5 vs 12.7).
+  Scenario A beat the official pass slightly on 16 legs (one game, ledger row "watch"). Backup-QB row now 2 games
+  (Fagnano, Wentz): a third makes it a MODEL_LAB test. Correction logged: Travis's 5-leg hit (all legs cleared).
+  OPEN: (1) MODEL_LAB early-exit simulation (ledger 4 games); (2) run the scenario script on future games;
+  (3) historical alt-line pull.

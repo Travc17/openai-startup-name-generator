@@ -48,3 +48,15 @@
 * BUF@MIN (MNF) not in nflverse yet. Preliminary: BUF 23, MIN 6 (predicted BUF 25, MIN 22; BUF 62%: winner right). Wentz
   8 of 25 (model median 18 of 28, 183 yds; book 218.5); Allen 21 of 31, 234 yds (model 178, book 230.5); Cook 31 for 107
   (model 90, book 84.5). Full grade and the scenario test after the data posts.
+
+## Update 2026-11-10 9:40 AM ET: BUF@MIN graded (all 5 games final)
+* BUF 23, MIN 6 (pred BUF 25, MIN 22; BUF 62%): winner right; total miss 18 (line 16.5). Winners 4 of 5 for the week.
+* BUF@MIN A+B inside 22/26 (85%); model beat the book here: mean miss 11.5 vs 12.7, closer on 15 of 26.
+* Week (5 games): A+B 88% inside (112/127), 90% without in-game exits; mean miss model 15.4, book 14.9, best 15.0 (n=122);
+  model under the book: result on the model's side 63% (50/79); over: 52% (22/42).
+* QB lines vs official box: Allen 21/31 234 matches ESPN; Wentz 8/24 81 in nflverse vs 8 of 25 reported (one attempt).
+* In-game: Jefferson injured Q1, returned. Wentz pulled late for Brosmer (counted in the early-exit ledger row).
+* Correction: the preliminary note said Travis's 5-leg MIN legs almost certainly missed; all five legs hit (Jefferson 58,
+  Cook 107, Shakir 53, Hockenson 33, Addison 28). The note ignored Brosmer's relief passing.
+* Scenario test (reviews/2026_wk09_BUF_at_MIN_scenario_test.csv): scenario A slightly better than official on 16 legs
+  (15.30 vs 16.04 mean miss; Brier 0.1574 vs 0.1596). One game: watch, no change.

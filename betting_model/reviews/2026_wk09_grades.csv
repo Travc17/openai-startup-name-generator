@@ -1,4 +1,48 @@
 game,resim,team,name,pos,stat,grade,median,lo,hi,book,best,actual,inside,side,pit,err_model,last_touch,injury,early_exit,err_book,err_best,lean,lean_right
+2026_wk09_BUF_at_MIN,False,MIN,Justin Jefferson,WR,rec,A,5.0,2.0,9.0,6.5,6.2,3.0,True,in,0.199,2.0,Q4 03:50,"injured Q1 01:13, returned",False,3.5,3.2,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Justin Jefferson,WR,rec_yds,A,55.6,17.6,111.2,77.5,73.1,58.0,True,in,0.526,2.3999999999999986,Q4 03:50,"injured Q1 01:13, returned",False,19.5,15.099999999999994,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Jordan Addison,WR,rec,A,3.0,1.0,6.0,3.5,3.4,2.0,True,in,0.255,1.0,Q4 04:22,,False,1.5,1.4,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Jordan Addison,WR,rec_yds,A,38.0,6.5,91.8,40.5,40.0,28.0,True,in,0.378,10.0,Q4 04:22,,False,12.5,12.0,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Aaron Jones,RB,rush_att,C,13.0,7.0,21.0,8.5,9.4,5.0,False,below,0.039,8.0,Q3 14:06,,False,3.5,4.4,over,False
+2026_wk09_BUF_at_MIN,False,MIN,Aaron Jones,RB,rush_yds,C,52.8,20.9,95.7,30.5,35.0,16.0,False,below,0.061,36.8,Q3 14:06,,False,14.5,19.0,over,False
+2026_wk09_BUF_at_MIN,False,MIN,Aaron Jones,RB,rec,B,2.0,0.0,4.0,1.5,1.6,1.0,True,in,0.339,1.0,Q3 14:06,,False,0.5,0.6000000000000001,over,False
+2026_wk09_BUF_at_MIN,False,MIN,Aaron Jones,RB,rec_yds,B,8.5,0.0,31.9,9.5,9.3,5.0,True,in,0.395,3.5,Q3 14:06,,False,4.5,4.300000000000001,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Jordan Mason,RB,rush_att,C,10.0,5.0,16.0,11.5,11.2,6.0,True,in,0.171,4.0,Q4 02:54,,False,5.5,5.199999999999999,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Jordan Mason,RB,rush_yds,C,38.9,13.0,78.8,47.5,45.8,35.0,True,in,0.435,3.8999999999999986,Q4 02:54,,False,12.5,10.799999999999997,under,True
+2026_wk09_BUF_at_MIN,False,MIN,T.J. Hockenson,TE,rec,A,3.0,1.0,6.0,4.5,4.2,4.0,True,in,0.657,1.0,Q4 02:00,,False,0.5,0.20000000000000018,under,True
+2026_wk09_BUF_at_MIN,False,MIN,T.J. Hockenson,TE,rec_yds,A,26.9,3.8,65.4,38.5,36.2,33.0,True,in,0.596,6.100000000000001,Q4 02:00,,False,5.5,3.200000000000003,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Tai Felton,WR,rec,C,1.0,0.0,2.0,0.5,0.6,0.0,True,in,0.249,1.0,,,False,0.5,0.6,over,False
+2026_wk09_BUF_at_MIN,False,MIN,Tai Felton,WR,rec_yds,C,0.0,0.0,29.7,1.5,1.2,0.0,True,in,0.254,0.0,,,False,1.5,1.2,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Myles Price,WR,rec,C,0.0,0.0,2.0,,,1.0,True,in,0.69,1.0,Q4 05:51,,False,,,,
+2026_wk09_BUF_at_MIN,False,MIN,Myles Price,WR,rec_yds,C,0.0,0.0,26.0,,,6.0,True,in,0.662,6.0,Q4 05:51,,False,,,,
+2026_wk09_BUF_at_MIN,False,MIN,Carson Wentz,QB,pass_cmp,A,18.0,11.0,25.0,20.0,19.6,8.0,False,below,0.03,10.0,Q1 05:30,,False,12.0,11.600000000000001,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Carson Wentz,QB,pass_att,A,28.0,19.0,38.0,30.5,30.0,24.0,True,in,0.286,4.0,Q1 05:30,,False,6.5,6.0,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Carson Wentz,QB,pass_yds,A,183.2,103.4,272.6,218.5,211.4,81.0,False,below,0.046,102.19999999999999,Q1 05:30,,False,137.5,130.4,under,True
+2026_wk09_BUF_at_MIN,False,MIN,Carson Wentz,QB,pass_td,C,1.0,0.0,3.0,,,0.0,True,in,0.159,1.0,Q1 05:30,,False,,,,
+2026_wk09_BUF_at_MIN,False,MIN,Carson Wentz,QB,int,C,0.0,0.0,2.0,,,2.0,True,in,0.903,2.0,Q1 05:30,,False,,,,
+2026_wk09_BUF_at_MIN,False,BUF,Dalton Kincaid,TE,rec,A,3.0,1.0,6.0,3.5,3.4,3.0,True,in,0.478,0.0,Q4 08:12,,False,0.5,0.3999999999999999,under,True
+2026_wk09_BUF_at_MIN,False,BUF,Dalton Kincaid,TE,rec_yds,A,31.7,4.7,76.4,40.5,38.7,28.0,True,in,0.461,3.6999999999999993,Q4 08:12,,False,12.5,10.700000000000003,under,True
+2026_wk09_BUF_at_MIN,False,BUF,Khalil Shakir,WR,rec,A,4.0,1.0,7.0,3.5,3.6,4.0,True,in,0.578,0.0,Q3 04:04,,False,0.5,0.3999999999999999,over,True
+2026_wk09_BUF_at_MIN,False,BUF,Khalil Shakir,WR,rec_yds,A,36.4,6.5,89.6,39.5,38.9,53.0,True,in,0.672,16.6,Q3 04:04,,False,13.5,14.100000000000001,under,False
+2026_wk09_BUF_at_MIN,False,BUF,James Cook,RB,rush_att,B,20.0,13.0,28.0,18.5,18.8,31.0,False,above,0.955,11.0,Q4 05:38,,False,12.5,12.2,over,True
+2026_wk09_BUF_at_MIN,False,BUF,James Cook,RB,rush_yds,B,90.4,47.2,146.5,84.5,85.7,107.0,True,in,0.655,16.599999999999994,Q4 05:38,,False,22.5,21.299999999999997,over,True
+2026_wk09_BUF_at_MIN,False,BUF,James Cook,RB,rec,C,1.0,0.0,3.0,1.5,1.4,0.0,True,in,0.14,1.0,Q4 05:38,,False,1.5,1.4,under,True
+2026_wk09_BUF_at_MIN,False,BUF,James Cook,RB,rec_yds,C,6.4,0.0,29.5,8.5,8.1,0.0,True,in,0.171,6.4,Q4 05:38,,False,8.5,8.1,under,True
+2026_wk09_BUF_at_MIN,False,BUF,Josh Allen,QB,pass_cmp,A,17.0,10.0,24.0,19.5,19.0,21.0,True,in,0.778,4.0,Q4 10:15,,False,1.5,2.0,under,False
+2026_wk09_BUF_at_MIN,False,BUF,Josh Allen,QB,pass_att,A,26.0,16.0,35.0,29.5,28.8,31.0,True,in,0.747,5.0,Q4 10:15,,False,1.5,2.1999999999999993,under,False
+2026_wk09_BUF_at_MIN,False,BUF,Josh Allen,QB,pass_yds,A,178.0,94.1,270.1,230.5,220.0,234.0,True,in,0.789,56.0,Q4 10:15,,False,3.5,14.0,under,False
+2026_wk09_BUF_at_MIN,False,BUF,Josh Allen,QB,pass_td,C,1.0,0.0,3.0,,,1.0,True,in,0.471,0.0,Q4 10:15,,False,,,,
+2026_wk09_BUF_at_MIN,False,BUF,Josh Allen,QB,int,C,0.0,0.0,2.0,,,1.0,True,in,0.711,1.0,Q4 10:15,,False,,,,
+2026_wk09_BUF_at_MIN,False,BUF,DJ Moore,WR,rec,A,2.0,0.0,5.0,3.5,3.2,3.0,True,in,0.606,1.0,Q4 14:12,,False,0.5,0.20000000000000018,under,True
+2026_wk09_BUF_at_MIN,False,BUF,DJ Moore,WR,rec_yds,A,28.0,0.0,74.7,49.5,45.2,25.0,True,in,0.457,3.0,Q4 14:12,,False,24.5,20.200000000000003,under,True
+2026_wk09_BUF_at_MIN,False,BUF,Ty Johnson,RB,rush_att,C,1.0,0.0,5.0,,,1.0,True,in,0.442,0.0,Q3 11:08,,False,,,,
+2026_wk09_BUF_at_MIN,False,BUF,Ty Johnson,RB,rush_yds,C,2.9,0.0,20.6,,,1.0,True,in,0.43,1.9,Q3 11:08,,False,,,,
+2026_wk09_BUF_at_MIN,False,BUF,Ty Johnson,RB,rec,B,1.0,0.0,4.0,1.5,1.4,2.0,True,in,0.649,1.0,Q3 11:08,,False,0.5,0.6000000000000001,under,False
+2026_wk09_BUF_at_MIN,False,BUF,Ty Johnson,RB,rec_yds,B,7.4,0.0,35.0,13.5,12.3,36.0,False,above,0.909,28.6,Q3 11:08,,False,22.5,23.7,under,False
+2026_wk09_BUF_at_MIN,False,BUF,Keon Coleman,WR,rec,B,2.0,0.0,5.0,2.5,2.4,3.0,True,in,0.659,1.0,Q4 13:34,,False,0.5,0.6000000000000001,under,False
+2026_wk09_BUF_at_MIN,False,BUF,Keon Coleman,WR,rec_yds,B,24.3,0.0,67.2,25.5,25.3,17.0,True,in,0.399,7.300000000000001,Q4 13:34,,False,8.5,8.3,under,True
+2026_wk09_BUF_at_MIN,False,BUF,Ray Davis,RB,rush_att,C,1.0,0.0,5.0,,,2.0,True,in,0.651,1.0,Q4 05:27,,False,,,,
+2026_wk09_BUF_at_MIN,False,BUF,Ray Davis,RB,rush_yds,C,2.0,0.0,22.6,4.5,4.0,2.0,True,in,0.505,0.0,Q4 05:27,,False,2.5,2.0,under,True
 2026_wk09_CIN_at_ATL,False,ATL,Drake London,WR,rec,A,5.0,2.0,9.0,5.5,5.4,5.0,True,in,0.522,0.0,Q4 14:13,,False,0.5,0.40000000000000036,under,True
 2026_wk09_CIN_at_ATL,False,ATL,Drake London,WR,rec_yds,A,68.1,20.6,137.2,77.5,75.6,68.0,True,in,0.497,0.09999999999999432,Q4 14:13,,False,9.5,7.599999999999994,under,True
 2026_wk09_CIN_at_ATL,False,ATL,Kyle Pitts,TE,rec,A,3.0,1.0,6.0,4.0,3.8,3.0,True,in,0.467,0.0,Q4 04:30,,False,1.0,0.7999999999999998,under,True
