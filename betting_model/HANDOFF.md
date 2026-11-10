@@ -358,3 +358,6 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   (Fagnano, Wentz): a third makes it a MODEL_LAB test. Correction logged: Travis's 5-leg hit (all legs cleared).
   OPEN: (1) MODEL_LAB early-exit simulation (ledger 4 games); (2) run the scenario script on future games;
   (3) historical alt-line pull.
+* IMPROVE LOOP built 2026-11-10: IMPROVE_PROMPT.md + improve_report.py (+ `improve` skill mode). First run: model
+  calibrated on all 2026 games; no calibration change. Next test (not started): early-exit simulation (ledger #1).
+  Log: reviews/improve_log.md.
