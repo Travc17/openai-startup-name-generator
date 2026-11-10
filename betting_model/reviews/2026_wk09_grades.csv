@@ -126,6 +126,10 @@ game,resim,team,name,pos,stat,grade,median,lo,hi,book,best,actual,inside,side,pi
 2026_wk09_GB_at_NE,False,GB,Pierre Strong,RB,rush_yds,C,10.8,0.0,32.3,,,22.0,True,in,0.784,11.2,Q4 02:27,,False,,,,
 2026_wk09_GB_at_NE,False,GB,Pierre Strong,RB,rec,C,1.0,0.0,4.0,,,2.0,True,in,0.645,1.0,Q4 02:27,,False,,,,
 2026_wk09_GB_at_NE,False,GB,Pierre Strong,RB,rec_yds,C,6.9,0.0,31.3,,,11.0,True,in,0.611,4.1,Q4 02:27,,False,,,,
+2026_wk09_GB_at_NE,False,GB,Bo Melton,WR,rec,C,1.0,0.0,3.0,,,0.0,True,in,0.222,1.0,,,False,,,,
+2026_wk09_GB_at_NE,False,GB,Bo Melton,WR,rec_yds,C,4.9,0.0,36.5,,,0.0,True,in,0.23,4.9,,,False,,,,
+2026_wk09_GB_at_NE,False,GB,Jonnu Smith,TE,rec,C,0.0,0.0,2.0,,,0.0,True,in,0.269,0.0,,,False,,,,
+2026_wk09_GB_at_NE,False,GB,Jonnu Smith,TE,rec_yds,C,0.0,0.0,25.3,,,0.0,True,in,0.276,0.0,,,False,,,,
 2026_wk09_GB_at_NE,False,GB,Jordan Love,QB,pass_cmp,A,23.0,16.0,30.0,23.5,23.4,23.0,True,in,0.509,0.0,Q3 04:10,,False,0.5,0.3999999999999986,under,True
 2026_wk09_GB_at_NE,False,GB,Jordan Love,QB,pass_att,A,36.0,26.0,45.0,37.5,37.2,29.0,True,in,0.186,7.0,Q3 04:10,,False,8.5,8.200000000000003,under,True
 2026_wk09_GB_at_NE,False,GB,Jordan Love,QB,pass_yds,A,252.6,158.6,357.2,271.5,267.7,372.0,False,above,0.927,119.4,Q3 04:10,,False,100.5,104.30000000000001,under,False

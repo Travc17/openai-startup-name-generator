@@ -345,3 +345,10 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   failed; now keeps the projections file's order (replay passes). Analysis refreshed: analysis/2026_wk09_BUF_at_MIN_final.md.
 * NEXT: grade BUF@MIN after the game (`python grade_week.py --week 9 --league --simcast`, GRADE_PROMPT.md), including
   the scenario pass vs actuals (did zone fit / Wentz split help?).
+
+## Week 9 grade (2026-11-10 ~12:40 AM ET, GRADE_PROMPT via /nfl-game grade-week 9)
+* 4 of 5 games graded final (snaps posted): A+B 89% inside (90/101), 91% without in-game exits; league panel 14 games
+  calibrated; book beat model on mean miss (15.6 vs 16.5). BUF@MIN (BUF 23, MIN 6) not in nflverse yet: scheduled
+  `trig_01A7qMBRsWJsd7EsoccmMFTL` at 9:30 AM ET to finish it (grade + scenario test).
+* New process fix: INACTIVE CHECK in roster_check (news says inactive/out but player still in sims) + SIM_PROMPT rule
+  to --out every inactive skill player. regression_check No drift. Ledger row added.

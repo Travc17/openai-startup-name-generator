@@ -87,6 +87,8 @@ Seed 7 (the default) so every later replay (parlays, SizzleSims, floor legs) mat
 * ZERO "ROSTER CHECK" lines in the report output (2026-11-09, Hollins): every RB/WR/TE the news or the team's
   inactives report lists as active, activated off IR, designated to return or elevated is in the sims. Fix with
   `--players "Name" --blind "Name"` (first game back = blind spot). Never write "not modeled" for an active player.
+* Final pass: put EVERY RB/WR/TE on both official inactive lists in the news file and `--out` each one, depth
+  players included (week 9: five depth players were simulated but inactive). Zero "INACTIVE CHECK" lines.
 * Final pass: `python nfl.py update` AFTER inactives post, so the depth chart is game day's (it adds starters the
   usage history misses, ranked among players not ruled out).
 * Each key player's 80% range covers most of his last 4 games, or a stated reason (role change, injury).

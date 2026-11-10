@@ -263,6 +263,18 @@ def roster_check(model: GameModel, news: list, roster: list, a) -> list[str]:
             missing.append(pid)
             print(f"ROSTER CHECK: {name_of(pid)} ({tm}) is '{it.get('status')}' in the news but NOT in the sims. "
                   f"Rerun with --players \"{name_of(pid)}\" --blind \"{name_of(pid)}\" (source: {it.get('url', 'no url')})")
+    # The other direction: a player the news lists as inactive/out who is still in the sims without --out
+    # (week 9 grade: five depth backs/TEs predicted, none played, none ruled out)
+    for it in (news.get("items", []) if isinstance(news, dict) else news) or []:
+        st = str(it.get("status", "")).lower()
+        if not (st.startswith("inactive") or st.startswith("out") or " inactive" in st) or "not on the" in st:
+            continue
+        try:
+            pid = lookup(model, it.get("player", ""))[0]
+        except SystemExit:
+            continue
+        if pid in have and pid not in outs:
+            print(f"INACTIVE CHECK: {name_of(pid)} is '{it.get('status')}' in the news but still in the sims. Rerun with --out \"{name_of(pid)}\"")
     a.roster_missing = missing
     return missing
 

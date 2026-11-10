@@ -38,3 +38,13 @@
   note and missed a depth-chart back; wind forecast not found.
 * Predictions: B. 89% inside on A+B, league-wide calibrated; the book beat the model on mean miss (as tested).
 * Bets: no model bets on the Sunday games (none placed); week total is the two JAX@BAL bets (net -17.17).
+
+## Update 2026-11-10 (GRADE_PROMPT rerun after snap counts posted)
+* Snap counts posted for all 14 Sunday games; regrade unchanged for A+B (90/101 inside); C now 69/85 with zero-touch players counted.
+* League panel now 14 games (TB@CHI added): receiving under-p50 45 to 49%, p90 93%; calibrated.
+* Gesicki early exit (CIN@ATL): injury news not found.
+* Process miss: five depth skill players were simulated but inactive (no snaps). Fixed: INACTIVE CHECK in the report and a
+  SIM_PROMPT final-pass rule. Ledger row added.
+* BUF@MIN (MNF) not in nflverse yet. Preliminary: BUF 23, MIN 6 (predicted BUF 25, MIN 22; BUF 62%: winner right). Wentz
+  8 of 25 (model median 18 of 28, 183 yds; book 218.5); Allen 21 of 31, 234 yds (model 178, book 230.5); Cook 31 for 107
+  (model 90, book 84.5). Full grade and the scenario test after the data posts.

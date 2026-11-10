@@ -1,6 +1,6 @@
 # Grades: 2026 week 9
 
-Graded 2026-11-09 05:13 UTC from the saved pre-kickoff files (no reruns). Actuals: nflverse play by play.
+Graded 2026-11-10 04:39 UTC from the saved pre-kickoff files (no reruns). Actuals: nflverse play by play.
 
 ## Scores
 
@@ -20,9 +20,6 @@ Graded 2026-11-09 05:13 UTC from the saved pre-kickoff files (no reruns). Actual
 Rows for a player injured in-game who did not return are graded as usual (the model does not simulate it) and
 also shown without them below, so an injury does not hide a real model miss.
 
-SNAP COUNTS NOT POSTED for 2026_wk09_CIN_at_ATL, 2026_wk09_DAL_at_IND, 2026_wk09_GB_at_NE: players who played without a touch are missing (not graded as 0).
-Regrade after nflverse posts snap counts (usually 1 to 2 days).
-
 
 ## Inside the 80% range (about 80% = calibrated)
 
@@ -30,7 +27,7 @@ Regrade after nflverse posts snap counts (usually 1 to 2 days).
 |---|---|---|---|
 | A | 87% (48/55) | 1 | 6 |
 | B | 91% (42/46) | 3 | 1 |
-| C | 80% (65/81) | 5 | 11 |
+| C | 81% (69/85) | 5 | 11 |
 | A+B | 89% (90/101) | 4 | 7 |
 | A+B without players hurt or out early | 91% (81/89) | 1 | 7 |
 
@@ -69,7 +66,7 @@ Regrade after nflverse posts snap counts (usually 1 to 2 days).
 | GB_at_NE | Jordan Love | pass_yds | 252.6 | 158.6 to 357.2 | 271.5 | 372 | 0.93 |  |
 | CIN_at_ATL | Ja'Marr Chase | rec_yds | 83.3 | 30.9 to 152.3 | 77.5 | 155 | 0.91 |  |
 
-Predicted but no stat line (inactive or no snaps; check the news file): 2026_wk09_CIN_at_ATL: Tahj Brooks rush_att, Tahj Brooks rush_yds, Erick All rec, Erick All rec_yds; 2026_wk09_DAL_at_IND: DJ Giddens rush_att, DJ Giddens rush_yds, Malik Davis rush_att, Malik Davis rush_yds; 2026_wk09_GB_at_NE: Bo Melton rec, Bo Melton rec_yds, Jonnu Smith rec, Jonnu Smith rec_yds; 2026_wk09_JAX_at_BAL: Rasheen Ali rush_att, Rasheen Ali rush_yds, Rasheen Ali rec, Rasheen Ali rec_yds
+Predicted but no stat line (inactive or no snaps; check the news file): 2026_wk09_CIN_at_ATL: Tahj Brooks rush_att, Tahj Brooks rush_yds, Erick All rec, Erick All rec_yds; 2026_wk09_DAL_at_IND: DJ Giddens rush_att, DJ Giddens rush_yds, Malik Davis rush_att, Malik Davis rush_yds; 2026_wk09_JAX_at_BAL: Rasheen Ali rush_att, Rasheen Ali rush_yds, Rasheen Ali rec, Rasheen Ali rec_yds
 
 ## Every game of 2026 week 9 (live model, real starting QBs, closing spread, players who played)
 
@@ -77,14 +74,14 @@ Calibrated reads 10 / 50 / 90. Baseline = regression sample (2025 weeks 10-13).
 
 | Stat | n | under p10 | under p50 | under p90 | baseline p10 / p50 / p90 |
 |---|---|---|---|---|---|
-| targets | 115 | 8% | 48% | 93% | 7.1 / 49.6 / 91.3 |
-| rec | 115 | 8% | 50% | 92% | 9.4 / 48.4 / 91.3 |
-| rec_yds | 115 | 10% | 46% | 93% | 11.2 / 49.2 / 90.6 |
-| rush_att | 35 | 11% | 43% | 91% | 12.6 / 40.4 / 83.1 |
-| rush_yds | 35 | 6% | 46% | 100% | 9.8 / 42.6 / 85.8 |
-| pass_att | 26 | 8% | 54% | 100% | 11.9 / 55.1 / 89.8 |
-| pass_cmp | 26 | 12% | 62% | 100% | 12.7 / 64.4 / 91.5 |
-| pass_yds | 26 | 8% | 58% | 92% | 7.6 / 58.5 / 96.6 |
+| targets | 122 | 7% | 48% | 93% | 7.1 / 49.6 / 91.3 |
+| rec | 122 | 8% | 49% | 93% | 9.4 / 48.4 / 91.3 |
+| rec_yds | 122 | 10% | 45% | 93% | 11.2 / 49.2 / 90.6 |
+| rush_att | 38 | 11% | 45% | 92% | 12.6 / 40.4 / 83.1 |
+| rush_yds | 38 | 5% | 47% | 100% | 9.8 / 42.6 / 85.8 |
+| pass_att | 28 | 7% | 50% | 100% | 11.9 / 55.1 / 89.8 |
+| pass_cmp | 28 | 11% | 61% | 100% | 12.7 / 64.4 / 91.5 |
+| pass_yds | 28 | 7% | 54% | 93% | 7.6 / 58.5 / 96.6 |
 
 under p50 above 50% = results came in BELOW the model's median more often than they should (model high);
 below 50% = model low. One week of about 14 games moves these by several points on noise alone.
