@@ -26,3 +26,14 @@
   toward 10%). Leaders' medians move less than 2%. Expected size: small (a 3% event).
 * Bar (MODEL_LAB rule 3): a target stat improves with t <= -2 on the pooled seasons; no stat worse with t >= +2;
   coverage stays within 3 points of 10/50/90; regression_check passes and its baseline is refreshed if shipped.
+
+## 2026-11-11: early-exit RESULT — FAILED (left OFF; code kept for reproduction)
+* 536 games, paired. Measured rates: no stat better at t <= -2; rec_yds +0.08% (t=+2.0) and pass_cmp +0.11% (t=+2.0)
+  worse. Rates x1.5: depth players' targets and receptions better (-0.14%, t=-2.4) but leaders worse (targets +0.24%,
+  t=+3.4; receptions +0.23%, t=+3.5; rec_yds +0.19%, t=+2.9). Fails "no other stat worse with t >= +2".
+* Why: a 3 to 4% event spreads every player's distribution a little; leaders pay more than backups gain. Depth upper
+  tails stay thin (targets p90 coverage 84.9% OFF, 85.4% ON; carries 82.7% -> 83.5%): exits are not the main cause.
+* New lead from the same backtest (n=5,753 depth target rows, 1,416 depth carry rows): depth players' p90 coverage
+  83-85% vs 90%. Hypothesis for the next test: share uncertainty for small-share players is too tight (one beta
+  concentration for everyone). Ledger row added; it is backtest-sized evidence, so it is READY.
+* Graded-game sanity check not needed (no ship). Regression baseline unchanged.

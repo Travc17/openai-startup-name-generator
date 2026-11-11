@@ -205,6 +205,12 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-11 Early exit (Config.early_exit, OFF): RB/WR/TE leave hurt at 2019-23 rates (RB 2.9%, WR 4.2%, TE 2.7%),
+  backups absorb. Paired test 2024-26 (536 games, ~16.7k rows per variant): measured rates rec_yds +0.08% (t=+2.0),
+  pass_cmp +0.11% (t=+2.0), nothing better at t<=-2; x1.5 rates helped depth targets/rec (-0.14%, t=-2.4) but hurt
+  leaders' targets/rec (+0.24%, t=+3.4). FAILED. Depth p90 coverage barely moved (84.9 -> 85.4): the thin depth tails
+  have another cause. Details: reviews/lab_2026-11-11_early_exit.md
+
 Full-season walk-forward run of the live model (routes + QB layer + game script), weeks 4+, real starting QBs,
 closing spread for game script. Median absolute error, model vs naive (player's last 8 games average):
 

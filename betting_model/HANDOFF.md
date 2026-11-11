@@ -361,3 +361,5 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * IMPROVE LOOP built 2026-11-10: IMPROVE_PROMPT.md + improve_report.py (+ `improve` skill mode). First run: model
   calibrated on all 2026 games; no calibration change. Next test (not started): early-exit simulation (ledger #1).
   Log: reviews/improve_log.md.
+* MODEL_LAB 2026-11-11 early exit: FAILED, Config.early_exit stays OFF (README Model review, reviews/lab_2026-11-11_early_exit.md).
+  Next test in the queue: depth-player share uncertainty (p90 coverage 83-85% vs 90%, backtest-sized evidence).
