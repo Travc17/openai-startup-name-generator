@@ -72,6 +72,22 @@ class Config:
     pff_rb_eff: bool = False        # F3 RB yards after contact per attempt -> RB yards per carry
     pff_coverage: bool = False      # F4 defense coverage grade by defender group -> receiver yards per target
     pff_missing_def: bool = False   # F5 missing regular defenders x PFF grade -> opponent pass/rush yards
+    # Model lab 2026-11-11: a RB/WR/TE may leave the game hurt (rates fit on 2019-23, nflmodel/early_exit.json);
+    # backups later in the allocation absorb his volume. OFF is bit-identical to the old model.
+    early_exit: bool = False
+    early_exit_scale: float = 1.0
+
+
+_EE = None
+
+
+def _early_exit() -> dict:
+    global _EE
+    if _EE is None:
+        import json as _json
+        from pathlib import Path as _P
+        _EE = _json.loads(_P(__file__).with_name("early_exit.json").read_text())
+    return _EE
 
 
 def decay_weights(keys: np.ndarray, cfg: Config) -> np.ndarray:
@@ -446,6 +462,8 @@ class GameModel:
         cfg = self.cfg
         n = n_sims or cfg.n_sims
         rng = np.random.default_rng(seed)
+        ex_rng = np.random.default_rng(None if seed is None else seed + 1_000_003)   # early-exit draws only
+        ee = _early_exit() if cfg.early_exit else None
         teams = (team_a, team_b)
         opp_of = {team_a: team_b, team_b: team_a}
 
@@ -502,8 +520,13 @@ class GameModel:
                               max(1 - inp["t_share"], 1e-3) * cfg.target_concentration, n) if inp["t_share"] > 0.002 else np.zeros(n)
                 sc = rng.beta(max(inp["c_share"], 1e-3) * cfg.carry_concentration,
                               max(1 - inp["c_share"], 1e-3) * cfg.carry_concentration, n) if inp["c_share"] > 0.002 else np.zeros(n)
-                tg = rng.binomial(left_t, np.clip(st / share_left_t, 0, 1))
-                ca = rng.binomial(left_c, np.clip(sc / share_left_c, 0, 1))
+                frac = 1.0
+                if ee is not None and inp["pos"] in ("RB", "WR", "TE"):
+                    hit = ex_rng.random(n) < ee["p"].get(inp["pos"], 0.0) * cfg.early_exit_scale
+                    frac = np.where(hit, ex_rng.choice(ee["played_quantiles"], n), 1.0)
+                # share_left still drops by the full share below, so later players absorb an exited player's volume
+                tg = rng.binomial(left_t, np.clip(st * frac / share_left_t, 0, 1))
+                ca = rng.binomial(left_c, np.clip(sc * frac / share_left_c, 0, 1))
                 left_t -= tg; left_c -= ca
                 share_left_t = np.maximum(share_left_t - st, 0.05)
                 share_left_c = np.maximum(share_left_c - sc, 0.05)
