@@ -77,3 +77,14 @@
 * Hypothesis and sign: depth tier CRPS down and depth under-p90 up toward 90 (receivers), depth carries p10/p90 toward
   10/90; leaders within +-0.1% (not touched except through teammates' volume).
 * Bar: as before (target stat t <= -2 on 2025-26, no stat worse t >= +2, coverage within 3 points, regression passes).
+
+## 2026-11-11 (night): role-swing RESULT — FAILED (left OFF)
+* Selection on 2024 (pre-registered rule): sigma 0.25 (mean -0.02%; 0.40 -0.01%; 0.55 +0.20%).
+* Judged on 2025-26: no stat better at t <= -2 (best: depth carries -0.27%, t=-1.8); nothing worse at t >= +2
+  (pass_cmp +0.13%, t=+1.8). Depth targets p90 85.6 -> 86.0. Fails the bar. Larger sigma hurt targets (t=+2.6, +4.3).
+* Diagnosis: backup carries p90 79.0% when a starter sat out vs 85.5% when all played. The lab bench has no
+  next-man-up for missing starters (live reports do), so it overstates the backup-RB problem. Receivers' p90 ~86%
+  either way: real, unexplained so far.
+* What changed in production: nothing (all three switches OFF; regression No drift).
+* Next: fix the test bench first (mirror production rosters with known outs), re-measure, then a new hypothesis for
+  backup receivers. Ledger rows updated.

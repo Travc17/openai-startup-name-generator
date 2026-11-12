@@ -205,6 +205,14 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-11 Small-role share uncertainty: (a) lower beta concentration for small shares (Config.share_conc_ref)
+  ABANDONED after a smoke test: it piles small shares near zero (median falls). (b) Mean-preserving lognormal role
+  swing for t_share < 0.10 / c_share < 0.30 (Config.role_noise_sigma, sigma chosen on 2024 = 0.25): 2025-26 depth
+  carries -0.27% (t=-1.8), nothing at t<=-2, pass_cmp +0.13% (t=+1.8); larger sigma hurt targets (t=+2.6/+4.3).
+  FAILED, OFF. Diagnosis: a third of the depth gap was scoring (zero-snap actives dropped); backup-RB gap sits
+  mostly in games with a starter out (the backtest bench lacks production's next-man-up). Details:
+  reviews/lab_2026-11-11_role_noise.md
+
 * 2026-11-11 Early exit (Config.early_exit, OFF): RB/WR/TE leave hurt at 2019-23 rates (RB 2.9%, WR 4.2%, TE 2.7%),
   backups absorb. Paired test 2024-26 (536 games, ~16.7k rows per variant): measured rates rec_yds +0.08% (t=+2.0),
   pass_cmp +0.11% (t=+2.0), nothing better at t<=-2; x1.5 rates helped depth targets/rec (-0.14%, t=-2.4) but hurt

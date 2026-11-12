@@ -363,3 +363,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   Log: reviews/improve_log.md.
 * MODEL_LAB 2026-11-11 early exit: FAILED, Config.early_exit stays OFF (README Model review, reviews/lab_2026-11-11_early_exit.md).
   Next test in the queue: depth-player share uncertainty (p90 coverage 83-85% vs 90%, backtest-sized evidence).
+* MODEL_LAB 2026-11-11 night: small-role share tests FAILED (share_conc_ref abandoned, role_noise_sigma 0.25 no gain);
+  all switches OFF, production unchanged. Learned: depth gap partly scoring artifact (zero-snap actives) and partly
+  the lab bench lacking next-man-up. NEXT: rebuild the lab bench on nfl.roster_for with known outs, re-measure.
+  New data: data/roster_weekly_2024-26.parquet (nflverse weekly roster status; public, gitignored).
