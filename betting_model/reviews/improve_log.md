@@ -166,3 +166,17 @@
   |t| < 1, nothing worse. Misses the bar. Even shipped, k=8 moves NYG volume only 3% (factor 0.969).
 * Lesson: a new starter's first 2-3 games say little about team pass volume in general. For WAS@NYG the official
   stays at 34 att; the scenario (29 att) and the best estimate (about 31) are shown beside it, not instead of it.
+
+## 2026-11-12 (5:30 PM ET): PRE-REGISTRATION: QB CAREER pass volume (Config.qb_volume_mode = "career")
+* Why: Travis asked to correct the McCarthy gap. New evidence the team-only test could not see: McCarthy 10 MIN 2025
+  starts 29.3 att vs Wentz 39.6 on the same team; NYG 2026 McCarthy 32 (2) vs Winston 40.6 (5). The failed test used only
+  starts for the CURRENT team (n=2).
+* Hypothesis: a team's target volume follows the starting QB's career volume ratio. For each start of QB q in the current
+  and previous season (any team, games before the predicted game), ratio = team targets that game / that team-season's
+  mean targets over games before the predicted game; r = mean ratio; factor = (n r + k) / (n + k), k = 8 FIXED in
+  advance (no grid, no fitting), applied to the team target mean (QB lines are summed from targets).
+* Expected sign: CRPS down for pass_att, pass_cmp, pass_yds, targets, rec, rec_yds; biggest in QB-change games.
+* Data: bench v2, 2024 and 2025 weeks 4-18, 2026 weeks 4-9, 2,000 sims, paired seeds, variant vs production.
+* Bar (MODEL_LAB): pooled 2024-26 at least one target stat improves at t <= -2; no stat worse at t >= +2 pooled or in any
+  single season; coverage within 3 points. k is not fit, so all three seasons are scored. Pass = ON before the final pass;
+  fail = OFF and the 20/80 best estimate stays the only tested correction.

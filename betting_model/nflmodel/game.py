@@ -85,6 +85,9 @@ class Config:
     # Model lab 2026-11-12: team target volume follows the starting QB: offense targets = (n x QB-start mean + k x team
     # mean) / (n + k) over the team window, n = his starts for this team. None = OFF (bit-identical).
     qb_volume_k: float | None = None
+    # "team": n = his starts for this team (FAILED 2026-11-12). "career": ratio of his teams' targets in his starts (any
+    # team, this season and last) to each team-season mean, shrunk with qb_volume_k (pre-registered 2026-11-12 PM).
+    qb_volume_mode: str = "team"
     role_noise_c: float = 0.30
 
 
@@ -211,6 +214,8 @@ class GameModel:
         """Ratio of QB-adjusted to team offense targets (Config.qb_volume_k). 1.0 when the QB has no starts here."""
         if qb is None or getattr(self, "qbm", None) is None:
             return 1.0
+        if self.cfg.qb_volume_mode == "career":
+            return self._qb_career_factor(key, qb)
         off = self._tg_off[team]
         off = off[off.key < key].tail(self.cfg.team_window)
         if off.empty:
@@ -227,6 +232,31 @@ class GameModel:
         o_qb = float(off.targets.to_numpy()[mine].mean())
         k = self.cfg.qb_volume_k
         return ((n * o_qb + k * o_team) / (n + k)) / o_team
+
+    def _qb_career_factor(self, key: int, qb: str) -> float:
+        """Career volume ratio for Config.qb_volume_mode == "career" (see Config)."""
+        if not hasattr(self, "_starter_by_game"):
+            P = self.qbm.p
+            self._starter_by_game = P.groupby(["game_id", "posteam"]).passer_player_id.agg(lambda x: x.value_counts().idxmax()).to_dict()
+        if not hasattr(self, "_tg_qb"):
+            T = self.tg[["key", "game_id", "posteam", "targets"]].copy()
+            T["starter"] = [self._starter_by_game.get((g, t)) for g, t in zip(T.game_id, T.posteam)]
+            T["season"] = T.key // 100
+            self._tg_qb = T
+        T = self._tg_qb
+        A = T[(T.key < key) & (T.season >= key // 100 - 1)]
+        mine = A[A.starter == qb]
+        n = len(mine)
+        if n == 0:
+            return 1.0
+        mu = A.groupby(["posteam", "season"]).targets.mean()
+        den = mu.reindex(list(zip(mine.posteam, mine.season))).to_numpy()
+        ok = den > 0
+        if not ok.any():
+            return 1.0
+        r = float(np.mean(mine.targets.to_numpy()[ok] / den[ok]))
+        k = self.cfg.qb_volume_k
+        return (n * r + k) / (n + k)
 
     def _team_mu(self, team: str, opp: str, key: int, col: str) -> float:
         off = self._tg_off[team]
