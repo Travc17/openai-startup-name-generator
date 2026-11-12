@@ -405,3 +405,8 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   `*_books_late_gamelines.csv`; 132 left). Cause: money on WAS (VSiN, betting splits), no injury news. Late news: McCarthy
   no designation (hip pointer), Skattebo off report; WAS elevated OL Good-Jones, signed LB Kaho (not modeled). Wind
   unchanged (--wind 12). 25k: WAS 20, NYG 22, NYG 54.2%. Medians moved under 1 yard. SizzleSims v29. Final pass 6:55 PM.
+* QB CAREER volume test (Travis: "correct the McCarthy gap"): FAILED 5:15 PM ET (pooled targets t=-1.18; QB stats
+  neutral; QB-change slice right direction, not significant). OFF. `reviews/lab_2026-11-12_qb_career_volume.txt`.
+  Measured: production's pass_att median too high in QB-change games (58% below, n=267) -> next MODEL_LAB test.
+  ASKED Travis: make the 20/80 best estimate the headline (prediction of record) for players with a book line?
+  Not changed until he says yes.

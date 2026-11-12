@@ -205,6 +205,11 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-12 PM QB CAREER pass volume (Config.qb_volume_mode='career', k=8 fixed, OFF): ratio of his teams' targets in his
+  starts (any team, this season and last) to each team-season mean. 536 games, paired: pooled targets -0.07% (t=-1.18), rec
+  -0.07% (t=-1.23), QB stats |t|<0.4. FAILED. QB-change games: right direction, not significant; production's pass_att median
+  is too high there (58% below, n=267): next test target.
+
 * 2026-11-12 QB-specific team pass volume (Config.qb_volume_k, OFF): offense targets blended toward the starting QB's
   starts for the team. 2024 (selection): every k made QB stats worse (k=2 pass_att +1.41%, k=4 +0.81%, k=8 +0.36%); k=8
   chosen. 2025-26 vs production: targets -0.14% (t=-1.98), rec -0.12% (t=-1.75), QB stats -0.1 to -0.2% (|t|<1). FAILED

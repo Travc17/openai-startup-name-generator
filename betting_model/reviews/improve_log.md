@@ -180,3 +180,11 @@
 * Bar (MODEL_LAB): pooled 2024-26 at least one target stat improves at t <= -2; no stat worse at t >= +2 pooled or in any
   single season; coverage within 3 points. k is not fit, so all three seasons are scored. Pass = ON before the final pass;
   fail = OFF and the 20/80 best estimate stays the only tested correction.
+* RESULT (5:15 PM ET): FAILED, stays OFF. Bench v2, 536 games, paired vs production:
+  pooled targets -0.07% (t=-1.18), rec -0.07% (t=-1.23), rec_yds -0.06% (t=-1.15), pass_att -0.02% (t=-0.07),
+  pass_yds +0.10% (t=+0.38). Only 2024 rec reached t=-2.06 (one season; the bar is pooled). Nothing worse at t>=+2.
+  QB-change slice (267 team-games): right direction, not significant: pass_att -0.88% (t=-0.92), targets -0.30% (t=-1.74),
+  rec_yds -0.26% (t=-1.76). McCarthy factor would have been 0.946 (33 -> ~31 att).
+* REAL BIAS FOUND (not a fix): in QB-change games production's pass_att median is too high: 58.4% of results land below
+  it (n=267, z=2.8); 56.6% with the career switch. Next test (pre-register on 2024-25, judge on 2026 + new weeks): a
+  QB-change attempts shift. Not tonight: fitting it on these games and scoring them is the mistake the bar exists for.
