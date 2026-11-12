@@ -415,3 +415,8 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   median-game QB and rusher lines to it (`best_anchors`, needs `--books`), sets `record: "best"`; `viewer.html` headline =
   best (model median marked * where no book line). Older games keep their model-median record. CLAUDE.md + SIM_PROMPT
   updated. Sims, projections and bet pricing unchanged. WAS@NYG re-exported: McCarthy 19/30 217 (model 21/33 249).
+* BEST BETS BOT built (Travis approved with changes ~5:30 PM ET): `bestbets.py`, `BESTBETS_PROMPT.md`, spec
+  `BESTBETS_SPEC.md` section 13, skill mode `bestbets`, `final` mode now ends with it. Test on WAS@NYG midday captures:
+  deterministic, self-check passed (`markets/*_bestbets_mid.*`, `*_kalshi_game_mid.csv`; credits 124 left). Ranking uses
+  the best estimate (first build on the raw model put the McCarthy gap on top). Queued: game-score blend test
+  (model own projection vs consensus, fit 2022-24, judge 2025-26). FINAL PASS TONIGHT: run bestbets with close captures.

@@ -1,4 +1,4 @@
-# Best Bets bot: spec (DRAFT, waiting for Travis's yes; 2026-11-12)
+# Best Bets bot: spec (APPROVED with changes by Travis, 2026-11-12 ~5:30 PM ET; built: `bestbets.py`, `BESTBETS_PROMPT.md`)
 
 What Travis asked (2026-11-12, 5:21 PM ET): an agent that takes our sim passes and picks its favorite bets.
 - **Bet types:** alt-line parlays, single player props, game totals and spreads.
@@ -127,3 +127,16 @@ No prompt or code is written until Travis says yes (CLAUDE.md "bots and automati
 3. **Full lines.** CLAUDE.md says alt rungs only. Proposal: allow Kalshi's rung at the books' main line, at the same 10-point bar.
 4. **Overs.** Model overs lost both seasons (-6.8%, -4.4%). Proposal: keep unders plus labeled low-rung overs (floor check).
 5. **80% cap measure.** Proposal: the model's probability of the bet side AND the Kalshi price, both at or under 80%.
+
+## 13. Travis's answers (2026-11-12) and how they were built
+* "Keep all bet types in": attempts/completions allowed as singles, each with a non-attempt alternate; NEVER in parlays.
+  Spreads, totals, moneyline and overs are in the list. Bankroll stakes still follow the approved CLAUDE.md rules.
+* "In lack of edge still provide bets": the list always has 10 picks, labeled BANKROLL / VALUE / MODEL LEAN / NO EDGE.
+* "10 totals ranked by best, at least 3 parlays, rest singles or game lines": 10 picks, 3+ parlays, best score first.
+* Ranking uses the BEST estimate probability (20% model + 80% market: Kalshi's own two-sided no-vig price per rung), not
+  the raw model: the first build ranked on the raw model and its top picks were the McCarthy volume gap (model overs,
+  which lost in both test seasons). Parlay best probability = sims' joint rate x product of (best / model) per leg.
+* "Project score, winner and total better, not just consensus": the model's own spreads lost to consensus (margin error
+  10.58 vs 9.67) and its totals had no edge on 543 bets (README "Game lines"). Queued: a blend test (model weight fit on
+  2022-24, judged on 2025-26). Until it passes, game lines are priced on the consensus-anchored score sim, and say so.
+* Test run (WAS@NYG midday captures): two runs byte-identical, self-check passed, 3 parlays, attempt alternates shown.

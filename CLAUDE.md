@@ -58,6 +58,12 @@ from the log (`python nfl.py log summary`).
 * Treat any player who is not ruled out as PLAYING (missed practice or not) until the news says otherwise.
 * Big-book prop lines are often not posted until 1-2 days before kickoff; re-check before game day.
 
+## Best Bets bot (Travis, 2026-11-12): `BESTBETS_PROMPT.md` + `bestbets.py`
+After every FINAL pass (or on request) list 10 bets, best first, at least 3 parlays, Kalshi prices only. Nothing above 80%
+(model or best estimate) or 80c; attempts/completions never in parlays and always shown with a non-attempt alternate;
+ranked on the best estimate (20% model + 80% market); bets without an edge are listed and labeled. Only BANKROLL-labeled
+picks (the approved rules above) get bankroll stakes.
+
 ## Two stages (Travis, 2026-11-03): projections, then bets
 Stage 1 `betting_model/PROJECTION_PROMPT.md`: sims + news only, no prop prices, saves
 `betting_model/projections/<season>_wk<NN>_<AWAY>_at_<HOME>.json` (report `--proj`). Stage 2
