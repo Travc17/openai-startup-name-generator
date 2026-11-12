@@ -37,3 +37,26 @@
   83-85% vs 90%. Hypothesis for the next test: share uncertainty for small-share players is too tight (one beta
   concentration for everyone). Ledger row added; it is backtest-sized evidence, so it is READY.
 * Graded-game sanity check not needed (no ship). Regression baseline unchanged.
+
+## 2026-11-11 (evening): MODEL_LAB test "share uncertainty for small roles" PRE-REGISTRATION (before any run)
+* Travis asked to run it now (overrides the one-test-per-week pace; the bar is unchanged).
+* Feature: the per-game share draw (beta) uses concentration x min(1, share / s0) for targets and carries, floor 2:
+  players with shares below s0 get wider role uncertainty; players above s0 are unchanged. Switch
+  `Config.share_conc_ref = s0` (None = OFF, bit-identical).
+* Grid (fixed now): s0 in {0.10, 0.20, 0.30}. Selection rule (fixed now): choose on 2024 weeks 4-18 ONLY, the s0 with
+  the lowest mean of the % CRPS changes over targets, rec, rec_yds, rush_att, rush_yds (all tiers pooled). The chosen
+  s0 is judged on 2025 weeks 4-18 + 2026 weeks 4-9 (never used to choose). Other grid values are reported, not used.
+* Hypothesis and sign: depth players' CRPS falls and their under-p90 coverage rises from about 83-85% toward 90% (all
+  five stats); leaders change little for s0 = 0.10 and widen (risk of getting worse) as s0 grows.
+* Bar: a target stat better at t <= -2 on 2025-26; no stat worse at t >= +2; coverage within 3 points of 10/50/90;
+  regression_check passes, baseline refreshed in the same commit if shipped.
+* Known caveat: scoring uses players who played (inactive or zero-snap backups drop out), which pushes actuals up for
+  depth players; the same caveat applies OFF and ON, so the paired comparison is fair, but some of the gap may be this.
+
+## 2026-11-11 (evening): share-uncertainty variant ABANDONED before any scored run
+* Smoke test (2026 week 9, 300 sims) showed the design pushes the wrong way: lowering the beta concentration for
+  small shares piles probability near zero (median drops, p90 does not rise). Depth targets under-p50 42% -> 38/33%.
+  This is a property of the beta at small means, not noise. No scored run made; nothing chosen.
+* Diagnosis before redesign: is the depth gap (median too low, p90 85%) real or a scoring artifact? The harness drops
+  backups who were active but played 0 snaps (no snap row), which pushes depth actuals up. Rescoring OFF with
+  nflverse weekly roster status (ACT with no snaps = 0): runs started 2026-11-11 ~7:40 PM ET.

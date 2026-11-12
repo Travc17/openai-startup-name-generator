@@ -17,7 +17,10 @@ import nfl  # noqa: E402
 from nflmodel import data  # noqa: E402
 from nflmodel.backtest import crps  # noqa: E402
 from nflmodel.game import Player  # noqa: E402
-VARIANTS = {"off": (False, 1.0), "on": (True, 1.0), "on15": (True, 1.5)}
+VARIANTS = {"off": {}, "on": {"early_exit": True}, "on15": {"early_exit": True, "early_exit_scale": 1.5}}
+SHARE = {"off": {}, "c10": {"share_conc_ref": 0.10}, "c20": {"share_conc_ref": 0.20}, "c30": {"share_conc_ref": 0.30}}
+OFFONLY = {"off": {}}
+DEFAULTS = {"early_exit": False, "early_exit_scale": 1.0, "share_conc_ref": None}
 STATS = ["targets", "rec", "rec_yds", "rush_att", "rush_yds", "pass_att", "pass_cmp", "pass_yds"]
 
 
@@ -25,8 +28,12 @@ def _u(*parts) -> float:
     return zlib.crc32("|".join(map(str, parts)).encode()) / 2 ** 32
 
 
-def run(season: int, weeks: list[int], sims: int) -> pd.DataFrame:
+def run(season: int, weeks: list[int], sims: int, zero_snaps: bool = False) -> pd.DataFrame:
     m = nfl.build_model()
+    ros = None
+    if zero_snaps:   # nflverse weekly rosters: ACT = active for the game; ACT with no snaps counts as 0, not dropped
+        r = pd.read_parquet(data.DATA_DIR / f"roster_weekly_{season}.parquet", columns=["week", "team", "gsis_id", "status"])
+        ros = set(map(tuple, r[r.status == "ACT"][["week", "team", "gsis_id"]].to_numpy()))
     gi_ = pd.read_parquet(data.DATA_DIR / f"pbp_{season}.parquet", columns=["game_id", "home_team", "spread_line"]).drop_duplicates("game_id").set_index("game_id")
     P = m.qbm.p
     starter = (P[P.key // 100 == season].groupby(["game_id", "posteam", "passer_player_id"]).size().rename("att").reset_index()
@@ -46,7 +53,8 @@ def run(season: int, weeks: list[int], sims: int) -> pd.DataFrame:
         roster, tier = [], {}
         for t in opp:
             leaders = [pid for pid in m.usage_leaders(t, g.key, min_targets=3, min_carries=6) if pid in act.index]
-            depth = [pid for pid in m.active_players(t, g.key) if pid not in leaders and pid in act.index and pid not in qbs.values()]
+            depth = [pid for pid in m.active_players(t, g.key) if pid not in leaders and pid not in qbs.values()
+                     and (pid in act.index or (ros is not None and (g.key % 100, t, pid) in ros))]
             for pid in leaders + depth:
                 tier[pid] = "leader" if pid in leaders else "depth"
                 rm = 1.0
@@ -60,8 +68,9 @@ def run(season: int, weeks: list[int], sims: int) -> pd.DataFrame:
                 roster.append(Player(pid, t, share_mult=rm))
         em = None if pd.isna(G.spread_line) else (G.spread_line if g.posteam == G.home_team else -G.spread_line)
         seed = zlib.crc32(g.game_id.encode()) % 2 ** 31
-        for v, (on, scale) in VARIANTS.items():
-            m.cfg.early_exit, m.cfg.early_exit_scale = on, scale
+        for v, over in VARIANTS.items():
+            for k_, v_ in {**DEFAULTS, **over}.items():
+                setattr(m.cfg, k_, v_)
             try:
                 sim = m.simulate(g.posteam, g.defteam, g.key, roster, n_sims=sims, seed=seed, exp_margin_a=em, qbs=qbs)
             except (ValueError, KeyError):
@@ -71,8 +80,8 @@ def run(season: int, weeks: list[int], sims: int) -> pd.DataFrame:
                 stats = []
                 if "pass_yds" in s and (g.game_id, pid) in qb_act.index:
                     stats += [(st, float(qb_act.loc[(g.game_id, pid), st])) for st in ("pass_att", "pass_cmp", "pass_yds")]
-                if pid in act.index and pid in tier:
-                    stats += [(st, float(act.loc[pid, st])) for st in
+                if pid in tier and (pid in act.index or ros is not None):
+                    stats += [(st, float(act.loc[pid, st]) if pid in act.index else 0.0) for st in
                               (["targets", "rec", "rec_yds"] if info["t_share"] >= 0.06 or tier[pid] == "depth" else []) +
                               (["rush_att", "rush_yds"] if info["c_share"] >= 0.15 or (tier[pid] == "depth" and info["pos"] == "RB") else [])]
                 for st, y in stats:
@@ -80,7 +89,8 @@ def run(season: int, weeks: list[int], sims: int) -> pd.DataFrame:
                     rows.append({"variant": v, "season": season, "game_id": g.game_id, "pid": pid, "pos": info["pos"],
                                  "tier": "qb" if st.startswith("pass") else tier.get(pid, "leader"), "stat": st, "y": y,
                                  "crps": crps(x, y), "pit": float((x < y).mean() + _u(g.game_id, pid, st) * (x == y).mean())})
-        m.cfg.early_exit, m.cfg.early_exit_scale = False, 1.0
+        for k_, v_ in DEFAULTS.items():
+            setattr(m.cfg, k_, v_)
     return pd.DataFrame(rows)
 
 
@@ -115,13 +125,17 @@ if __name__ == "__main__":
     ap.add_argument("--sims", type=int, default=2000)
     ap.add_argument("--out")
     ap.add_argument("--score", nargs="+")
+    ap.add_argument("--family", default="early_exit", choices=["early_exit", "share", "off"])
+    ap.add_argument("--zero-snaps", action="store_true")
     a = ap.parse_args()
+    if a.family != "early_exit":
+        VARIANTS.clear(); VARIANTS.update(SHARE if a.family == "share" else OFFONLY)
     if a.score:
         r = score(a.score)
         pd.set_option("display.width", 200)
         print(r.round(3).to_string(index=False))
     else:
         lo, hi = map(int, a.weeks.split("-"))
-        df = run(a.season, list(range(lo, hi + 1)), a.sims)
+        df = run(a.season, list(range(lo, hi + 1)), a.sims, a.zero_snaps)
         df.to_parquet(a.out)
         print(f"{a.season}: {df.game_id.nunique()} games, {len(df)} rows -> {a.out}")

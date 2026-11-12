@@ -76,6 +76,8 @@ class Config:
     # backups later in the allocation absorb his volume. OFF is bit-identical to the old model.
     early_exit: bool = False
     early_exit_scale: float = 1.0
+    # Model lab 2026-11-11: wider role uncertainty for small shares: beta concentration x min(1, share / s0), floor 2.
+    share_conc_ref: float | None = None   # s0; None = OFF (bit-identical)
 
 
 _EE = None
@@ -516,10 +518,14 @@ class GameModel:
                 if pf is not None:
                     p_rec_mult *= pf["cov"].get(inp["pos"], 1.0)
                 inp["t_share"] = float(np.clip(inp["t_share"] * vol_mult, 0.0, 0.6))
-                st = rng.beta(max(inp["t_share"], 1e-3) * cfg.target_concentration,
-                              max(1 - inp["t_share"], 1e-3) * cfg.target_concentration, n) if inp["t_share"] > 0.002 else np.zeros(n)
-                sc = rng.beta(max(inp["c_share"], 1e-3) * cfg.carry_concentration,
-                              max(1 - inp["c_share"], 1e-3) * cfg.carry_concentration, n) if inp["c_share"] > 0.002 else np.zeros(n)
+                kt, kc = cfg.target_concentration, cfg.carry_concentration
+                if cfg.share_conc_ref:
+                    kt = max(kt * min(1.0, inp["t_share"] / cfg.share_conc_ref), 2.0)
+                    kc = max(kc * min(1.0, inp["c_share"] / cfg.share_conc_ref), 2.0)
+                st = rng.beta(max(inp["t_share"], 1e-3) * kt,
+                              max(1 - inp["t_share"], 1e-3) * kt, n) if inp["t_share"] > 0.002 else np.zeros(n)
+                sc = rng.beta(max(inp["c_share"], 1e-3) * kc,
+                              max(1 - inp["c_share"], 1e-3) * kc, n) if inp["c_share"] > 0.002 else np.zeros(n)
                 frac = 1.0
                 if ee is not None and inp["pos"] in ("RB", "WR", "TE"):
                     hit = ex_rng.random(n) < ee["p"].get(inp["pos"], 0.0) * cfg.early_exit_scale
