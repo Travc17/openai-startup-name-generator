@@ -82,6 +82,9 @@ class Config:
     # ON 2026-11-12 for CARRIES only (role_noise_t = 0): bench v2 vs early exit, 2025-26 rush_att -0.23% (t=-2.9), rush_yds -0.20% (t=-2.6)
     role_noise_sigma: float | None = 0.25
     role_noise_t: float = 0.0
+    # Model lab 2026-11-12: team target volume follows the starting QB: offense targets = (n x QB-start mean + k x team
+    # mean) / (n + k) over the team window, n = his starts for this team. None = OFF (bit-identical).
+    qb_volume_k: float | None = None
     role_noise_c: float = 0.30
 
 
@@ -203,6 +206,27 @@ class GameModel:
         pairs = pairs[pairs.posteam_a != pairs.posteam_b]  # both orderings, symmetric
         m = pairs[["targets_res_a", "rushes_res_a", "targets_res_b", "rushes_res_b"]].to_numpy()
         return np.corrcoef(m.T), m.std(axis=0)
+
+    def _qb_vol_factor(self, team: str, key: int, qb: str | None) -> float:
+        """Ratio of QB-adjusted to team offense targets (Config.qb_volume_k). 1.0 when the QB has no starts here."""
+        if qb is None or getattr(self, "qbm", None) is None:
+            return 1.0
+        off = self._tg_off[team]
+        off = off[off.key < key].tail(self.cfg.team_window)
+        if off.empty:
+            return 1.0
+        if not hasattr(self, "_starter_by_game"):
+            P = self.qbm.p
+            self._starter_by_game = P.groupby(["game_id", "posteam"]).passer_player_id.agg(lambda x: x.value_counts().idxmax()).to_dict()
+        w = decay_weights(off.key.to_numpy(), self.cfg)
+        o_team = float(np.average(off.targets, weights=w))
+        mine = np.array([self._starter_by_game.get((g, team)) == qb for g in off.game_id])
+        n = int(mine.sum())
+        if n == 0 or o_team <= 0:
+            return 1.0
+        o_qb = float(off.targets.to_numpy()[mine].mean())
+        k = self.cfg.qb_volume_k
+        return ((n * o_qb + k * o_team) / (n + k)) / o_team
 
     def _team_mu(self, team: str, opp: str, key: int, col: str) -> float:
         off = self._tg_off[team]
@@ -477,6 +501,8 @@ class GameModel:
 
         mu = np.array([self._team_mu(team_a, team_b, key, "targets"), self._team_mu(team_a, team_b, key, "rushes"),
                        self._team_mu(team_b, team_a, key, "targets"), self._team_mu(team_b, team_a, key, "rushes")])
+        if cfg.qb_volume_k and qbs:
+            mu = mu * np.array([self._qb_vol_factor(team_a, key, qbs.get(team_a)), 1.0, self._qb_vol_factor(team_b, key, qbs.get(team_b)), 1.0])
         if exp_margin_a is not None:
             # Game script from the market spread (2022-25 fit, 2,174 team-games): favorites run more.
             # Per point of expected margin: +0.13 rushes, -0.02 targets.

@@ -146,3 +146,16 @@
   <= 0.2%, no drift flags).
 * Production now: early exit ON + carry-only role swing ON. Backup RB carries 2025-26 depth p90 85.6 -> 86.3,
   median 54.0 -> 52.9 (closer to 50). Open: backup receivers' high side (~86%); QB completions on the weekly watch.
+
+## 2026-11-12 (night): MODEL_LAB test "team pass volume follows the starting QB" PRE-REGISTRATION (before any run)
+* Trigger: WAS@NYG pass 1, McCarthy median 34 att / 256 yds vs book 30 / 210.5; NYG targets with McCarthy 27, 27 vs a
+  team window average of 32.0 (Winston games 52, 43). Scenario (not the record): full McCarthy volume gives 29 / 215.
+* Feature: offense target mean = (n x mean targets in this QB's starts for the team + k x team weighted mean) / (n + k)
+  over the team window; n = his starts there; n = 0 -> unchanged. Switch `Config.qb_volume_k` (None = OFF,
+  bit-identical; regression No drift before the run). Starting QB = the game's real starter (known before kickoff).
+* Grid (fixed now): k in {2, 4, 8}, all on top of production (early exit + carry swings). Selection rule (fixed now): on
+  2024 weeks 4-18 ONLY, the k with the lowest mean % CRPS change over pass_att, pass_cmp, pass_yds, targets, rec,
+  rec_yds. Judged on 2025 weeks 4-18 + 2026 weeks 4-9 vs production, bench v2.
+* Hypothesis and sign: pass_att and pass_cmp CRPS down (largest in games after a QB change), receivers' targets down
+  slightly; rushing unchanged. Bar: a target stat better at t <= -2 on 2025-26, no stat worse at t >= +2, coverage
+  within 3 points, regression passes. If it passes before 12:30 PM ET it applies to WAS@NYG pass 2.
