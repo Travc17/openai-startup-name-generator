@@ -422,3 +422,5 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   (model own projection vs consensus, fit 2022-24, judge 2025-26). FINAL PASS TONIGHT: run bestbets with close captures.
 * Game score blend test FAILED (5:50 PM ET): model weight 0 on margin, 0.05 on total (worse on 2025-26); line picks
   winners 66.5% vs model 63.5%. Consensus stays the score/winner/total of record. `reviews/improve_log.md`.
+* Best Bets now 12 picks (Travis ~5:50 PM): + 2 long parlays (4-8 legs, beam search, fresh legs, pay-at-most column, fee
+  est. 7% x P x (1-P) min 1c for cheap tickets). Midday test: 4-leg tickets ~10-12c, best-estimate return +1 to +2%.

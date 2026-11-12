@@ -1,4 +1,4 @@
-# Best bets: WAS@NYG (mid, 2026-11-12 22:37 UTC)
+# Best bets: WAS@NYG (mid, 2026-11-12 22:46 UTC)
 
 Projection: WAS 20, NYG 22 | NYG wins 54% | total 41 (score sim anchored to the consensus NYG -1.5, 41.0; the model's own score blend is untested)
 
@@ -19,3 +19,12 @@ Ranked on the BEST estimate (20% model + 80% market, the prediction of record). 
 | 8 | Austin Ekeler NO 30+ rush yds | prop | 50.0c | 51.9% | 61.3% | 51.5% | 47% | +0.4 | +9.8 | 0.2 | VALUE | - |
 | 9 | Malachi Fields 25+ rec yds | prop | 52.0c | 53.9% | 63.7% | 53.5% | 56% | +0.4 | +10.2 | 0.0 | VALUE, low-rung over (untested) | - |
 | 10 | Devin Singletary 20+ rush yds + Antonio Williams NO 5+ catches | parlay | 38.4c | 40.8% | 55.7% | 40.8% | 39% | +0.1 | +14.9 | -0.8 | VALUE | - |
+
+## Long parlays (4 to 8 legs), best-estimate return per dollar first
+
+Kalshi's real combo quote prices the legs' correlation, so expect it ABOVE the legs multiplied; pay no more than the last column.
+
+| # | Legs | Ticket | Kalshi (legs multiplied) | Fee est. | Best hit | Model hit | Break-even | Best return per $1 | Label | Pay at most |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 11 | 4 | Malik Nabers 6+ catches + Cam Skattebo NO 60+ rush yds + Chig Okonkwo NO 5+ catches + Isaiah Likely 4+ catches | 11.8c | 1.0c | 13.0% | 15.3% | 12.8% | +2% | VALUE | 12.0c |
+| 12 | 4 | Malik Nabers 6+ catches + Treylon Burks NO 30+ rec yds + Chig Okonkwo NO 40+ rec yds + Stefon Diggs NO 5+ catches | 10.0c | 1.0c | 11.1% | 14.3% | 11.0% | +1% | VALUE | 10.1c |

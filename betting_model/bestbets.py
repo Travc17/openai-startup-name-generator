@@ -1,6 +1,7 @@
 """Best Bets bot (BESTBETS_PROMPT.md; spec BESTBETS_SPEC.md; Travis 2026-11-12).
 
-Ten bets for one game, ranked best first, at least 3 parlays, the rest singles or game lines, priced ONLY with Kalshi.
+Twelve bets for one game: 10 ranked best first (at least 3 parlays, the rest singles or game lines) plus 2 long parlays
+(4 to 8 legs), priced ONLY with Kalshi.
 
     python bestbets.py --proj projections/<game>.json --kalshi markets/<game>_kalshi_<when>.csv \\
         --books markets/<game>_books_<when>.csv [--books-alt markets/<game>_books_alt_<when>.csv] \\
@@ -37,6 +38,7 @@ ATTEMPTS = {"pass_att", "pass_cmp", "rush_att"}
 NEVER = {"pass_td", "int"}       # not calibration-checked (CLAUDE.md)
 ALT_OF = {"pass_att": "pass_yds", "pass_cmp": "pass_yds", "rush_att": "rush_yds"}
 N_PICKS, MIN_PARLAYS = 10, 3
+N_LONG, LONG_MIN, LONG_MAX = 2, 4, 8     # Travis 2026-11-12: plus 2 long parlays, 4 to 8 legs (12 bets)
 LABEL = {"rec": "catches", "rec_yds": "rec yds", "rush_yds": "rush yds", "pass_yds": "pass yds", "pass_att": "pass att",
          "pass_cmp": "completions", "rec_rush_yds": "rush+rec yds", "rush_att": "carries"}
 
@@ -267,6 +269,59 @@ def main(a) -> int:
             else:
                 r["alternate"] = "no non-attempt line under the 80% cap"
 
+    # ---------------- 2 long parlays, 4 to 8 legs (Travis 2026-11-12) ----------------
+    single_legs = {tuple(l) for r in picks for l in r["legs"]}   # long tickets use legs not already in the 10 picks
+    LP = C[(C.kind == "prop") & (C["flags"] == "") & ~C.stat.isin(ATTEMPTS) & (C.pb >= 0.50)]
+    LP = LP[[(pid, st) not in single_legs for pid, st in zip(LP.pid, LP.stat)]]
+    LP = LP.sort_values("eb", ascending=False).groupby(["pid", "stat"]).head(1).head(a.long_pool).reset_index(drop=True)
+    la = [(np.asarray(sim[r.pid][r.stat]) >= r.x) if r.side == "yes" else (np.asarray(sim[r.pid][r.stat]) < r.x) for r in LP.itertuples()]
+    ratio = (LP.pb / LP.p.clip(lower=1e-6)).to_numpy()
+    def kfee(P):                                         # Kalshi schedule 7% x P x (1 - P), at least 1c (est. for cheap tickets)
+        return max(0.01, 0.07 * P * (1 - P))
+    def ok_add(legs, j):
+        r = LP.iloc[j]
+        same = [LP.iloc[i] for i in legs if LP.iloc[i].pid == r.pid]
+        if not same:
+            return True
+        st = {x.stat for x in same} | {r.stat}
+        return len(same) == 1 and "rush_yds" in st and bool({"rec", "rec_yds"} & st)   # same player: rushing + receiving only
+    beam = [((), np.ones(len(la[0]), bool) if la else None)]
+    long_c = []
+    for size in range(1, LONG_MAX + 1):
+        nxt = {}
+        for legs, joint in beam:
+            for j in range(len(LP)):
+                if (legs and j <= legs[-1]) or not ok_add(legs, j):
+                    continue
+                key = legs + (j,)
+                jj = joint & la[j]
+                price = float(np.prod(LP.price.to_numpy()[list(key)]))
+                if price < a.min_long:
+                    continue
+                pm_ = float(jj.mean())
+                pb_ = min(0.999, pm_ * float(np.prod(ratio[list(key)])))
+                cost = price + kfee(price)
+                nxt[key] = (jj, pm_, pb_, price, cost, pb_ / cost - 1)
+        beam = [(k, v[0]) for k, v in sorted(nxt.items(), key=lambda kv: -kv[1][5])[: a.beam]]
+        if size >= LONG_MIN:
+            long_c += [(k, v) for k, v in nxt.items()]
+    long_c.sort(key=lambda kv: -kv[1][5])
+    longs = []
+    for k, v in long_c:
+        if len(longs) == N_LONG:
+            break
+        if any(len(set(k) & set(k2)) > 2 for k2, _ in longs):
+            continue                                      # the two long tickets share at most 2 legs
+        longs.append((k, v))
+    long_rows = []
+    for k, (jj, pm_, pb_, price, cost, roi) in longs:
+        rows = LP.iloc[list(k)]
+        bad_l = [x for x in rows.itertuples() if x.stat in ATTEMPTS or x.p > CAP or x.pb > CAP or x.price > CAP]
+        if bad_l:
+            sys.exit(f"STOP: long parlay self-check failed: {[x.pick for x in bad_l]}")
+        long_rows.append(dict(kind="long parlay", pick=" + ".join(rows.pick), n=len(k), price=price, fee=cost - price, p=pm_, pb=pb_,
+                              eb=pb_ - cost, edge=pm_ - cost, roi=roi, legs=list(zip(rows.pid, rows.stat))))
+
     # bankroll stakes only for bets that pass the approved rules
     from nflmodel import ledger
     bank = ledger.current_bankroll()
@@ -299,6 +354,15 @@ def main(a) -> int:
                   f"{100 * r['eb']:+.1f} | {100 * r['edge']:+.1f} | {r['score']:.1f} | {lab} | {'$' + format(stake[r['pick']], '.0f') if r['pick'] in stake else '-'} |")
         if r.get("alternate"):
             L_.append(f"|  | non-attempt alternate: {r['alternate']} | | | | | | | | | | | |")
+    L_ += ["", f"## Long parlays ({LONG_MIN} to {LONG_MAX} legs), best-estimate return per dollar first", "",
+           "Kalshi's real combo quote prices the legs' correlation, so expect it ABOVE the legs multiplied; pay no more than the last column.", "",
+           "| # | Legs | Ticket | Kalshi (legs multiplied) | Fee est. | Best hit | Model hit | Break-even | Best return per $1 | Label | Pay at most |", "|---|---|---|---|---|---|---|---|---|---|---|"]
+    for i, r in enumerate(long_rows, len(picks) + 1):
+        lab = "BANKROLL-eligible edge" if r["edge"] >= pricing.MIN_EDGE and r["eb"] > 0 else ("VALUE" if r["eb"] > 0 else ("MODEL LEAN" if r["edge"] > 0 else "NO EDGE"))
+        L_.append(f"| {i} | {r['n']} | {r['pick']} | {100 * r['price']:.1f}c | {100 * r['fee']:.1f}c | {r['pb']:.1%} | {r['p']:.1%} | "
+                  f"{r['price'] + r['fee']:.1%} | {r['roi']:+.0%} | {lab} | {max(0.0, 100 * (r['pb'] - r['fee'])):.1f}c |")
+    if not long_rows:
+        L_.append("| - | no 4+ leg ticket passes the rules at these prices | | | | | | | | | |")
     md = "\n".join(L_) + "\n"
     out.with_suffix(".md").write_text(md)
     print(md)
@@ -325,4 +389,7 @@ if __name__ == "__main__":
     ap.add_argument("--out")
     ap.add_argument("--leg-pool", type=int, default=28)
     ap.add_argument("--min-ticket", type=float, default=0.05)
+    ap.add_argument("--long-pool", type=int, default=30, help="legs considered for the long parlays")
+    ap.add_argument("--beam", type=int, default=300)
+    ap.add_argument("--min-long", type=float, default=0.02, help="cheapest long ticket allowed (2c)")
     sys.exit(main(ap.parse_args()))
