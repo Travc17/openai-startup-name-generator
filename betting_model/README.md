@@ -205,6 +205,14 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-12 SHIPPED early exit (Config.early_exit ON) after the lab bench was rebuilt on live rosters (lab/bench_v2.py:
+  nfl.roster_for with real inactives from nflverse weekly rosters, next-man-up, zero-snap actives scored as 0). Bench v2,
+  2025-26 (judged): targets -0.15% (t=-2.6), rec -0.20% (t=-3.3), rec_yds -0.16% (t=-2.7), rush_att -0.22% (t=-2.3), nothing
+  worse at t>=+2; pooled 2024-26 also passes (rec -0.13%, t=-3.0). Role swing sigma 0.25 also passed alone (rush_att -0.37%,
+  t=-4.4) but the combination lost early exit's receiving gain (rec +0.13% vs ee, t=+2.4), so per the pre-registered rule
+  only early exit shipped. Bench v1 had failed both: it graded backups against rosters live reports never use.
+  Regression baseline refreshed. Projections saved before 2026-11-12 used early exit OFF (replays of them differ).
+
 * 2026-11-11 Small-role share uncertainty: (a) lower beta concentration for small shares (Config.share_conc_ref)
   ABANDONED after a smoke test: it piles small shares near zero (median falls). (b) Mean-preserving lognormal role
   swing for t_share < 0.10 / c_share < 0.30 (Config.role_noise_sigma, sigma chosen on 2024 = 0.25): 2025-26 depth

@@ -367,3 +367,6 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   all switches OFF, production unchanged. Learned: depth gap partly scoring artifact (zero-snap actives) and partly
   the lab bench lacking next-man-up. NEXT: rebuild the lab bench on nfl.roster_for with known outs, re-measure.
   New data: data/roster_weekly_2024-26.parquet (nflverse weekly roster status; public, gitignored).
+* SHIPPED 2026-11-12: Config.early_exit ON (bench v2 confirmation; README Model review). Regression baseline refreshed.
+  Projections saved before today used early exit OFF: replays of them will not match (grading reads saved files, fine).
+  Lab bench v2 (`lab/bench_v2.py`) is the test bench from now on. Next test running: ee + carry-only role swing.

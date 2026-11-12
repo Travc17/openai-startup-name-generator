@@ -74,7 +74,7 @@ class Config:
     pff_missing_def: bool = False   # F5 missing regular defenders x PFF grade -> opponent pass/rush yards
     # Model lab 2026-11-11: a RB/WR/TE may leave the game hurt (rates fit on 2019-23, nflmodel/early_exit.json);
     # backups later in the allocation absorb his volume. OFF is bit-identical to the old model.
-    early_exit: bool = False
+    early_exit: bool = True   # ON 2026-11-12: bench v2 paired test 2025-26 targets -0.15% (t=-2.6), rec -0.20% (t=-3.3), rec_yds -0.16% (t=-2.7), rush_att -0.22% (t=-2.3)
     early_exit_scale: float = 1.0
     # Model lab 2026-11-11: wider role uncertainty for small shares: beta concentration x min(1, share / s0), floor 2.
     share_conc_ref: float | None = None   # s0; None = OFF (bit-identical)

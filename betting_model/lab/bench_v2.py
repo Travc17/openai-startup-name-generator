@@ -20,8 +20,9 @@ from nflmodel import data  # noqa: E402
 from nflmodel.backtest import crps  # noqa: E402
 from nflmodel.game import Player  # noqa: E402
 from early_exit_test import score  # noqa: E402  (same paired scoring)
-ALL = {"off": {}, "n25": {"role_noise_sigma": 0.25}, "ee": {"early_exit": True}, "both": {"early_exit": True, "role_noise_sigma": 0.25}}
-DEFAULTS = {"early_exit": False, "early_exit_scale": 1.0, "share_conc_ref": None, "role_noise_sigma": None}
+ALL = {"off": {}, "n25": {"role_noise_sigma": 0.25}, "ee": {"early_exit": True}, "both": {"early_exit": True, "role_noise_sigma": 0.25},
+       "ee_c25": {"early_exit": True, "role_noise_sigma": 0.25, "role_noise_t": 0.0}}
+DEFAULTS = {"early_exit": False, "early_exit_scale": 1.0, "share_conc_ref": None, "role_noise_sigma": None, "role_noise_t": 0.10}
 
 
 def _u(*parts) -> float:

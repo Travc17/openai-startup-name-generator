@@ -109,3 +109,14 @@
 * Combination (MODEL_LAB rule 4, after singles pass): "both" = ee + n25, fixed settings, bench v2, judged on 2025-26
   (2024 reported). Ship rule (fixed now): ship "both" if it passes the bar AND is not worse than the better single on
   any stat at t >= +2 (paired vs that single); otherwise ship the singles that pass, ee first.
+
+## 2026-11-12: combination RESULT and SHIP
+* "both" (ee + n25) vs off 2025-26 passes (rush_att -0.42% t=-3.9, rush_yds -0.24% t=-2.3, rec_yds -0.12% t=-2.1) but
+  vs ee it is worse on receptions (+0.13%, t=+2.4): fails the pre-registered combination rule. SHIPPED: early exit
+  alone (Config.early_exit = True). Regression baseline refreshed in the same commit (changes under 1%, no drift flags).
+* Next (pre-registered below): ee + role swing on CARRIES ONLY (swings never helped receiving).
+
+## 2026-11-12: "ee + carry-only role swing" PRE-REGISTRATION (before any run)
+* Variant ee_c25: early_exit ON (production now) + role_noise_sigma 0.25 applied to carries only (role_noise_t = 0, so
+  targets untouched). Settings fixed (sigma chosen on 2024 earlier). Bench v2. Baseline for the test = production (ee).
+* Judged on 2025-26 vs ee: ship if rush_att or rush_yds better at t <= -2 and no stat worse at t >= +2 (vs ee).
