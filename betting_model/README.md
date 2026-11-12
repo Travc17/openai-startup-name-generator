@@ -205,6 +205,10 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-12 PM game score BLEND (model's own margin/total + closing line; weight fit 2022-24, judged 2025-26): weight
+  0.00 on margin, 0.05 on total; 2025-26 margin RMSE 12.19 both, total 13.22 vs 13.21 (t=+0.72); winners right 63.5%
+  model vs 66.5% line. FAILED: the closing line stays the score, winner and total of record.
+
 * 2026-11-12 PM QB CAREER pass volume (Config.qb_volume_mode='career', k=8 fixed, OFF): ratio of his teams' targets in his
   starts (any team, this season and last) to each team-season mean. 536 games, paired: pooled targets -0.07% (t=-1.18), rec
   -0.07% (t=-1.23), QB stats |t|<0.4. FAILED. QB-change games: right direction, not significant; production's pass_att median

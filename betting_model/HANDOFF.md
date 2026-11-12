@@ -420,3 +420,5 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   deterministic, self-check passed (`markets/*_bestbets_mid.*`, `*_kalshi_game_mid.csv`; credits 124 left). Ranking uses
   the best estimate (first build on the raw model put the McCarthy gap on top). Queued: game-score blend test
   (model own projection vs consensus, fit 2022-24, judge 2025-26). FINAL PASS TONIGHT: run bestbets with close captures.
+* Game score blend test FAILED (5:50 PM ET): model weight 0 on margin, 0.05 on total (worse on 2025-26); line picks
+  winners 66.5% vs model 63.5%. Consensus stays the score/winner/total of record. `reviews/improve_log.md`.

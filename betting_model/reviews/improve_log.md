@@ -188,3 +188,16 @@
 * REAL BIAS FOUND (not a fix): in QB-change games production's pass_att median is too high: 58.4% of results land below
   it (n=267, z=2.8); 56.6% with the career switch. Next test (pre-register on 2024-25, judge on 2026 + new weeks): a
   QB-change attempts shift. Not tonight: fitting it on these games and scoring them is the mistake the bar exists for.
+
+## 2026-11-12 (5:45 PM ET): PRE-REGISTRATION: game score blend (model's own projection + consensus)
+* Why: Travis: "project score, winner and total better; I don't just want a consensus."
+* Method: nflmodel/scores.py walk-forward (ratings + coefficients fit only on prior seasons; 2019-21 warmup).
+  blend margin = w x model margin + (1 - w) x closing spread; blend total = v x model total + (1 - v) x closing total.
+  w, v chosen on 2022-24 (grid 0 to 1 by 0.05, minimize squared error), then judged ONCE on 2025-26.
+* Bar: on 2025-26 the blend beats the closing line on squared error with paired t <= -2 (margin or total), and is not
+  worse on the other. Pass: the blend becomes the score, winner and total of record (Travis approves before it ships).
+  Fail: consensus stays; record the numbers.
+* RESULT (5:50 PM ET): FAILED. Selection 2022-24 (815 games) chose margin weight 0.00 and total weight 0.05: the model
+  adds nothing to the closing line. Test 2025-26 (408 games): margin RMSE line 12.19 = blend 12.19, model alone 12.85;
+  total RMSE line 13.21, blend 13.22 (t=+0.72), model 13.65; winner right: line 66.5%, model 63.5%. Consensus stays the
+  score, winner and total of record. Next idea only if new information exists that the line lacks at kickoff.
