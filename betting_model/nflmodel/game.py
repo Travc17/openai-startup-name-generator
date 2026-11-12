@@ -469,6 +469,7 @@ class GameModel:
         n = n_sims or cfg.n_sims
         rng = np.random.default_rng(seed)
         ex_rng = np.random.default_rng(None if seed is None else seed + 1_000_003)   # early-exit draws only
+        sw_rng = np.random.default_rng(None if seed is None else seed + 2_000_029)   # role-swing draws only (own stream since 2026-11-12)
         ee = _early_exit() if cfg.early_exit else None
         teams = (team_a, team_b)
         opp_of = {team_a: team_b, team_b: team_a}
@@ -533,9 +534,9 @@ class GameModel:
                 if cfg.role_noise_sigma:
                     sg = cfg.role_noise_sigma
                     if 0.002 < inp["t_share"] < cfg.role_noise_t:
-                        st = np.clip(st * np.exp(sg * ex_rng.standard_normal(n) - sg * sg / 2), 0.0, 0.95)
+                        st = np.clip(st * np.exp(sg * sw_rng.standard_normal(n) - sg * sg / 2), 0.0, 0.95)
                     if 0.002 < inp["c_share"] < cfg.role_noise_c:
-                        sc = np.clip(sc * np.exp(sg * ex_rng.standard_normal(n) - sg * sg / 2), 0.0, 0.95)
+                        sc = np.clip(sc * np.exp(sg * sw_rng.standard_normal(n) - sg * sg / 2), 0.0, 0.95)
                 frac = 1.0
                 if ee is not None and inp["pos"] in ("RB", "WR", "TE"):
                     hit = ex_rng.random(n) < ee["p"].get(inp["pos"], 0.0) * cfg.early_exit_scale

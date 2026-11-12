@@ -128,3 +128,12 @@
   which receivers exit; QB completions lose their pairing. Not shipping on a "likely". Next test: separate stream,
   same settings, same rule.
 * Production after tonight: early exit ON (shipped), every other lab switch OFF. Regression baseline = early exit ON.
+
+## 2026-11-12 (evening): clean re-test PRE-REGISTRATION — carry-only role swing on its own random stream
+* Change to the switch only: role-swing draws use their own stream (`sw_rng`), so turning swings on no longer
+  reshuffles early-exit draws. Swings OFF = bit-identical (regression No drift before the run).
+* Variant ee_c25 (early exit ON + role_noise_sigma 0.25 on carries only, role_noise_t 0), bench v2, run in the SAME
+  job as its baseline "ee" (production) so both use identical data. Settings fixed (sigma chosen on 2024 earlier).
+* Judged on 2025 weeks 4-18 + 2026 weeks 4-9 vs ee: ship if rush_att or rush_yds better at t <= -2 AND no stat worse
+  at t >= +2; 2024 and pooled 2024-26 reported. If it ships: Config role_noise_sigma = 0.25, role_noise_t = 0.0,
+  regression baseline refreshed in the same commit.
