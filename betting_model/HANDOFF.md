@@ -370,3 +370,5 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * SHIPPED 2026-11-12: Config.early_exit ON (bench v2 confirmation; README Model review). Regression baseline refreshed.
   Projections saved before today used early exit OFF: replays of them will not match (grading reads saved files, fine).
   Lab bench v2 (`lab/bench_v2.py`) is the test bench from now on. Next test running: ee + carry-only role swing.
+* Carry-only role swing FAILED vs production (pass_cmp t=+2.7, likely RNG coupling); stays OFF. Next lab test: give
+  role swings their own random stream and re-run ee_c25 vs ee on bench v2 (IMPROVE_PROMPT queue, ledger).

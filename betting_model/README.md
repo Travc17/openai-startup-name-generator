@@ -205,6 +205,11 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-12 Early exit + carry-only role swing (role_noise_sigma 0.25, role_noise_t 0): vs production (early exit),
+  2025-26 rush_att -0.26% (t=-2.9), rush_yds -0.33% (t=-4.0) but pass_cmp +0.20% (t=+2.7). FAILED the pre-registered rule;
+  stays OFF. Likely artifact: the swing draws share the early-exit random stream, so exits are reshuffled across
+  receivers and pairing breaks for QB lines. Re-test with a separate stream is queued.
+
 * 2026-11-12 SHIPPED early exit (Config.early_exit ON) after the lab bench was rebuilt on live rosters (lab/bench_v2.py:
   nfl.roster_for with real inactives from nflverse weekly rosters, next-man-up, zero-snap actives scored as 0). Bench v2,
   2025-26 (judged): targets -0.15% (t=-2.6), rec -0.20% (t=-3.3), rec_yds -0.16% (t=-2.7), rush_att -0.22% (t=-2.3), nothing

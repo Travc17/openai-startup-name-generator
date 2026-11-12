@@ -120,3 +120,11 @@
 * Variant ee_c25: early_exit ON (production now) + role_noise_sigma 0.25 applied to carries only (role_noise_t = 0, so
   targets untouched). Settings fixed (sigma chosen on 2024 earlier). Bench v2. Baseline for the test = production (ee).
 * Judged on 2025-26 vs ee: ship if rush_att or rush_yds better at t <= -2 and no stat worse at t >= +2 (vs ee).
+
+## 2026-11-12: "ee + carry-only role swing" RESULT — FAILED (stays OFF)
+* vs ee (production), 2025-26: rush_att -0.26% (t=-2.9), rush_yds -0.33% (t=-4.0), receiving within +-0.05%, but
+  pass_cmp +0.20% (t=+2.7). Pooled 2024-26 same picture (pass_cmp +0.15%, t=+2.6). Fails "no stat worse at t >= +2".
+* Likely test artifact: role-swing draws and early-exit draws share one random stream, so turning swings on reshuffles
+  which receivers exit; QB completions lose their pairing. Not shipping on a "likely". Next test: separate stream,
+  same settings, same rule.
+* Production after tonight: early exit ON (shipped), every other lab switch OFF. Regression baseline = early exit ON.
