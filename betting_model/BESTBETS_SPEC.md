@@ -140,3 +140,5 @@ No prompt or code is written until Travis says yes (CLAUDE.md "bots and automati
   10.58 vs 9.67) and its totals had no edge on 543 bets (README "Game lines"). Queued: a blend test (model weight fit on
   2022-24, judged on 2025-26). Until it passes, game lines are priced on the consensus-anchored score sim, and say so.
 * Test run (WAS@NYG midday captures): two runs byte-identical, self-check passed, 3 parlays, attempt alternates shown.
+* Travis 2026-11-12 ~5:50 PM: "also provide 2 long parlays with up to 8 legs but more than 3 legs. So 12 bets": built (4-8 legs, beam search,
+  legs not used in the 10 picks, pay-at-most shown).

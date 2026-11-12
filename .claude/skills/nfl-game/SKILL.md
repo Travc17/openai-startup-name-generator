@@ -23,11 +23,11 @@ step. This skill only says which file to run, in what order, and what every mode
 | `analyze` | `ANALYZE_PROMPT.md` (10,000 sims, spread and total only; no props, no Kalshi, no edges) | alt-rung hit rates at 80/70/60/50% for every skill player + matchups |
 | `bets` | `GAMEDAY_PROMPT.md` steps 3 to 6 on the latest projections (step 4b runs `FLOOR_PROMPT.md`) | verdict table: 1 or 2 singles + 1 or 2 parlays, max 3, or "pass" |
 | `floor` | `FLOOR_PROMPT.md` via `floor_legs.py` (`--base` = planned or placed parlay, `--singles` = singles) | floor/ceiling table + parlay options |
-| `final` | `SIM_PROMPT.md` final pass (real inactives), then `bestbets` (SizzleSims page; no clip unless asked) | the prediction of record + the 10 best bets |
+| `final` | `SIM_PROMPT.md` final pass (real inactives), then `bestbets` (SizzleSims page; no clip unless asked) | the prediction of record + the 12 best bets |
 | `grade` | `POSTGAME_PROMPT.md` (plus SIM_PROMPT.md section 8 and FLOOR_PROMPT.md step 8) | settled bets, scorecard, lessons ledger, self-grade, review in `reviews/` |
 | `grade-week` | `GRADE_PROMPT.md` via `grade_week.py --week N --league --simcast` (saved files, no reruns; in-game injuries checked) | every projected game graded, league panel, lessons ledger, code fixes only for bugs |
 | `improve` | `IMPROVE_PROMPT.md` via `improve_report.py --league` (after grade-week) | evidence, one MODEL_LAB test per week or "no change" with counts, improve_log entry |
-| `bestbets` | `BESTBETS_PROMPT.md` via `bestbets.py` (Kalshi prices only; runs after every final pass) | 10 ranked picks, 3+ parlays, labels, bankroll plan |
+| `bestbets` | `BESTBETS_PROMPT.md` via `bestbets.py` (Kalshi prices only; runs after every final pass) | 12 picks: 10 ranked (3+ parlays) + 2 long parlays (4-8 legs), labels, bankroll plan |
 | `full` | `sim`, then `bets` | both |
 
 ## Rules that bind every mode (CLAUDE.md wins on any conflict)

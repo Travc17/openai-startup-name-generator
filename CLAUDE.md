@@ -59,7 +59,7 @@ from the log (`python nfl.py log summary`).
 * Big-book prop lines are often not posted until 1-2 days before kickoff; re-check before game day.
 
 ## Best Bets bot (Travis, 2026-11-12): `BESTBETS_PROMPT.md` + `bestbets.py`
-After every FINAL pass (or on request) list 10 bets, best first, at least 3 parlays, Kalshi prices only. Nothing above 80%
+After every FINAL pass (or on request) list 12 bets: 10 best first (at least 3 parlays) plus 2 long parlays (4-8 legs), Kalshi prices only. Nothing above 80%
 (model or best estimate) or 80c; attempts/completions never in parlays and always shown with a non-attempt alternate;
 ranked on the best estimate (20% model + 80% market); bets without an edge are listed and labeled. Only BANKROLL-labeled
 picks (the approved rules above) get bankroll stakes.

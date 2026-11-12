@@ -1,4 +1,4 @@
-# Best Bets prompt: 10 ranked bets per game, Kalshi prices only (Travis, 2026-11-12)
+# Best Bets prompt: 12 bets per game (10 ranked + 2 long parlays), Kalshi prices only (Travis, 2026-11-12)
 
 Say "best bets AWAY HOME" or `/nfl-game AWAY HOME bestbets`. It also runs automatically at the end of every FINAL pass.
 
@@ -33,6 +33,12 @@ python bestbets.py --proj projections/<game>.json --kalshi markets/<game>_kalshi
 - parlays: 2 to 4 legs, never an attempts or completions leg, at least 3 parlays among the 10 picks
 - every attempts or completions single carries a non-attempt alternate (same player's yards line, same direction)
 - no player+stat twice across picks; a player in at most 2 picks
+- PLUS 2 long parlays, 4 to 8 legs (Travis 2026-11-12: "so 12 bets"):
+  - found by beam search on best-estimate return per $1
+  - use legs not already in the 10 picks, and share at most 2 legs with each other
+  - same leg rules and 80% cap
+- long-parlay fee: estimated from Kalshi's schedule (7% x P x (1 - P), at least 1c). The flat 2.4c seen on a ~30c combo
+  overstates the fee on a 5-10c ticket. Replace the estimate when a real long-ticket fill shows the fee.
 - ranking: score = best-estimate edge points - 0.1 x distance from 50%
 - self-check: it stops on any rule break
 
@@ -59,7 +65,8 @@ python bestbets.py --proj projections/<game>.json --kalshi markets/<game>_kalshi
 
 ## 5. Reply (phone)
 **First line:** projected score, winner with win chance, and total. Then:
-1. **The 10 picks, best first.** Columns:
+1. **The 10 picks, best first, then the 2 long parlays.** Long parlays show "pay at most": Kalshi's real combo quote prices
+   the legs' correlation and usually sits ABOVE the legs multiplied. Columns:
    - bet
    - Kalshi price
    - best hit vs break-even
