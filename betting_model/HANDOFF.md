@@ -401,3 +401,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   (credits 134 left). Over tickets re-priced (`*_over_legs_mid.csv`, `*_over_tickets_mid_*.csv`): 3-leg 22.8c sim 31.8%
   (+6.6 pts, max 19.4c), 4-leg 25.6c sim 35.1% (+7.1, max 22.7c), best any-matchup Singletary 20+ rush / Fields 15+ /
   Nabers 40+ / Diggs 20+ 24.8c sim 36.0% (+8.8). All NO BET. Pass 3 at 6:55 PM ET (inactives, close captures).
+* PASS 2b (Travis asked, 4:57 PM ET): update + regression No drift. Lines NYG -1.5 at all 5 books, total 41 (2 credits,
+  `*_books_late_gamelines.csv`; 132 left). Cause: money on WAS (VSiN, betting splits), no injury news. Late news: McCarthy
+  no designation (hip pointer), Skattebo off report; WAS elevated OL Good-Jones, signed LB Kaho (not modeled). Wind
+  unchanged (--wind 12). 25k: WAS 20, NYG 22, NYG 54.2%. Medians moved under 1 yard. SizzleSims v29. Final pass 6:55 PM.

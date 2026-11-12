@@ -159,5 +159,47 @@
   "status": "Consensus NYG -2, total 41 at 17:32 UTC (pass 1: -2.5 / 41); move under 1 point",
   "url": "https://www.si.com/betting/commanders-vs-giants-odds-shift-towards-new-york-on-thursday-night-football-with-j-j-mccarthy-expected-to-play",
   "found_utc": "2026-11-12T17:40Z"
+ },
+ {
+  "player": "J.J. McCarthy",
+  "team": "NYG QB",
+  "status": "Hip pointer; full practice Tuesday; no designation; expected to start (no Thursday-dated update found)",
+  "url": "https://www.cbssports.com/nfl/news/jj-mccarthy-injury-giants-qb-on-track-commanders-thursday-night-football/",
+  "found_utc": "2026-11-12T22:05Z"
+ },
+ {
+  "player": "Cam Skattebo",
+  "team": "NYG RB",
+  "status": "Off the final injury report (no designation), full go",
+  "url": "https://www.cbssports.com/nfl/news/cam-skattebo-injury-update-giants-rb-thursday-night-commanders/",
+  "found_utc": "2026-11-12T22:05Z"
+ },
+ {
+  "player": "Julian Good-Jones",
+  "team": "WAS OL",
+  "status": "Elevated from practice squad (C/G depth, Patrick out) [OL: noted, not modeled]",
+  "url": "https://sports.yahoo.com/articles/washington-commanders-elevate-backup-center-210828344.html",
+  "found_utc": "2026-11-12T22:05Z"
+ },
+ {
+  "player": "Ale Kaho",
+  "team": "WAS LB",
+  "status": "Signed to active roster from practice squad (special teams) [defense: noted, not modeled]",
+  "url": "https://www.yardbarker.com/nfl/articles/commanders_promote_two_players_for_thursday_night/s1_17039_44553316",
+  "found_utc": "2026-11-12T22:05Z"
+ },
+ {
+  "player": "Weather",
+  "team": "NYG (outdoor, MetLife)",
+  "status": "Unchanged: kickoff ~52F, NE 11-12 mph, gusts up to 23 mph in one forecast, rain >70%; --wind 12 kept",
+  "url": "https://heavy.com/sports/nfl/new-york-giants/weather-alert-rain-impact-tnf-showdown/",
+  "found_utc": "2026-11-12T22:05Z"
+ },
+ {
+  "player": "Lines",
+  "team": "WAS@NYG",
+  "status": "NYG -1.5 at all 5 books, total 41 (22:00 UTC); 1 point from pass 1. Cause: betting money on WAS (Circa -2.5 to -2 Wed, WAS ML 22% of bets / 38% of money), no injury news found",
+  "url": "https://vsin.com/the-vsin-daily/thursday-night-football-best-bets-commanders-vs-giants-picks-and-betting-splits/",
+  "found_utc": "2026-11-12T22:05Z"
  }
 ]
