@@ -117,5 +117,47 @@
   "status": "On reserve since week 8 (nflverse weekly roster); not in the sims",
   "url": "https://github.com/nflverse/nflverse-data/releases/tag/weekly_rosters",
   "found_utc": "2026-11-12T02:00Z"
+ },
+ {
+  "player": "Treylon Burks",
+  "team": "WAS WR",
+  "status": "No game designation (foot); DNP Wednesday was planned rest per Quinn, expected to play",
+  "url": "https://www.si.com/nfl/commanders/onsi/commanders-giants-final-injury-report-week-10",
+  "found_utc": "2026-11-12T17:40Z"
+ },
+ {
+  "player": "Lucas Patrick",
+  "team": "WAS OL",
+  "status": "Out [OL: noted, not modeled]",
+  "url": "https://sports.yahoo.com/articles/commanders-injury-report-treylon-burks-212616773.html",
+  "found_utc": "2026-11-12T17:40Z"
+ },
+ {
+  "player": "Weather",
+  "team": "NYG (outdoor, MetLife)",
+  "status": "Kickoff 52F, NE wind 11-12 mph (gusts near 16), 74% light rain; heavier rain pregame. Wind used: --wind 12 (QB pass yards only). Rain noted, not modeled",
+  "url": "https://dknetwork.draftkings.com/2026/11/12/commanders-vs-giants-weather-forecast-tnf/",
+  "found_utc": "2026-11-12T17:40Z"
+ },
+ {
+  "player": "Weather (2nd source)",
+  "team": "NYG (outdoor, MetLife)",
+  "status": "SI: kickoff 52F, NE ~11 mph, 74% rain (updated 1:27 AM ET 11/12)",
+  "url": "https://www.si.com/nfl/commanders/onsi/commanders-giants-weather-forecast-week-10",
+  "found_utc": "2026-11-12T17:40Z"
+ },
+ {
+  "player": "Practice-squad elevations",
+  "team": "WAS/NYG",
+  "status": "Not found for 2026 week 10 (search; team sites blocked from this session)",
+  "url": "https://www.cbssports.com/fantasy/football/news/commanders-robbie-chosen-elevated-for-week-10",
+  "found_utc": "2026-11-12T17:40Z"
+ },
+ {
+  "player": "Lines",
+  "team": "WAS@NYG",
+  "status": "Consensus NYG -2, total 41 at 17:32 UTC (pass 1: -2.5 / 41); move under 1 point",
+  "url": "https://www.si.com/betting/commanders-vs-giants-odds-shift-towards-new-york-on-thursday-night-football-with-j-j-mccarthy-expected-to-play",
+  "found_utc": "2026-11-12T17:40Z"
  }
 ]

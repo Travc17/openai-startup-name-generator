@@ -4,11 +4,13 @@ import sys, pickle, math
 sys.path.insert(0, ".")
 import numpy as np, pandas as pd
 SP = "/tmp/claude-0/-home-user-openai-startup-name-generator/1abb259b-39fb-5226-92ba-1d60a674cc9b/scratchpad"
-C = pickle.load(open(f"{SP}/wasnyg_sims.pkl", "rb"))
+import os
+WHEN = os.environ.get("WHEN", "open")
+C = pickle.load(open(f"{SP}/wasnyg_sims_{WHEN}.pkl", "rb"))
 sims, proj = C["sims"], C["proj"]
 FEE = 0.024
 min_sim, bands, LO, HI, tag = float(sys.argv[1]), sys.argv[2].split(","), float(sys.argv[3]), float(sys.argv[4]), sys.argv[5]
-L = pd.read_csv("markets/2026_wk10_WAS_at_NYG_over_legs_open.csv")
+L = pd.read_csv(f"markets/2026_wk10_WAS_at_NYG_over_legs_{WHEN}.csv")
 L = L[(L.sim >= min_sim) & L.mband.isin(bands) & (L.kalshi <= 97)].sort_values(["name", "stat", "x"]).reset_index(drop=True)
 H = {k: [sims[k][proj["players"][r.name]["pid"]][r.stat] >= r.x for r in L.itertuples()] for k in sims}
 lp = np.log(L.kalshi.values / 100)
@@ -41,7 +43,7 @@ print(f"[{tag}] rungs {len(L)}, groups {len(groups)}, tickets {LO*100:.0f}-{HI*1
 if len(O):
     for k in ("", "92", "84"):
         O["edge" + k] = O["hit" + k] - O.price - FEE
-    O.sort_values("edge", ascending=False).to_csv(f"markets/2026_wk10_WAS_at_NYG_over_tickets_{tag}.csv", index=False)
+    O.sort_values("edge", ascending=False).to_csv(f"markets/2026_wk10_WAS_at_NYG_over_tickets_{WHEN}_{tag}.csv", index=False)
     pd.set_option("display.width", 400); pd.set_option("display.max_colwidth", 400)
     for lab, k in (("BEST EDGE", "edge"), ("BEST x0.922 EDGE", "edge92"), ("HIGHEST HIT", "hit")):
         print(f"  {lab}")

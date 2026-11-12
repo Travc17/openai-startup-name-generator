@@ -1,0 +1,21 @@
+venue,player,stat,line,side,price,captured_at
+DraftKings,New York Giants,spreads,-2.5,team,-108,2026-11-12T17:32:18+00:00
+DraftKings,Washington Commanders,spreads,2.5,team,-112,2026-11-12T17:32:18+00:00
+DraftKings,Over,totals,40.5,over,-118,2026-11-12T17:32:18+00:00
+DraftKings,Under,totals,40.5,under,-102,2026-11-12T17:32:18+00:00
+Caesars,New York Giants,spreads,-2.0,team,-110,2026-11-12T17:32:18+00:00
+Caesars,Washington Commanders,spreads,2.0,team,-111,2026-11-12T17:32:18+00:00
+Caesars,Over,totals,41.0,over,-108,2026-11-12T17:32:18+00:00
+Caesars,Under,totals,41.0,under,-113,2026-11-12T17:32:18+00:00
+FanDuel,New York Giants,spreads,-1.5,team,-120,2026-11-12T17:32:18+00:00
+FanDuel,Washington Commanders,spreads,1.5,team,100,2026-11-12T17:32:18+00:00
+FanDuel,Over,totals,41.5,over,100,2026-11-12T17:32:18+00:00
+FanDuel,Under,totals,41.5,under,-120,2026-11-12T17:32:18+00:00
+BetMGM,New York Giants,spreads,-2.0,team,-110,2026-11-12T17:32:18+00:00
+BetMGM,Washington Commanders,spreads,2.0,team,-108,2026-11-12T17:32:18+00:00
+BetMGM,Over,totals,41.0,over,-108,2026-11-12T17:32:18+00:00
+BetMGM,Under,totals,41.0,under,-110,2026-11-12T17:32:18+00:00
+Fanatics,New York Giants,spreads,-2.0,team,-110,2026-11-12T17:32:18+00:00
+Fanatics,Washington Commanders,spreads,2.0,team,-110,2026-11-12T17:32:18+00:00
+Fanatics,Over,totals,41.0,over,-110,2026-11-12T17:32:18+00:00
+Fanatics,Under,totals,41.0,under,-110,2026-11-12T17:32:18+00:00

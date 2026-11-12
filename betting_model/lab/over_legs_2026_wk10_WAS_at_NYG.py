@@ -5,7 +5,9 @@ import sys, io, contextlib, itertools, pickle, os
 sys.path.insert(0, "simcast"); sys.path.insert(0, ".")
 import numpy as np, pandas as pd
 SP = "/tmp/claude-0/-home-user-openai-startup-name-generator/1abb259b-39fb-5226-92ba-1d60a674cc9b/scratchpad"
-CACHE = f"{SP}/wasnyg_sims.pkl"
+WHEN = os.environ.get("WHEN", "open")
+BK = {"open": "open", "mid": "mid", "close": "close"}[WHEN]
+CACHE = f"{SP}/wasnyg_sims_{WHEN}.pkl"
 PROJ = "projections/2026_wk10_WAS_at_NYG.json"
 FEE = 0.024
 STATS = ("rec", "rec_yds", "rush_yds")
@@ -54,15 +56,15 @@ P = {n: v for n, v in proj["players"].items() if v["pos"] != "QB" and n not in b
 byk = {name_key(n): n for n in P}
 opp = {"WAS": "NYG", "NYG": "WAS"}
 
-q = pd.read_csv("markets/2026_wk10_WAS_at_NYG_kalshi_open.csv")
+q = pd.read_csv(f"markets/2026_wk10_WAS_at_NYG_kalshi_{WHEN}.csv")
 noq = q[q.side == "no"].set_index(["player", "stat", "line"]).price
 q = q[q.stat.isin(STATS) & (q.side == "yes")].copy()
 q["name"] = q.player.map(lambda s: byk.get(name_key(s)))
 q = q[q.name.notna()]
-b = pd.read_csv("markets/2026_wk10_WAS_at_NYG_books_open.csv")
+b = pd.read_csv(f"markets/2026_wk10_WAS_at_NYG_books_{BK}.csv")
 main = b[b.stat.isin(STATS)].groupby(["player", "stat"]).line.median()
 imp = lambda p: 100 / (p + 100) if p > 0 else -p / (-p + 100)
-alt = pd.read_csv("markets/2026_wk10_WAS_at_NYG_books_alt_open.csv").query("side == 'over'")
+alt = pd.read_csv(f"markets/2026_wk10_WAS_at_NYG_books_alt_{WHEN}.csv").query("side == 'over'")
 altp = alt.assign(p=alt.price.map(imp)).groupby(["player", "stat", "line"]).p.median()
 
 rows = []
@@ -83,11 +85,11 @@ for r in q.itertuples():
                      mband="strong" if mo >= 1.05 else ("neutral" if mo >= 0.95 else "tough"),
                      role=f"{l4:.2f} vs {s:.2f}", shrinking=bool(l4 < 0.9 * s) if s == s else False))
 L = pd.DataFrame(rows)
-L.to_csv("markets/2026_wk10_WAS_at_NYG_over_legs_open.csv", index=False)
+L.to_csv(f"markets/2026_wk10_WAS_at_NYG_over_legs_{WHEN}.csv", index=False)
 # rung of choice: highest posted rung with official sim >= 90% (per player and stat)
 c = L[(L.sim >= 0.90)].sort_values("x").groupby(["name", "stat"]).tail(1)
 pd.set_option("display.width", 250)
 cols = ["name", "team", "stat", "x", "kalshi", "no", "book_main", "book_alt", "sim", "sim92", "sim84", "season", "last4", "matchup", "mrank", "mband", "role", "shrinking"]
 print("90% RUNG OF CHOICE, every player (official sim >= 90%, highest posted rung)")
 print(c.sort_values(["mband", "team"])[cols].round(3).to_string(index=False))
-c.to_csv(f"{SP}/wasnyg_90legs.csv", index=False)
+c.to_csv(f"{SP}/wasnyg_90legs_{WHEN}.csv", index=False)
