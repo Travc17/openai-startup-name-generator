@@ -424,3 +424,5 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   winners 66.5% vs model 63.5%. Consensus stays the score/winner/total of record. `reviews/improve_log.md`.
 * Best Bets now 12 picks (Travis ~5:50 PM): + 2 long parlays (4-8 legs, beam search, fresh legs, pay-at-most column, fee
   est. 7% x P x (1-P) min 1c for cheap tickets). Midday test: 4-leg tickets ~10-12c, best-estimate return +1 to +2%.
+* FINAL PASS: add `--blind "Van Jefferson"` (direct next-man-up backup; week 9 fill-in 58% snaps with Burks and Brown out,
+  5-12% before; CLAUDE.md blind-spot rule). Diggs: no change (61-65% snaps all year, coach-capped, not hurt). News items added.
