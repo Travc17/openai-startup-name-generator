@@ -137,3 +137,12 @@
 * Judged on 2025 weeks 4-18 + 2026 weeks 4-9 vs ee: ship if rush_att or rush_yds better at t <= -2 AND no stat worse
   at t >= +2; 2024 and pooled 2024-26 reported. If it ships: Config role_noise_sigma = 0.25, role_noise_t = 0.0,
   regression baseline refreshed in the same commit.
+
+## 2026-11-12 (evening): clean re-test RESULT — PASSED, SHIPPED
+* ee_c25 vs ee (production), bench v2, same job: 2025-26 rush_att -0.23% (t=-2.9), rush_yds -0.20% (t=-2.6); receiving
+  +0.02 to +0.07% (t <= +1.3); pass_cmp +0.07% (t=+1.1). Passes the pre-registered rule. 2024: rush_att -0.21% (t=-2.0).
+  Pooled 2024-26: rush_att -0.22% (t=-3.5), rush_yds -0.13% (t=-2.1), pass_cmp +0.11% (t=+1.96, under the line; watch).
+* SHIPPED: Config.role_noise_sigma = 0.25, role_noise_t = 0.0 (carries only). Regression baseline refreshed (all moves
+  <= 0.2%, no drift flags).
+* Production now: early exit ON + carry-only role swing ON. Backup RB carries 2025-26 depth p90 85.6 -> 86.3,
+  median 54.0 -> 52.9 (closer to 50). Open: backup receivers' high side (~86%); QB completions on the weekly watch.

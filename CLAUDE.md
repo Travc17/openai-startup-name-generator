@@ -112,7 +112,7 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
 
 Paper-trading log (`picks_log.csv`): `report` records every qualifying pick before kickoff and refuses games
 already in the data. Never add or edit rows by hand; this is the public every-pick record for subscribers.
-Automatic in every report (tested, see README "Model review"): early exit (players can leave a simulated game hurt, ON 2026-11-12), next man up by position, no injury bump once a
+Automatic in every report (tested, see README "Model review"): early exit (players can leave a simulated game hurt, ON 2026-11-12), role swings for small carry shares (backup RB volume varies more, ON 2026-11-12), next man up by position, no injury bump once a
 player has missed 2+ straight games, per-stat calibration maps, walk-forward team-volume fit. Parlay tickets
 are priced with NO combo discount (too few Robinhood tickets observed to fit one).
 

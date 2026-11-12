@@ -372,3 +372,6 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   Lab bench v2 (`lab/bench_v2.py`) is the test bench from now on. Next test running: ee + carry-only role swing.
 * Carry-only role swing FAILED vs production (pass_cmp t=+2.7, likely RNG coupling); stays OFF. Next lab test: give
   role swings their own random stream and re-run ee_c25 vs ee on bench v2 (IMPROVE_PROMPT queue, ledger).
+* SHIPPED 2026-11-12 evening: carry-only role swing (Config.role_noise_sigma 0.25, role_noise_t 0; own random stream).
+  Production = early exit ON + carry-only role swing ON. Regression baseline refreshed. Watch QB completions in the
+  weekly grade (pooled t=+1.96 on the test). Next lab item: backup receivers' high side (p90 ~86%), on bench v2.

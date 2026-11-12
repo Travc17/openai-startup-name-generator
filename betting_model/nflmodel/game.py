@@ -79,8 +79,9 @@ class Config:
     # Model lab 2026-11-11: wider role uncertainty for small shares: beta concentration x min(1, share / s0), floor 2.
     share_conc_ref: float | None = None   # s0; None = OFF (bit-identical)
     # Model lab 2026-11-11: mean-preserving role swing for small roles (share x lognormal) below these shares.
-    role_noise_sigma: float | None = None   # None = OFF (bit-identical)
-    role_noise_t: float = 0.10
+    # ON 2026-11-12 for CARRIES only (role_noise_t = 0): bench v2 vs early exit, 2025-26 rush_att -0.23% (t=-2.9), rush_yds -0.20% (t=-2.6)
+    role_noise_sigma: float | None = 0.25
+    role_noise_t: float = 0.0
     role_noise_c: float = 0.30
 
 

@@ -205,6 +205,12 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-12 SHIPPED carry-only role swing (Config.role_noise_sigma 0.25, role_noise_t 0: mean-preserving lognormal
+  swing on carry shares under 0.30), after giving it its own random stream. Bench v2 vs early exit (production),
+  2025-26: rush_att -0.23% (t=-2.9), rush_yds -0.20% (t=-2.6), nothing worse at t>=+2 (pass_cmp +0.07%, t=+1.1).
+  Pooled 2024-26: rush_att -0.22% (t=-3.5), rush_yds -0.13% (t=-2.1), pass_cmp +0.11% (t=+1.96, watch). The earlier
+  failure (pass_cmp t=+2.7) was mostly shared-stream reshuffling of early-exit draws. Regression baseline refreshed.
+
 * 2026-11-12 Early exit + carry-only role swing (role_noise_sigma 0.25, role_noise_t 0): vs production (early exit),
   2025-26 rush_att -0.26% (t=-2.9), rush_yds -0.33% (t=-4.0) but pass_cmp +0.20% (t=+2.7). FAILED the pre-registered rule;
   stays OFF. Likely artifact: the swing draws share the early-exit random stream, so exits are reshuffled across
