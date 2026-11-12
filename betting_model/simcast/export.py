@@ -161,7 +161,7 @@ def _to_ints(v: np.ndarray, total: int) -> np.ndarray:
     return base
 
 
-def median_box(run: dict, team: str) -> dict:
+def median_box(run: dict, team: str, anchor: dict | None = None) -> dict:
     """The median game (Travis, 2026-11-03). The QB shows his exact median line. Each receiver sits at the SAME
     percentile of his own range, chosen so the team's catches, targets and yards add up to that QB line (every
     completion goes to a named player). Why not every receiver's own median: receiving yards are lopsided, so
@@ -174,6 +174,10 @@ def median_box(run: dict, team: str) -> dict:
     R = [p for p in pids if p != qb_pid]
     A = lambda p, k: np.rint(np.asarray(sim[p][k], float))
     att, cmp_, yds = med(q["pass_att"]), med(q["pass_cmp"]), med(q["pass_yds"])
+    # Prediction of record = best estimate (Travis, 2026-11-12): anchor the QB line to 20% model + 80% book main line
+    bq = lambda pid, st, m: m if not anchor or (pid, st) not in anchor else int(np.floor(anchor[(pid, st)] + 0.5))
+    att, cmp_, yds = bq(qb_pid, "pass_att", att), bq(qb_pid, "pass_cmp", cmp_), bq(qb_pid, "pass_yds", yds)
+    cmp_ = min(cmp_, att)
     away = int(max(0, round(float(np.median(A(qb_pid, "pass_att") - sum(A(p, "targets") for p in R))))))
     n_tg = max(cmp_, att - away)                                 # targets to named players; the rest thrown away
     p_rec, v = _common_pct([A(p, "rec") for p in R], cmp_)
@@ -199,12 +203,12 @@ def median_box(run: dict, team: str) -> dict:
     players = []
     for i, p in enumerate(R):
         s = sim[p]
-        ra, rr = med(s["rush_att"]), med(s["rush_yds"])
+        ra, rr = bq(p, "rush_att", med(s["rush_att"])), bq(p, "rush_yds", med(s["rush_yds"]))
         players.append({"pid": p, "name": names[p], "pos": info[p].get("pos", "WR"), "targets": int(tg[i]),
                         "rec": int(rec[i]), "rec_yds": int(yd[i]), "rush_att": ra,
                         "rush_yds": 0 if ra == 0 else int(np.clip(rr, -6 * ra, 70 * ra)), "projected": True,
                         "median": {"targets": med(s["targets"]), "rec": med(s["rec"]), "rec_yds": med(s["rec_yds"])}})
-    qra, qrr = med(q["rush_att"]), med(q["rush_yds"])
+    qra, qrr = bq(qb_pid, "rush_att", med(q["rush_att"])), bq(qb_pid, "rush_yds", med(q["rush_yds"]))
     qb = {"pid": qb_pid, "name": names[qb_pid], "att": att, "cmp": cmp_, "yds": yds,
           "td": min(med(q["pass_td"]), cmp_), "int": min(med(q["int"]), att - cmp_),
           "rush_att": qra, "rush_yds": 0 if qra == 0 else int(np.clip(qrr, -6 * qra, 70 * qra)),
@@ -449,7 +453,21 @@ def verify(ev, boxes, final) -> list[str]:
     return bad
 
 
-def export(proj_path: str, seed: int | None = None, mode: str = "median") -> dict:
+def best_anchors(run: dict, books_csv: str | None) -> dict | None:
+    """(pid, stat) -> best estimate (BEST_W x model median + rest x book main line) for every stat with a book line."""
+    if not books_csv:
+        return None
+    main = book_mains(books_csv)
+    out = {}
+    for pl_name, pl in run["proj"]["players"].items():
+        for st, lad in pl["stats"].items():
+            ml = main.get((_nk(pl_name), st))
+            if ml is not None:
+                out[(pl["pid"], st)] = BEST_W * lad["q"][2] + (1 - BEST_W) * ml
+    return out
+
+
+def export(proj_path: str, seed: int | None = None, mode: str = "median", books: str | None = None) -> dict:
     run = rerun(proj_path)
     bad = check(run)
     if bad:
@@ -464,7 +482,8 @@ def export(proj_path: str, seed: int | None = None, mode: str = "median") -> dic
     final = {away: int(run["score"]["away"][j]), home: int(run["score"]["home"][j])}
     seed = seed if seed is not None else run["key"] * 7 + sum(map(ord, away + home))
     rng = np.random.default_rng(seed)
-    boxes = {t: (median_box(run, t) if mode == "median" else team_box(run, i, t, rng)) for t in teams}
+    anchor = best_anchors(run, books) if mode == "median" else None
+    boxes = {t: (median_box(run, t, anchor) if mode == "median" else team_box(run, i, t, rng)) for t in teams}
 
     outcomes, tries, ptd = {}, {}, {}
     plan = {}
@@ -531,6 +550,19 @@ def export(proj_path: str, seed: int | None = None, mode: str = "median") -> dic
 BEST_W = 0.20   # model weight in the best estimate (approved 2026-11-05; fit on 2025 closing lines, held up on 2026)
 
 
+def _nk(name: str) -> str:
+    sys.path.insert(0, str(HERE.parent))
+    from nflmodel.market import name_key
+    return name_key(name)
+
+
+def book_mains(books_csv: str) -> dict:
+    import pandas as pd
+    b = pd.read_csv(books_csv)
+    b = b[~b.venue.str.contains("alt", case=False, na=False) & ~b.stat.isin(["spreads", "totals"])]
+    return b.assign(k=b.player.map(_nk)).groupby(["k", "stat"]).line.median().to_dict()
+
+
 def add_best(g: dict, books_csv: str) -> None:
     """Best estimate = 20% model median + 80% books' main line (median across books, alt lines excluded).
     Tested on 2025-26 closing lines: more accurate than the model alone and slightly better than the line alone."""
@@ -549,6 +581,7 @@ def add_best(g: dict, books_csv: str) -> None:
             n += 1
     g["best_w"] = BEST_W
     g["books_file"] = Path(books_csv).name
+    g["record"] = "best"      # prediction of record = best estimate where a book line exists (Travis, 2026-11-12)
     print(f"best estimate added to {n} of {len(g.get('pred', []))} predictions (book lines from {Path(books_csv).name})")
 
 
@@ -581,7 +614,7 @@ if __name__ == "__main__":
                     help="median (default): every player at his median, QB = sum of receivers; typical: one sim game")
     ap.add_argument("--books", help="big-book main lines CSV (nfl.py odds): adds the BEST ESTIMATE to each prediction")
     a = ap.parse_args()
-    g = export(a.proj, a.seed, a.mode)
+    g = export(a.proj, a.seed, a.mode, a.books)
     if a.books:
         add_best(g, a.books)
     out = a.out or str(HERE / "games" / (Path(a.proj).stem + ".json"))

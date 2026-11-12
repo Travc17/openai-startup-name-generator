@@ -410,3 +410,8 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   Measured: production's pass_att median too high in QB-change games (58% below, n=267) -> next MODEL_LAB test.
   ASKED Travis: make the 20/80 best estimate the headline (prediction of record) for players with a book line?
   Not changed until he says yes.
+* APPROVED (Travis, 5:30 PM ET 11/12, "Yes"): the BEST ESTIMATE (20% model + 80% book main line) is the prediction of
+  record wherever a book line exists; model median + 80% range shown beside it. Code: `simcast/export.py` anchors the
+  median-game QB and rusher lines to it (`best_anchors`, needs `--books`), sets `record: "best"`; `viewer.html` headline =
+  best (model median marked * where no book line). Older games keep their model-median record. CLAUDE.md + SIM_PROMPT
+  updated. Sims, projections and bet pricing unchanged. WAS@NYG re-exported: McCarthy 19/30 217 (model 21/33 249).

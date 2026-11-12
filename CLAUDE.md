@@ -28,8 +28,10 @@ from the log (`python nfl.py log summary`).
   Travis bets ALT LINES ONLY (Kalshi x+ rungs), never book main lines. UNDERS only (NO on a rung). Exception
   (Travis): an OVER on an alt rung BELOW the book's main line may be shown and bet when the matchup and season hit
   rate are strong (FLOOR_PROMPT.md checks pass) and the edge is >= 10%; label it "low-rung over (untested)". No QB
-  passing-yards unders (lost in both seasons). Every prediction shows the BEST ESTIMATE (20% model / 80% book line,
-  the blend that beat the line alone out of sample) beside the model's own median. The historical test used book
+  passing-yards unders (lost in both seasons). The BEST ESTIMATE (20% model / 80% book main line, the blend that
+  beat the line alone out of sample) is the PREDICTION OF RECORD wherever a book main line exists (Travis, 2026-11-12:
+  "a gap is unacceptable"); the model's own median and 80% range are shown beside it. Bets are still priced from the
+  model's sims (unchanged). The historical test used book
   main lines; alt-line results are still untested (pull alt-line history when credits allow).
 * Stake: 5% of the CURRENT bankroll per bet (Travis, 2026-11-05; about half Kelly on the measured edge, not the
   model's inflated one), min $50, and every bet on one game together <= 10% (cap below): 1 bet = 5%, 2 bets about 5%
@@ -93,14 +95,16 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    `python simcast/export.py projections/<file>.json` (reruns the exact sims and stops on any mismatch), then
    `python simcast/build_page.py`, then publish `betting_model/simcast/simcast.html` with the Artifact tool to
    https://claude.ai/artifact/Bx8jZgufz7Amfk5FgysjRh (read it first; same URL every time; all games share one
-   page with a picker). Commit `simcast/games/*.json`. Default is the MEDIAN game (Travis): each QB line is his exact median;
+   page with a picker). Commit `simcast/games/*.json`. Default is the MEDIAN game (Travis), anchored to the best estimate since 2026-11-12: each QB line
+   (att/cmp/yds) and each rusher's carries/yards = best estimate where a book line exists, else his exact median;
    receivers all sit at one common percentile of their own ranges, solved so catches/targets/yards add up EXACTLY to
    the QB line (sum of individual medians undercounts lopsided receiving yards); every completion to a named player,
    never a placeholder; rushers at their own medians; score = median score. The page's Predictions panel is the
-   prediction of record (Travis 2026-11-05: accuracy for himself and friends; no X posting): each player's OWN median + 80% range + rule-based grade (A tested
+   prediction of record (Travis 2026-11-05: accuracy for himself and friends; no X posting): headline = BEST estimate
+   (2026-11-12; model median where no book line, marked *), plus the model's OWN median + 80% range + rule-based grade (A tested
    stat, clear role / B rushing or lighter role / C blind spot, depth, untested). Played games get a scorecard
-   (share inside the 80% range by grade). Export with `--books <books CSV>` so each prediction also shows the BEST
-   estimate (20% model + 80% book main line). Final run 90 minutes before kickoff, after inactives. Video clip: OPTIONAL, only when Travis asks (2026-11-05: "forget X"): `python simcast/clip.py out.mp4` (Travis 2026-11-04: LANDSCAPE
+   (share inside the 80% range by grade). Export ALWAYS with `--books <books CSV>` (latest capture): it sets the
+   best estimate and anchors the box to it. Final run 90 minutes before kickoff, after inactives. Video clip: OPTIONAL, only when Travis asks (2026-11-05: "forget X"): `python simcast/clip.py out.mp4` (Travis 2026-11-04: LANDSCAPE
    1920x1080 broadcast like a TV game: score bug + pregame win chance on top, tilted field, each team's live box score
    on its side (relevant players only), one-line caption, no buttons, nothing cut off; confetti on scores; then the
    full final box score for both teams 10 s; original synthesized soundtrack (`simcast/sound.py`: music bed, whistles,

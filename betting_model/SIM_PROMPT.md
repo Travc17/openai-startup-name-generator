@@ -104,8 +104,9 @@ Seed 7 (the default) so every later replay (parlays, SizzleSims, floor legs) mat
 
 ## 7. Reply (Travis reads it on his phone)
 First line: predicted score and win chance. Then:
-1. The MEDIAN box score, both teams, every player with snaps in the sims: QB line; each receiver's targets, catches,
-   yards; each rusher's carries and yards.
+1. The box score of record (median game anchored to the BEST ESTIMATE, Travis 2026-11-12), both teams, every player
+   with snaps in the sims: QB line; each receiver's targets, catches, yards; each rusher's carries and yards. Show the
+   model's own median beside any QB or rusher line where they differ.
 2. Key players' 80% ranges and A/B/C grades (the Predictions panel).
 3. Inputs used, each with its URL. Things noted but NOT modeled, each with its URL.
 4. Status-sensitive players and what changes if they sit.
