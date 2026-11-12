@@ -393,3 +393,11 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   Nabers 60+ rec yds 23.1c, sim 32.2% (x0.922 scenario 26.9%, x0.844 21.4%), edge +6.7 pts: NO BET. Mixed 4-leg
   (Singletary 15+ rush, Fields 2+ rec, Nabers 50+, Diggs 20+) 24.9c, sim 36.3% (32.4/28.4), +9.0 pts: NO BET.
   Files: `*_over_legs_open.csv`, `*_over_tickets_{sn60,any75}.csv`, `lab/over_tickets_search.py`. Re-price at pass 2.
+* PASS 2 (12:31 PM ET Thu): update + regression No drift. Consensus NYG -2 / 41 (from -2.5 / 41). Wind 11-12 mph NE,
+  74% rain at kickoff (DK Network, SI) -> `--wind 12`. Burks no designation (planned rest); Lucas Patrick (WAS OL) out,
+  noted only. Elevations not found. Zero ROSTER/INACTIVE/RESERVE CHECK lines. 25k: WAS 20, NYG 22, NYG 56%.
+  Changes vs pass 1 (wind + spread only): McCarthy 34/256 -> 33/248, Daniels 30/194 -> 29/188, receivers -1 to -2 yds.
+  SizzleSims v28 with books_mid best estimates. Captures: `*_books_mid*.csv`, `*_kalshi_mid.csv`, `*_books_alt_mid.csv`
+  (credits 134 left). Over tickets re-priced (`*_over_legs_mid.csv`, `*_over_tickets_mid_*.csv`): 3-leg 22.8c sim 31.8%
+  (+6.6 pts, max 19.4c), 4-leg 25.6c sim 35.1% (+7.1, max 22.7c), best any-matchup Singletary 20+ rush / Fields 15+ /
+  Nabers 40+ / Diggs 20+ 24.8c sim 36.0% (+8.8). All NO BET. Pass 3 at 6:55 PM ET (inactives, close captures).
