@@ -205,6 +205,11 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-12 QB-specific team pass volume (Config.qb_volume_k, OFF): offense targets blended toward the starting QB's
+  starts for the team. 2024 (selection): every k made QB stats worse (k=2 pass_att +1.41%, k=4 +0.81%, k=8 +0.36%); k=8
+  chosen. 2025-26 vs production: targets -0.14% (t=-1.98), rec -0.12% (t=-1.75), QB stats -0.1 to -0.2% (|t|<1). FAILED
+  (no stat at t<=-2). A new QB's first starts are mostly noise for team volume. Trigger was WAS@NYG (McCarthy).
+
 * 2026-11-12 SHIPPED carry-only role swing (Config.role_noise_sigma 0.25, role_noise_t 0: mean-preserving lognormal
   swing on carry shares under 0.30), after giving it its own random stream. Bench v2 vs early exit (production),
   2025-26: rush_att -0.23% (t=-2.9), rush_yds -0.20% (t=-2.6), nothing worse at t>=+2 (pass_cmp +0.07%, t=+1.1).

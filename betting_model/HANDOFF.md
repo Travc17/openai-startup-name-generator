@@ -385,3 +385,5 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * New code: `reserve_check` in reports (weekly roster status RES), `data.ensure_rosters` (update refreshes weekly
   rosters), inactive-check wording fix ("inactives" no longer matches). regression No drift.
 * Scheduled: pass 2 12:30 PM ET (trig_01Wu9cv4JHayAyNbjhABD67w), pass 3 6:55 PM ET (trig_015DSJLKvP2DTEMJ8FVLKD3b).
+* QB-specific volume test (Config.qb_volume_k) FAILED 2026-11-12 night (targets t=-1.98; 2024 hurt QB stats): OFF.
+  WAS@NYG official stays at McCarthy 34 att; scenario file analysis/2026_wk10_WAS_at_NYG_scenario.json (29 att).

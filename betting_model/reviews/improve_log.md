@@ -159,3 +159,10 @@
 * Hypothesis and sign: pass_att and pass_cmp CRPS down (largest in games after a QB change), receivers' targets down
   slightly; rushing unchanged. Bar: a target stat better at t <= -2 on 2025-26, no stat worse at t >= +2, coverage
   within 3 points, regression passes. If it passes before 12:30 PM ET it applies to WAS@NYG pass 2.
+
+## 2026-11-12 (night): QB-specific volume RESULT — FAILED (stays OFF)
+* Selection 2024: k=2 mean +0.56%, k=4 +0.26%, k=8 +0.04% (QB attempts worse at every k: +1.41 / +0.81 / +0.36%). k=8.
+* Judged 2025-26 vs production: targets -0.14% (t=-1.98), rec -0.12% (t=-1.75), rec_yds -0.10% (t=-1.5), QB stats
+  |t| < 1, nothing worse. Misses the bar. Even shipped, k=8 moves NYG volume only 3% (factor 0.969).
+* Lesson: a new starter's first 2-3 games say little about team pass volume in general. For WAS@NYG the official
+  stays at 34 att; the scenario (29 att) and the best estimate (about 31) are shown beside it, not instead of it.
