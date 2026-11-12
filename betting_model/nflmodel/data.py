@@ -13,6 +13,7 @@ PBP_URL = "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_
 PLAYERS_URL = "https://github.com/nflverse/nflverse-data/releases/download/players/players.parquet"
 SNAPS_URL = "https://github.com/nflverse/nflverse-data/releases/download/snap_counts/snap_counts_{season}.parquet"
 DEPTH_URL = "https://github.com/nflverse/nflverse-data/releases/download/depth_charts/depth_charts_{season}.parquet"
+ROSTERS_URL = "https://github.com/nflverse/nflverse-data/releases/download/weekly_rosters/roster_weekly_{season}.parquet"
 SKILL = ["WR", "TE", "RB", "FB", "QB"]
 
 PBP_COLS = [
@@ -192,3 +193,11 @@ def load_coaches(seasons: list[int]) -> pd.DataFrame:
         frames.append(pd.DataFrame({"team": d.home_team, "key": k, "coach": d.home_coach}))
         frames.append(pd.DataFrame({"team": d.away_team, "key": k, "coach": d.away_coach}))
     return pd.concat(frames, ignore_index=True).dropna().sort_values("key").reset_index(drop=True)
+
+
+def ensure_rosters(seasons: list[int] | None = None, refresh_current: bool = True) -> None:
+    """nflverse weekly rosters (status ACT/INA/RES per week): used by nfl.reserve_check and lab/bench_v2.py."""
+    import datetime as _dt
+    cur = _dt.date.today().year if _dt.date.today().month >= 8 else _dt.date.today().year - 1
+    for s_ in seasons or [cur]:
+        _download(ROSTERS_URL.format(season=s_), DATA_DIR / f"roster_weekly_{s_}.parquet", refresh=refresh_current and s_ == cur)

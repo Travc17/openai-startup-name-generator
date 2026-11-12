@@ -375,3 +375,13 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * SHIPPED 2026-11-12 evening: carry-only role swing (Config.role_noise_sigma 0.25, role_noise_t 0; own random stream).
   Production = early exit ON + carry-only role swing ON. Regression baseline refreshed. Watch QB completions in the
   weekly grade (pooled t=+1.96 on the test). Next lab item: backup receivers' high side (p90 ~86%), on bench v2.
+
+## WAS at NYG, TNF week 10 (Thu 2026-11-12 8:15 PM ET): pass 1 of 3 done (~9:00 PM ET Wed)
+* 25k: WAS 19, NYG 22, NYG wins 58%. Consensus NYG -2.5, total 41 (books open capture, 10 credits, 164 left).
+  Outs: Yankoff (WAS TE), Dart (NYG QB, IR), and three reserve players the new RESERVE CHECK found (nflverse weekly
+  rosters): Tyrone Tracy Jr. (NYG RB), Jeremy McNichols (WAS RB), Dyami Brown (WAS WR). McLaurin on reserve since wk 8.
+* Flag: McCarthy 34 att / 256 yds vs book 30 / 210.5 (NYG team volume built mostly from Winston games; model has no
+  QB-specific volume). Best estimate 220. Wind forecast not found (pass 2).
+* New code: `reserve_check` in reports (weekly roster status RES), `data.ensure_rosters` (update refreshes weekly
+  rosters), inactive-check wording fix ("inactives" no longer matches). regression No drift.
+* Scheduled: pass 2 12:30 PM ET (trig_01Wu9cv4JHayAyNbjhABD67w), pass 3 6:55 PM ET (trig_015DSJLKvP2DTEMJ8FVLKD3b).

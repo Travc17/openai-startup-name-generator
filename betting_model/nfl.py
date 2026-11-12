@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from itertools import combinations
 
@@ -268,7 +269,7 @@ def roster_check(model: GameModel, news: list, roster: list, a) -> list[str]:
     # (week 9 grade: five depth backs/TEs predicted, none played, none ruled out)
     for it in (news.get("items", []) if isinstance(news, dict) else news) or []:
         st = str(it.get("status", "")).lower()
-        if not (st.startswith("inactive") or st.startswith("out") or " inactive" in st) or "not on the" in st:
+        if not re.search(r"(^|[^a-z])(inactive|out)\b(?!s)", st) or "not on the" in st or "no designation" in st:
             continue
         try:
             pid = lookup(model, it.get("player", ""))[0]
@@ -278,6 +279,23 @@ def roster_check(model: GameModel, news: list, roster: list, a) -> list[str]:
             print(f"INACTIVE CHECK: {name_of(pid)} is '{it.get('status')}' in the news but still in the sims. Rerun with --out \"{name_of(pid)}\"")
     a.roster_missing = missing
     return missing
+
+
+def reserve_check(model: GameModel, roster: list, key: int) -> list[str]:
+    """Players in the sims whom nflverse weekly rosters list on RESERVE (IR, PUP, NFI) for this week. WAS at NYG
+    2026-11-12: Dyami Brown went on reserve in week 9 but still had week-8 snaps, so the recent-snaps rule kept him."""
+    import pandas as pd
+    f = data.DATA_DIR / f"roster_weekly_{key // 100}.parquet"
+    try:
+        r = pd.read_parquet(f, columns=["week", "team", "gsis_id", "status"])
+    except (FileNotFoundError, OSError):
+        print(f"RESERVE CHECK skipped: {f.name} not downloaded (python -c 'from nflmodel import data; data.ensure_rosters()')")
+        return []
+    res = set(r[(r.week == key % 100) & (r.status == "RES")].gsis_id)
+    hits = [p.pid for p in roster if p.pid in res]
+    for pid in hits:
+        print(f"RESERVE CHECK: {name_of(pid)} is on reserve (nflverse weekly roster, week {key % 100}) but in the sims. Rerun with --out \"{name_of(pid)}\"")
+    return hits
 
 
 def depth_status(model: GameModel, a, key: int, teams) -> dict:
@@ -551,6 +569,7 @@ def cmd_report(a):
     board = report.load_board(a.board)
     news = report.load_news(a.news)
     roster_check(model, news, roster, a)
+    reserve_check(model, roster, key)
     blind = set(a.blind or [])
     for pid in sorted(getattr(a, "depth_added", ())):
         print(f"DEPTH ADD: {name_of(pid)} (recent snaps; auto blind spot until depth-player tails are calibrated)")
@@ -655,6 +674,10 @@ def cmd_update(a):
         print(f"PFF weekly receiving data refreshed ({n} weeks).")
     except Exception as e:
         print(f"PFF refresh skipped: {e}")
+    try:
+        data.ensure_rosters([CURRENT_SEASON])   # weekly roster status (reserve check)
+    except Exception as e:
+        print(f"Weekly roster refresh skipped: {e}")
     print(f"Refreshed {CURRENT_SEASON} play by play and player list.")
 
 

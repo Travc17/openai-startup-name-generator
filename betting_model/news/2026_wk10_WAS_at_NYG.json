@@ -1,0 +1,121 @@
+[
+ {
+  "player": "J.J. McCarthy",
+  "team": "NYG QB",
+  "status": "Starting (hip, no designation; Harbaugh: expected to play). Jaxson Dart out for the season (IR)",
+  "url": "https://clutchpoints.com/nfl/new-york-giants/giants-news-cam-skattebo-jj-mccarthy-good-to-go-for-commanders-clash",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Jaxson Dart",
+  "team": "NYG QB",
+  "status": "Injured reserve (knee), out for the season",
+  "url": "https://www.giants.com/news/giants-vs-commanders-week-10-injury-report-qb-j-j-mccarthy-rb-cam-skattebo-limited",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Cam Skattebo",
+  "team": "NYG RB",
+  "status": "Returns from hamstring (missed weeks 8-9); no designation, 'full go' per Harbaugh",
+  "url": "https://clutchpoints.com/nfl/new-york-giants/giants-news-cam-skattebo-jj-mccarthy-good-to-go-for-commanders-clash",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Malik Harrison",
+  "team": "NYG LB",
+  "status": "Questionable (groin) [defense: noted, not modeled]",
+  "url": "https://www.giants.com/news/giants-vs-commanders-week-10-injury-report-qb-j-j-mccarthy-rb-cam-skattebo-limited",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Abdul Carter",
+  "team": "NYG OLB",
+  "status": "On practice report (knee/back), no game designation [defense: noted, not modeled]",
+  "url": "https://www.si.com/nfl/commanders/onsi/commanders-giants-final-injury-report-week-10",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Colton Hood",
+  "team": "NYG CB",
+  "status": "Limited (finger), no designation [defense: noted, not modeled]",
+  "url": "https://www.si.com/nfl/commanders/onsi/commanders-giants-final-injury-report-week-10",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Jayden Daniels",
+  "team": "WAS QB",
+  "status": "Starting",
+  "url": "https://www.si.com/nfl/commanders/onsi/commanders-giants-final-injury-report-week-10",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Colson Yankoff",
+  "team": "WAS TE",
+  "status": "Out (knee)",
+  "url": "https://www.si.com/nfl/commanders/onsi/commanders-giants-final-injury-report-week-10",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Lucas Patrick",
+  "team": "WAS C",
+  "status": "Out (concussion); Nick Allegretti starts [OL: noted, not modeled]",
+  "url": "https://www.si.com/nfl/commanders/onsi/commanders-giants-final-injury-report-week-10",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Treylon Burks",
+  "team": "WAS WR",
+  "status": "No designation (foot; DNP Mon/Wed, limited Tue); expected to play, confirm at inactives",
+  "url": "https://www.si.com/nfl/commanders/onsi/commanders-giants-final-injury-report-week-10",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Line",
+  "team": "WAS@NYG",
+  "status": "Consensus NYG -2.5, total 41 (4 books, 2026-11-12 ~02:00 UTC)",
+  "url": "https://the-odds-api.com/",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Weather",
+  "team": "NYG (outdoor, MetLife)",
+  "status": "Kickoff wind forecast not found (pass 1); recheck pass 2",
+  "url": "https://windy.app/forecast2/spot/4471169/MetLife+Stadium",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Schedule",
+  "team": "WAS@NYG",
+  "status": "Thursday night: both teams on a short week [noted, not modeled]",
+  "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+  "found_utc": "2026-11-12T01:58Z"
+ },
+ {
+  "player": "Tyrone Tracy Jr.",
+  "team": "NYG RB",
+  "status": "Out: on reserve (nflverse weekly roster, week 10)",
+  "url": "https://github.com/nflverse/nflverse-data/releases/tag/weekly_rosters",
+  "found_utc": "2026-11-12T02:00Z"
+ },
+ {
+  "player": "Jeremy McNichols",
+  "team": "WAS RB",
+  "status": "Out: on reserve (nflverse weekly roster, week 10)",
+  "url": "https://github.com/nflverse/nflverse-data/releases/tag/weekly_rosters",
+  "found_utc": "2026-11-12T02:00Z"
+ },
+ {
+  "player": "Dyami Brown",
+  "team": "WAS WR",
+  "status": "Out: on reserve (nflverse weekly roster, week 10)",
+  "url": "https://github.com/nflverse/nflverse-data/releases/tag/weekly_rosters",
+  "found_utc": "2026-11-12T02:00Z"
+ },
+ {
+  "player": "Terry McLaurin",
+  "team": "WAS WR",
+  "status": "On reserve since week 8 (nflverse weekly roster); not in the sims",
+  "url": "https://github.com/nflverse/nflverse-data/releases/tag/weekly_rosters",
+  "found_utc": "2026-11-12T02:00Z"
+ }
+]
