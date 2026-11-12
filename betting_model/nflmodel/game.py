@@ -78,6 +78,10 @@ class Config:
     early_exit_scale: float = 1.0
     # Model lab 2026-11-11: wider role uncertainty for small shares: beta concentration x min(1, share / s0), floor 2.
     share_conc_ref: float | None = None   # s0; None = OFF (bit-identical)
+    # Model lab 2026-11-11: mean-preserving role swing for small roles (share x lognormal) below these shares.
+    role_noise_sigma: float | None = None   # None = OFF (bit-identical)
+    role_noise_t: float = 0.10
+    role_noise_c: float = 0.30
 
 
 _EE = None
@@ -526,6 +530,12 @@ class GameModel:
                               max(1 - inp["t_share"], 1e-3) * kt, n) if inp["t_share"] > 0.002 else np.zeros(n)
                 sc = rng.beta(max(inp["c_share"], 1e-3) * kc,
                               max(1 - inp["c_share"], 1e-3) * kc, n) if inp["c_share"] > 0.002 else np.zeros(n)
+                if cfg.role_noise_sigma:
+                    sg = cfg.role_noise_sigma
+                    if 0.002 < inp["t_share"] < cfg.role_noise_t:
+                        st = np.clip(st * np.exp(sg * ex_rng.standard_normal(n) - sg * sg / 2), 0.0, 0.95)
+                    if 0.002 < inp["c_share"] < cfg.role_noise_c:
+                        sc = np.clip(sc * np.exp(sg * ex_rng.standard_normal(n) - sg * sg / 2), 0.0, 0.95)
                 frac = 1.0
                 if ee is not None and inp["pos"] in ("RB", "WR", "TE"):
                     hit = ex_rng.random(n) < ee["p"].get(inp["pos"], 0.0) * cfg.early_exit_scale

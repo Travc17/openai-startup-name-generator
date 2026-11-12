@@ -20,7 +20,8 @@ from nflmodel.game import Player  # noqa: E402
 VARIANTS = {"off": {}, "on": {"early_exit": True}, "on15": {"early_exit": True, "early_exit_scale": 1.5}}
 SHARE = {"off": {}, "c10": {"share_conc_ref": 0.10}, "c20": {"share_conc_ref": 0.20}, "c30": {"share_conc_ref": 0.30}}
 OFFONLY = {"off": {}}
-DEFAULTS = {"early_exit": False, "early_exit_scale": 1.0, "share_conc_ref": None}
+NOISE = {"off": {}, "n25": {"role_noise_sigma": 0.25}, "n40": {"role_noise_sigma": 0.40}, "n55": {"role_noise_sigma": 0.55}}
+DEFAULTS = {"early_exit": False, "early_exit_scale": 1.0, "share_conc_ref": None, "role_noise_sigma": None}
 STATS = ["targets", "rec", "rec_yds", "rush_att", "rush_yds", "pass_att", "pass_cmp", "pass_yds"]
 
 
@@ -125,11 +126,11 @@ if __name__ == "__main__":
     ap.add_argument("--sims", type=int, default=2000)
     ap.add_argument("--out")
     ap.add_argument("--score", nargs="+")
-    ap.add_argument("--family", default="early_exit", choices=["early_exit", "share", "off"])
+    ap.add_argument("--family", default="early_exit", choices=["early_exit", "share", "off", "noise"])
     ap.add_argument("--zero-snaps", action="store_true")
     a = ap.parse_args()
     if a.family != "early_exit":
-        VARIANTS.clear(); VARIANTS.update(SHARE if a.family == "share" else OFFONLY)
+        VARIANTS.clear(); VARIANTS.update({"share": SHARE, "off": OFFONLY, "noise": NOISE}[a.family])
     if a.score:
         r = score(a.score)
         pd.set_option("display.width", 200)

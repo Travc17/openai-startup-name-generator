@@ -60,3 +60,20 @@
 * Diagnosis before redesign: is the depth gap (median too low, p90 85%) real or a scoring artifact? The harness drops
   backups who were active but played 0 snaps (no snap row), which pushes depth actuals up. Rescoring OFF with
   nflverse weekly roster status (ACT with no snaps = 0): runs started 2026-11-11 ~7:40 PM ET.
+
+## 2026-11-11 (night): diagnosis result + MODEL_LAB test "role swings for small roles" PRE-REGISTRATION
+* Diagnosis (OFF model, 2024-26, 536 games): counting active zero-snap backups as 0 (nflverse weekly roster status)
+  moves depth coverage closer but not all the way: depth targets under-p10/p50/p90 8.8/44.3/84.9 -> 9.5/46.4/86.0;
+  rec_yds 9.1/46.4/86.4 -> 9.8/47.7/87.2; carries 11.0/47.5/82.7 -> 13.7/52.1/84.9; rush_yds 9.8/49.4/85.5 ->
+  11.3/54.2/87.4. Leaders unchanged (about 9/48/89-90). So: about a third of the gap was scoring; the rest is real
+  under-dispersion for small roles (receivers: thin high side; backup RB carries: thin on both sides).
+* Scoring from now on counts active zero-snap players as 0 (`--zero-snaps`).
+* Feature: multiplicative role swing for small roles, mean-preserving: share x exp(sigma z - sigma^2/2) for players
+  with expected target share < 0.10 (targets) or carry share < 0.30 (carries); leaders' larger shares untouched.
+  Switch `Config.role_noise_sigma` (None = OFF, bit-identical; separate random stream).
+* Grid (fixed now): sigma in {0.25, 0.40, 0.55}. Selection rule (fixed now): on 2024 weeks 4-18 ONLY, the sigma with
+  the lowest mean % CRPS change over targets, rec, rec_yds, rush_att, rush_yds (all tiers pooled). Judged on 2025 weeks
+  4-18 + 2026 weeks 4-9 only.
+* Hypothesis and sign: depth tier CRPS down and depth under-p90 up toward 90 (receivers), depth carries p10/p90 toward
+  10/90; leaders within +-0.1% (not touched except through teammates' volume).
+* Bar: as before (target stat t <= -2 on 2025-26, no stat worse t >= +2, coverage within 3 points, regression passes).
