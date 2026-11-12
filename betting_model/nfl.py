@@ -105,7 +105,7 @@ def stat_name(s: str) -> str:
 def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     """Usage leaders for both teams plus any named players, minus --out, with news multipliers."""
     team_a, team_b = a.team_a.upper(), a.team_b.upper()
-    outs = {lookup(model, n)[0] for n in (a.out or [])}
+    outs = {lookup(model, n)[0] for n in (a.out or [])} | set(getattr(a, "out_pids", None) or ())   # out_pids: lab bench
     catches = {}
     for spec in getattr(a, "catch", None) or []:
         n, v = spec.rsplit("=", 1)
@@ -129,7 +129,8 @@ def roster_for(model: GameModel, a, key: int, extra: list[str]) -> list[Player]:
     for pid, (now, prev, rank, pos, team) in dep.items():
         rank = eff[pid]
         top = now or (pos == "RB" and rank <= 3) or (pos == "WR" and rank <= 4)
-        if top and pos in ("WR", "TE", "RB") and pid in model._pg_by and pid not in outs:
+        # history BEFORE this game (in a replay a rookie's only rows can be this very game: 2026-11-11 lab bench)
+        if top and pos in ("WR", "TE", "RB") and pid in model._pg_by and model._pg_by[pid].key.min() < key and pid not in outs:
             pids.setdefault(pid, team)
     for pid in extra:
         team = current_team(model, pid)

@@ -88,3 +88,13 @@
 * What changed in production: nothing (all three switches OFF; regression No drift).
 * Next: fix the test bench first (mirror production rosters with known outs), re-measure, then a new hypothesis for
   backup receivers. Ledger rows updated.
+
+## 2026-11-11 (late): lab bench v2 + re-measure PRE-REGISTRATION
+* Bench v2 (`lab/bench_v2.py`): rosters from the live `nfl.roster_for` (usage leaders, depth-chart adds, recent-snap
+  players, next-man-up for outs, return multipliers, route-role) with each game's real inactive list (nflverse weekly
+  roster status != ACT, known before kickoff); scores every rostered RB/WR/TE who was ACTIVE (0 if no snaps) and the
+  starting QBs. Bug found while building it and fixed: in a replay, the depth-chart backstop could add a rookie whose
+  only history is the replayed game (crash); now requires history before the game. Live behavior unchanged.
+* Re-measure (descriptive): OFF calibration by tier, 2024 wks 4-18, 2025 wks 4-18, 2026 wks 4-9.
+* Confirmatory re-judgement, no re-selection: n25 (role_noise_sigma 0.25, chosen on 2024 earlier) and ee (early exit,
+  measured rates) on 2025-26 under bench v2, same bar as before.
