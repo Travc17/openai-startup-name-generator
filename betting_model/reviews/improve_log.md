@@ -98,3 +98,14 @@
 * Re-measure (descriptive): OFF calibration by tier, 2024 wks 4-18, 2025 wks 4-18, 2026 wks 4-9.
 * Confirmatory re-judgement, no re-selection: n25 (role_noise_sigma 0.25, chosen on 2024 earlier) and ee (early exit,
   measured rates) on 2025-26 under bench v2, same bar as before.
+
+## 2026-11-12 (early): bench v2 RESULT + combination PRE-REGISTRATION
+* Re-measure: on live rosters the OFF model's depth tier stays under-dispersed (targets p10/p50/p90 8.8/44.6/84.5;
+  carries 14.0/53.9/85.2); leaders and QBs about calibrated.
+* Confirmatory re-judgement on 2025-26 (bench v2): BOTH PASS the bar.
+  ee (early exit, measured rates): targets -0.15% (t=-2.6), rec -0.20% (t=-3.3), rec_yds -0.16% (t=-2.7), rush_att
+  -0.22% (t=-2.3); nothing worse at t >= +2. n25 (role swing 0.25): rush_att -0.37% (t=-4.4), rush_yds -0.28%
+  (t=-3.3); nothing worse at t >= +2. Bench v1 had failed both: v1 graded backups against rosters live reports never use.
+* Combination (MODEL_LAB rule 4, after singles pass): "both" = ee + n25, fixed settings, bench v2, judged on 2025-26
+  (2024 reported). Ship rule (fixed now): ship "both" if it passes the bar AND is not worse than the better single on
+  any stat at t >= +2 (paired vs that single); otherwise ship the singles that pass, ee first.
