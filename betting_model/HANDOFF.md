@@ -387,3 +387,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Scheduled: pass 2 12:30 PM ET (trig_01Wu9cv4JHayAyNbjhABD67w), pass 3 6:55 PM ET (trig_015DSJLKvP2DTEMJ8FVLKD3b).
 * QB-specific volume test (Config.qb_volume_k) FAILED 2026-11-12 night (targets t=-1.98; 2024 hurt QB stats): OFF.
   WAS@NYG official stays at McCarthy 34 att; scenario file analysis/2026_wk10_WAS_at_NYG_scenario.json (29 att).
+* Over-parlay request (Travis, Wed night): Kalshi open ladders (`markets/*_kalshi_open.csv`, 7 credits) + book alt
+  ladders rec/rec_yds/rush_yds (`*_books_alt_open.csv`, 3 credits; 154 left). His spec (90% legs, strong/neutral
+  matchup, 10-25c ticket) has 1 qualifying leg (Nabers 3+ rec, 93c): impossible. Closest: Likely 30+ / Fields 25+ /
+  Nabers 60+ rec yds 23.1c, sim 32.2% (x0.922 scenario 26.9%, x0.844 21.4%), edge +6.7 pts: NO BET. Mixed 4-leg
+  (Singletary 15+ rush, Fields 2+ rec, Nabers 50+, Diggs 20+) 24.9c, sim 36.3% (32.4/28.4), +9.0 pts: NO BET.
+  Files: `*_over_legs_open.csv`, `*_over_tickets_{sn60,any75}.csv`, `lab/over_tickets_search.py`. Re-price at pass 2.
