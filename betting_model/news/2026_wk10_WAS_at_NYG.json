@@ -250,5 +250,33 @@
   "status": "Consensus NYG -1.5, total 40.5 at 23:57 UTC (5 books)",
   "url": "https://www.hogshaven.com/washington-commanders-injuries/454574/washington-commanders-vs-new-york-giants-inactives-in-nfl-week-10",
   "found_utc": "2026-11-12T23:58Z"
+ },
+ {
+  "player": "Giants inactives",
+  "team": "NYG",
+  "status": "CB Paulson Adebo, OL J.C. Davis, TE Thomas Fidone II, LB Malik Harrison, DL C.J. Okoye, CB Nikko Reed, OL Josh Sills. Elevated: DL Dawuane Smoot, LB Chandler Martin [defense: not modeled]",
+  "url": "https://www.giants.com/news/inactives-who-s-in-who-s-out-for-giants-vs-commanders",
+  "found_utc": "2026-11-13T00:06Z"
+ },
+ {
+  "player": "Thomas Fidone II",
+  "team": "NYG TE",
+  "status": "Inactive (official list)",
+  "url": "https://sports.yahoo.com/articles/week-10-inactives-giants-000023886.html",
+  "found_utc": "2026-11-13T00:06Z"
+ },
+ {
+  "player": "Cam Skattebo",
+  "team": "NYG RB",
+  "status": "Active: returns to the lineup (official inactives)",
+  "url": "https://sports.yahoo.com/nfl/live/giants-commanders-score-live-updates-inactives-highlights-stats-week-10-thursday-night-football-235342314.html",
+  "found_utc": "2026-11-13T00:06Z"
+ },
+ {
+  "player": "Commanders inactives (confirmed)",
+  "team": "WAS",
+  "status": "Kaliakmanis, Yiadom, Barber, Togiai, Patrick, Yankoff (unchanged)",
+  "url": "https://sports.yahoo.com/articles/week-10-inactives-commanders-235256710.html",
+  "found_utc": "2026-11-13T00:06Z"
  }
 ]

@@ -436,3 +436,8 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * BEST BETS (close): `markets/*_bestbets_close.{csv,md}`; judgment drops (same McCarthy-volume thesis as pick #1):
   32+ att, 19+ cmp, 24+ cmp (`--drop`). No BANKROLL pick. Travis places any bet himself.
 * AFTER THE GAME: grade (GRADE_PROMPT / grade_week.py --week 10), including the 12 best bets and the best-estimate record.
+* FINAL PASS v2 (7:08 PM ET, official inactives): NYG inactive Adebo, J.C. Davis, Fidone II (TE, now --out), Harrison,
+  Okoye, Reed, Sills; Skattebo ACTIVE; WAS list unchanged. Zero CHECK lines. Medians moved ~1 yd (Fidone's targets).
+  SizzleSims v32. Best bets FINAL: `markets/*_bestbets_final.{csv,md}` (Kalshi re-pulled 7:08 PM, `*_kalshi_final.csv`,
+  `*_kalshi_game_final.csv`); judgment drop: every McCarthy over single (same thesis as parlay #1). No BANKROLL pick.
+  Credits 85 left. Grade after the game (grade_week.py --week 10), including the 12 picks.
