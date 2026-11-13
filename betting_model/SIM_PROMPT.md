@@ -29,10 +29,11 @@ predictions after the game (section 8), not by how much was searched.
 | Starting QBs | QB layer | `--qb "TEAM=Name"` when not last game's starter |
 | Players ruled out or inactive | removed; next man up automatic | `--out "Name"` |
 | Wind above 8 mph (outdoor) | QB pass yards only | `--wind MPH` |
+| Rain forecast at kickoff, 50%+ chance (outdoor) | pass attempts, rushes, yards per pass (tested 2026-11-12) | `--rain` |
 | Route-based role, injury bump rules, depth promotion | automatic (tested) | none |
 | Role news (coach says more or fewer snaps) | human judgment, least tested | `--mult "Name=1.10"` + URL |
 | Players the model cannot price | kept out of bets | `--blind` (CLAUDE.md blind spots) |
-| Defensive injuries, OL injuries, rain/snow/cold, short week, travel, coaching or play-caller change, kicker change, referees | NOT modeled (untested) | note with URL, never hand-adjust |
+| Defensive injuries, OL injuries, snow/cold, short week, travel, coaching or play-caller change, kicker change, referees | NOT modeled (untested) | note with URL, never hand-adjust |
 
 ## 2. Sweep: every outlet you can reach, both teams
 WebSearch every source (WebFetch is blocked for many news sites: cite the search results' URLs). Sources: official

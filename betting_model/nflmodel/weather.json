@@ -12,16 +12,19 @@
   "rush_r": 0.0013
  },
  "rain": {
-  "att_r": -0.0517,
-  "rush_r": 0.0585,
-  "ypa_r": -0.0993,
+  "att_r": -0.0408,
+  "rush_r": 0.0525,
+  "ypa_r": -0.0997,
   "fitted_on_seasons": [
    2019,
    2020,
    2021,
    2022,
-   2023
+   2023,
+   2024,
+   2025,
+   2026
   ],
-  "status": "pre-registered test 2026-11-12"
+  "status": "ON 2026-11-12: leave-one-season-out test passed (54 rain games 2022-26: rec_yds -1.44% t=-2.60, pass_yds -6.0% t=-1.93); use --rain when rain is forecast at kickoff (50%+)"
  }
 }

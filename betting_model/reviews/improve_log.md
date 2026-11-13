@@ -226,3 +226,8 @@
   fit-only. Rain games scored: 2022 15, 2023 18, 2024 6, 2025 11, 2026 9 (about 59).
 * Arms: production + actual wind vs + rain (paired seeds). Bar unchanged: a named target (pass_yds, pass_att,
   rec_yds) improves at t <= -2 pooled; no stat worse at t >= +2. Pass: `--rain` ON for forecast rain at kickoff.
+* RESULT (bigger test, 54 rain games 2022-26, each season scored with constants fit on the others): PASSED.
+  rec_yds -1.44% (t=-2.60), rec -0.66% (t=-2.40), pass_yds -6.02% (t=-1.93; under-median 69% -> 53%), pass_cmp -2.52%
+  (t=-1.61), nothing worse at t >= +2 (rush_yds +0.90%, t=+1.41). Better in 4 of 5 seasons (2025 +1.3%). SHIPPED:
+  `--rain` for outdoor games with rain forecast at kickoff (50%+); constants refit on 2019-26 in weather.json.
+  WAS@NYG (heavy rain, locked before this shipped): rain scenario saved in analysis/ and graded with the week.

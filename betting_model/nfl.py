@@ -770,7 +770,7 @@ def main():
     rp.add_argument("--model-line", help="Independent model's number, shown for reference")
     rp.add_argument("--qb", action="append", help="'TEAM=QB Name' starter override (default: last game's starter)")
     rp.add_argument("--wind", type=float, help="Forecast wind (mph) for outdoor games; leave out for domes")
-    rp.add_argument("--rain", action="store_true", help="Forecast rain at kickoff. LAB ONLY: failed the 2026-11-12 test narrowly (25 games); do not use for the record")
+    rp.add_argument("--rain", action="store_true", help="Rain forecast at kickoff (50%+ chance) for outdoor games: fewer/shorter passes, more runs (tested 2026-11-12, ON)")
     rp.add_argument("--no-log", action="store_true", help="Don't add this report's picks to the paper-trading log")
     rp.add_argument("--sims", type=int, default=25000)
     rp.add_argument("--html", default="report.html")

@@ -1,0 +1,15 @@
+LOSO rain test: 54 rain games 2022-26
+-- pooled
+pass_att  n= 108 CRPS  -0.58%  t=-0.35  under-median 53% -> 48%
+pass_cmp  n= 108 CRPS  -2.52%  t=-1.61  under-median 59% -> 53%
+pass_yds  n= 108 CRPS  -6.02%  t=-1.93  under-median 69% -> 53%
+targets   n=1076 CRPS  -0.31%  t=-1.04  under-median 47% -> 45%
+rec       n=1076 CRPS  -0.66%  t=-2.40  under-median 49% -> 47%
+rec_yds   n=1076 CRPS  -1.44%  t=-2.60  under-median 52% -> 49%
+rush_att  n= 306 CRPS  -0.35%  t=-0.43  under-median 52% -> 54%
+rush_yds  n= 306 CRPS  +0.90%  t=+1.41  under-median 48% -> 51%
+   2022: pass_yds+rec_yds CRPS -2.95% (n=250)
+   2023: pass_yds+rec_yds CRPS -4.87% (n=376)
+   2024: pass_yds+rec_yds CRPS -3.90% (n=117)
+   2025: pass_yds+rec_yds CRPS +1.33% (n=228)
+   2026: pass_yds+rec_yds CRPS -3.57% (n=213)

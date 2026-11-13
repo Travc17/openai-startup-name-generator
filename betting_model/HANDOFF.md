@@ -444,3 +444,6 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * RAIN (Travis asked): fit 2019-23 (att -5.2%, rush +5.9%, ypa -9.9%), held-out 2024-26 25 games: right direction, not
   significant (pass_yds t=-0.55, rec t=-2.11 not a named target). OFF. Next: leave-one-season-out test 2019-26 (~100 rain
   games; download 2019-23 weekly rosters). Tonight's WAS@NYG (heavy rain) adds one game. `lab/rain_fit.py`, `lab/rain_test.py`.
+* RAIN SHIPPED (10 PM-ish 11/12): leave-one-season-out test passed (54 games: rec_yds t=-2.60, pass_yds -6.0% t=-1.93).
+  Use `--rain` for outdoor games with rain forecast at kickoff (50%+); SIM_PROMPT input map + CLAUDE.md step 4 updated.
+  WAS@NYG record unchanged (locked at kickoff); `analysis/2026_wk10_WAS_at_NYG_rain_scenario.json` is graded with week 10.

@@ -84,6 +84,8 @@ The steps below still apply; the report's `--proj` file is the stage 1 record.
    `--blind "Name"` excludes all of a player's props; `--blind "Name:rec,rec_yds,targets"` only those stats
    (e.g. an RB's receiving props with a third-string QB while his rushing stays bettable).
    Outdoor game with wind forecast above 8 mph: add `--wind MPH` (tested on QB pass yards only).
+   Outdoor game with rain forecast at kickoff (50%+ chance): add `--rain` (tested 2026-11-12 on 54 held-out rain games:
+   receiving yards -1.4% error t=-2.6, QB pass yards -6.0%; pass attempts -4%, rushes +5%, yards per pass -9%).
    Run `python regression_check.py` after `update` or any code change; if it prints DRIFT, fix before publishing.
 5. Publish the HTML with the Artifact tool (same file path per game to keep the URL), then reply with: score
    prediction, edges (or "pass"), best bet with stake, top singles/parlays, and anything the model can't price.

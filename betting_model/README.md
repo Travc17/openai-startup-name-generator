@@ -205,6 +205,9 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-12 night RAIN, bigger test (leave one season out, 54 rain games 2022-26): rec_yds -1.44% (t=-2.60), rec -0.66%
+  (t=-2.40), pass_yds -6.0% (t=-1.93; under-median 69% -> 53%); nothing worse. ON: `--rain` when rain is forecast at kickoff.
+
 * 2026-11-12 night RAIN (`--rain`, weather.json "rain", OFF): fit 2019-23 (144 rain team-games): pass att -5.2%,
   rushes +5.9%, yards/pass -9.9%. Held out 2024-26 (25 rain games): pass_yds -2.6% (t=-0.55; under-median 64% -> 50%), rec
   -0.9% (t=-2.11), rec_yds -1.3% (t=-1.58), nothing worse at t>=+2. Failed the pre-registered bar (too few games); bigger
