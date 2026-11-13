@@ -219,3 +219,10 @@
   (t=+1.30). FAILED the pre-registered bar (no NAMED target at t <= -2) but nothing worse at t >= +2 and every receiving
   stat moved the right way. Stays OFF (`--rain` exists, unused). Next: a bigger test, each season 2019-26 scored with
   rain constants fit on the OTHER seasons (about 100 rain games; needs 2019-23 weekly rosters for bench v2).
+
+## 2026-11-12 (night): PRE-REGISTRATION: rain, bigger test (leave one season out), declared AFTER the 25-game test
+* Each test season s in 2022-26 is scored with rain constants fit on every OTHER season 2019-26 (same fit code,
+  `lab/rain_fit.py`), so no season is scored with constants that saw it. Bench v2 needs model history, so 2019-21 are
+  fit-only. Rain games scored: 2022 15, 2023 18, 2024 6, 2025 11, 2026 9 (about 59).
+* Arms: production + actual wind vs + rain (paired seeds). Bar unchanged: a named target (pass_yds, pass_att,
+  rec_yds) improves at t <= -2 pooled; no stat worse at t >= +2. Pass: `--rain` ON for forecast rain at kickoff.

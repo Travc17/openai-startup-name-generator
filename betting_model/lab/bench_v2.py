@@ -22,7 +22,7 @@ from nflmodel.game import Player  # noqa: E402
 from early_exit_test import score  # noqa: E402  (same paired scoring)
 ALL = {"off": {}, "n25": {"role_noise_sigma": 0.25}, "ee": {"early_exit": True}, "both": {"early_exit": True, "role_noise_sigma": 0.25},
        "ee_c25": {"early_exit": True, "role_noise_sigma": 0.25, "role_noise_t": 0.0}}
-DEFAULTS = {"early_exit": False, "early_exit_scale": 1.0, "share_conc_ref": None, "role_noise_sigma": None, "role_noise_t": 0.10, "qb_volume_k": None, "qb_volume_mode": "team"}
+DEFAULTS = {"early_exit": False, "early_exit_scale": 1.0, "share_conc_ref": None, "role_noise_sigma": None, "role_noise_t": 0.10, "qb_volume_k": None, "qb_volume_mode": "team", "rain_override": None}
 PROD = {"early_exit": True, "role_noise_sigma": 0.25, "role_noise_t": 0.0}   # production since 2026-11-12
 ALL.update({"prod": PROD, "qv2": {**PROD, "qb_volume_k": 2.0}, "qv4": {**PROD, "qb_volume_k": 4.0}, "qv8": {**PROD, "qb_volume_k": 8.0}, "qvc8": {**PROD, "qb_volume_k": 8.0, "qb_volume_mode": "career"},
             "prodw": {**PROD, "_wind": True}, "rainw": {**PROD, "_wind": True, "_rain": True}})

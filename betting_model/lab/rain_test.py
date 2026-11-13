@@ -15,5 +15,12 @@ def rain_games(season):
 if __name__ == "__main__":
     season, out = int(sys.argv[1]), sys.argv[2]
     W = rain_games(season)
-    d = bench_v2.run(season, list(range(1, 19)), 2000, {k: bench_v2.ALL[k] for k in ("prodw", "rainw")}, only=set(W), weather=W)
+    loso = len(sys.argv) > 3 and sys.argv[3] == "--loso"
+    variants = {k: dict(bench_v2.ALL[k]) for k in ("prodw", "rainw")}
+    if loso:                                            # constants fit on every OTHER season 2019-26
+        import rain_fit
+        rp = rain_fit.fit([s for s in range(2019, 2027) if s != season])
+        variants["rainw"]["rain_override"] = rp
+        print(f"{season}: LOSO rain constants {rp}")
+    d = bench_v2.run(season, list(range(1, 19)), 2000, variants, only=set(W), weather=W)
     d.to_parquet(out); print(f"{season}: {len(W)} rain games, {d.game_id.nunique()} benched, {len(d)} rows -> {out}")

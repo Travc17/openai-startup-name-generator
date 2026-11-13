@@ -88,6 +88,8 @@ class Config:
     # "team": n = his starts for this team (FAILED 2026-11-12). "career": ratio of his teams' targets in his starts (any
     # team, this season and last) to each team-season mean, shrunk with qb_volume_k (pre-registered 2026-11-12 PM).
     qb_volume_mode: str = "team"
+    # Model lab 2026-11-12: rain constants override (leave-one-season-out tests); None = weather.json "rain"
+    rain_override: dict | None = None
     role_noise_c: float = 0.30
 
 
@@ -549,7 +551,7 @@ class GameModel:
         if rain:   # forecast rain at kickoff (lab 2026-11-12: fit 2019-23 in weather.json "rain"; OFF unless --rain)
             import json as _json
             from pathlib import Path as _P
-            rb = _json.loads(_P(__file__).with_name("weather.json").read_text()).get("rain")
+            rb = self.cfg.rain_override or _json.loads(_P(__file__).with_name("weather.json").read_text()).get("rain")
             if rb:
                 mu = mu * np.array([1 + rb["att_r"], 1 + rb["rush_r"], 1 + rb["att_r"], 1 + rb["rush_r"]])
                 wfx["ypa_r"] = (1 + wfx["ypa_r"]) * (1 + rb["ypa_r"]) - 1
