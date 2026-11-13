@@ -447,3 +447,16 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * RAIN SHIPPED (10 PM-ish 11/12): leave-one-season-out test passed (54 games: rec_yds t=-2.60, pass_yds -6.0% t=-1.93).
   Use `--rain` for outdoor games with rain forecast at kickoff (50%+); SIM_PROMPT input map + CLAUDE.md step 4 updated.
   WAS@NYG record unchanged (locked at kickoff); `analysis/2026_wk10_WAS_at_NYG_rain_scenario.json` is graded with week 10.
+
+## Week 10 TNF graded (2026-11-13 ~1 AM ET): WAS 24, NYG 21 (record NYG 21-20, wrong winner)
+* A+B inside 80% range 85% (29/34). McCarthy 23/36 293: model 249 was closer than the record (best est. 211) and book 201.5.
+  Best bets 3 of 12 won (`reviews/2026_wk10_WAS_at_NYG_bestbets_graded.md`). Rain scenario moved passing the wrong way here.
+  Singletary last touch Q1 (early exit; cause not checked yet). Snap counts not posted: regrade later.
+
+## PIT at CIN, SNF week 10 (Sun 2026-11-15 8:20 PM ET): pass 1 of 3 done (~1 AM ET Fri)
+* Consensus CIN -3.5, total 49.5 (books open, 10 credits; 75 left). QBs Rodgers, Burrow. Chase healthy. Iosivas on IR
+  (window open, not activated): out of the sims; recheck. 8 depth adds blind. No --wind/--rain (cold, dry; wind not found).
+* 25k: PIT 23, CIN 27, CIN 61%. Record: Burrow 27/38 292, Chase 9-104, Higgins 6-82; Rodgers 22/35 240, Metcalf 5-66.
+* Code: roster check no longer fires on "not on the active roster"; inactive check skips "treated as playing"/"kept in
+  the sims" (the 11/12 false hits). Regression No drift.
+* Scheduled: pass 2 Sun 12:30 PM ET (trig_01Fq5TsPYnjyLWprn8Q3rSp2), pass 3 Sun 6:55 PM ET (trig_019cNc9cyDfFBbuZ2npPyuyQ).

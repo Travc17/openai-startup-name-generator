@@ -242,6 +242,7 @@ def games_back(model: GameModel, pid: str, team: str, key: int, min_missed: int 
     return 0
 
 
+NOT_ACTIVE = ("not on the active roster", "not activated", "on injured reserve", "on reserve", "not yet activated")
 ACTIVE_WORDS = ("active", "activated", "off ir", "returns", "return from", "designated to return", "elevated", "will play", "starting")
 
 
@@ -255,7 +256,8 @@ def roster_check(model: GameModel, news: list, roster: list, a) -> list[str]:
     missing = []
     for it in (news.get("items", []) if isinstance(news, dict) else news) or []:
         st, tm = str(it.get("status", "")).lower(), str(it.get("team", "")).upper()
-        if not any(w in st for w in ACTIVE_WORDS) or "inactive" in st or not any(p in tm for p in ("RB", "WR", "TE")):
+        if not any(w in st for w in ACTIVE_WORDS) or "inactive" in st or not any(p in tm for p in ("RB", "WR", "TE")) \
+                or any(x in st for x in NOT_ACTIVE):   # 2026-11-13: "not on the active roster" matched "active" (Iosivas)
             continue
         try:
             pid = lookup(model, it.get("player", ""))[0]
@@ -269,7 +271,8 @@ def roster_check(model: GameModel, news: list, roster: list, a) -> list[str]:
     # (week 9 grade: five depth backs/TEs predicted, none played, none ruled out)
     for it in (news.get("items", []) if isinstance(news, dict) else news) or []:
         st = str(it.get("status", "")).lower()
-        if not re.search(r"(^|[^a-z])(inactive|out)\b(?!s)", st) or "not on the" in st or "no designation" in st:
+        if not re.search(r"(^|[^a-z])(inactive|out)\b(?!s)", st) or "not on the" in st or "no designation" in st \
+                or any(x in st for x in ("treated as playing", "kept in the sims")):   # 2026-11-12 false hits (Skattebo, Jefferson)
             continue
         try:
             pid = lookup(model, it.get("player", ""))[0]
