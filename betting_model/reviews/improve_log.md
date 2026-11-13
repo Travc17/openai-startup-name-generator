@@ -201,3 +201,21 @@
   adds nothing to the closing line. Test 2025-26 (408 games): margin RMSE line 12.19 = blend 12.19, model alone 12.85;
   total RMSE line 13.21, blend 13.22 (t=+0.72), model 13.65; winner right: line 66.5%, model 63.5%. Consensus stays the
   score, winner and total of record. Next idea only if new information exists that the line lacks at kickoff.
+
+## 2026-11-12 (night): PRE-REGISTRATION: rain (Travis: "We need to add rain to model")
+* Data: nflverse play by play `weather` text at kickoff, outdoor/open-roof regular-season games; rain = rain, shower,
+  drizzle, storm or thunder in the text (snow kept out). 2019-23: 74 rain games (fit); 2024-26: 26 rain games (test).
+* Fit (2019-23 only): per team-game, pass attempts, rushes and yards per attempt divided by that team's season mean in
+  its other outdoor games; rain effect = mean rain-game ratio / mean dry-game ratio - 1, net of the tested wind effect
+  for games above 8 mph. Same three levers and code path as wind (`weather.json`): att_r, rush_r, ypa_r. Applied when
+  the report gets `--rain` (forecast rain at kickoff).
+* Test: bench v2 (real inactives), the 26 rain games of 2024-26, production vs production + rain, paired seeds.
+* Expected sign: fewer pass attempts and yards, more rushes. Targets: pass_yds, pass_att, rec_yds.
+* Bar: a target stat improves at t <= -2 in the rain games; no stat worse at t >= +2. Pass = ON (`--rain`), fail = OFF.
+  Small sample warning: 26 games, about 52 QB rows; a real but small effect may not reach the bar.
+* FIT (2019-23, 144 rain team-games): pass attempts -5.2% (se 2.1), rushes +5.9% (se 2.5), yards per pass -9.9% (se 2.0).
+* RESULT (25 held-out rain games 2024-26, prod+wind vs +rain, paired): pass_yds -2.62% (t=-0.55; under-median 64% -> 50%),
+  pass_att +1.68% (t=+0.61), rec_yds -1.29% (t=-1.58), rec -0.93% (t=-2.11, not a named target), rush_yds +1.44%
+  (t=+1.30). FAILED the pre-registered bar (no NAMED target at t <= -2) but nothing worse at t >= +2 and every receiving
+  stat moved the right way. Stays OFF (`--rain` exists, unused). Next: a bigger test, each season 2019-26 scored with
+  rain constants fit on the OTHER seasons (about 100 rain games; needs 2019-23 weekly rosters for bench v2).

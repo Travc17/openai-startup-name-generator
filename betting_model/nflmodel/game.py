@@ -517,7 +517,7 @@ class GameModel:
     def simulate(self, team_a: str, team_b: str, key: int, players: list[Player],
                  n_sims: int | None = None, seed: int | None = 7,
                  rho: dict[str, float] | None = None, exp_margin_a: float | None = None,
-                 qbs: dict | None = None, qb_adjust: bool = True, wind: float | None = None) -> dict:
+                 qbs: dict | None = None, qb_adjust: bool = True, wind: float | None = None, rain: bool = False) -> dict:
         """rho: pair correlations for the copula. None loads the fitted file, {} turns it off.
         qbs: {team: qb gsis id}; with a QB model attached, adds the QB line and the QB quality adjustment."""
         cfg = self.cfg
@@ -546,6 +546,13 @@ class GameModel:
                 per = _json.loads(wf.read_text())["per_mph_above_8"]
                 wfx = {k: v * (wind - 8) for k, v in per.items()}
                 mu = mu * np.array([1 + wfx["att_r"], 1 + wfx["rush_r"], 1 + wfx["att_r"], 1 + wfx["rush_r"]])
+        if rain:   # forecast rain at kickoff (lab 2026-11-12: fit 2019-23 in weather.json "rain"; OFF unless --rain)
+            import json as _json
+            from pathlib import Path as _P
+            rb = _json.loads(_P(__file__).with_name("weather.json").read_text()).get("rain")
+            if rb:
+                mu = mu * np.array([1 + rb["att_r"], 1 + rb["rush_r"], 1 + rb["att_r"], 1 + rb["rush_r"]])
+                wfx["ypa_r"] = (1 + wfx["ypa_r"]) * (1 + rb["ypa_r"]) - 1
         vcorr, vsd = self._vol_params(key)
         z = rng.multivariate_normal(np.zeros(4), vcorr, size=n)
         vol = np.clip(np.rint(mu + z * vsd), 5, 80).astype(int)

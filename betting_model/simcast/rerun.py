@@ -51,7 +51,7 @@ def rerun(proj_path: str) -> dict:
     fav, spread, total = meta.get("fav"), meta.get("spread"), meta.get("total")
     margin_home = (spread if fav == home else -spread) if (fav and spread is not None) else None
     sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home,
-                         qbs=qbs, wind=meta.get("wind"))
+                         qbs=qbs, wind=meta.get("wind"), rain=bool(meta.get("rain")))
     gs = None
     if fav and spread is not None and total is not None:
         g, _ = scores.load_games(sorted({key // 100 - i for i in range(5)}))

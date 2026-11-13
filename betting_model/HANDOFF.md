@@ -441,3 +441,6 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   SizzleSims v32. Best bets FINAL: `markets/*_bestbets_final.{csv,md}` (Kalshi re-pulled 7:08 PM, `*_kalshi_final.csv`,
   `*_kalshi_game_final.csv`); judgment drop: every McCarthy over single (same thesis as parlay #1). No BANKROLL pick.
   Credits 85 left. Grade after the game (grade_week.py --week 10), including the 12 picks.
+* RAIN (Travis asked): fit 2019-23 (att -5.2%, rush +5.9%, ypa -9.9%), held-out 2024-26 25 games: right direction, not
+  significant (pass_yds t=-0.55, rec t=-2.11 not a named target). OFF. Next: leave-one-season-out test 2019-26 (~100 rain
+  games; download 2019-23 weekly rosters). Tonight's WAS@NYG (heavy rain) adds one game. `lab/rain_fit.py`, `lab/rain_test.py`.

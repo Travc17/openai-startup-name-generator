@@ -205,6 +205,11 @@ Surprises and leads:
 
 ## Model review (2026-11-03): every test, passed and failed
 
+* 2026-11-12 night RAIN (`--rain`, weather.json "rain", OFF): fit 2019-23 (144 rain team-games): pass att -5.2%,
+  rushes +5.9%, yards/pass -9.9%. Held out 2024-26 (25 rain games): pass_yds -2.6% (t=-0.55; under-median 64% -> 50%), rec
+  -0.9% (t=-2.11), rec_yds -1.3% (t=-1.58), nothing worse at t>=+2. Failed the pre-registered bar (too few games); bigger
+  leave-one-season-out test next.
+
 * 2026-11-12 PM game score BLEND (model's own margin/total + closing line; weight fit 2022-24, judged 2025-26): weight
   0.00 on margin, 0.05 on total; 2025-26 margin RMSE 12.19 both, total 13.22 vs 13.21 (t=+0.72); winners right 63.5%
   model vs 66.5% line. FAILED: the closing line stays the score, winner and total of record.

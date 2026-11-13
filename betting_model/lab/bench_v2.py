@@ -24,14 +24,15 @@ ALL = {"off": {}, "n25": {"role_noise_sigma": 0.25}, "ee": {"early_exit": True},
        "ee_c25": {"early_exit": True, "role_noise_sigma": 0.25, "role_noise_t": 0.0}}
 DEFAULTS = {"early_exit": False, "early_exit_scale": 1.0, "share_conc_ref": None, "role_noise_sigma": None, "role_noise_t": 0.10, "qb_volume_k": None, "qb_volume_mode": "team"}
 PROD = {"early_exit": True, "role_noise_sigma": 0.25, "role_noise_t": 0.0}   # production since 2026-11-12
-ALL.update({"prod": PROD, "qv2": {**PROD, "qb_volume_k": 2.0}, "qv4": {**PROD, "qb_volume_k": 4.0}, "qv8": {**PROD, "qb_volume_k": 8.0}, "qvc8": {**PROD, "qb_volume_k": 8.0, "qb_volume_mode": "career"}})
+ALL.update({"prod": PROD, "qv2": {**PROD, "qb_volume_k": 2.0}, "qv4": {**PROD, "qb_volume_k": 4.0}, "qv8": {**PROD, "qb_volume_k": 8.0}, "qvc8": {**PROD, "qb_volume_k": 8.0, "qb_volume_mode": "career"},
+            "prodw": {**PROD, "_wind": True}, "rainw": {**PROD, "_wind": True, "_rain": True}})
 
 
 def _u(*parts) -> float:
     return zlib.crc32("|".join(map(str, parts)).encode()) / 2 ** 32
 
 
-def run(season: int, weeks: list[int], sims: int, variants: dict) -> pd.DataFrame:
+def run(season: int, weeks: list[int], sims: int, variants: dict, only: set | None = None, weather: dict | None = None) -> pd.DataFrame:
     m = nfl.build_model()
     gi_ = pd.read_parquet(data.DATA_DIR / f"pbp_{season}.parquet", columns=["game_id", "home_team", "away_team", "spread_line"]).drop_duplicates("game_id").set_index("game_id")
     wr = pd.read_parquet(data.DATA_DIR / f"roster_weekly_{season}.parquet", columns=["week", "team", "gsis_id", "status"])
@@ -43,7 +44,7 @@ def run(season: int, weeks: list[int], sims: int, variants: dict) -> pd.DataFram
     games = m.tg[(m.tg.key // 100 == season) & (m.tg.key % 100).isin(weeks)].drop_duplicates("game_id")
     rows = []
     for g in games.itertuples(index=False):
-        if g.game_id not in gi_.index:
+        if g.game_id not in gi_.index or (only is not None and g.game_id not in only):
             continue
         G = gi_.loc[g.game_id]
         home, away, wk = G.home_team, G.away_team, g.key % 100
@@ -64,10 +65,12 @@ def run(season: int, weeks: list[int], sims: int, variants: dict) -> pd.DataFram
         em = None if pd.isna(G.spread_line) else float(G.spread_line)   # nflverse spread_line = expected home margin
         seed = zlib.crc32(g.game_id.encode()) % 2 ** 31
         for v, over in variants.items():
-            for k_, v_ in {**DEFAULTS, **over}.items():
+            for k_, v_ in {**DEFAULTS, **{k: x for k, x in over.items() if not k.startswith("_")}}.items():
                 setattr(m.cfg, k_, v_)
+            wx = (weather or {}).get(g.game_id, {})
             try:
-                sim = m.simulate(home, away, g.key, roster, n_sims=sims, seed=seed, exp_margin_a=em, qbs=qbs)
+                sim = m.simulate(home, away, g.key, roster, n_sims=sims, seed=seed, exp_margin_a=em, qbs=qbs,
+                                 wind=wx.get("wind") if over.get("_wind") else None, rain=bool(over.get("_rain") and wx.get("rain")))
             except (ValueError, KeyError):
                 break
             for pid, s in sim["players"].items():

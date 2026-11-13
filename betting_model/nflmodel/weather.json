@@ -10,5 +10,18 @@
   "ypa_r": -0.0072,
   "att_r": -0.0032,
   "rush_r": 0.0013
+ },
+ "rain": {
+  "att_r": -0.0517,
+  "rush_r": 0.0585,
+  "ypa_r": -0.0993,
+  "fitted_on_seasons": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023
+  ],
+  "status": "pre-registered test 2026-11-12"
  }
 }

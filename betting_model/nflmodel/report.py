@@ -101,9 +101,9 @@ def hit_rate_parlays(usable, fee, min_legs=3, max_legs=6, lo=0.05, hi=0.40, beam
 
 
 def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, bankroll, fee,
-          fav=None, spread=None, total=None, model_line=None, blind=(), qbs=None, wind=None):
+          fav=None, spread=None, total=None, model_line=None, blind=(), qbs=None, wind=None, rain=False):
     margin_home = (spread if fav == home else -spread) if (fav and spread is not None) else None
-    sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home, qbs=qbs, wind=wind)
+    sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home, qbs=qbs, wind=wind, rain=rain)
     # blind spots: "Name" excludes every prop for that player; "Name:rec,rec_yds" excludes only those stats
     blind_stats = {}
     for b in blind:
@@ -124,7 +124,7 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
            "bankroll": bankroll, "fee": fee, "blind": blind_txt}
     # Layer 1 output: projections only (no prices), for the venue-agnostic bet finder (market.py)
     proj = projections.export(sim, name_of, home, away, key,
-                              meta={"fav": fav, "spread": spread, "total": total, "wind": wind,
+                              meta={"fav": fav, "spread": spread, "total": total, "wind": wind, "rain": bool(rain),
                                     "qbs": {t: name_of(q) for t, q in (qbs or {}).items() if q},
                                     "news": [{k: n.get(k) for k in ("player", "team", "status", "url")} for n in news]})
     for nm_, pl in proj["players"].items():
