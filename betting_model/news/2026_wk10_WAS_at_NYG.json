@@ -278,5 +278,12 @@
   "status": "Kaliakmanis, Yiadom, Barber, Togiai, Patrick, Yankoff (unchanged)",
   "url": "https://sports.yahoo.com/articles/week-10-inactives-commanders-235256710.html",
   "found_utc": "2026-11-13T00:06Z"
+ },
+ {
+  "player": "Weather",
+  "team": "NYG (outdoor, MetLife)",
+  "status": "Severe weather ~1 hour before kickoff: shelter in place, players off the field, thunder and lightning, heavy rain (Keim, Duggan via Heavy). NWS: ~51F, NE ~10 mph gusts to 20, 75% rain at kickoff. Possible lightning delay. Rain not modeled; --wind 12 kept (forecast 10-12)",
+  "url": "https://heavy.com/sports/nfl/new-york-giants/severe-weather-update-players-leave-field/",
+  "found_utc": "2026-11-13T00:20Z"
  }
 ]
