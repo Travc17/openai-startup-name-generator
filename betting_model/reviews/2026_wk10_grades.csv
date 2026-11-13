@@ -1,0 +1,43 @@
+game,resim,team,name,pos,stat,grade,median,lo,hi,book,best,actual,inside,side,pit,err_model,last_touch,injury,early_exit,err_book,err_best,lean,lean_right
+2026_wk10_WAS_at_NYG,False,NYG,Malik Nabers,WR,rec,A,6.0,3.0,10.0,5.5,5.6,5.0,True,in,0.344,1.0,Q4 00:34,,False,0.5,0.5999999999999996,over,False
+2026_wk10_WAS_at_NYG,False,NYG,Malik Nabers,WR,rec_yds,A,79.7,27.2,149.4,66.5,69.1,44.0,True,in,0.213,35.7,Q4 00:34,,False,22.5,25.099999999999994,over,False
+2026_wk10_WAS_at_NYG,False,NYG,Isaiah Likely,TE,rec,A,5.0,2.0,8.0,4.5,4.6,9.0,False,above,0.926,4.0,Q4 08:24,,False,4.5,4.4,over,True
+2026_wk10_WAS_at_NYG,False,NYG,Isaiah Likely,TE,rec_yds,A,48.9,13.5,99.9,46.5,47.0,127.0,False,above,0.966,78.1,Q4 08:24,,False,80.5,80.0,over,True
+2026_wk10_WAS_at_NYG,False,NYG,Malachi Fields,WR,rec,A,3.0,1.0,6.0,2.5,2.6,3.0,True,in,0.543,0.0,Q4 00:42,,False,0.5,0.3999999999999999,over,True
+2026_wk10_WAS_at_NYG,False,NYG,Malachi Fields,WR,rec_yds,A,36.3,4.0,90.8,25.5,27.7,62.0,True,in,0.745,25.700000000000003,Q4 00:42,,False,36.5,34.3,over,True
+2026_wk10_WAS_at_NYG,False,NYG,Devin Singletary,RB,rush_att,B,10.0,5.0,16.0,5.5,6.4,1.0,False,below,0.007,9.0,Q1 12:15,,True,4.5,5.4,over,False
+2026_wk10_WAS_at_NYG,False,NYG,Devin Singletary,RB,rush_yds,B,34.4,10.1,73.8,19.5,22.5,3.0,False,below,0.027,31.4,Q1 12:15,,True,16.5,19.5,over,False
+2026_wk10_WAS_at_NYG,False,NYG,Devin Singletary,RB,rec,B,2.0,0.0,5.0,1.5,1.6,0.0,True,in,0.087,2.0,Q1 12:15,,True,1.5,1.6,over,False
+2026_wk10_WAS_at_NYG,False,NYG,Devin Singletary,RB,rec_yds,B,11.8,0.0,41.2,8.5,9.2,0.0,True,in,0.115,11.8,Q1 12:15,,True,8.5,9.2,over,False
+2026_wk10_WAS_at_NYG,False,NYG,Cam Skattebo,RB,rush_att,B,14.0,7.0,21.0,16.5,16.0,18.0,True,in,0.78,4.0,Q4 02:10,,False,1.5,2.0,under,False
+2026_wk10_WAS_at_NYG,False,NYG,Cam Skattebo,RB,rush_yds,B,56.6,22.2,106.2,64.5,62.9,78.0,True,in,0.735,21.4,Q4 02:10,,False,13.5,15.100000000000001,under,False
+2026_wk10_WAS_at_NYG,False,NYG,Cam Skattebo,RB,rec,B,2.0,0.0,4.0,1.5,1.6,3.0,True,in,0.777,1.0,Q4 02:10,,False,1.5,1.4,over,True
+2026_wk10_WAS_at_NYG,False,NYG,Cam Skattebo,RB,rec_yds,B,8.8,0.0,36.3,7.5,7.8,44.0,False,above,0.94,35.2,Q4 02:10,,False,36.5,36.2,over,True
+2026_wk10_WAS_at_NYG,False,NYG,Darnell Mooney,WR,rec,B,1.0,0.0,4.0,1.5,1.4,2.0,True,in,0.61,1.0,Q4 00:39,,False,0.5,0.6000000000000001,under,False
+2026_wk10_WAS_at_NYG,False,NYG,Darnell Mooney,WR,rec_yds,B,17.2,0.0,61.6,13.5,14.2,8.0,True,in,0.358,9.2,Q4 00:39,,False,5.5,6.199999999999999,over,False
+2026_wk10_WAS_at_NYG,False,NYG,J.J. McCarthy,QB,pass_cmp,A,21.0,14.0,28.0,17.5,18.2,23.0,True,in,0.623,2.0,Q4 02:00,,False,5.5,4.800000000000001,over,True
+2026_wk10_WAS_at_NYG,False,NYG,J.J. McCarthy,QB,pass_att,A,33.0,24.0,43.0,29.5,30.2,36.0,True,in,0.637,3.0,Q4 02:00,,False,6.5,5.800000000000001,over,True
+2026_wk10_WAS_at_NYG,False,NYG,J.J. McCarthy,QB,pass_yds,A,248.9,154.7,351.4,201.5,211.0,293.0,True,in,0.719,44.099999999999994,Q4 02:00,,False,91.5,82.0,over,True
+2026_wk10_WAS_at_NYG,False,NYG,J.J. McCarthy,QB,pass_td,C,1.0,0.0,3.0,,,1.0,True,in,0.401,0.0,Q4 02:00,,False,,,,
+2026_wk10_WAS_at_NYG,False,NYG,J.J. McCarthy,QB,int,C,1.0,0.0,2.0,,,1.0,True,in,0.549,0.0,Q4 02:00,,False,,,,
+2026_wk10_WAS_at_NYG,False,WAS,Stefon Diggs,WR,rec,A,4.0,1.0,7.0,3.5,3.6,6.0,True,in,0.797,2.0,Q4 01:05,,False,2.5,2.4,over,True
+2026_wk10_WAS_at_NYG,False,WAS,Stefon Diggs,WR,rec_yds,A,39.2,8.2,88.0,38.5,38.6,83.0,True,in,0.882,43.8,Q4 01:05,,False,44.5,44.4,over,True
+2026_wk10_WAS_at_NYG,False,WAS,Chig Okonkwo,TE,rec,A,4.0,1.0,7.0,3.5,3.6,4.0,True,in,0.564,0.0,Q4 02:19,,False,0.5,0.3999999999999999,over,True
+2026_wk10_WAS_at_NYG,False,WAS,Chig Okonkwo,TE,rec_yds,A,32.1,5.5,72.4,35.5,34.8,24.0,True,in,0.382,8.100000000000001,Q4 02:19,,False,11.5,10.799999999999997,under,True
+2026_wk10_WAS_at_NYG,False,WAS,Antonio Williams,WR,rec,A,3.0,1.0,6.0,3.5,3.4,2.0,True,in,0.299,1.0,Q4 08:13,,False,1.5,1.4,under,True
+2026_wk10_WAS_at_NYG,False,WAS,Antonio Williams,WR,rec_yds,A,31.0,4.6,76.6,37.5,36.2,42.0,True,in,0.646,11.0,Q4 08:13,,False,4.5,5.799999999999997,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Treylon Burks,WR,rec,B,2.0,0.0,5.0,1.5,1.6,2.0,True,in,0.479,0.0,Q3 03:26,,False,0.5,0.3999999999999999,over,True
+2026_wk10_WAS_at_NYG,False,WAS,Treylon Burks,WR,rec_yds,B,22.8,0.0,70.2,26.5,25.8,27.0,True,in,0.556,4.199999999999999,Q3 03:26,,False,0.5,1.1999999999999993,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Rachaad White,RB,rush_att,B,9.0,4.0,15.0,10.5,10.2,11.0,True,in,0.686,2.0,Q4 02:48,"injured Q4 06:21, returned",False,0.5,0.8000000000000007,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Rachaad White,RB,rush_yds,B,35.0,10.3,76.2,38.5,37.8,47.0,True,in,0.665,12.0,Q4 02:48,"injured Q4 06:21, returned",False,8.5,9.200000000000003,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Rachaad White,RB,rec,C,1.0,0.0,4.0,2.5,2.2,1.0,True,in,0.45,0.0,Q4 02:48,"injured Q4 06:21, returned",False,1.5,1.2000000000000002,under,True
+2026_wk10_WAS_at_NYG,False,WAS,Rachaad White,RB,rec_yds,C,5.5,0.0,29.3,12.5,11.1,5.0,True,in,0.502,0.5,Q4 02:48,"injured Q4 06:21, returned",False,7.5,6.1,under,True
+2026_wk10_WAS_at_NYG,False,WAS,Austin Ekeler,RB,rush_att,B,6.0,2.0,13.0,8.5,8.0,9.0,True,in,0.721,3.0,Q4 01:33,,False,0.5,1.0,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Austin Ekeler,RB,rush_yds,B,23.7,4.1,61.8,29.5,28.3,26.0,True,in,0.551,2.3000000000000007,Q4 01:33,,False,3.5,2.3000000000000007,under,True
+2026_wk10_WAS_at_NYG,False,WAS,Austin Ekeler,RB,rec,C,0.0,0.0,3.0,1.5,1.2,4.0,False,above,0.971,4.0,Q4 01:33,,False,2.5,2.8,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Austin Ekeler,RB,rec_yds,C,0.0,0.0,19.2,10.5,8.4,26.0,False,above,0.942,26.0,Q4 01:33,,False,15.5,17.6,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Jayden Daniels,QB,pass_cmp,A,19.0,12.0,25.0,19.5,19.4,23.0,True,in,0.798,4.0,Q4 00:21,,False,3.5,3.6000000000000014,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Jayden Daniels,QB,pass_att,A,29.0,20.0,39.0,30.5,30.2,33.0,True,in,0.683,4.0,Q4 00:21,,False,2.5,2.8000000000000007,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Jayden Daniels,QB,pass_yds,A,189.7,107.7,277.4,202.5,199.9,249.0,True,in,0.808,59.30000000000001,Q4 00:21,,False,46.5,49.099999999999994,under,False
+2026_wk10_WAS_at_NYG,False,WAS,Jayden Daniels,QB,pass_td,C,1.0,0.0,3.0,,,3.0,True,in,0.884,2.0,Q4 00:21,,False,,,,
+2026_wk10_WAS_at_NYG,False,WAS,Jayden Daniels,QB,int,C,0.0,0.0,2.0,,,2.0,True,in,0.936,2.0,Q4 00:21,,False,,,,

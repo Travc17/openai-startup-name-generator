@@ -1,0 +1,79 @@
+[
+ {
+  "player": "Aaron Rodgers",
+  "team": "PIT QB",
+  "status": "Expected starter",
+  "url": "https://www.sharpfootballanalysis.com/fantasy/steelers-bengals-week-10-fantasy-football-preview-nfl-worksheet-rich-hribar-2026/",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Joe Burrow",
+  "team": "CIN QB",
+  "status": "Starter, no injury report listing found",
+  "url": "https://www.sharpfootballanalysis.com/fantasy/steelers-bengals-week-10-fantasy-football-preview-nfl-worksheet-rich-hribar-2026/",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Ja'Marr Chase",
+  "team": "CIN WR",
+  "status": "Not on the week 10 practice reports; an undated SI shoulder item is old. Playing",
+  "url": "https://www.bengals.com/news/bengals-steelers-week-10-2026-injury-report",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Andrei Iosivas",
+  "team": "CIN WR",
+  "status": "Designated to return from IR (thumb), full practice Thursday; activation undetermined. Not in pass 1; add as --players + --blind if activated",
+  "url": "https://steelersdepot.com/2026/11/bengals-week-10-thursday-injury-report-practice-window-opens-for-three-players/",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Ben Skowronek",
+  "team": "PIT WR",
+  "status": "Full practice (calf)",
+  "url": "https://sports.yahoo.com/articles/steelers-good-injury-news-three-155818014.html",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Kyle Dugger",
+  "team": "CIN S",
+  "status": "DNP Wed/Thu (quad) [defense: noted, not modeled]",
+  "url": "https://www.si.com/betting/steelers-vs-bengals-prediction-odds-spread-injuries-trends-for-nfl-week-10-01m7414skcz7",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "DeShon Elliott",
+  "team": "PIT S",
+  "status": "Limited (ankle) [defense: noted, not modeled]",
+  "url": "https://www.steelers.com/news/week-10-injury-report-bengals-x6285",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Cam Heyward / T.J. Watt",
+  "team": "PIT DL/LB",
+  "status": "Rest days [defense: noted, not modeled]",
+  "url": "https://sports.yahoo.com/articles/steelers-vs-bengals-week-10-110007649.html",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Weather",
+  "team": "CIN (outdoor, Paycor)",
+  "status": "Cold: feels like low 30s at kickoff, weekend mostly dry (pass 1, Friday). Wind not found; recheck pass 2",
+  "url": "https://local12.com/weather/weather-articles/strong-storms-possible-gusty-winds-expected-in-cincinnati-before-sharp-temperature-drop",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Schedule",
+  "team": "CIN",
+  "status": "Second game after Madrid (week 9 at ATL in Madrid) [noted, not modeled]",
+  "url": "https://www.covers.com/nfl/steelers-vs-bengals-prediction-picks-odds-early-leans-week-10-2026",
+  "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Lines",
+  "team": "PIT@CIN",
+  "status": "Consensus CIN -3.5, total 49.5 (5 books, Fri 1 AM ET)",
+  "url": "https://www.si.com/betting/steelers-vs-bengals-opening-odds-for-sunday-night-football-in-week-10-cincy-favored-at-home",
+  "found_utc": "2026-11-13T06:05Z"
+ }
+]
