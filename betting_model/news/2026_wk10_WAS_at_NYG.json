@@ -219,8 +219,36 @@
  {
   "player": "Van Jefferson",
   "team": "WAS WR",
-  "status": "Week 9 fill-in: 36 snaps (58%), 7 targets, 5-58 with Burks (foot) and Dyami Brown out; 5-12% snaps before. Burks back tonight, Brown on reserve: direct next-man-up backup -> BLIND SPOT for bets (CLAUDE.md), kept in the sims",
+  "status": "Week 9 fill-in: 36 snaps (58%), 7 targets, 5-58 while Burks (foot) and Dyami Brown sat; 5-12% snaps before. Burks back tonight, Brown on reserve: direct next-man-up backup, blind spot for bets (CLAUDE.md), kept in the sims",
   "url": "https://www.si.com/nfl/commanders/onsi/commanders-stefon-diggs-usage-rams",
   "found_utc": "2026-11-12T22:55Z"
+ },
+ {
+  "player": "Commanders inactives",
+  "team": "WAS",
+  "status": "TE Colson Yankoff, C Lucas Patrick, QB Athan Kaliakmanis (3rd QB), DL Ricky Barber, CB Isaac Yiadom, G Tanoa Togiai. Burks active (not listed)",
+  "url": "https://www.hogshaven.com/washington-commanders-injuries/454574/washington-commanders-vs-new-york-giants-inactives-in-nfl-week-10",
+  "found_utc": "2026-11-12T23:58Z"
+ },
+ {
+  "player": "Giants inactives",
+  "team": "NYG",
+  "status": "Official list not found in search at 7:00 PM ET; Harrison (LB) questionable",
+  "url": "https://sports.yahoo.com/articles/giants-vs-commanders-week-10-233121911.html",
+  "found_utc": "2026-11-12T23:58Z"
+ },
+ {
+  "player": "Cam Skattebo",
+  "team": "NYG RB",
+  "status": "Treated as PLAYING: Yahoo live blog today says he is back in the lineup; Athlon: off the injury report. A VAVEL live blog conflicts (likely stale week 9 text). Sit scenario run for status sensitivity",
+  "url": "https://sports.yahoo.com/articles/giants-vs-commanders-week-10-233121911.html",
+  "found_utc": "2026-11-12T23:58Z"
+ },
+ {
+  "player": "Lines",
+  "team": "WAS@NYG",
+  "status": "Consensus NYG -1.5, total 40.5 at 23:57 UTC (5 books)",
+  "url": "https://www.hogshaven.com/washington-commanders-injuries/454574/washington-commanders-vs-new-york-giants-inactives-in-nfl-week-10",
+  "found_utc": "2026-11-12T23:58Z"
  }
 ]

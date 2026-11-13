@@ -426,3 +426,13 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   est. 7% x P x (1-P) min 1c for cheap tickets). Midday test: 4-leg tickets ~10-12c, best-estimate return +1 to +2%.
 * FINAL PASS: add `--blind "Van Jefferson"` (direct next-man-up backup; week 9 fill-in 58% snaps with Burks and Brown out,
   5-12% before; CLAUDE.md blind-spot rule). Diggs: no change (61-65% snaps all year, coach-capped, not hurt). News items added.
+* FINAL PASS (7:00 PM ET): update + regression No drift. WAS inactives (Hogs Haven): Yankoff, Patrick, Kaliakmanis (QB3),
+  Barber, Yiadom, Togiai; Burks active. NYG official list not found; Skattebo treated as playing (Yahoo live blog, Athlon;
+  a VAVEL blog conflicts). Lines NYG -1.5 / 40.5. Van Jefferson blind. Zero CHECK lines (two false INACTIVE CHECK hits from my
+  own news wording "out" fixed by rewording; code fix queued: skip statuses marked PLAYING/blind). Medians unchanged vs 2b.
+  Skattebo-sits scenario: Singletary 10 -> 15 carries, 34 -> 55 yds. SizzleSims v31 (close books): WAS 20, NYG 21, NYG 54%;
+  McCarthy record 18/30 211 (model 21/33 249, book 29.5/201.5). Captures: `*_books_close*`, `*_kalshi_close.csv`,
+  `*_books_alt_close.csv`, `*_kalshi_game_close.csv`; credits 97 left.
+* BEST BETS (close): `markets/*_bestbets_close.{csv,md}`; judgment drops (same McCarthy-volume thesis as pick #1):
+  32+ att, 19+ cmp, 24+ cmp (`--drop`). No BANKROLL pick. Travis places any bet himself.
+* AFTER THE GAME: grade (GRADE_PROMPT / grade_week.py --week 10), including the 12 best bets and the best-estimate record.

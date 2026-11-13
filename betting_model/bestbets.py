@@ -227,6 +227,10 @@ def main(a) -> int:
     print(f"candidates: {len(C)} singles/game lines ({(C["flags"] == '').sum()} under the 80% cap), {len(Pq)} parlays from {len(L)} legs")
 
     # ---------------- pick 10: at least 3 parlays, no player+stat used twice, best score first ----------------
+    if a.drop:                                            # prompt judgment: drop a pick, the next one takes its place
+        C = C[~C.pick.isin(a.drop)]
+        Pq = Pq[~Pq.pick.isin(a.drop)] if len(Pq) else Pq
+        print(f"dropped by judgment: {a.drop}")
     pool_s = C[C["flags"] == ""].sort_values("score", ascending=False)
     pool_p = Pq.sort_values("score", ascending=False) if len(Pq) else Pq
     picks, used, per_player = [], set(), {}
@@ -389,6 +393,7 @@ if __name__ == "__main__":
     ap.add_argument("--out")
     ap.add_argument("--leg-pool", type=int, default=28)
     ap.add_argument("--min-ticket", type=float, default=0.05)
+    ap.add_argument("--drop", nargs="*", default=[], help='exact pick text to drop (BESTBETS_PROMPT.md section 4), e.g. "J.J. McCarthy 32+ pass att"')
     ap.add_argument("--long-pool", type=int, default=30, help="legs considered for the long parlays")
     ap.add_argument("--beam", type=int, default=300)
     ap.add_argument("--min-long", type=float, default=0.02, help="cheapest long ticket allowed (2c)")
