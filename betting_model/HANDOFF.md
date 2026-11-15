@@ -464,3 +464,8 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   Iosivas OUT (not activated); Dugger out; Freiermuth questionable (illness, added Sat): treated as playing, sit
   scenario small (Metcalf 7 -> 8 targets); Harmon activated (DT). Weather ~40F, wind 3-4 mph, dry: no flags.
   Zero CHECK lines; medians unchanged vs pass 1. SizzleSims republished. Scheduled passes Sun 12:30 PM and 6:55 PM stand.
+* RANGES (Travis 11/15): `ranges.py`, `RANGES_PROMPT.md`, skill mode `ranges`, `nflmodel/window_calibration.json`
+  (backtest window hit rates). PIT at CIN ranges in `analysis/2026_wk10_PIT_at_CIN_ranges.{md,csv}`. Context landing =
+  untested scenario, graded weekly (GRADE_PROMPT 7b). Scheme context needs PFF defensive facets (not on this machine).
+* INDEPENDENT TEST (Travis 11/15): a fresh side agent with no model context is writing its own PIT at CIN projections to
+  `analysis/2026_wk10_PIT_at_CIN_independent.md`; grade it beside the record after the game.

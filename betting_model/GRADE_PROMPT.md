@@ -60,6 +60,11 @@ Write each into `reviews/lessons.csv`: same lesson again = add the game, raise `
 3. Everything else: no change. Say so, with the count still needed.
 Betting rules never change from this prompt (2+ seasons of closing lines AND Travis's approval).
 
+## 7b. Ranges and the context landing (RANGES_PROMPT.md)
+For every game with `analysis/<game>_ranges.csv`: share of actuals inside the 50% and 70% windows (vs the stated
+confidence), record miss vs context-landing miss, and how often "lean up/down" was right. Add the counts to the ledger
+row "context landing"; 3 consistent weeks = a MODEL_LAB test.
+
 ## 8. Record and reply
 * `python simcast/build_page.py`, publish SizzleSims to the same URL (scorecards on every played game).
 * Commit `reviews/` (grades CSV, grade md, grades_log.csv, lessons.csv), `simcast/games/`, any fix; update

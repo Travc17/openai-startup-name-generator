@@ -28,6 +28,7 @@ step. This skill only says which file to run, in what order, and what every mode
 | `grade-week` | `GRADE_PROMPT.md` via `grade_week.py --week N --league --simcast` (saved files, no reruns; in-game injuries checked) | every projected game graded, league panel, lessons ledger, code fixes only for bugs |
 | `improve` | `IMPROVE_PROMPT.md` via `improve_report.py --league` (after grade-week) | evidence, one MODEL_LAB test per week or "no change" with counts, improve_log entry |
 | `bestbets` | `BESTBETS_PROMPT.md` via `bestbets.py` (Kalshi prices only; runs after every final pass) | 12 picks: 10 ranked (3+ parlays) + 2 long parlays (4-8 legs), labels, bankroll plan |
+| `ranges` | `RANGES_PROMPT.md` via `ranges.py` (latest pass; no prices) | prediction, 50%/70% windows with backtest confidence, rating, rank, context landing |
 | `full` | `sim`, then `bets` | both |
 
 ## Rules that bind every mode (CLAUDE.md wins on any conflict)
