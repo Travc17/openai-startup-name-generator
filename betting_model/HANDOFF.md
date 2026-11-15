@@ -470,6 +470,10 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   WR Brandon Smith signed (no PIT snaps). Weather 40-48F, wind calm-7 mph, rain 0-6%: no flags. Zero CHECK lines; every
   median identical to pass 2a (record unchanged: PIT 23, CIN 27, CIN 61%). SizzleSims republished (v38).
   FINAL (6:55 PM ET trigger) budget: 29 credits. Kalshi 7 + books props 10 + game lines 2 = 19; skip alt (3) if short.
+* PASS 2b (Travis asked, Sun 4 PM ET): update + regression No drift. Lines unchanged on all 5 books (2 credits, 27 left;
+  markets/2026_wk10_PIT_at_CIN_books_pm_gamelines.csv). Freiermuth still questionable, no Sunday update (game-time decision).
+  Record identical to pass 2 (0 median changes). Sit scenario (25k, scratchpad only): Metcalf 7 -> 8 targets, +1 yd to
+  Metcalf/Bernard/D. Washington, Rodgers -3.5 yds. FINAL budget: 27 credits (Kalshi 7 + props 10 + game lines 2 = 19).
 * RANGES (Travis 11/15): `ranges.py`, `RANGES_PROMPT.md`, skill mode `ranges`, `nflmodel/window_calibration.json`
   (backtest window hit rates). PIT at CIN ranges in `analysis/2026_wk10_PIT_at_CIN_ranges.{md,csv}`. Context landing =
   untested scenario, graded weekly (GRADE_PROMPT 7b). Scheme context needs PFF defensive facets (not on this machine).
