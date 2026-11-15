@@ -40,6 +40,30 @@ market (model median shown); trust the market side more (it has beaten the model
 | 27 | Emmett Johnson (KC) | rush yds | 62 | 53-77 (46%) | 49-86 (66%) | Low (blind spot) | 51 | down | GAP: model 16 |
 | 28 | Khalil Herbert (ATL) | rush yds | 10 | 2-20 (46%) | 0-27 (66%) | Low (blind spot) | 9 | down |  |
 
+## Matchups: what each defense allows (context; rank 1 = allows the fewest, 32 = the most)
+
+### ATL defense (faces KC)
+
+| vs | Allows per game | Rank (1 = fewest) | Per target / carry vs league | Last 4 games | Read |
+|---|---|---|---|---|---|
+| WR rec yds | 159 | 23 of 32 | 1.02x (rank 18) | 130 (tighter lately) | middle |
+| TE rec yds | 50 | 15 of 32 | 0.98x (rank 14) | 46 (steady) | middle |
+| RB rec yds | 31 | 16 of 32 | 0.77x (rank 6) | 36 (softer lately) | middle |
+| RB rush yds | 109 | 25 of 32 | 1.12x (rank 28) | 153 (softer lately) | SOFT |
+| QB pass yds | 241 | 20 of 32 | 0.96x (rank 13) | 216 (steady) | middle |
+
+### KC defense (faces ATL)
+
+| vs | Allows per game | Rank (1 = fewest) | Per target / carry vs league | Last 4 games | Read |
+|---|---|---|---|---|---|
+| WR rec yds | 113 | 2 of 32 | 0.81x (rank 2) | 118 (steady) | TOUGH |
+| TE rec yds | 65 | 26 of 32 | 0.94x (rank 10) | 48 (tighter lately) | SOFT |
+| RB rec yds | 42 | 29 of 32 | 1.29x (rank 29) | 47 (steady) | SOFT |
+| RB rush yds | 73 | 7 of 32 | 0.81x (rank 2) | 78 (steady) | TOUGH |
+| QB pass yds | 220 | 7 of 32 | 0.91x (rank 7) | 212 (steady) | TOUGH |
+
+Defensive and line absences (noted, not modeled): Jaylon Moore (KC OT): Out (ankle); Divine Deablo (ATL LB): Out (forearm)
+
 ## Context behind each landing (untested factors, each shown)
 
 * **Drake London** (ATL WR, home): snaps last 4: 100%, 81%, 96%, 97%; target share last 4 27% vs season 28%; routes trend steady

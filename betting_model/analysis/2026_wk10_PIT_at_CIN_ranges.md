@@ -44,6 +44,30 @@ market (model median shown); trust the market side more (it has beaten the model
 | 31 | Pat Freiermuth (PIT) | catches | 2.4 | 1.0-4.0 (52%) | 1.0-5.0 (71%) | Low (blind spot) | 2.7 | up |  |
 | 32 | Pat Freiermuth (PIT) | rec yds | 27 | 12-48 (50%) | 3-61 (70%) | Low (blind spot) | 39 | up |  |
 
+## Matchups: what each defense allows (context; rank 1 = allows the fewest, 32 = the most)
+
+### CIN defense (faces PIT)
+
+| vs | Allows per game | Rank (1 = fewest) | Per target / carry vs league | Last 4 games | Read |
+|---|---|---|---|---|---|
+| WR rec yds | 136 | 10 of 32 | 0.95x (rank 15) | 142 (steady) | middle |
+| TE rec yds | 81 | 31 of 32 | 1.22x (rank 31) | 59 (tighter lately) | SOFT |
+| RB rec yds | 32 | 17 of 32 | 1.07x (rank 18) | 25 (tighter lately) | middle |
+| RB rush yds | 88 | 14 of 32 | 1.08x (rank 25) | 98 (steady) | middle |
+| QB pass yds | 249 | 23 of 32 | 1.04x (rank 21) | 225 (steady) | middle |
+
+### PIT defense (faces CIN)
+
+| vs | Allows per game | Rank (1 = fewest) | Per target / carry vs league | Last 4 games | Read |
+|---|---|---|---|---|---|
+| WR rec yds | 138 | 12 of 32 | 0.86x (rank 4) | 128 (steady) | middle |
+| TE rec yds | 57 | 21 of 32 | 1.19x (rank 30) | 77 (softer lately) | middle |
+| RB rec yds | 47 | 32 of 32 | 1.13x (rank 23) | 54 (steady) | SOFT |
+| RB rush yds | 70 | 4 of 32 | 0.86x (rank 5) | 42 (tighter lately) | TOUGH |
+| QB pass yds | 242 | 22 of 32 | 0.97x (rank 14) | 259 (steady) | middle |
+
+Defensive and line absences (noted, not modeled): Kyle Dugger (CIN S): DNP Wed/Thu (quad); DeShon Elliott (PIT S): Limited (ankle); Cam Heyward / T.J. Watt (PIT DL/LB): Rest days; Kyle Dugger (CIN S): Out (quad); Derrick Harmon (PIT DT): Activated from IR Saturday
+
 ## Context behind each landing (untested factors, each shown)
 
 * **Ja'Marr Chase** (CIN WR, home): snaps last 4: 89%, 87%, 96%, 84%; target share last 4 34% vs season 27%; routes trend rising

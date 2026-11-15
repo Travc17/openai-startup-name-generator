@@ -32,10 +32,40 @@ market (model median shown); trust the market side more (it has beaten the model
 | 19 | Jordan Addison (MIN) | catches | 3.4 | 2.0-5.0 (52%) | 1.0-6.0 (71%) | Low (blind spot) | 2.8 | down |  |
 | 20 | Justin Jefferson (MIN) | rec yds | 79 | 53-110 (50%) | 42-129 (70%) | Low (blind spot) | 79 | even |  |
 | 21 | Jordan Addison (MIN) | rec yds | 48 | 26-77 (50%) | 18-95 (70%) | Low (blind spot) | 39 | down |  |
-| 22 | Jordan Mason (MIN) | catches | 1.4 | 0.0-2.0 (47%) | 0.0-2.0 (67%) | Low (blind spot) | 0.9 | down |  |
-| 23 | Aaron Jones (MIN) | catches | 1.4 | 1.0-3.0 (47%) | 0.0-3.0 (67%) | Low (blind spot) | 1.3 | down |  |
-| 24 | Aaron Jones (MIN) | rec yds | 10 | 2-20 (48%) | 2-29 (66%) | Low (blind spot) | 10 | even |  |
-| 25 | Jordan Mason (MIN) | rec yds | 4 | 4-13 (48%) | 4-19 (66%) | Low (blind spot) | 2 | down |  |
+| 22 | Gavin Bartholomew (MIN) | catches | 2.0 | 2.0-3.0 (47%) | 2.0-4.0 (67%) | Low (blind spot) | 2.6 | up | GAP: model 0.0 |
+| 23 | Jordan Mason (MIN) | catches | 1.4 | 0.0-2.0 (47%) | 0.0-2.0 (67%) | Low (blind spot) | 0.9 | down |  |
+| 24 | Ben Yurosek (MIN) | catches | 1.2 | 1.0-2.0 (47%) | 1.0-3.0 (67%) | Low (blind spot) | 2.1 | up | GAP: model 0.0 |
+| 25 | Aaron Jones (MIN) | catches | 1.4 | 1.0-3.0 (47%) | 0.0-3.0 (67%) | Low (blind spot) | 1.3 | down |  |
+| 26 | Myles Price (MIN) | catches | 1.4 | 0.0-2.0 (47%) | 0.0-3.0 (67%) | Low (blind spot) | 1.4 | even |  |
+| 27 | Gavin Bartholomew (MIN) | rec yds | 17 | 17-29 (48%) | 17-37 (66%) | Low (blind spot) | 20 | up | GAP: model 0 |
+| 28 | Ben Yurosek (MIN) | rec yds | 8 | 8-19 (48%) | 8-27 (66%) | Low (blind spot) | 11 | up | GAP: model 0 |
+| 29 | Aaron Jones (MIN) | rec yds | 10 | 2-20 (48%) | 2-29 (66%) | Low (blind spot) | 10 | even |  |
+| 30 | Myles Price (MIN) | rec yds | 14 | 2-30 (48%) | 2-42 (66%) | Low (blind spot) | 15 | up |  |
+| 31 | Jordan Mason (MIN) | rec yds | 4 | 4-13 (48%) | 4-19 (66%) | Low (blind spot) | 2 | down |  |
+
+## Matchups: what each defense allows (context; rank 1 = allows the fewest, 32 = the most)
+
+### GB defense (faces MIN)
+
+| vs | Allows per game | Rank (1 = fewest) | Per target / carry vs league | Last 4 games | Read |
+|---|---|---|---|---|---|
+| WR rec yds | 156 | 21 of 32 | 0.89x (rank 6) | 186 (softer lately) | middle |
+| TE rec yds | 41 | 2 of 32 | 0.88x (rank 7) | 52 (softer lately) | TOUGH |
+| RB rec yds | 34 | 21 of 32 | 1.08x (rank 19) | 33 (steady) | middle |
+| RB rush yds | 93 | 16 of 32 | 0.99x (rank 15) | 84 (steady) | middle |
+| QB pass yds | 232 | 14 of 32 | 0.91x (rank 6) | 272 (softer lately) | middle |
+
+### MIN defense (faces GB)
+
+| vs | Allows per game | Rank (1 = fewest) | Per target / carry vs league | Last 4 games | Read |
+|---|---|---|---|---|---|
+| WR rec yds | 119 | 4 of 32 | 0.90x (rank 9) | 90 (tighter lately) | TOUGH |
+| TE rec yds | 46 | 8 of 32 | 0.95x (rank 12) | 43 (steady) | TOUGH |
+| RB rec yds | 21 | 5 of 32 | 0.82x (rank 7) | 18 (steady) | TOUGH |
+| RB rush yds | 104 | 22 of 32 | 1.04x (rank 22) | 131 (softer lately) | middle |
+| QB pass yds | 187 | 2 of 32 | 0.90x (rank 4) | 154 (tighter lately) | TOUGH |
+
+Defensive and line absences (noted, not modeled): Micah Parsons (GB DE): Out; Sean Rhyan / Zaire Franklin (GB C / LB): Rhyan out, Franklin doubtful; Blake Cashman (MIN LB): Out
 
 ## Context behind each landing (untested factors, each shown)
 
@@ -73,6 +103,15 @@ market (model median shown); trust the market side more (it has beaten the model
   * rush yds: matchup 0.99x lg (rank 15) x1.00; role x0.90; vs GB 4 games x0.98; away 4 games x1.09
   * catches: matchup n/a; role x0.82; vs GB 4 games x1.03; away 4 games x1.08
   * rec yds: matchup 1.08x lg (rank 19) x1.04; role x0.82; vs GB 4 games x1.08; away 4 games x1.06
+* **Myles Price** (MIN WR, away): snaps last 4: 20%, 3%, 4%, 60%; target share last 4 7% vs season 5%; routes trend falling
+  * catches: matchup n/a; role x1.21; vs GB 1 games x0.86; away 4 games x1.00
+  * rec yds: matchup 0.89x lg (rank 6) x0.95; role x1.21; vs GB 1 games x0.86; away 4 games x1.08
+* **Ben Yurosek** (MIN TE, away): snaps last 4: 55%, 51%, 43%, 21%; target share last 4 3% vs season 3%; routes trend falling
+  * catches: matchup n/a; role x1.00; vs GB 1 games x1.43; away 2 games x1.20
+  * rec yds: matchup 0.88x lg (rank 7) x0.94; role x1.00; vs GB 1 games x1.29; away 2 games x1.20
+* **Gavin Bartholomew** (MIN TE, away): snaps last 4: 62%, 12%, 4%, 12%; target share last 4 6% vs season 5%; routes trend steady
+  * catches: matchup n/a; role x1.17; vs GB 0 games x1.00; away 3 games x1.12
+  * rec yds: matchup 0.88x lg (rank 7) x0.94; role x1.17; vs GB 0 games x1.00; away 3 games x1.06
 * **Kirk Cousins** (MIN QB, away): QB
   * pass yds: matchup 0.91x lg (rank 6) x0.95; role x1.00; vs GB 0 games x1.00; away 5 games x0.97
   * attempts: matchup n/a; role x1.00; vs GB 0 games x1.00; away 5 games x0.94

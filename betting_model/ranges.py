@@ -51,6 +51,40 @@ def shrink(ratio, n, k):
     return 1.0 + (ratio - 1.0) * n / (n + k) if np.isfinite(ratio) and n else 1.0
 
 
+def defense_profile(m, season, key, D):
+    """What each defense allows, by position: yards per game (rank 1 = fewest allowed), per target / per carry vs the
+    league (from floor_legs.defense), and the last 4 games vs the season (trend). Context only (tested neutral as an
+    input; the sims already use team-level defense)."""
+    pg = m.pg[(m.pg.key // 100 == season) & (m.pg.key < key)]
+    out = {}
+    for lab, pos, col in (("WR rec yds", "WR", "rec_yds"), ("TE rec yds", "TE", "rec_yds"), ("RB rec yds", "RB", "rec_yds"),
+                          ("RB rush yds", "RB", "rush_yds")):
+        g = pg[pg.pos == pos].groupby(["defteam", "game_id", "key"])[col].sum().reset_index().sort_values("key")
+        per = g.groupby("defteam")[col].mean()
+        l4 = g.groupby("defteam").tail(4).groupby("defteam")[col].mean()
+        rk = per.rank(method="min")
+        ratio, prk = D[(pos, "rush" if col == "rush_yds" else "rec")]
+        out[lab] = (per, rk, l4, ratio, prk)
+    qp = m.qbm.p[(m.qbm.p.key // 100 == season) & (m.qbm.p.key < key)]
+    g = qp.groupby(["defteam", "game_id", "key"]).yards.sum().reset_index().sort_values("key")
+    per = g.groupby("defteam").yards.mean()
+    out["QB pass yds"] = (per, per.rank(method="min"), g.groupby("defteam").tail(4).groupby("defteam").yards.mean(), *D[("QB", "pass")])
+    return out
+
+
+def matchup_lines(prof, defteam, offteam):
+    L = [f"### {defteam} defense (faces {offteam})", "",
+         "| vs | Allows per game | Rank (1 = fewest) | Per target / carry vs league | Last 4 games | Read |", "|---|---|---|---|---|---|"]
+    for lab, (per, rk, l4, ratio, prk) in prof.items():
+        if defteam not in per.index:
+            continue
+        v, r, v4, q = per[defteam], int(rk[defteam]), l4.get(defteam, float("nan")), ratio.get(defteam, float("nan"))
+        trend = "softer lately" if v4 > 1.15 * v else ("tighter lately" if v4 < 0.85 * v else "steady")
+        read = "TOUGH" if r <= 8 else ("SOFT" if r >= 25 else "middle")
+        L.append(f"| {lab} | {v:.0f} | {r} of 32 | {q:.2f}x (rank {int(prk.get(defteam, 0))}) | {v4:.0f} ({trend}) | {read} |")
+    return L
+
+
 def main(a) -> int:
     from rerun import rerun, check
     with contextlib.redirect_stdout(io.StringIO()):
@@ -213,6 +247,12 @@ def main(a) -> int:
         L.append(f"| {i} | {r.player} ({r.team}) | {LABEL[r.stat]} | {fmt(r.pred, r.stat)} | {fmt(r.w50[0], r.stat)}-{fmt(r.w50[1], r.stat)} ({r.c50:.0%}) | "
                  f"{fmt(r.w70[0], r.stat)}-{fmt(r.w70[1], r.stat)} ({r.c70:.0%}) | {r.rating} | {fmt(r.ctx, r.stat)} | {r.lean} | "
                  f"{'GAP: model ' + fmt(r.model, r.stat) if r.gap else ''} |")
+    prof = defense_profile(m, season, key, D)
+    L += ["", "## Matchups: what each defense allows (context; rank 1 = allows the fewest, 32 = the most)", ""]
+    L += matchup_lines(prof, home, away) + [""] + matchup_lines(prof, away, home)
+    outs = [n_ for n_ in proj["meta"].get("news", []) if "[defense" in str(n_.get("status", "")) or "[OL" in str(n_.get("status", ""))]
+    if outs:
+        L += ["", "Defensive and line absences (noted, not modeled): " + "; ".join(f"{n_['player']} ({n_['team']}): {n_['status'].split(' [')[0]}" for n_ in outs)]
     L += ["", "## Context behind each landing (untested factors, each shown)", ""]
     for name, (team, pos, role, scheme, is_home) in ctx_lines.items():
         sub = R[R.player == name]

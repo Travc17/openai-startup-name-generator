@@ -40,8 +40,12 @@ It replays the saved sims exactly (stops on any mismatch) and writes the .md (ra
 First line: record score, winner and total, and the pass it comes from. Then:
 1. The ranked table: player, stat, prediction, 50% window (confidence), 70% window (confidence), rating, context
    landing, lean.
-2. The three biggest context leans (up or down) with the factors behind them, each labeled untested.
-3. Status-sensitive players (questionable) and what moves if they sit.
+2. MATCHUPS (Travis 2026-11-15: "I want more matchup context in your replies"): for each defense, what it allows
+   to WRs, TEs, RB receiving, RB rushing and QB passing: yards per game and rank (1 = fewest), per target / carry
+   vs league, last 4 games vs season (softer or tighter lately), TOUGH / SOFT; key defensive and line absences.
+   Then the trends to know: which matchups line up with a rising or falling role.
+3. The three biggest context leans (up or down) with the factors behind them, each labeled untested.
+4. Status-sensitive players (questionable) and what moves if they sit.
 Tags [Certain] / [Likely] / [Guessing]. Never write " - ".
 
 ## Save

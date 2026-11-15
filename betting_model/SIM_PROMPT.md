@@ -109,6 +109,8 @@ First line: predicted score and win chance. Then:
    with snaps in the sims: QB line; each receiver's targets, catches, yards; each rusher's carries and yards. Show the
    model's own median beside any QB or rusher line where they differ.
 2. Key players' 80% ranges and A/B/C grades (the Predictions panel).
+2b. Matchups (Travis 2026-11-15): what each defense allows by position (per game, rank, per target/carry, last 4
+   trend, TOUGH/SOFT) from `ranges.py`, key defensive absences, and the trends to know.
 3. Inputs used, each with its URL. Things noted but NOT modeled, each with its URL.
 4. Status-sensitive players and what changes if they sit.
 5. What changed since the last run, and why.
