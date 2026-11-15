@@ -103,5 +103,12 @@
   "status": "On reserve (nflverse weekly roster): out",
   "url": "https://github.com/nflverse/nflverse-data/releases/tag/weekly_rosters",
   "found_utc": "2026-11-15T16:00Z"
+ },
+ {
+  "player": "Josh Downs",
+  "team": "KC WR",
+  "status": "Traded from IND this week; first game with KC. Reid: he will play after strong practices; projections range from under 20 snaps to 35-50% (KC eases new players in). No KC usage on file: blind spot",
+  "url": "https://sports.yahoo.com/articles/chiefs-hc-andy-reid-reveals-192736115.html",
+  "found_utc": "2026-11-15T16:05Z"
  }
 ]

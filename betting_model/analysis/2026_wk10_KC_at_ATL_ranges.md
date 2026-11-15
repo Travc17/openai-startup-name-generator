@@ -18,22 +18,22 @@ market (model median shown); trust the market side more (it has beaten the model
 | 5 | Kyle Pitts (ATL) | catches | 3.4 | 2.0-5.0 (52%) | 1.0-6.0 (71%) | High | 4.2 | up |  |
 | 6 | Jahan Dotson (ATL) | catches | 2.4 | 1.0-3.0 (52%) | 0.0-4.0 (71%) | High | 2.4 | even |  |
 | 7 | Xavier Worthy (KC) | catches | 2.8 | 1.0-4.0 (52%) | 0.0-5.0 (71%) | High | 2.4 | down |  |
-| 8 | Josh Downs (KC) | catches | 2.8 | 1.0-5.0 (52%) | 1.0-6.0 (71%) | High | 2.5 | down |  |
-| 9 | Drake London (ATL) | rec yds | 69 | 45-100 (50%) | 34-118 (70%) | High | 59 | down |  |
-| 10 | Rashee Rice (KC) | rec yds | 54 | 32-83 (50%) | 22-100 (70%) | High | 65 | up |  |
-| 11 | Kyle Pitts (ATL) | rec yds | 36 | 21-55 (50%) | 15-67 (70%) | High | 48 | up |  |
-| 12 | Travis Kelce (KC) | rec yds | 47 | 26-72 (50%) | 18-88 (70%) | High | 42 | down |  |
-| 13 | Bijan Robinson (ATL) | rec yds | 27 | 15-44 (50%) | 10-54 (70%) | High | 25 | down |  |
-| 14 | Jahan Dotson (ATL) | rec yds | 27 | 12-48 (50%) | 6-63 (70%) | High | 20 | down |  |
-| 15 | Xavier Worthy (KC) | rec yds | 29 | 11-55 (50%) | 3-70 (70%) | High | 26 | down |  |
-| 16 | Josh Downs (KC) | rec yds | 26 | 5-53 (50%) | 0-69 (70%) | High | 22 | down |  |
-| 17 | Patrick Mahomes (KC) | pass yds | 239 | 187-290 (49%) | 162-321 (70%) | High | 225 | down |  |
-| 18 | Michael Penix Jr. (ATL) | pass yds | 212 | 166-258 (49%) | 144-286 (70%) | High | 204 | even |  |
-| 19 | Michael Penix Jr. (ATL) | attempts | 31 | 26-37 (47%) | 24-39 (67%) | Medium | 32 | even |  |
-| 20 | Patrick Mahomes (KC) | attempts | 32 | 27-37 (47%) | 24-40 (67%) | Medium | 33 | even |  |
-| 21 | Bijan Robinson (ATL) | rush yds | 83 | 58-113 (47%) | 47-133 (67%) | Medium | 66 | down |  |
-| 22 | Olamide Zaccheaus (ATL) | catches | 1.4 | 0.0-2.0 (47%) | 0.0-3.0 (67%) | Medium | 1.3 | down |  |
-| 23 | Olamide Zaccheaus (ATL) | rec yds | 9 | 0-24 (48%) | 0-34 (66%) | Low | 7 | down |  |
+| 8 | Drake London (ATL) | rec yds | 69 | 45-100 (50%) | 34-118 (70%) | High | 59 | down |  |
+| 9 | Rashee Rice (KC) | rec yds | 54 | 32-83 (50%) | 22-100 (70%) | High | 65 | up |  |
+| 10 | Kyle Pitts (ATL) | rec yds | 36 | 21-55 (50%) | 15-67 (70%) | High | 48 | up |  |
+| 11 | Travis Kelce (KC) | rec yds | 47 | 26-72 (50%) | 18-88 (70%) | High | 42 | down |  |
+| 12 | Bijan Robinson (ATL) | rec yds | 27 | 15-44 (50%) | 10-54 (70%) | High | 25 | down |  |
+| 13 | Jahan Dotson (ATL) | rec yds | 27 | 12-48 (50%) | 6-63 (70%) | High | 20 | down |  |
+| 14 | Xavier Worthy (KC) | rec yds | 29 | 11-55 (50%) | 3-70 (70%) | High | 26 | down |  |
+| 15 | Patrick Mahomes (KC) | pass yds | 239 | 187-290 (49%) | 162-321 (70%) | High | 225 | down |  |
+| 16 | Michael Penix Jr. (ATL) | pass yds | 212 | 166-258 (49%) | 144-286 (70%) | High | 204 | even |  |
+| 17 | Michael Penix Jr. (ATL) | attempts | 31 | 26-37 (47%) | 24-39 (67%) | Medium | 32 | even |  |
+| 18 | Patrick Mahomes (KC) | attempts | 32 | 27-37 (47%) | 24-40 (67%) | Medium | 33 | even |  |
+| 19 | Bijan Robinson (ATL) | rush yds | 83 | 58-113 (47%) | 47-133 (67%) | Medium | 66 | down |  |
+| 20 | Olamide Zaccheaus (ATL) | catches | 1.4 | 0.0-2.0 (47%) | 0.0-3.0 (67%) | Medium | 1.3 | down |  |
+| 21 | Olamide Zaccheaus (ATL) | rec yds | 9 | 0-24 (48%) | 0-34 (66%) | Low | 7 | down |  |
+| 22 | Josh Downs (KC) | catches | 2.8 | 1.0-5.0 (52%) | 1.0-6.0 (71%) | Low (blind spot) | 2.5 | down |  |
+| 23 | Josh Downs (KC) | rec yds | 26 | 5-53 (50%) | 0-69 (70%) | Low (blind spot) | 22 | down |  |
 | 24 | Emmett Johnson (KC) | catches | 3.0 | 2.0-4.0 (47%) | 2.0-5.0 (67%) | Low (blind spot) | 3.7 | up | GAP: model 1.0 |
 | 25 | Khalil Herbert (ATL) | catches | 0.6 | 0.0-1.0 (47%) | 0.0-2.0 (67%) | Low (blind spot) | 0.6 | even |  |
 | 26 | Emmett Johnson (KC) | rec yds | 21 | 17-32 (48%) | 17-42 (66%) | Low (blind spot) | 24 | up | GAP: model 4 |
