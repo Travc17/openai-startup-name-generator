@@ -468,7 +468,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   -115 at 3 books): markets/2026_wk10_PIT_at_CIN_books_mid_gamelines.csv (2 credits, 29 left; props NOT re-pulled to save the
   SNF final). Iosivas still on reserve; Freiermuth questionable (illness), treated as playing; Pittman Jr./R. Wilson reserve;
   WR Brandon Smith signed (no PIT snaps). Weather 40-48F, wind calm-7 mph, rain 0-6%: no flags. Zero CHECK lines; every
-  median identical to pass 2a (SF 30/26 style record unchanged: PIT 23, CIN 27). SizzleSims republished (v38).
+  median identical to pass 2a (record unchanged: PIT 23, CIN 27, CIN 61%). SizzleSims republished (v38).
   FINAL (6:55 PM ET trigger) budget: 29 credits. Kalshi 7 + books props 10 + game lines 2 = 19; skip alt (3) if short.
 * RANGES (Travis 11/15): `ranges.py`, `RANGES_PROMPT.md`, skill mode `ranges`, `nflmodel/window_calibration.json`
   (backtest window hit rates). PIT at CIN ranges in `analysis/2026_wk10_PIT_at_CIN_ranges.{md,csv}`. Context landing =
