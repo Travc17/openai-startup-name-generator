@@ -488,3 +488,13 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   KC backs blind (next man up): model gives Walker's carries to Nate Carter/Ott/E. Johnson; books post Emmett Johnson at
   17 carries / 73.5 yds vs model 4 / 16 (GAP). Roof game: no weather. 25k: KC 25, ATL 23, KC 61%. Zero CHECK lines.
 * ranges.py: blind players with a book line now included (rated Low (blind spot)).
+
+### SF at DAL (wk10, Sun 4:25 PM ET, roof) pass 1 (2026-11-15 ~11:40 AM ET)
+* Record: SF 30, DAL 26 (SF 64%); consensus SF -4, total 55.5 (5 books, 11 AM ET). Files: news/2026_wk10_SF_at_DAL.json,
+  projections/2026_wk10_SF_at_DAL.json, markets/2026_wk10_SF_at_DAL_books_open*.csv, analysis/2026_wk10_SF_at_DAL_ranges.md.
+* Out: Evans, Ferguson, Goodson (IR), Mingo, Malik Davis (res), Christian Kirk (res), Pearsall (IR).
+  Blind: Deebo (first game back), Keenan Allen (traded from IND, simulated from his IND role: model 46 yds vs book 22.5),
+  Abanikanda (elevated, Goodson's next man up), Turpin (first game back), James Mitchell (Ferguson's next man up) + depth adds.
+* Bug fixed this pass: --blind matched names exactly ("Deebo Samuel" missed "Deebo Samuel Sr."); now name_key. Ledger row added.
+* Model vs book: Purdy pass yds model 221 vs book 259 (record 251); Watkins model 0 catches vs book 1.5 (Allen's IND share eats SF WR targets).
+* Open: final pass after inactives (~2:55 PM ET) if Travis wants it; Kalshi not pulled (credits).

@@ -91,7 +91,8 @@ def main(a) -> int:
     proj, sim, home, away = run["proj"], run["sim"]["players"], run["home"], run["away"]
     game = f"{away}@{home}"
     G = grades(a.proj)
-    blind = set(proj["meta"].get("adjustments", {}).get("blind") or [])
+    from nflmodel.market import name_key as _nk          # "Sr."/"Jr." suffix-safe (2026-11-15)
+    blind = {_nk(b.split(":")[0]) for b in (proj["meta"].get("adjustments", {}).get("blind") or []) if ":" not in b}
     P = {name_key(n): (n, v) for n, v in proj["players"].items()}
     qbs = {v["pid"] for v in proj["players"].values() if v["pos"] == "QB"}
 
@@ -132,7 +133,7 @@ def main(a) -> int:
         if pos == "QB" and r.stat in ("pass_att", "pass_cmp", "pass_yds"):
             grade = G.get((k, r.stat), "A")
         flags = []
-        if nm in blind or grade == "C":
+        if _nk(nm) in blind or grade == "C":
             flags.append("blind spot / grade C")
         if p > CAP:
             flags.append(f"model {p:.0%} > 80%")

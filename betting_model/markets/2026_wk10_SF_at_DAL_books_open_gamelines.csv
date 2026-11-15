@@ -1,0 +1,21 @@
+venue,player,stat,line,side,price,captured_at
+DraftKings,Dallas Cowboys,spreads,4.5,team,-112,2026-11-15T16:00:08+00:00
+DraftKings,San Francisco 49ers,spreads,-4.5,team,-108,2026-11-15T16:00:08+00:00
+DraftKings,Over,totals,55.5,over,-118,2026-11-15T16:00:08+00:00
+DraftKings,Under,totals,55.5,under,-102,2026-11-15T16:00:08+00:00
+Caesars,Dallas Cowboys,spreads,4.0,team,-109,2026-11-15T16:00:08+00:00
+Caesars,San Francisco 49ers,spreads,-4.0,team,-110,2026-11-15T16:00:08+00:00
+Caesars,Over,totals,56.0,over,-107,2026-11-15T16:00:08+00:00
+Caesars,Under,totals,56.0,under,-113,2026-11-15T16:00:08+00:00
+FanDuel,Dallas Cowboys,spreads,4.5,team,-110,2026-11-15T16:00:08+00:00
+FanDuel,San Francisco 49ers,spreads,-4.5,team,-110,2026-11-15T16:00:08+00:00
+FanDuel,Over,totals,55.5,over,-115,2026-11-15T16:00:08+00:00
+FanDuel,Under,totals,55.5,under,-105,2026-11-15T16:00:08+00:00
+BetMGM,Dallas Cowboys,spreads,4.0,team,-105,2026-11-15T16:00:08+00:00
+BetMGM,San Francisco 49ers,spreads,-4.0,team,-112,2026-11-15T16:00:08+00:00
+BetMGM,Over,totals,56.0,over,-108,2026-11-15T16:00:08+00:00
+BetMGM,Under,totals,56.0,under,-110,2026-11-15T16:00:08+00:00
+Fanatics,Dallas Cowboys,spreads,4.0,team,-110,2026-11-15T16:00:08+00:00
+Fanatics,San Francisco 49ers,spreads,-4.0,team,-110,2026-11-15T16:00:08+00:00
+Fanatics,Over,totals,55.5,over,-110,2026-11-15T16:00:08+00:00
+Fanatics,Under,totals,55.5,under,-110,2026-11-15T16:00:08+00:00

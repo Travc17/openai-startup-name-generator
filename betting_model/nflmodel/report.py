@@ -105,21 +105,24 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
     margin_home = (spread if fav == home else -spread) if (fav and spread is not None) else None
     sim = model.simulate(home, away, key, roster, n_sims=n_sims, seed=7, exp_margin_a=margin_home, qbs=qbs, wind=wind, rain=rain)
     # blind spots: "Name" excludes every prop for that player; "Name:rec,rec_yds" excludes only those stats
-    blind_stats = {}
+    # matched on name_key so "Deebo Samuel" also flags "Deebo Samuel Sr." (suffix bug found 2026-11-15)
+    from .market import name_key
+    blind_stats, blind_names = {}, {}
     for b in blind:
         nm_, _, sts = b.partition(":")
-        blind_stats[nm_.strip()] = {x.strip() for x in sts.split(",") if x.strip()} or None
+        blind_stats[name_key(nm_)] = {x.strip() for x in sts.split(",") if x.strip()} or None
+        blind_names[name_key(nm_)] = nm_.strip()
 
     def is_blind(nm_, stat=None):
-        if nm_ not in blind_stats:
+        if name_key(nm_) not in blind_stats:
             return False
-        st_ = blind_stats[nm_]
+        st_ = blind_stats[name_key(nm_)]
         if st_ is None:
             return True
         # rush+rec yds contains receiving: blind if any receiving stat is (2026-11-05)
         return stat is not None and (stat in st_ or (stat == "rec_rush_yds" and bool({"rec", "rec_yds", "targets"} & set(st_))))
-    blind_txt = sorted(nm_ if st_ is None else f"{nm_} ({', '.join(STAT_LABEL.get(x, x) for x in sorted(st_))})"
-                       for nm_, st_ in blind_stats.items())
+    blind_txt = sorted(blind_names[k_] if st_ is None else f"{blind_names[k_]} ({', '.join(STAT_LABEL.get(x, x) for x in sorted(st_))})"
+                       for k_, st_ in blind_stats.items())
     rep = {"home": home, "away": away, "date": date.today().isoformat(), "sims": n_sims, "news": news,
            "bankroll": bankroll, "fee": fee, "blind": blind_txt}
     # Layer 1 output: projections only (no prices), for the venue-agnostic bet finder (market.py)
@@ -128,8 +131,8 @@ def build(model, name_of, lookup, roster, home, away, key, n_sims, board, news, 
                                     "qbs": {t: name_of(q) for t, q in (qbs or {}).items() if q},
                                     "news": [{k: n.get(k) for k in ("player", "team", "status", "url")} for n in news]})
     for nm_, pl in proj["players"].items():
-        if nm_ in blind_stats:
-            pl["blind"] = sorted(blind_stats[nm_]) if blind_stats[nm_] else "all"
+        if name_key(nm_) in blind_stats:
+            pl["blind"] = sorted(blind_stats[name_key(nm_)]) if blind_stats[name_key(nm_)] else "all"
     rep["projections"] = proj
 
     # ---------- score ----------

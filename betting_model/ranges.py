@@ -99,13 +99,14 @@ def main(a) -> int:
     S = run["sim"]["players"]
     gfile = HERE / "simcast/games" / (Path(a.proj).stem + ".json")
     pred = {(p["name"], p["stat"]): p for p in json.loads(gfile.read_text())["pred"]} if gfile.exists() else {}
+    from nflmodel.market import name_key as _nk
     blind, blind_stats = set(), {}
-    for b in proj["meta"].get("adjustments", {}).get("blind") or []:
+    for b in proj["meta"].get("adjustments", {}).get("blind") or []:   # matched on name_key ("Sr."/"Jr." suffixes)
         if ":" in b:
             nm_, st_ = b.split(":", 1)
-            blind_stats.setdefault(nm_, set()).update(st_.split(","))
+            blind_stats.setdefault(_nk(nm_), set()).update(st_.split(","))
         else:
-            blind.add(b)
+            blind.add(_nk(b))
     D = defense(m, season, key)
     pffm = getattr(m, "pffm", None)
     if pffm is None:
@@ -132,7 +133,7 @@ def main(a) -> int:
         real_role = pos == "QB" or (len(rl) and (rl.t_share.mean() >= 0.12 or rl.c_share.mean() >= 0.30)) \
             or float(np.median(tonight.get("rush_att", [0]))) >= 8 or float(np.median(tonight.get("targets", [0]))) >= 3 \
             or any(p_.get("book") is not None for (n_, s_), p_ in pred.items() if n_ == name)   # next man up tonight / books post him
-        blind_flag = name in blind or not (grades & {"A", "B"})
+        blind_flag = _nk(name) in blind or not (grades & {"A", "B"})
         if blind_flag and not real_role:
             continue                                   # depth players: no tight ranges
         # blind spots with a real role (new QB, return from IR) stay in, rated Low (blind spot)
@@ -200,7 +201,7 @@ def main(a) -> int:
                 w70 = (min(w50[0], round(w70[0])), max(w50[1], round(w70[1])))
             if pv < (0.5 if st == "rec" else 3):
                 continue                                   # no real role in this stat tonight
-            sb = blind_flag or st in blind_stats.get(name, set()) or (st in ("rec", "rec_yds") and "targets" in blind_stats.get(name, set()))
+            sb = blind_flag or st in blind_stats.get(_nk(name), set()) or (st in ("rec", "rec_yds") and "targets" in blind_stats.get(_nk(name), set()))
             # context factors (untested)
             kind = "rush" if st == "rush_yds" else ("pass" if pos == "QB" else "rec")
             dk = (pos if pos in ("WR", "TE", "RB") else "QB", kind)

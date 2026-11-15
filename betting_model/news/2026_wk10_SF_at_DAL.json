@@ -1,0 +1,142 @@
+[
+ {
+  "player": "Brock Purdy",
+  "team": "SF QB",
+  "status": "Starter (started week 9; no week 10 designation found)",
+  "url": "https://www.thefantasyfootballers.com/news/646731/brock-purdy-three-total-tds-in-week-9-win/",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Mike Evans",
+  "team": "SF WR",
+  "status": "Out (Achilles)",
+  "url": "https://sports.yahoo.com/articles/49ers-week-10-injury-report-032734583.html",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Deebo Samuel",
+  "team": "SF WR",
+  "status": "Cleared to play: returns from injury (last game week 5); first game back = blind spot",
+  "url": "https://www.49erswebzone.com/news/205123-cleared-williams-questionable-against-cowboys/",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Keenan Allen",
+  "team": "SF WR",
+  "status": "Traded from IND this week; first SF game, simulated from his IND role: blind spot",
+  "url": "https://sports.yahoo.com/articles/49ers-week-10-injury-report-032734583.html",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Trent Williams",
+  "team": "SF OT",
+  "status": "Questionable (shoulder) [OL: noted, not modeled]",
+  "url": "https://www.49erswebzone.com/articles/205119-cowboys-injury-report-williams-questionable/",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "49ers cornerbacks",
+  "team": "SF CB",
+  "status": "Lenoir, Green, Stout questionable; Hobbs on IR [defense: noted, not modeled]",
+  "url": "https://sports.yahoo.com/articles/lack-49ers-roster-moves-hints-132622334.html",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Dak Prescott",
+  "team": "DAL QB",
+  "status": "Starter (no designation found)",
+  "url": "https://www.si.com/nfl/cowboys/onsi/cowboys-injury-report-raises-major-defensive-concerns-ahead-of-49ers-game",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "George Pickens",
+  "team": "DAL WR",
+  "status": "Off the injury report (hamstring): playing",
+  "url": "https://www.si.com/nfl/cowboys/onsi/george-pickens-emphatically-confirms-week-10-status-cowboys-49ers",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Jake Ferguson",
+  "team": "DAL TE",
+  "status": "Out (knee/ankle)",
+  "url": "https://www.bloggingtheboys.com/dallas-cowboys-injuries/226515/final-game-status-george-pickens-joey-porter-jr",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Tyler Goodson",
+  "team": "DAL RB",
+  "status": "Placed on injured reserve (knee): out",
+  "url": "https://www.dallasnews.com/sports/cowboys/article/tyler-goodson-ir-cowboys-roster-moves-nfl-week-10-22530889.php",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Jonathan Mingo",
+  "team": "DAL WR",
+  "status": "Out (ankle/foot)",
+  "url": "https://www.bloggingtheboys.com/dallas-cowboys-injuries/226515/final-game-status-george-pickens-joey-porter-jr",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Israel Abanikanda",
+  "team": "DAL RB",
+  "status": "Elevated from practice squad, expected RB2 behind Javonte Williams; direct next man up for Goodson: blind spot",
+  "url": "https://sports.yahoo.com/articles/cowboys-multiple-roster-moves-ahead-214356127.html",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "James Mitchell",
+  "team": "DAL TE",
+  "status": "Signed to the active roster from the practice squad (Ferguson sidelined); next man up = blind spot",
+  "url": "https://sports.yahoo.com/articles/cowboys-multiple-roster-moves-ahead-214356127.html",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Cowboys defense",
+  "team": "DAL DEF",
+  "status": "Ezeiruaku, Locke out; Juanyeh Thomas doubtful; Bland, Porter Jr. questionable [defense: noted, not modeled]",
+  "url": "https://insidethestar.com/week-10-injury-report-cowboys-injuries-continue-to-pile-up-on-defense",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Weather",
+  "team": "DAL (roof stadium)",
+  "status": "Indoor: no weather inputs",
+  "url": "https://www.bloggingtheboys.com/dallas-cowboys-roster/226214/2026-nfl-week-10-cowboys-49ers",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "Lines",
+  "team": "SF@DAL",
+  "status": "Consensus SF -4, total 55.5 (5 books, 11 AM ET)",
+  "url": "https://www.bloggingtheboys.com/dallas-cowboys-roster/226214/2026-nfl-week-10-cowboys-49ers",
+  "found_utc": "2026-11-15T16:10Z"
+ },
+ {
+  "player": "KaVontae Turpin",
+  "team": "DAL WR",
+  "status": "Active on the week 10 roster, first game back from an absence: blind spot",
+  "url": "https://sports.yahoo.com/articles/cowboys-multiple-roster-moves-ahead-214356127.html",
+  "found_utc": "2026-11-15T16:25Z"
+ },
+ {
+  "player": "Malik Davis",
+  "team": "DAL RB",
+  "status": "On reserve (nflverse week 10 roster): not active",
+  "url": "https://sports.yahoo.com/articles/cowboys-multiple-roster-moves-ahead-214356127.html",
+  "found_utc": "2026-11-15T16:25Z"
+ },
+ {
+  "player": "Christian Kirk",
+  "team": "SF WR",
+  "status": "On reserve (nflverse week 10 roster): not active",
+  "url": "https://sports.yahoo.com/articles/49ers-week-10-injury-report-032734583.html",
+  "found_utc": "2026-11-15T16:25Z"
+ },
+ {
+  "player": "Ricky Pearsall",
+  "team": "SF WR",
+  "status": "On injured reserve (knee): not active",
+  "url": "https://www.cbssports.com/fantasy/football/news/49ers-ricky-pearsall-ruled-out-for-week-10",
+  "found_utc": "2026-11-15T16:25Z"
+ }
+]
