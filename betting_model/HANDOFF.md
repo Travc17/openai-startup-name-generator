@@ -464,6 +464,12 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   Iosivas OUT (not activated); Dugger out; Freiermuth questionable (illness, added Sat): treated as playing, sit
   scenario small (Metcalf 7 -> 8 targets); Harmon activated (DT). Weather ~40F, wind 3-4 mph, dry: no flags.
   Zero CHECK lines; medians unchanged vs pass 1. SizzleSims republished. Scheduled passes Sun 12:30 PM and 6:55 PM stand.
+* PASS 2 (scheduled, Sun 12:45 PM ET): update + regression No drift. Lines unchanged on all 5 books (CIN -3.5, 49.5; under
+  -115 at 3 books): markets/2026_wk10_PIT_at_CIN_books_mid_gamelines.csv (2 credits, 29 left; props NOT re-pulled to save the
+  SNF final). Iosivas still on reserve; Freiermuth questionable (illness), treated as playing; Pittman Jr./R. Wilson reserve;
+  WR Brandon Smith signed (no PIT snaps). Weather 40-48F, wind calm-7 mph, rain 0-6%: no flags. Zero CHECK lines; every
+  median identical to pass 2a (SF 30/26 style record unchanged: PIT 23, CIN 27). SizzleSims republished (v38).
+  FINAL (6:55 PM ET trigger) budget: 29 credits. Kalshi 7 + books props 10 + game lines 2 = 19; skip alt (3) if short.
 * RANGES (Travis 11/15): `ranges.py`, `RANGES_PROMPT.md`, skill mode `ranges`, `nflmodel/window_calibration.json`
   (backtest window hit rates). PIT at CIN ranges in `analysis/2026_wk10_PIT_at_CIN_ranges.{md,csv}`. Context landing =
   untested scenario, graded weekly (GRADE_PROMPT 7b). Scheme context needs PFF defensive facets (not on this machine).

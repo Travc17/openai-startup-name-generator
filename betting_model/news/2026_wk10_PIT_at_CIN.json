@@ -110,5 +110,47 @@
   "status": "About 40F at kickoff, wind 3-4 mph, rain chance minimal: no --wind, no --rain",
   "url": "https://www.covers.com/nfl/steelers-vs-bengals-prediction-picks-nov-15-2026",
   "found_utc": "2026-11-15T02:40Z"
+ },
+ {
+  "player": "Pat Freiermuth",
+  "team": "PIT TE",
+  "status": "Questionable (illness), no Sunday update yet: treated as PLAYING; inactives ~6:50 PM ET decide it",
+  "url": "https://sports.yahoo.com/articles/steelers-pat-freiermuth-questionable-sunday-181826318.html",
+  "found_utc": "2026-11-15T17:45Z"
+ },
+ {
+  "player": "Brandon Smith",
+  "team": "PIT WR",
+  "status": "Signed to the active roster from the practice squad (no PIT snaps on file: cannot be simulated)",
+  "url": "https://steelersdepot.com/2026/11/steelers-release-updated-week-10-depth-chart-for-bengals-game/",
+  "found_utc": "2026-11-15T17:45Z"
+ },
+ {
+  "player": "Michael Pittman Jr. / Roman Wilson",
+  "team": "PIT WR",
+  "status": "On reserve (nflverse week 10 roster): not active",
+  "url": "https://www.behindthesteelcurtain.com/pittsburgh-steelers-news/177867/steelers-te-pat-freiermuth-may-not-play-vs-bengals",
+  "found_utc": "2026-11-15T17:45Z"
+ },
+ {
+  "player": "Andrei Iosivas",
+  "team": "CIN WR",
+  "status": "Still on reserve Sunday (nflverse week 10 roster): not activated",
+  "url": "https://sports.yahoo.com/articles/bengals-final-injury-report-updates-190326614.html",
+  "found_utc": "2026-11-15T17:45Z"
+ },
+ {
+  "player": "Weather",
+  "team": "CIN (outdoor, Paycor)",
+  "status": "Sunday forecasts: 40-48F at kickoff, wind calm to 7 mph, rain 0-6%: no --wind, no --rain",
+  "url": "https://dknetwork.draftkings.com/2026/11/13/nfl-week-10-weather-forecast/",
+  "found_utc": "2026-11-15T17:45Z"
+ },
+ {
+  "player": "Lines",
+  "team": "PIT@CIN",
+  "status": "Sunday 12:45 PM ET, 5 books: CIN -3.5, total 49.5 (unchanged vs pass 1; under juiced to -115 at 3 books)",
+  "url": "https://www.covers.com/nfl/steelers-vs-bengals-prediction-picks-odds-early-leans-week-10-2026",
+  "found_utc": "2026-11-15T17:45Z"
  }
 ]
