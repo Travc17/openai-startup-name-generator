@@ -482,3 +482,9 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * ranges.py: windows now centered on the record (sims' spread) with a GAP flag when model and market disagree; count
   windows whole numbers; stat-only blind spots honored; no rows for stats with no real role.
 * Final pass after inactives not scheduled; offer it.
+
+## KC at ATL (Sun 2026-11-15 1:00 PM ET): pass 1 + ranges (~11:15 AM ET, before inactives)
+* KC -3, total 47.5 (10 credits, 38 left). Out: Walker (groin), Branch, Brian Robinson (IR), Trey Sermon (reserve).
+  KC backs blind (next man up): model gives Walker's carries to Nate Carter/Ott/E. Johnson; books post Emmett Johnson at
+  17 carries / 73.5 yds vs model 4 / 16 (GAP). Roof game: no weather. 25k: KC 25, ATL 23, KC 61%. Zero CHECK lines.
+* ranges.py: blind players with a book line now included (rated Low (blind spot)).

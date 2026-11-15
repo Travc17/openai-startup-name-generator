@@ -94,7 +94,10 @@ def main(a) -> int:
             continue
         grades = {p_["grade"] for (n_, s_), p_ in pred.items() if n_ == name}
         rl = m.pg[(m.pg.pid == pid) & (m.pg.key // 100 == season) & (m.pg.key < key)]
-        real_role = pos == "QB" or (len(rl) and (rl.t_share.mean() >= 0.12 or rl.c_share.mean() >= 0.30))
+        tonight = S[pid]
+        real_role = pos == "QB" or (len(rl) and (rl.t_share.mean() >= 0.12 or rl.c_share.mean() >= 0.30)) \
+            or float(np.median(tonight.get("rush_att", [0]))) >= 8 or float(np.median(tonight.get("targets", [0]))) >= 3 \
+            or any(p_.get("book") is not None for (n_, s_), p_ in pred.items() if n_ == name)   # next man up tonight / books post him
         blind_flag = name in blind or not (grades & {"A", "B"})
         if blind_flag and not real_role:
             continue                                   # depth players: no tight ranges

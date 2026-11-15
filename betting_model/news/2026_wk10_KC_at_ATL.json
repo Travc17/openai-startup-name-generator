@@ -1,0 +1,107 @@
+[
+ {
+  "player": "Patrick Mahomes",
+  "team": "KC QB",
+  "status": "Full participant (knee/right elbow), no designation: starting",
+  "url": "https://www.chiefs.com/news/week-10-injury-report-chiefs-vs-falcons-2026",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Kenneth Walker III",
+  "team": "KC RB",
+  "status": "Ruled OUT (groin), downgraded Saturday",
+  "url": "https://heavy.com/sports/nfl/kansas-city-chiefs/nate-carter-jacob-dejesus-kenneth-walker/",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Jaydn Ott",
+  "team": "KC RB",
+  "status": "Questionable (hamstring); treated as PLAYING",
+  "url": "https://atozsports.com/nfl/kansas-city-chiefs-news/chiefs-final-injury-report-week-10-falcons-kenneth-walker/",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Nate Carter",
+  "team": "KC RB",
+  "status": "Elevated from practice squad with Walker sidelined; in the sims from the depth chart; next man up = blind spot",
+  "url": "https://heavy.com/sports/nfl/kansas-city-chiefs/nate-carter-jacob-dejesus-kenneth-walker/",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Jacob De Jesus",
+  "team": "KC WR",
+  "status": "Elevated as returner; no NFL snaps on file: cannot be simulated",
+  "url": "https://www.1047thecave.com/chiefs-elevate-2-players-from-practice-squad-for-week-10/",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Travis Kelce",
+  "team": "KC TE",
+  "status": "Expected to play (no designation)",
+  "url": "https://athlonsports.com/nfl/trending/final-injury-report-for-chiefs-falcons-will-patrick-mahomes-kenneth-walker-iii-play",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Jaylon Moore",
+  "team": "KC OT",
+  "status": "Out (ankle) [OL: noted, not modeled]",
+  "url": "https://heavy.com/sports/nfl/kansas-city-chiefs/chiefs-final-injury-report-falcons-update/",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Zachariah Branch",
+  "team": "ATL WR",
+  "status": "Out (hamstring)",
+  "url": "https://sports.yahoo.com/articles/falcons-list-3-players-questionable-184014379.html",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Brian Robinson Jr.",
+  "team": "ATL RB",
+  "status": "Placed on injured reserve: out",
+  "url": "https://www.yardbarker.com/nfl/articles/kansas_city_chiefs_practice_squad_elevations_set_up_former_falcon_for_revenge_game_fill_return_specialist_void_in_week_10/s1_17313_44561440",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Khalil Herbert",
+  "team": "ATL RB",
+  "status": "Promoted to the active roster (played week 9)",
+  "url": "https://www.atlantafalcons.com/news/falcons-elevate-jammie-robinson-tj-quinn-chiefs-week-10",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Michael Penix Jr.",
+  "team": "ATL QB",
+  "status": "Starter (last game's starter; no injury listing found)",
+  "url": "https://www.atlantafalcons.com/news/atlanta-falcons-week-10-depth-chart-vs-kansas-city-chiefs",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Divine Deablo",
+  "team": "ATL LB",
+  "status": "Out (forearm) [defense: noted, not modeled]",
+  "url": "https://sports.yahoo.com/articles/falcons-list-3-players-questionable-184014379.html",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Weather",
+  "team": "ATL (retractable roof)",
+  "status": "Indoor/roof game: no weather inputs; roof decision not found",
+  "url": "https://www.atlantafalcons.com/news/atlanta-falcons-week-10-depth-chart-vs-kansas-city-chiefs",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Lines",
+  "team": "KC@ATL",
+  "status": "Consensus KC -3, total 47.5 (5 books, 10:50 AM ET)",
+  "url": "https://www.cbssports.com/nfl/news/nfl-week-10-injury-report-chiefs-kenneth-walker-aj-brown/",
+  "found_utc": "2026-11-15T15:50Z"
+ },
+ {
+  "player": "Trey Sermon",
+  "team": "ATL RB",
+  "status": "On reserve (nflverse weekly roster): out",
+  "url": "https://github.com/nflverse/nflverse-data/releases/tag/weekly_rosters",
+  "found_utc": "2026-11-15T16:00Z"
+ }
+]
