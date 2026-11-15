@@ -75,5 +75,40 @@
   "status": "Consensus CIN -3.5, total 49.5 (5 books, Fri 1 AM ET)",
   "url": "https://www.si.com/betting/steelers-vs-bengals-opening-odds-for-sunday-night-football-in-week-10-cincy-favored-at-home",
   "found_utc": "2026-11-13T06:05Z"
+ },
+ {
+  "player": "Andrei Iosivas",
+  "team": "CIN WR",
+  "status": "Downgraded to OUT Saturday (not activated from IR)",
+  "url": "https://www.bengals.com/news/bengals-steelers-week-10-2026-injury-report",
+  "found_utc": "2026-11-15T02:40Z"
+ },
+ {
+  "player": "Kyle Dugger",
+  "team": "CIN S",
+  "status": "Out (quad) [defense: noted, not modeled]",
+  "url": "https://steelersdepot.com/2026/11/bengals-week-10-friday-injury-report-one-former-steeler-ruled-out/",
+  "found_utc": "2026-11-15T02:40Z"
+ },
+ {
+  "player": "Pat Freiermuth",
+  "team": "PIT TE",
+  "status": "Questionable (illness), added Saturday; treated as PLAYING; a sit scenario is run (Tonyan more snaps)",
+  "url": "https://www.nbcsports.com/nfl/profootballtalk/rumor-mill/news/steelers-say-pat-freiermuth-is-questionable-for-sunday-night-vs-bengals-with-an-illness",
+  "found_utc": "2026-11-15T02:40Z"
+ },
+ {
+  "player": "Derrick Harmon",
+  "team": "PIT DT",
+  "status": "Activated from IR Saturday [defense: noted, not modeled]",
+  "url": "https://www.steelers.com/news/steelers-activate-harmon-ahead-of-bengals-game",
+  "found_utc": "2026-11-15T02:40Z"
+ },
+ {
+  "player": "Weather",
+  "team": "CIN (outdoor, Paycor)",
+  "status": "About 40F at kickoff, wind 3-4 mph, rain chance minimal: no --wind, no --rain",
+  "url": "https://www.covers.com/nfl/steelers-vs-bengals-prediction-picks-nov-15-2026",
+  "found_utc": "2026-11-15T02:40Z"
  }
 ]

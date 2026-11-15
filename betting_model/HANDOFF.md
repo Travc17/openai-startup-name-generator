@@ -460,3 +460,7 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Code: roster check no longer fires on "not on the active roster"; inactive check skips "treated as playing"/"kept in
   the sims" (the 11/12 false hits). Regression No drift.
 * Scheduled: pass 2 Sun 12:30 PM ET (trig_01Fq5TsPYnjyLWprn8Q3rSp2), pass 3 Sun 6:55 PM ET (trig_019cNc9cyDfFBbuZ2npPyuyQ).
+* PASS 2a (Sat 9:40 PM ET, Travis asked): update + regression No drift. Lines unchanged (CIN -3.5, 49.5; 2 credits, 58 left).
+  Iosivas OUT (not activated); Dugger out; Freiermuth questionable (illness, added Sat): treated as playing, sit
+  scenario small (Metcalf 7 -> 8 targets); Harmon activated (DT). Weather ~40F, wind 3-4 mph, dry: no flags.
+  Zero CHECK lines; medians unchanged vs pass 1. SizzleSims republished. Scheduled passes Sun 12:30 PM and 6:55 PM stand.
