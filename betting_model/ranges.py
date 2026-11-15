@@ -65,7 +65,13 @@ def main(a) -> int:
     S = run["sim"]["players"]
     gfile = HERE / "simcast/games" / (Path(a.proj).stem + ".json")
     pred = {(p["name"], p["stat"]): p for p in json.loads(gfile.read_text())["pred"]} if gfile.exists() else {}
-    blind = set(proj["meta"].get("adjustments", {}).get("blind") or [])
+    blind, blind_stats = set(), {}
+    for b in proj["meta"].get("adjustments", {}).get("blind") or []:
+        if ":" in b:
+            nm_, st_ = b.split(":", 1)
+            blind_stats.setdefault(nm_, set()).update(st_.split(","))
+        else:
+            blind.add(b)
     D = defense(m, season, key)
     pffm = getattr(m, "pffm", None)
     if pffm is None:
@@ -84,11 +90,15 @@ def main(a) -> int:
     rows, ctx_lines, console = [], {}, []
     for name, pl in proj["players"].items():
         pid, pos, team = pl["pid"], pl["pos"], pl["team"]
-        if name in blind or pos not in STATS or pid not in S:
+        if pos not in STATS or pid not in S:
             continue
         grades = {p_["grade"] for (n_, s_), p_ in pred.items() if n_ == name}
-        if pred and not (grades & {"A", "B"}):
-            continue                                   # depth / blind-spot players: no tight ranges
+        rl = m.pg[(m.pg.pid == pid) & (m.pg.key // 100 == season) & (m.pg.key < key)]
+        real_role = pos == "QB" or (len(rl) and (rl.t_share.mean() >= 0.12 or rl.c_share.mean() >= 0.30))
+        blind_flag = name in blind or not (grades & {"A", "B"})
+        if blind_flag and not real_role:
+            continue                                   # depth players: no tight ranges
+        # blind spots with a real role (new QB, return from IR) stay in, rated Low (blind spot)
         g_all = game_logs(m, pid, pos, season, key)
         hist = m.pg[(m.pg.pid == pid) & (m.pg.key < key) & (m.pg.key // 100 >= season - 2)] if pos != "QB" else None
         if pos == "QB":
@@ -141,7 +151,19 @@ def main(a) -> int:
             pv = p.get("best") if p.get("best") is not None else float(np.median(x))
             tr = tier(pos, st, this) if len(this) else "depth"
             cal = CAL.get(f"{tr}:{st}") or CAL.get(f"{tr}:rec_yds")
-            w50, w70 = (np.percentile(x, 25), np.percentile(x, 75)), (np.percentile(x, 15), np.percentile(x, 85))
+            # windows keep the sims' spread but are centered on the record (best estimate), so the prediction and its
+            # windows agree; a shift bigger than half the 50% window = model and market disagree (flagged)
+            med = float(np.median(x))
+            shift = pv - med
+            w50, w70 = (np.percentile(x, 25) + shift, np.percentile(x, 75) + shift), (np.percentile(x, 15) + shift, np.percentile(x, 85) + shift)
+            w50, w70 = (max(0.0, w50[0]), w50[1]), (max(0.0, w70[0]), w70[1])
+            gap = abs(shift) > 0.5 * (np.percentile(x, 75) - np.percentile(x, 25)) and abs(shift) >= 1
+            if st in ("rec", "pass_att"):                  # counts: whole numbers, and the window holds the prediction
+                w50 = (min(np.floor(pv), round(w50[0])), max(np.ceil(pv), round(w50[1])))
+                w70 = (min(w50[0], round(w70[0])), max(w50[1], round(w70[1])))
+            if pv < (0.5 if st == "rec" else 3):
+                continue                                   # no real role in this stat tonight
+            sb = blind_flag or st in blind_stats.get(name, set()) or (st in ("rec", "rec_yds") and "targets" in blind_stats.get(name, set()))
             # context factors (untested)
             kind = "rush" if st == "rush_yds" else ("pass" if pos == "QB" else "rec")
             dk = (pos if pos in ("WR", "TE", "RB") else "QB", kind)
@@ -162,10 +184,13 @@ def main(a) -> int:
             ctx = pv * f_m * f_r * f_h * f_ha
             lean = "up" if ctx > 1.05 * pv else ("down" if ctx < 0.95 * pv else "even")
             rows.append(dict(player=name, team=team, pos=pos, stat=st, pred=pv, w50=w50, w70=w70, c50=cal["50"], c70=cal["70"],
-                             rating=rating(cal["70"]), rel=(w70[1] - w70[0]) / max(pv, 1), ctx=ctx, lean=lean,
-                             f_m=f_m, mr=mr, rk=rk, f_r=f_r, f_h=f_h, n_h=len(vs), f_ha=f_ha, n_ha=len(side)))
+                             rating="Low (blind spot)" if sb else rating(cal["70"]), rel=(w70[1] - w70[0]) / max(pv, 1), ctx=ctx, lean=lean,
+                             f_m=f_m, mr=mr, rk=rk, f_r=f_r, f_h=f_h, n_h=len(vs), f_ha=f_ha, n_ha=len(side),
+                             model=med, gap=gap))
         ctx_lines[name] = (team, pos, role, scheme, is_home)
-    R = pd.DataFrame(rows).sort_values(["c70", "rel"], ascending=[False, True]).reset_index(drop=True)
+    R = pd.DataFrame(rows)
+    R["_b"] = R.rating.str.startswith("Low (blind")
+    R = R.sort_values(["_b", "c70", "rel"], ascending=[True, False, True]).drop(columns="_b").reset_index(drop=True)
     R.index += 1
     fmt = lambda v, st: f"{v:.0f}" if st in ("pass_yds", "rec_yds", "rush_yds", "pass_att") else f"{v:.1f}"
     g = json.loads(gfile.read_text()) if gfile.exists() else {}
@@ -177,11 +202,14 @@ def main(a) -> int:
          "Confidence = how often that window type held in the backtest (43,489 predictions, 2024-26). Prediction = the record.",
          "Context landing = the record moved by matchup, role trend, history vs this team and home/away (UNTESTED scenario,",
          "graded weekly beside the record).", "",
-         "| Rank | Player | Stat | Prediction | 50% window (conf) | 70% window (conf) | Rating | Context landing | Lean |",
-         "|---|---|---|---|---|---|---|---|---|"]
+         "Windows: the sims' spread, centered on the prediction of record. GAP = the model's own median sits far from the",
+         "market (model median shown); trust the market side more (it has beaten the model on every stat).", "",
+         "| Rank | Player | Stat | Prediction | 50% window (conf) | 70% window (conf) | Rating | Context landing | Lean | Flag |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
     for i, r in R.iterrows():
         L.append(f"| {i} | {r.player} ({r.team}) | {LABEL[r.stat]} | {fmt(r.pred, r.stat)} | {fmt(r.w50[0], r.stat)}-{fmt(r.w50[1], r.stat)} ({r.c50:.0%}) | "
-                 f"{fmt(r.w70[0], r.stat)}-{fmt(r.w70[1], r.stat)} ({r.c70:.0%}) | {r.rating} | {fmt(r.ctx, r.stat)} | {r.lean} |")
+                 f"{fmt(r.w70[0], r.stat)}-{fmt(r.w70[1], r.stat)} ({r.c70:.0%}) | {r.rating} | {fmt(r.ctx, r.stat)} | {r.lean} | "
+                 f"{'GAP: model ' + fmt(r.model, r.stat) if r.gap else ''} |")
     L += ["", "## Context behind each landing (untested factors, each shown)", ""]
     for name, (team, pos, role, scheme, is_home) in ctx_lines.items():
         sub = R[R.player == name]
@@ -198,7 +226,7 @@ def main(a) -> int:
     txt = "\n".join(L) + "\n"
     if a.out:
         Path(a.out).write_text(txt)
-        cols = ["player", "team", "pos", "stat", "pred", "ctx", "lean", "c50", "c70", "rating", "f_m", "f_r", "f_h", "n_h", "f_ha", "n_ha"]
+        cols = ["player", "team", "pos", "stat", "pred", "model", "gap", "ctx", "lean", "c50", "c70", "rating", "f_m", "f_r", "f_h", "n_h", "f_ha", "n_ha"]
         C = R[cols].assign(w50_lo=[w[0] for w in R.w50], w50_hi=[w[1] for w in R.w50], w70_lo=[w[0] for w in R.w70], w70_hi=[w[1] for w in R.w70])
         C.to_csv(Path(a.out).with_suffix(".csv"), index_label="rank")   # graded after the game (record vs context landing)
     print(txt)

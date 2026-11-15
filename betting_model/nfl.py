@@ -242,7 +242,7 @@ def games_back(model: GameModel, pid: str, team: str, key: int, min_missed: int 
     return 0
 
 
-NOT_ACTIVE = ("not on the active roster", "not activated", "on injured reserve", "on reserve", "not yet activated")
+NOT_ACTIVE = ("not on the active roster", "not activated", "on injured reserve", "on reserve", "not yet activated", "cannot be simulated")
 ACTIVE_WORDS = ("active", "activated", "off ir", "returns", "return from", "designated to return", "elevated", "will play", "starting")
 
 
@@ -713,7 +713,7 @@ def main():
 
     g = sub.add_parser("game", help="Projections for every key player in a game")
     common(g)
-    g.add_argument("--players", nargs="+")
+    g.add_argument("--players", nargs="+", action="extend")
     g.set_defaults(func=cmd_game)
 
     pr = sub.add_parser("project", help="One player, priced lines")
@@ -768,8 +768,8 @@ def main():
     rp.add_argument("--total", type=float)
     rp.add_argument("--board", help="CSV of Robinhood prices and/or big-book lines")
     rp.add_argument("--news", help="JSON list of injury/news items with sources")
-    rp.add_argument("--players", nargs="+")
-    rp.add_argument("--blind", nargs="+", help="Players the model can't price tonight (excluded from bets); \"Name:rec,rec_yds\" excludes only those stats")
+    rp.add_argument("--players", nargs="+", action="extend")
+    rp.add_argument("--blind", nargs="+", action="extend", help="Players the model can't price tonight (excluded from bets); \"Name:rec,rec_yds\" excludes only those stats")
     rp.add_argument("--model-line", help="Independent model's number, shown for reference")
     rp.add_argument("--qb", action="append", help="'TEAM=QB Name' starter override (default: last game's starter)")
     rp.add_argument("--wind", type=float, help="Forecast wind (mph) for outdoor games; leave out for domes")

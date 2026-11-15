@@ -1,0 +1,135 @@
+[
+ {
+  "player": "Kirk Cousins",
+  "team": "MIN QB",
+  "status": "Expected starter; acquired by trade this week (from LV). New to the team: MIN pass catchers are blind spots for bets (CLAUDE.md new-QB rule)",
+  "url": "https://www.vikings.com/news/packers-injury-report-week-10-2026-nfl-season",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Kyler Murray",
+  "team": "MIN QB",
+  "status": "Out (hamstring)",
+  "url": "https://www.vikings.com/news/packers-injury-report-week-10-2026-nfl-season",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Carson Wentz",
+  "team": "MIN QB",
+  "status": "No designation (ankle earlier in the week); backup",
+  "url": "https://www.vikings.com/news/packers-injury-report-week-10-2026-nfl-season",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "T.J. Hockenson",
+  "team": "MIN TE",
+  "status": "Out (chest, wrist)",
+  "url": "https://www.si.com/nfl/vikings/onsi/news/final-vikings-packers-injury-report-hockenson-cleveland-nwangwu",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Jauan Jennings",
+  "team": "MIN WR",
+  "status": "Out (calf)",
+  "url": "https://www.vikings.com/news/jeshaun-jones-devin-culp-packers-week-10-elevate-roster",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Jordan Addison",
+  "team": "MIN WR",
+  "status": "Questionable (thumb); treated as PLAYING",
+  "url": "https://thevikingage.com/minnesota-vikings-final-injury-report-week-10-green-bay-packers",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Jeshaun Jones",
+  "team": "MIN WR",
+  "status": "Elevated from practice squad for week 10",
+  "url": "https://www.vikings.com/news/jeshaun-jones-devin-culp-packers-week-10-elevate-roster",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Devin Culp",
+  "team": "MIN TE",
+  "status": "Elevated from practice squad for week 10; no Vikings snaps on file (last game TB 2025): cannot be simulated, blind spot",
+  "url": "https://www.vikings.com/news/jeshaun-jones-devin-culp-packers-week-10-elevate-roster",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Josh Jacobs",
+  "team": "GB RB",
+  "status": "Out (finger surgery)",
+  "url": "https://www.si.com/nfl/packers/onsi/packers-vikings-final-injury-report-seven-starters-out-or-questionable",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Josh Whyle",
+  "team": "GB TE",
+  "status": "Placed on injured reserve (concussion): out",
+  "url": "https://atozsports.com/nfl/green-bay-packers-news/roster-moves-packers-week-10-chris-brooks-skyy-moore/",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Chris Brooks",
+  "team": "GB RB",
+  "status": "Activated off IR (ankle); expected to play; first game back = blind spot",
+  "url": "https://www.nbcsports.com/fantasy/football/player-news/2026-11-14/packers-activate-two-players-from-ir-for-week-10",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Skyy Moore",
+  "team": "GB WR",
+  "status": "Activated off IR (ankle); expected to play; first game back = blind spot",
+  "url": "https://www.nbcsports.com/fantasy/football/player-news/2026-11-14/packers-activate-two-players-from-ir-for-week-10",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Drake Dabney",
+  "team": "GB TE",
+  "status": "Elevated from practice squad for week 10; no 2026 snaps on file: cannot be simulated, blind spot",
+  "url": "https://atozsports.com/nfl/green-bay-packers-news/roster-moves-packers-week-10-chris-brooks-skyy-moore/",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Micah Parsons",
+  "team": "GB DE",
+  "status": "Out [defense: noted, not modeled]",
+  "url": "https://athlonsports.com/nfl/trending/final-injury-report-for-vikings-packers-will-micah-parsons-josh-jacobs-play",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Sean Rhyan / Zaire Franklin",
+  "team": "GB C / LB",
+  "status": "Rhyan out, Franklin doubtful [OL/defense: noted, not modeled]",
+  "url": "https://www.packers.com/news/packers-list-seven-questionable-rule-out-four-vs-vikings-week-10-injury-report",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Blake Cashman",
+  "team": "MIN LB",
+  "status": "Out [defense: noted, not modeled]",
+  "url": "https://thevikingage.com/minnesota-vikings-final-injury-report-week-10-green-bay-packers",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Weather",
+  "team": "GB (outdoor, Lambeau)",
+  "status": "44F, overcast, 0% precipitation, wind about 7 mph: no --wind, no --rain",
+  "url": "https://www.accuweather.com/en/us/lambeau-field/54304/current-weather/29742_poi",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Lines",
+  "team": "MIN@GB",
+  "status": "Consensus GB -2.5, total 42.5 (5 books, 10:35 AM ET)",
+  "url": "https://www.packers.com/news/packers-list-seven-questionable-rule-out-four-vs-vikings-week-10-injury-report",
+  "found_utc": "2026-11-15T15:40Z"
+ },
+ {
+  "player": "Coleman Owen",
+  "team": "GB WR",
+  "status": "Released Saturday (out)",
+  "url": "https://atozsports.com/nfl/green-bay-packers-news/roster-moves-packers-week-10-chris-brooks-skyy-moore/",
+  "found_utc": "2026-11-15T15:55Z"
+ }
+]

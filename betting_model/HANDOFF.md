@@ -472,3 +472,13 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
 * Independent agent finished (11/15 ~11 PM ET): CIN 26, PIT 23, CIN 59%, total 49. Notably LOWER than the record on CIN
   passing (Burrow 255 vs 292; Higgins 60 vs 75; Gesicki 16 vs 24). Grade both on Monday: miss vs actual, window hit rates
   (its 50%/70% vs ours), lean direction vs the book. Void Freiermuth rows if he is inactive.
+
+## MIN at GB (Sun 2026-11-15 1:00 PM ET): pass 1 + ranges (~11 AM ET, before inactives)
+* GB -2.5, total 42.5 (10 credits, 48 left). Cousins starts for MIN (traded this week, from LV): --qb, MIN pass catchers
+  blind (new-QB rule), Mason/Jones receiving blind. Out: Jacobs, Murray, Hockenson, Jennings, Whyle (IR), Coleman Owen
+  (released). Brooks, Skyy Moore off IR and Jeshaun Jones elevated: --players + blind. Dabney/Culp: no 2026 team snaps,
+  not simulated. Weather 44F, calm, dry. Addison questionable (playing). 25k: MIN 20, GB 23, GB 58%. Zero CHECK lines.
+* BUG FIXED: repeated --blind/--players kept only the last value (now action="extend"); ledger row added.
+* ranges.py: windows now centered on the record (sims' spread) with a GAP flag when model and market disagree; count
+  windows whole numbers; stat-only blind spots honored; no rows for stats with no real role.
+* Final pass after inactives not scheduled; offer it.
