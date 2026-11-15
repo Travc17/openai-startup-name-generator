@@ -469,3 +469,6 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   untested scenario, graded weekly (GRADE_PROMPT 7b). Scheme context needs PFF defensive facets (not on this machine).
 * INDEPENDENT TEST (Travis 11/15): a fresh side agent with no model context is writing its own PIT at CIN projections to
   `analysis/2026_wk10_PIT_at_CIN_independent.md`; grade it beside the record after the game.
+* Independent agent finished (11/15 ~11 PM ET): CIN 26, PIT 23, CIN 59%, total 49. Notably LOWER than the record on CIN
+  passing (Burrow 255 vs 292; Higgins 60 vs 75; Gesicki 16 vs 24). Grade both on Monday: miss vs actual, window hit rates
+  (its 50%/70% vs ours), lean direction vs the book. Void Freiermuth rows if he is inactive.
