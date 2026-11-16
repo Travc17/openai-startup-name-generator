@@ -121,7 +121,7 @@
  {
   "player": "Brandon Smith",
   "team": "PIT WR",
-  "status": "Signed to the active roster from the practice squad (no PIT snaps on file: cannot be simulated)",
+  "status": "Signed to the active roster from the practice squad; has PIT snaps weeks 5-8 (27-52%): simulated as a depth WR (median 0 targets)",
   "url": "https://steelersdepot.com/2026/11/steelers-release-updated-week-10-depth-chart-for-bengals-game/",
   "found_utc": "2026-11-15T17:45Z"
  },
@@ -166,5 +166,40 @@
   "status": "Sunday 4 PM ET, 5 books: CIN -3.5, total 49.5 (unchanged)",
   "url": "https://www.covers.com/nfl/steelers-vs-bengals-prediction-picks-odds-early-leans-week-10-2026",
   "found_utc": "2026-11-15T20:58Z"
+ },
+ {
+  "player": "DeShon Elliott",
+  "team": "PIT S",
+  "status": "Ruled out after a pregame knee injury in warmups (Robert Spears-Jennings starts) [defense: noted, not modeled]",
+  "url": "https://www.cbssports.com/fantasy/football/news/steelers-deshon-elliott-injures-knee-wont-play-sunday-night/",
+  "found_utc": "2026-11-16T00:00Z"
+ },
+ {
+  "player": "Pat Freiermuth",
+  "team": "PIT TE",
+  "status": "Questionable (illness); no ruling found at 7 PM ET: treated as PLAYING per the rule (already a blind spot)",
+  "url": "https://steelersdepot.com/2026/11/steelers-add-pat-freiermuth-to-injury-report-ahead-of-week-10/",
+  "found_utc": "2026-11-16T00:00Z"
+ },
+ {
+  "player": "Official inactives",
+  "team": "PIT",
+  "status": "QB Will Howard, QB Drew Allar, RB Eli Heidenreich (not in the sims), S DeShon Elliott, CB Sean Murphy-Bunting",
+  "url": "https://steelersdepot.com/2026/11/steelers-vs-bengals-inactives-for-week-10-2/",
+  "found_utc": "2026-11-16T00:12Z"
+ },
+ {
+  "player": "Official inactives",
+  "team": "CIN",
+  "status": "S Kyle Dugger, C Connor Lew, T Myles Hinton, DT Landon Robinson [OL/defense: noted, not modeled]; Iosivas stays on IR",
+  "url": "https://steelersdepot.com/2026/11/steelers-vs-bengals-inactives-for-week-10-2/",
+  "found_utc": "2026-11-16T00:12Z"
+ },
+ {
+  "player": "Pat Freiermuth",
+  "team": "PIT TE",
+  "status": "ACTIVE (questionable, illness): playing; already a blind spot",
+  "url": "https://steelersdepot.com/2026/11/steelers-vs-bengals-inactives-for-week-10-2/",
+  "found_utc": "2026-11-16T00:12Z"
  }
 ]

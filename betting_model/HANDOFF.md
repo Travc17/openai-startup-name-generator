@@ -474,6 +474,14 @@ Read this, `CLAUDE.md`, `PROJECTION_PROMPT.md`, `BETFINDER_PROMPT.md`, and `EDGE
   markets/2026_wk10_PIT_at_CIN_books_pm_gamelines.csv). Freiermuth still questionable, no Sunday update (game-time decision).
   Record identical to pass 2 (0 median changes). Sit scenario (25k, scratchpad only): Metcalf 7 -> 8 targets, +1 yd to
   Metcalf/Bernard/D. Washington, Rodgers -3.5 yds. FINAL budget: 27 credits (Kalshi 7 + props 10 + game lines 2 = 19).
+* PASS 3 FINAL (scheduled, Sun ~7:10 PM ET): official inactives (Steelers Depot): PIT Howard, Allar, Heidenreich (not in
+  sims), Elliott (S, pregame knee), Murphy-Bunting; CIN Dugger, C Lew, T Hinton, DT L. Robinson. Freiermuth ACTIVE.
+  No RB/WR/TE inactive in the sims. Update + regression No drift; zero CHECK lines; 0 median changes vs pass 2b.
+  Record: CIN 27, PIT 23, CIN 61%. Close: consensus CIN -3.5, 49.5 (BetMGM -4; BetMGM/Fanatics total 49).
+  Captures: books_close (10), kalshi_close (7), kalshi_game_close (~5): about 5 credits left (low; next pull needs Travis).
+  Best bets (markets/2026_wk10_PIT_at_CIN_bestbets_final.md): NO BANKROLL pick. Top: Burrow 300+ & Chase 90+ parlay 22.6c
+  (VALUE), PIT +2.5 41c (VALUE; confirm Kalshi wording), long parlays 8.9c / 15.4c (VALUE). Rest MODEL LEAN / NO EDGE.
+  Brandon Smith news corrected: he HAS PIT snaps wk5-8 (simulated as depth WR, median 0 targets).
 * RANGES (Travis 11/15): `ranges.py`, `RANGES_PROMPT.md`, skill mode `ranges`, `nflmodel/window_calibration.json`
   (backtest window hit rates). PIT at CIN ranges in `analysis/2026_wk10_PIT_at_CIN_ranges.{md,csv}`. Context landing =
   untested scenario, graded weekly (GRADE_PROMPT 7b). Scheme context needs PFF defensive facets (not on this machine).
